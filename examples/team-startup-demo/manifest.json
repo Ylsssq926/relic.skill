@@ -1,0 +1,97 @@
+{
+  "name": "spark-studio",
+  "display_name": "星火工作室（Spark Studio）",
+  "slug": "team-startup-demo",
+  "relic_type": "team-culture",
+  "version": "1.0.0",
+  "status": "archived",
+  "primary_language": "zh-CN",
+  "summary": "一个 2022 至 2025 年存在的 5 人 AI 产品创业团队 Relic：先吐槽再落地，周五必点海底捞，用飞书但天天骂飞书，需求总在变但总能把版本扛上线。",
+  "time_range": {
+    "start": "2022-04",
+    "end": "2025-08"
+  },
+  "team_size": 5,
+  "domain": "AI 产品",
+  "work_mode": "远程 + 线下混合协作",
+  "dissolution": {
+    "year": 2025,
+    "status": "已解散",
+    "note": "团队在 2025 年夏季完成归档并停止持续运营。"
+  },
+  "members": [
+    {
+      "role": "产品经理",
+      "count": 1
+    },
+    {
+      "role": "CTO",
+      "count": 1
+    },
+    {
+      "role": "设计师",
+      "count": 1
+    },
+    {
+      "role": "运营",
+      "count": 1
+    },
+    {
+      "role": "实习生",
+      "count": 1
+    }
+  ],
+  "dimensions": [
+    "决策风格",
+    "沟通习惯",
+    "价值观",
+    "内部梗和仪式"
+  ],
+  "signature_traits": [
+    "周五必点海底捞外卖",
+    "用飞书但持续吐槽飞书",
+    "共享 meme 文件夹",
+    "CTO 口头禅：这个需求不合理但我可以做",
+    "产品经理永远改需求",
+    "设计师总会说这个颜色不对",
+    "实习生是快乐源泉"
+  ],
+  "sources": [
+    {
+      "type": "group-chat",
+      "platform": "飞书",
+      "description": "需求评审、发版夜、日常群聊、团建讨论",
+      "coverage": "2022-2025"
+    },
+    {
+      "type": "meeting-notes",
+      "platform": "Markdown",
+      "description": "周会、复盘会、需求评审结论",
+      "coverage": "2022-2025"
+    },
+    {
+      "type": "shared-docs",
+      "platform": "云文档",
+      "description": "产品需求文档、设计批注、上线 checklist",
+      "coverage": "2022-2025"
+    },
+    {
+      "type": "cultural-artifacts",
+      "platform": "文件夹",
+      "description": "共享 meme 文件夹、外卖截图、上线合影",
+      "coverage": "2023-2025"
+    }
+  ],
+  "desensitized": true,
+  "fictionalized": true,
+  "example": true,
+  "consent": {
+    "status": "example-demo",
+    "note": "本示例为演示用团队文化 Relic，不映射真实个人或真实公司。"
+  },
+  "identity_notice": "这是一个 Relic，用于承载特定团队的协作记忆与风格，不是真人团队，也不代表任何真人实时在线。",
+  "fingerprint": "relic:sha256:4f8b16a198e0fac609c9b1bc945d2ce9e42232bd0ee44e4f108a7bb6ba3d40a8",
+  "previous_fingerprint": null,
+  "issued_at": "2026-03-01T00:00:00Z",
+  "fingerprint_version": "1.0"
+}
