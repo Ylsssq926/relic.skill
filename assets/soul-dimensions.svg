@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">四维灵魂图</title>
+  <desc id="desc">A four quadrant soul dimensions diagram with cognition, expression, behavior and emotion.</desc>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="60" x2="920" y2="940" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a0a1a"/>
+      <stop offset="1" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <filter id="panelGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1000" height="1000" rx="32" fill="url(#bg)"/>
+  <text x="500" y="86" fill="#effbff" font-size="36" font-weight="700" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">四维灵魂图</text>
+  <text x="500" y="120" fill="#9bb2cf" font-size="18" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">认知 / 表达 / 行为 / 情感</text>
+
+  <g filter="url(#panelGlow)">
+    <rect x="84" y="164" width="372" height="372" rx="28" fill="#00d4ff" fill-opacity="0.12" stroke="#00d4ff" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="544" y="164" width="372" height="372" rx="28" fill="#6b7cff" fill-opacity="0.12" stroke="#7f8cff" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="84" y="544" width="372" height="372" rx="28" fill="#ff6b35" fill-opacity="0.12" stroke="#ff6b35" stroke-opacity="0.6" stroke-width="2"/>
+    <rect x="544" y="544" width="372" height="372" rx="28" fill="#ff4f9a" fill-opacity="0.12" stroke="#ff72af" stroke-opacity="0.6" stroke-width="2"/>
+  </g>
+
+  <path d="M500 156V924" stroke="#e7f5ff" stroke-opacity="0.16" stroke-width="3" stroke-dasharray="10 10"/>
+  <path d="M76 540H924" stroke="#e7f5ff" stroke-opacity="0.16" stroke-width="3" stroke-dasharray="10 10"/>
+
+  <circle cx="500" cy="540" r="108" fill="#11192f" stroke="#dcefff" stroke-opacity="0.22" stroke-width="2"/>
+  <circle cx="500" cy="540" r="72" fill="#00d4ff" fill-opacity="0.12" stroke="#00d4ff" stroke-opacity="0.55"/>
+  <text x="500" y="528" fill="#effbff" font-size="22" font-weight="700" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">灵魂核心</text>
+  <text x="500" y="558" fill="#9fdcf7" font-size="15" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">Soul Core</text>
+
+  <g font-family="'Segoe UI','Microsoft YaHei',sans-serif">
+    <text x="128" y="228" fill="#effbff" font-size="34" font-weight="700">认知</text>
+    <text x="128" y="264" fill="#9cecff" font-size="18">理解 · 推理 · 记忆</text>
+    <text x="128" y="300" fill="#b8cce2" font-size="16">知识结构、世界模型、判断方式</text>
+
+    <text x="588" y="228" fill="#effbff" font-size="34" font-weight="700">表达</text>
+    <text x="588" y="264" fill="#b9c4ff" font-size="18">语言 · 风格 · 叙事</text>
+    <text x="588" y="300" fill="#b8cce2" font-size="16">措辞习惯、语气节奏、符号偏好</text>
+
+    <text x="128" y="608" fill="#effbff" font-size="34" font-weight="700">行为</text>
+    <text x="128" y="644" fill="#ffb08d" font-size="18">习惯 · 决策 · 响应</text>
+    <text x="128" y="680" fill="#b8cce2" font-size="16">行动模式、选择路径、互动反馈</text>
+
+    <text x="588" y="608" fill="#effbff" font-size="34" font-weight="700">情感</text>
+    <text x="588" y="644" fill="#ff9cc5" font-size="18">偏好 · 共情 · 温度</text>
+    <text x="588" y="680" fill="#b8cce2" font-size="16">价值倾向、亲密度、情绪张力</text>
+  </g>
+
+  <g stroke-linecap="round" stroke-width="3">
+    <path d="M430 500L332 408" stroke="#00d4ff" stroke-opacity="0.8"/>
+    <path d="M570 500L664 406" stroke="#7f8cff" stroke-opacity="0.8"/>
+    <path d="M430 580L334 676" stroke="#ff6b35" stroke-opacity="0.8"/>
+    <path d="M570 580L666 676" stroke="#ff72af" stroke-opacity="0.8"/>
+  </g>
+</svg>

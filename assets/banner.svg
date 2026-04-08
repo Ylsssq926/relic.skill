@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">relic.skill banner</title>
+  <desc id="desc">Modern minimal relic.skill banner with a deep gradient background, circuit decorations, title, subtitle, and byline.</desc>
+  <defs>
+    <linearGradient id="bg" x1="60" y1="40" x2="1220" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a0a1a"/>
+      <stop offset="1" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <radialGradient id="cyanGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(992 188) rotate(90) scale(238 332)">
+      <stop stop-color="#00d4ff" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#00d4ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orangeGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(228 526) rotate(90) scale(170 220)">
+      <stop stop-color="#ff6b35" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#ff6b35" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="1" stop-color="#ff6b35"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" rx="32" fill="url(#bg)"/>
+  <rect width="1280" height="640" rx="32" fill="url(#grid)"/>
+  <circle cx="992" cy="188" r="238" fill="url(#cyanGlow)"/>
+  <circle cx="228" cy="526" r="170" fill="url(#orangeGlow)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.08">
+    <path d="M80 86H1200"/>
+    <path d="M80 554H1200"/>
+  </g>
+
+  <g opacity="0.9" filter="url(#softGlow)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M72 116H184V170H248V224H320" stroke="#00d4ff" stroke-width="4"/>
+    <path d="M72 452H166V396H238V344H310" stroke="#ff6b35" stroke-width="4"/>
+    <path d="M950 122H1104V190H1180V268" stroke="#00d4ff" stroke-width="4"/>
+    <path d="M886 422H1032V366H1120V312H1180" stroke="#ff6b35" stroke-width="4"/>
+    <path d="M894 510H1022V468H1104V432H1180" stroke="#00d4ff" stroke-width="4"/>
+
+    <g fill="#00d4ff" stroke="none">
+      <rect x="180" y="164" width="12" height="12" rx="3"/>
+      <rect x="242" y="218" width="12" height="12" rx="3"/>
+      <rect x="1098" y="184" width="12" height="12" rx="3"/>
+      <rect x="1114" y="306" width="12" height="12" rx="3"/>
+      <rect x="1098" y="426" width="12" height="12" rx="3"/>
+    </g>
+    <g fill="#ff6b35" stroke="none">
+      <rect x="160" y="390" width="12" height="12" rx="3"/>
+      <rect x="232" y="338" width="12" height="12" rx="3"/>
+      <rect x="1026" y="360" width="12" height="12" rx="3"/>
+    </g>
+  </g>
+
+  <g transform="translate(96 260)">
+    <text x="0" y="0" fill="#f3fbff" font-size="96" font-weight="700" letter-spacing="1.5" font-family="'JetBrains Mono','Fira Code','SFMono-Regular','Consolas','Liberation Mono',monospace">relic.skill</text>
+    <rect x="4" y="34" width="332" height="6" rx="3" fill="#00d4ff"/>
+    <rect x="348" y="34" width="70" height="6" rx="3" fill="#ff6b35"/>
+    <text x="0" y="98" fill="#c5edff" font-size="28" font-weight="500" letter-spacing="0.3" font-family="'Segoe UI','Microsoft YaHei',sans-serif">万物皆可 Relic — Universal Digital Immortality Engine</text>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M96 486H448" stroke="url(#signal)" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="458" cy="486" r="5" fill="#ff6b35"/>
+  </g>
+
+  <text x="96" y="582" fill="#dce9ff" fill-opacity="0.88" font-size="24" font-weight="600" letter-spacing="0.4" font-family="'Segoe UI','Microsoft YaHei',sans-serif">by 掠蓝</text>
+</svg>

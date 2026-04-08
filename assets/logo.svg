@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">relic.skill logo</title>
+  <desc id="desc">Minimal R logo merged with chip elements.</desc>
+  <defs>
+    <linearGradient id="chipStroke" x1="104" y1="88" x2="408" y2="424" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1b3451"/>
+      <stop offset="1" stop-color="#29405f"/>
+    </linearGradient>
+    <linearGradient id="rStroke" x1="158" y1="116" x2="364" y2="376" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="1" stop-color="#6ae8ff"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect x="104" y="88" width="304" height="336" rx="52" fill="#0b1021" stroke="url(#chipStroke)" stroke-width="12"/>
+
+  <g fill="#00d4ff">
+    <rect x="74" y="140" width="30" height="16" rx="6"/>
+    <rect x="74" y="208" width="30" height="16" rx="6"/>
+    <rect x="74" y="276" width="30" height="16" rx="6"/>
+    <rect x="74" y="344" width="30" height="16" rx="6"/>
+    <rect x="408" y="140" width="30" height="16" rx="6"/>
+    <rect x="408" y="208" width="30" height="16" rx="6"/>
+    <rect x="408" y="276" width="30" height="16" rx="6"/>
+    <rect x="408" y="344" width="30" height="16" rx="6"/>
+  </g>
+
+  <g stroke="#1b3b58" stroke-width="8" stroke-linecap="round">
+    <path d="M104 148H126"/>
+    <path d="M104 216H126"/>
+    <path d="M104 284H126"/>
+    <path d="M104 352H126"/>
+    <path d="M386 148H408"/>
+    <path d="M386 216H408"/>
+    <path d="M386 284H408"/>
+    <path d="M386 352H408"/>
+  </g>
+
+  <g filter="url(#glow)" stroke="url(#rStroke)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M170 374V138H276C326 138 360 172 360 220C360 268 326 302 276 302H170"/>
+    <path d="M258 302L352 374"/>
+  </g>
+
+  <circle cx="360" cy="220" r="10" fill="#ff6b35"/>
+  <path d="M360 220H388" stroke="#ff6b35" stroke-width="6" stroke-linecap="round"/>
+  <path d="M170 220H136" stroke="#00d4ff" stroke-width="6" stroke-linecap="round"/>
+</svg>

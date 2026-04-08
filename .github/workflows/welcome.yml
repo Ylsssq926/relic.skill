@@ -1,0 +1,57 @@
+name: Welcome
+
+on:
+  issues:
+    types:
+      - opened
+  pull_request_target:
+    types:
+      - opened
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    name: Welcome Contributor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post welcome message
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const isPullRequest = context.eventName === 'pull_request_target';
+            const payload = isPullRequest ? context.payload.pull_request : context.payload.issue;
+            const author = payload.user.login;
+
+            const body = isPullRequest
+              ? [
+                  `你好 @${author}，感谢你提交 Pull Request！`,
+                  ``,
+                  `我们已经收到你的变更，维护者会尽快查看。`,
+                  `如果方便，也欢迎补充以下内容：`,
+                  `- 变更动机与核心改动`,
+                  `- 相关 Issue 或背景说明`,
+                  `- 已完成的测试或验证方式`,
+                  ``,
+                  `感谢你为 relic.skill 做出贡献。`
+                ].join('\n')
+              : [
+                  `你好 @${author}，感谢你创建 Issue！`,
+                  ``,
+                  `我们已经收到你的反馈，维护者会尽快跟进。`,
+                  `如果方便，也欢迎补充以下内容：`,
+                  `- 复现步骤或使用场景`,
+                  `- 期望行为与实际结果`,
+                  `- 截图、日志或相关上下文`,
+                  ``,
+                  `感谢你帮助 relic.skill 持续改进。`
+                ].join('\n');
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: payload.number,
+              body
+            });

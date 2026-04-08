@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 1280 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">relic.skill architecture</title>
+  <desc id="desc">Architecture diagram showing raw data flowing through soul-forge into relic files, then soul-engine for interaction, with soul-shield protecting the core.</desc>
+  <defs>
+    <linearGradient id="bg" x1="40" y1="20" x2="1240" y2="460" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a0a1a"/>
+      <stop offset="1" stop-color="#151329"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00d4ff"/>
+      <stop offset="1" stop-color="#63e7ff"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff6b35"/>
+      <stop offset="1" stop-color="#ff9d76"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0L12 6L0 12" fill="#8cecff"/>
+    </marker>
+  </defs>
+
+  <rect width="1280" height="480" rx="24" fill="url(#bg)"/>
+  <text x="72" y="74" fill="#effbff" font-size="34" font-weight="700" font-family="'Segoe UI','Microsoft YaHei',sans-serif">relic.skill 架构</text>
+  <text x="72" y="108" fill="#a8bfd9" font-size="18" font-family="'Segoe UI','Microsoft YaHei',sans-serif">从原始数据到可交互数字遗存的最小闭环</text>
+
+  <rect x="68" y="188" width="168" height="92" rx="20" fill="#11192f" stroke="#3fdfff" stroke-width="2"/>
+  <text x="152" y="226" fill="#effbff" font-size="24" font-weight="700" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">原始数据</text>
+  <text x="152" y="254" fill="#96b9d8" font-size="16" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">文本 / 语音 / 行为</text>
+
+  <rect x="300" y="170" width="190" height="128" rx="22" fill="#13203a" stroke="url(#cyan)" stroke-width="2.5"/>
+  <text x="395" y="220" fill="#effbff" font-size="28" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono','Consolas',monospace">soul-forge</text>
+  <text x="395" y="252" fill="#a7dfff" font-size="16" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">炼制、清洗、结构化人格素材</text>
+
+  <rect x="558" y="188" width="168" height="92" rx="20" fill="#11192f" stroke="#3fdfff" stroke-width="2"/>
+  <text x="642" y="226" fill="#effbff" font-size="24" font-weight="700" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">Relic 文件</text>
+  <text x="642" y="254" fill="#96b9d8" font-size="16" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">可迁移人格载体</text>
+
+  <rect x="790" y="170" width="190" height="128" rx="22" fill="#13203a" stroke="url(#cyan)" stroke-width="2.5"/>
+  <text x="885" y="220" fill="#effbff" font-size="28" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono','Consolas',monospace">soul-engine</text>
+  <text x="885" y="252" fill="#a7dfff" font-size="16" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">推演、检索、生成交互回应</text>
+
+  <rect x="1048" y="188" width="168" height="92" rx="20" fill="#11192f" stroke="#3fdfff" stroke-width="2"/>
+  <text x="1132" y="226" fill="#effbff" font-size="24" font-weight="700" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">交互</text>
+  <text x="1132" y="254" fill="#96b9d8" font-size="16" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">对话 / 回忆 / 陪伴</text>
+
+  <path d="M236 234H300" stroke="#8cecff" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M490 234H558" stroke="#8cecff" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M726 234H790" stroke="#8cecff" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M980 234H1048" stroke="#8cecff" stroke-width="4" stroke-linecap="round" marker-end="url(#arrow)"/>
+
+  <rect x="534" y="142" width="472" height="184" rx="28" fill="none" stroke="url(#orange)" stroke-width="2.5" stroke-dasharray="12 10"/>
+  <text x="548" y="136" fill="#ffb08d" font-size="15" font-weight="600" font-family="'Segoe UI','Microsoft YaHei',sans-serif">受保护核心区</text>
+
+  <rect x="860" y="354" width="260" height="76" rx="18" fill="#221226" stroke="#ff6b35" stroke-width="2"/>
+  <text x="990" y="386" fill="#fff1eb" font-size="24" font-weight="700" text-anchor="middle" font-family="'JetBrains Mono','Consolas',monospace">soul-shield</text>
+  <text x="990" y="410" fill="#ffc4ae" font-size="15" text-anchor="middle" font-family="'Segoe UI','Microsoft YaHei',sans-serif">权限、边界、完整性保护</text>
+  <path d="M990 354V326" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
+  <path d="M990 326H930" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
+  <path d="M930 326V314" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
+
+  <circle cx="930" cy="314" r="5" fill="#ff6b35"/>
+  <circle cx="642" cy="234" r="5" fill="#00d4ff"/>
+  <circle cx="885" cy="234" r="5" fill="#00d4ff"/>
+</svg>
