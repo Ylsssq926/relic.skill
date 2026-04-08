@@ -6,12 +6,12 @@
 
 | 平台 | 支持形式 | 常见文件或来源 | 说明 |
 | --- | --- | --- | --- |
-| 微信 | 导出文本、网页导出、截图、语音消息登记 | `.txt` `.html` `.json` 图片 OCR | 聊天里的语音消息先登记，再转交 `voice-collector.md` |
-| QQ | 导出文本、截图、聊天备份 | `.txt` `.html` 图片 OCR | 注意区分群聊昵称与真实身份 |
-| Telegram | 导出聊天包、JSON、HTML | `.json` `.html` `.txt` | 可保留频道、群组、私聊结构 |
-| Slack | 工作区导出、频道归档 | `.json` `.txt` | 线程回复与表情反应要单独保留 |
+| 微信 | SQLite / CSV / JSON 导出、截图、语音消息登记 | `SQLite` `.csv` `.json`（通过 PyWxDump / MemoTrace 等工具导出） 图片 OCR | 聊天里的语音消息先登记，再转交 `voice-collector.md` |
+| QQ | 导出文本、截图、聊天备份 | `.txt` `.mht` `.mhtml` 图片 OCR | 注意区分群聊昵称与真实身份 |
+| Telegram | 导出聊天包、JSON、HTML | `.json` `.html` | 可保留频道、群组、私聊结构 |
+| Slack | 工作区导出、频道归档 | `.json`（ZIP 包内） | 线程回复与表情反应要单独保留 |
 | Discord | 导出文本、截图、频道记录 | `.json` `.txt` 图片 OCR | 需标记频道与服务器上下文 |
-| iMessage | 文本导出、截图、备份解析结果 | `.txt` `.csv` 图片 OCR | 要保留蓝绿气泡之外的时间与附件信息 |
+| iMessage | 备份解析结果、截图、结构化导出 | `chat.db`（SQLite） `.csv` `.pdf` 图片 OCR | 要保留蓝绿气泡之外的时间与附件信息 |
 
 额外支持：
 - 转发记录、聊天摘要、手工整理的对话摘录。

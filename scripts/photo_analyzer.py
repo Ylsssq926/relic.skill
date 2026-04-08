@@ -22,7 +22,7 @@ except ImportError:  # pragma: no cover - dependency guard
     Image = None
     UnidentifiedImageError = OSError
 
-SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp", ".heic", ".heif"}
+SUPPORTED_SUFFIXES = {".jpg", ".jpeg", ".png", ".tif", ".tiff", ".webp"}
 GPS_TAGS = {value: key for key, value in ExifTags.GPSTAGS.items()} if ExifTags else {}
 EXIF_TAGS = {value: key for key, value in ExifTags.TAGS.items()} if ExifTags else {}
 
