@@ -1,0 +1,53 @@
+name: Bug Report
+description: 报告一个问题
+labels: ["bug"]
+body:
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: 问题描述
+      description: 请清楚说明你遇到了什么问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: 复现步骤
+      description: 请按顺序写出复现过程，方便维护者快速定位问题。
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: 期望行为
+      description: 请说明你原本预期应该发生什么。
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: 环境信息
+      description: 你是在什么环境中遇到这个问题的？
+      options:
+        - Claude Code
+        - Kiro
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: python-version
+    attributes:
+      label: Python版本
+      description: 如果问题与脚本、解析器或本地工具有关，请填写你的 Python 版本。
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 截图
+      description: 如有需要，请粘贴截图、终端输出或其他补充信息。

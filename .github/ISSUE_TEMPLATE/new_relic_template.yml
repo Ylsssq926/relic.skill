@@ -1,0 +1,55 @@
+name: New Relic Template
+description: 提交新的万物永生模板
+labels: ["new-template"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        提交前请确认：不得蒸馏政治人物，不得提交未经授权的可识别私密数据。
+
+  - type: dropdown
+    id: relic-subject-type
+    attributes:
+      label: 蒸馏对象类型
+      description: 请选择你要提交的模板对象类型。若选择公众人物，仅接受非政治人物。
+      options:
+        - 人类
+        - 宠物
+        - 关系
+        - 团队
+        - 地方
+        - 时刻
+        - 公众人物
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: template-name
+    attributes:
+      label: 模板名称
+      description: 请填写模板名称，建议与未来文件名保持一致。
+    validations:
+      required: true
+
+  - type: textarea
+    id: four-dimensions
+    attributes:
+      label: 四维定义
+      description: 请说明这类对象在认知、表达、行为、情感四个维度分别提取什么。
+    validations:
+      required: true
+
+  - type: textarea
+    id: data-sources
+    attributes:
+      label: 数据来源
+      description: 请说明适合这个模板的数据来源，例如聊天记录、照片、语音、文档或公开资料。
+    validations:
+      required: true
+
+  - type: textarea
+    id: example-snippet
+    attributes:
+      label: 示例片段
+      description: 如果方便，请提供一小段能体现模板风格的示例内容。
