@@ -44,7 +44,7 @@ body:
       label: Python版本
       description: 如果问题与脚本、解析器或本地工具有关，请填写你的 Python 版本。
     validations:
-      required: true
+      required: false
 
   - type: textarea
     id: screenshots

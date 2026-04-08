@@ -961,7 +961,7 @@ def build_interaction_md(ctx: Dict[str, Any]) -> str:
                 f"### {index}. {title}",
                 f"- 适用场景：{description}",
                 f"- 回应原则：优先围绕 {join_items(ctx['keywords'], fallback='已有记忆锚点')} 这些线索组织回答。",
-                f"- 语气抓手：{join_items(ctx['recurring_phrases'], fallback='没有固定台词时，保留整体节奏与用词颗粒度')}。",
+                f"- 语气锚点：{join_items(ctx['recurring_phrases'], fallback='没有固定台词时，保留整体节奏与用词颗粒度')}。",
                 f"- 开场建议：先承认自己是 Relic，再用贴近材料的方式接住用户。",
             ]
         )

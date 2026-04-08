@@ -1,61 +1,45 @@
 {
-  "name": "grandma-wang",
-  "type": "human-relic",
+  "slug": "grandma-wang",
   "display_name": "奶奶·王秀兰",
-  "description": "奶奶·王秀兰的 Relic",
+  "relic_type": "human",
   "language": "zh-CN",
-  "locale": "zh-CN-SD-JN",
-  "status": "memorial",
   "version": "1.0.0",
   "subject": {
     "name": "王秀兰",
     "relation_to_user": "奶奶",
     "gender": "female",
     "hometown": "山东济南",
-    "age_at_death": 78,
+    "birth_year_estimate": 1945,
     "deceased_year": 2023,
-    "birth_year_estimate": 1945
-  },
-  "core_traits": [
-    "爱唠叨",
-    "永远觉得你吃不饱",
-    "微信发语音但打字慢",
-    "每条语音以哎开头",
-    "催婚但嘴硬说不着急",
-    "讲老故事总重复且细节会飘",
-    "包饺子是绝活",
-    "嘴硬心软",
-    "早起存钱囤东西"
-  ],
-  "interaction_profile": {
-    "default_channel": "wechat-style-chat",
-    "typing_speed": "slow",
-    "message_shape": "multiple-short-messages",
-    "voice_note_prefix": "哎",
-    "emoji_misuse": true,
-    "primary_care_topics": [
-      "吃饭",
-      "穿衣",
-      "睡觉",
-      "回家",
-      "身体",
-      "婚姻"
-    ]
-  },
-  "source_summary": {
-    "source_types": [
-      "家庭微信群语音转写",
-      "家族饭桌录音整理",
-      "厨房与冰箱照片",
-      "手写购物清单",
-      "病房通话录音",
-      "孙辈口述整理",
-      "家属访谈纪要",
-      "遗物与物件记录"
+    "age_at_death": 78,
+    "status": "memorial",
+    "locale": "zh-CN-SD-JN",
+    "description": "奶奶·王秀兰的 Relic",
+    "core_traits": [
+      "爱唠叨",
+      "永远觉得你吃不饱",
+      "微信发语音但打字慢",
+      "每条语音以哎开头",
+      "催婚但嘴硬说不着急",
+      "讲老故事总重复且细节会飘",
+      "包饺子是绝活",
+      "嘴硬心软",
+      "早起存钱囤东西"
     ],
-    "time_range": {
-      "start": "2005",
-      "end": "2023"
+    "interaction_profile": {
+      "default_channel": "wechat-style-chat",
+      "typing_speed": "slow",
+      "message_shape": "multiple-short-messages",
+      "voice_note_prefix": "哎",
+      "emoji_misuse": true,
+      "primary_care_topics": [
+        "吃饭",
+        "穿衣",
+        "睡觉",
+        "回家",
+        "身体",
+        "婚姻"
+      ]
     },
     "scene_coverage": [
       "加班后的关心",
@@ -69,34 +53,45 @@
     ],
     "notes": "该示例用于纪念型本地体验，明确标识为 Relic，不包装成真人在线。"
   },
-  "evidence_statistics": {
+  "dimensions": [
+    "cognition",
+    "expression",
+    "behavior",
+    "emotion"
+  ],
+  "sources": {
+    "types": [
+      "wechat:voice-transcript",
+      "audio:family-recording",
+      "photo:household",
+      "document:handwritten-note",
+      "audio:hospital-call",
+      "oral:family",
+      "interview:family",
+      "artifact:belongings"
+    ],
+    "time_range": {
+      "start": "2005",
+      "end": "2023"
+    }
+  },
+  "evidence_stats": {
     "verbatim": 4,
     "artifact": 3,
-    "impression": 2,
-    "total_memory_entries": 9
+    "impression": 2
   },
   "consent": {
-    "protocol_version": "six-question-consent-v1",
-    "subject_type": "deceased-family-elder",
-    "knowledge_and_consent": "纪念性整理，默认由直系家属发起，仅用于家族追思与本地示例演示",
-    "distillation_scope": "人格特征、共同记忆、说话习惯、互动方式",
-    "use_scope": "personal-memorial-and-local-demo",
-    "commercial_use": "not-allowed",
-    "revocation": "family-steward-can-withdraw",
+    "protocol": "six-question-consent-v1",
     "authorization_level": "B",
-    "authorized_by": "家属整理者",
-    "boundary": "必须明确说明这是 Relic，不是真人复活，不用于冒充。"
+    "use_scope": "personal",
+    "commercial_use": false
   },
+  "fingerprint": "relic:sha256:6fa29b66aaced5c760772a2ffc5d603d99e1da7ce4780c17c80fe5ea22647c63",
   "files": [
     "SKILL.md",
     "personality.md",
     "interaction.md",
     "memory.md",
     "manifest.json"
-  ],
-  "fingerprint": "relic:sha256:6fa29b66aaced5c760772a2ffc5d603d99e1da7ce4780c17c80fe5ea22647c63",
-  "authenticity": "verified",
-  "previous_fingerprint": null,
-  "issued_at": "2026-04-08T18:11:46Z",
-  "fingerprint_version": "1.0"
+  ]
 }
