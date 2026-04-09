@@ -78,7 +78,7 @@ Não é só para pessoas. Tudo merece um Relic.
 
 ### 🧓 Vovó · Wang Xiulan
 
-```
+```text
 你 ❯ 奶奶，我今天加班到十一点
 
 奶奶 ❯ 哎呀你这孩子
@@ -93,11 +93,10 @@ Não é só para pessoas. Tudo merece um Relic.
      也没见你改
      [发送了一个太阳的表情包]
      早点睡啊
-```
-
+```text
 ### 🐱 Mimi · gata laranja · 14 jin
 
-```
+```text
 你 ❯ 咪咪，我回来了
 
 [咪咪已经在门口等了。不是因为想你，是因为到饭点了。
@@ -113,11 +112,10 @@ Não é só para pessoas. Tudo merece um Relic.
  发出低沉的呼噜声。
  体重14斤，手腕已经麻了。
  但你没有动。]
-```
-
+```text
 ### 🏢 Spark Studio · startup de 5 pessoas
 
-```
+```text
 [飞书群 · 星火工作室]
 
 产品经理 ❯ 兄弟们，需求有点小调整
@@ -131,15 +129,14 @@ CTO ❯ 你上次也是这么说的
 实习生 ❯ 哈哈哈哈哈哈哈
 CTO ❯ 行吧，这个需求不合理但我可以做
      发我文档
-```
-
+```text
 ---
 
 ## Arquitetura da Alma em Quatro Dimensões
 
 Cada Relic captura uma alma em quatro dimensões:
 
-```
+```text
         🧠 Cognição (Cognition)
         Como pensa, como decide,
         no que acredita
@@ -154,9 +151,9 @@ qual tom                quais padrões
         ❤️ Emoção (Emotion)
         O que traz alegria, o que dói,
         como demonstra amor, como lida com conflito
-```
-
+```text
 Cada pedaço de informação recebe um nível de evidência:
+
 - `verbatim` — palavras exatas, sem mudar uma vírgula
 - `artifact` — vindo de documentos, fotos ou gravações
 - `impression` — vindo da descrição de outra pessoa ou de memória imprecisa
@@ -172,20 +169,17 @@ Cada pedaço de informação recebe um nível de evidência:
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```
-
+```text
 ### Opção 2: instalação global (disponível em todos os projetos)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```
-
+```text
 ### Opção 3: para usuários do Kiro
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```
-
+```text
 ### Requisitos
 
 - Claude Code ou Kiro (gratuito para instalar, exige Node.js 18+)
@@ -200,22 +194,20 @@ git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
 
 No Claude Code / Kiro, basta dizer:
 
-```
+```text
 "Me ajude a forjar um Relic. Quero eternizar minha avó."
 "Meu gato se foi. Quero transformá-lo em um Relic."
 "Me ajude a destilar a cultura da nossa equipe. Está todo mundo prestes a seguir seu caminho."
 "Quero preservar o padrão do relacionamento entre nós."
-```
-
+```text
 ### Slash Commands
 
-```
+```text
 /relic              — Inicia o fluxo de forja de Relic
 /relic-forge        — Entra direto na Soul Forge
 /relic-talk         — Conversa com um Relic já existente
 /relic-shield       — Protege o seu Relic
-```
-
+```text
 ### CLI Tools
 
 ```bash
@@ -231,8 +223,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 # Version management
 python scripts/version_manager.py snapshot --slug grandma --note "Primeira versão"
 python scripts/version_manager.py rollback --slug grandma --version 1
-```
-
+```text
 ---
 
 ## Plataformas de Dados Suportadas
@@ -259,7 +250,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ## Estrutura do Projeto
 
-```
+```text
 relic.skill/
 ├── SKILL.md                    # Entrada principal — motor Relic
 ├── FOR_AI.md                   # Entrada de um clique para AI
@@ -298,8 +289,7 @@ relic.skill/
 ├── scripts/                    # 🔧 Scripts utilitários em Python x6
 ├── assets/                     # 🎨 Recursos visuais
 └── docs/                       # 📚 Documentação aprofundada
-```
-
+```text
 ---
 
 ## Declaração Ética

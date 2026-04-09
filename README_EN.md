@@ -78,7 +78,7 @@ Not just people. Everything deserves a Relic.
 
 ### 🧓 Grandma · Wang Xiulan
 
-```
+```text
 你 ❯ 奶奶，我今天加班到十一点
 
 奶奶 ❯ 哎呀你这孩子
@@ -93,11 +93,10 @@ Not just people. Everything deserves a Relic.
      也没见你改
      [发送了一个太阳的表情包]
      早点睡啊
-```
-
+```text
 ### 🐱 Mimi · Orange Tabby · 14 jin
 
-```
+```text
 你 ❯ 咪咪，我回来了
 
 [咪咪已经在门口等了。不是因为想你，是因为到饭点了。
@@ -113,11 +112,10 @@ Not just people. Everything deserves a Relic.
  发出低沉的呼噜声。
  体重14斤，手腕已经麻了。
  但你没有动。]
-```
-
+```text
 ### 🏢 Spark Studio · 5-Person Startup Team
 
-```
+```text
 [飞书群 · 星火工作室]
 
 产品经理 ❯ 兄弟们，需求有点小调整
@@ -131,15 +129,14 @@ CTO ❯ 你上次也是这么说的
 实习生 ❯ 哈哈哈哈哈哈哈
 CTO ❯ 行吧，这个需求不合理但我可以做
      发我文档
-```
-
+```text
 ---
 
 ## The Four-Dimensional Soul Model
 
 Every Relic captures a soul across four dimensions:
 
-```
+```text
         🧠 Cognition
         How they think, how they decide,
         and what they believe
@@ -154,9 +151,9 @@ their tone              their patterns
         ❤️ Emotion
         What makes them happy, what hurts them,
         how they show love, how they handle conflict
-```
-
+```text
 Each piece of information is tagged with an evidence level:
+
 - `verbatim` — exact words, unchanged
 - `artifact` — from documents, photos, or recordings
 - `impression` — from someone else’s description or from fuzzy memory
@@ -172,20 +169,17 @@ Each piece of information is tagged with an evidence level:
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```
-
+```text
 ### Option 2: Global install (available in every project)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```
-
+```text
 ### Option 3: For Kiro users
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```
-
+```text
 ### Requirements
 
 - Claude Code or Kiro (free to install, requires Node.js 18+)
@@ -200,22 +194,20 @@ git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
 
 In Claude Code / Kiro, just say:
 
-```
+```text
 "Help me forge a Relic. I want to preserve my grandma."
 "My cat is gone. I want to turn it into a Relic."
 "Help me distill our team culture. We’re about to go our separate ways."
 "I want to preserve the pattern of the relationship between us."
-```
-
+```text
 ### Slash Commands
 
-```
+```text
 /relic              — Start the Relic forging flow
 /relic-forge        — Jump straight into the soul forge
 /relic-talk         — Chat with an existing Relic
 /relic-shield       — Protect your Relic
-```
-
+```text
 ### CLI Tools
 
 ```bash
@@ -231,8 +223,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 # Version management
 python scripts/version_manager.py snapshot --slug grandma --note "Version 1"
 python scripts/version_manager.py rollback --slug grandma --version 1
-```
-
+```text
 ---
 
 ## Supported Data Platforms
@@ -259,7 +250,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ## Project Structure
 
-```
+```text
 relic.skill/
 ├── SKILL.md                    # Main entry — Relic engine
 ├── FOR_AI.md                   # One-step entry for AI
@@ -298,8 +289,7 @@ relic.skill/
 ├── scripts/                    # 🔧 Python utility scripts x6
 ├── assets/                     # 🎨 Visual assets
 └── docs/                       # 📚 In-depth docs
-```
-
+```text
 ---
 
 ## Ethics Statement

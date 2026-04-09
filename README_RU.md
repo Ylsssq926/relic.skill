@@ -78,7 +78,7 @@ relic.skill — это движок бессмертия для всего.
 
 ### 🧓 Бабушка · Ван Сюлань
 
-```
+```text
 你 ❯ 奶奶，我今天加班到十一点
 
 奶奶 ❯ 哎呀你这孩子
@@ -93,11 +93,10 @@ relic.skill — это движок бессмертия для всего.
      也没见你改
      [发送了一个太阳的表情包]
      早点睡啊
-```
-
+```text
 ### 🐱 Мими · рыжая кошка · 14 jin
 
-```
+```text
 你 ❯ 咪咪，我回来了
 
 [咪咪已经在门口等了。不是因为想你，是因为到饭点了。
@@ -113,11 +112,10 @@ relic.skill — это движок бессмертия для всего.
  发出低沉的呼噜声。
  体重14斤，手腕已经麻了。
  但你没有动。]
-```
-
+```text
 ### 🏢 Spark Studio · стартап-команда из 5 человек
 
-```
+```text
 [飞书群 · 星火工作室]
 
 产品经理 ❯ 兄弟们，需求有点小调整
@@ -131,15 +129,14 @@ CTO ❯ 你上次也是这么说的
 实习生 ❯ 哈哈哈哈哈哈哈
 CTO ❯ 行吧，这个需求不合理但我可以做
      发我文档
-```
-
+```text
 ---
 
 ## Четырёхмерная архитектура души
 
 Каждый Relic захватывает душу в четырёх измерениях:
 
-```
+```text
         🧠 Когниция (Cognition)
         Как думает, как принимает решения,
         во что верит
@@ -154,9 +151,9 @@ CTO ❯ 行吧，这个需求不合理但我可以做
         ❤️ Эмоции (Emotion)
         Что радует, что ранит,
         как выражает любовь, как проживает конфликт
-```
-
+```text
 Каждый фрагмент информации помечается уровнем доказательности:
+
 - `verbatim` — точные слова, без единого изменения
 - `artifact` — из документов, фотографий или записей
 - `impression` — из чужих описаний или смутных воспоминаний
@@ -172,20 +169,17 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```
-
+```text
 ### Способ 2: глобальная установка (доступно во всех проектах)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```
-
+```text
 ### Способ 3: для пользователей Kiro
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```
-
+```text
 ### Требования к окружению
 
 - Claude Code или Kiro (ставятся бесплатно, нужен Node.js 18+)
@@ -200,22 +194,20 @@ git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
 
 В Claude Code / Kiro просто скажите:
 
-```
+```text
 "Помоги мне выковать Relic. Я хочу сохранить бабушку."
 "Моего кота больше нет. Я хочу превратить его в Relic."
 "Помоги дистиллировать культуру нашей команды. Мы скоро разойдёмся."
 "Я хочу сохранить паттерн наших отношений."
-```
-
+```text
 ### Slash Commands
 
-```
+```text
 /relic              — Запускает процесс ковки Relic
 /relic-forge        — Сразу переносит в Soul Forge
 /relic-talk         — Позволяет поговорить с уже существующим Relic
 /relic-shield       — Защищает ваш Relic
-```
-
+```text
 ### CLI Tools
 
 ```bash
@@ -231,8 +223,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 # Version management
 python scripts/version_manager.py snapshot --slug grandma --note "Первая версия"
 python scripts/version_manager.py rollback --slug grandma --version 1
-```
-
+```text
 ---
 
 ## Поддерживаемые платформы данных
@@ -259,7 +250,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ## Структура проекта
 
-```
+```text
 relic.skill/
 ├── SKILL.md                    # Главный вход — движок Relic
 ├── FOR_AI.md                   # Вход в один шаг для AI
@@ -298,8 +289,7 @@ relic.skill/
 ├── scripts/                    # 🔧 Утилитарные Python-скрипты x6
 ├── assets/                     # 🎨 Визуальные ресурсы
 └── docs/                       # 📚 Подробная документация
-```
-
+```text
 ---
 
 ## Этическое заявление

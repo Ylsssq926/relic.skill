@@ -78,7 +78,7 @@ relic.skill は、あらゆるものを永生化するエンジンです。
 
 ### 🧓 おばあちゃん · 王秀兰
 
-```
+```text
 你 ❯ 奶奶，我今天加班到十一点
 
 奶奶 ❯ 哎呀你这孩子
@@ -93,11 +93,10 @@ relic.skill は、あらゆるものを永生化するエンジンです。
      也没见你改
      [发送了一个太阳的表情包]
      早点睡啊
-```
-
+```text
 ### 🐱 咪咪 · 茶トラ · 14斤
 
-```
+```text
 你 ❯ 咪咪，我回来了
 
 [咪咪已经在门口等了。不是因为想你，是因为到饭点了。
@@ -113,11 +112,10 @@ relic.skill は、あらゆるものを永生化するエンジンです。
  发出低沉的呼噜声。
  体重14斤，手腕已经麻了。
  但你没有动。]
-```
-
+```text
 ### 🏢 星火工作室 · 5人のスタートアップチーム
 
-```
+```text
 [飞书群 · 星火工作室]
 
 产品经理 ❯ 兄弟们，需求有点小调整
@@ -131,15 +129,14 @@ CTO ❯ 你上次也是这么说的
 实习生 ❯ 哈哈哈哈哈哈哈
 CTO ❯ 行吧，这个需求不合理但我可以做
      发我文档
-```
-
+```text
 ---
 
 ## 四次元魂アーキテクチャ
 
 それぞれの Relic は、4つの次元から魂を捉えます：
 
-```
+```text
         🧠 認知 (Cognition)
         どう考え、どう決め、何を信じるか
                 |
@@ -153,9 +150,9 @@ CTO ❯ 行吧，这个需求不合理但我可以做
         ❤️ 感情 (Emotion)
         何がその人を喜ばせ、何が悲しませるか、
         どう愛を伝え、どう衝突を処理するか
-```
-
+```text
 各情報には証拠レベルを付けます：
+
 - `verbatim` — 原文、一字一句そのまま
 - `artifact` — 文書、写真、録音などに由来
 - `impression` — 他人の描写や曖昧な記憶に由来
@@ -171,20 +168,17 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```
-
+```text
 ### 方法二：グローバルインストール（すべてのプロジェクトで利用可能）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```
-
+```text
 ### 方法三：Kiro ユーザー
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```
-
+```text
 ### 動作環境
 
 - Claude Code または Kiro（無料で導入可能、Node.js 18+ が必要）
@@ -199,22 +193,20 @@ git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
 
 Claude Code / Kiro でそのままこう言ってください：
 
-```
+```text
 "Relic を鍛えてほしい。おばあちゃんを永生化したい"
 "うちの猫がいなくなった。Relic にしたい"
 "うちのチーム文化を蒸留して。みんな解散するんだ"
 "私と彼女の関係パターンを残したい"
-```
-
+```text
 ### Slash コマンド
 
-```
+```text
 /relic              — Relic 鍛造フローを開始
 /relic-forge        — 直接、魂の鍛造炉に入る
 /relic-talk         — 既存の Relic と会話する
 /relic-shield       — あなたの Relic を守る
-```
-
+```text
 ### CLI ツール
 
 ```bash
@@ -230,8 +222,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 # バージョン管理
 python scripts/version_manager.py snapshot --slug grandma --note "初版"
 python scripts/version_manager.py rollback --slug grandma --version 1
-```
-
+```text
 ---
 
 ## 対応データプラットフォーム
@@ -258,7 +249,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ## プロジェクト構成
 
-```
+```text
 relic.skill/
 ├── SKILL.md                    # メイン入口 — Relic エンジン
 ├── FOR_AI.md                   # AI ワンクリック入口
@@ -297,8 +288,7 @@ relic.skill/
 ├── scripts/                    # 🔧 Python ツールスクリプト x6
 ├── assets/                     # 🎨 ビジュアル素材
 └── docs/                       # 📚 詳細ドキュメント
-```
-
+```text
 ---
 
 ## 倫理声明

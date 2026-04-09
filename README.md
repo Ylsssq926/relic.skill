@@ -78,7 +78,7 @@ relic.skill 是一个万物永生引擎。
 
 ### 🧓 奶奶 · 王秀兰
 
-```
+```text
 你 ❯ 奶奶，我今天加班到十一点
 
 奶奶 ❯ 哎呀你这孩子
@@ -93,11 +93,10 @@ relic.skill 是一个万物永生引擎。
      也没见你改
      [发送了一个太阳的表情包]
      早点睡啊
-```
-
+```text
 ### 🐱 咪咪 · 橘猫 · 14斤
 
-```
+```text
 你 ❯ 咪咪，我回来了
 
 [咪咪已经在门口等了。不是因为想你，是因为到饭点了。
@@ -113,11 +112,10 @@ relic.skill 是一个万物永生引擎。
  发出低沉的呼噜声。
  体重14斤，手腕已经麻了。
  但你没有动。]
-```
-
+```text
 ### 🏢 星火工作室 · 5人创业团队
 
-```
+```text
 [飞书群 · 星火工作室]
 
 产品经理 ❯ 兄弟们，需求有点小调整
@@ -131,15 +129,14 @@ CTO ❯ 你上次也是这么说的
 实习生 ❯ 哈哈哈哈哈哈哈
 CTO ❯ 行吧，这个需求不合理但我可以做
      发我文档
-```
-
+```text
 ---
 
 ## 四维灵魂架构
 
 每个 Relic 从四个维度捕捉灵魂：
 
-```
+```text
         🧠 认知 (Cognition)
         怎么想、怎么做决定、相信什么
                 |
@@ -153,9 +150,9 @@ CTO ❯ 行吧，这个需求不合理但我可以做
         ❤️ 情感 (Emotion)
         什么让ta开心、什么让ta难过、
         怎么表达爱、怎么处理冲突
-```
-
+```text
 每条信息标注证据等级：
+
 - `verbatim` — 原话，一字不改
 - `artifact` — 来自文档、照片、录音
 - `impression` — 来自他人描述或模糊记忆
@@ -171,20 +168,17 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```
-
+```text
 ### 方式二：全局安装（所有项目可用）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```
-
+```text
 ### 方式三：Kiro 用户
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```
-
+```text
 ### 环境要求
 
 - Claude Code 或 Kiro（免费安装，需要 Node.js 18+）
@@ -199,22 +193,20 @@ git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
 
 在 Claude Code / Kiro 中直接说：
 
-```
+```text
 "帮我锻造一个 Relic，我想永生我奶奶"
 "我家猫走了，我想把它做成 Relic"
 "帮我蒸馏我们团队的文化，大家要散了"
 "我想保存我和她之间的关系模式"
-```
-
+```text
 ### Slash 命令
 
-```
+```text
 /relic              — 启动 Relic 锻造流程
 /relic-forge        — 直接进入灵魂锻造炉
 /relic-talk         — 跟已有的 Relic 聊天
 /relic-shield       — 保护你的 Relic
-```
-
+```text
 ### CLI 工具
 
 ```bash
@@ -230,8 +222,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 # 版本管理
 python scripts/version_manager.py snapshot --slug grandma --note "第一版"
 python scripts/version_manager.py rollback --slug grandma --version 1
-```
-
+```text
 ---
 
 ## 支持的数据平台
@@ -258,7 +249,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ## 项目结构
 
-```
+```text
 relic.skill/
 ├── SKILL.md                    # 主入口 — Relic 引擎
 ├── FOR_AI.md                   # AI 一键入口
@@ -297,8 +288,7 @@ relic.skill/
 ├── scripts/                    # 🔧 Python 工具脚本 x6
 ├── assets/                     # 🎨 视觉资源
 └── docs/                       # 📚 深度文档
-```
-
+```text
 ---
 
 ## 伦理声明

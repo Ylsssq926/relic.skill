@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-04-09
 
 ### Added
+
 - 🔥 **Soul Forge**: 4D soul distillation framework with cognition, expression, behavior, emotion dimensions
 - ⚡ **Soul Engine**: Interactive soul system with 6 interaction modes, 3-layer memory, proactive behavior, and evolution
 - 🛡️ **Soul Shield**: Protection framework with soul fingerprints, 6-question consent protocol, and ethics red lines

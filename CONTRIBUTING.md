@@ -9,6 +9,7 @@ Thank you for helping relic.skill remember a little more of the world.
 ## 如何贡献 / Ways to Contribute
 
 ### 1. 报告 Bug / Report Bugs
+
 - 使用 GitHub 的 `Bug Report` 模板提交 issue。
 - 尽量写清问题描述、复现步骤、期望行为、运行环境，以及截图或日志。
 - 如果问题与数据解析或模板有关，请附上最小可复现片段，并先移除隐私信息。
@@ -18,6 +19,7 @@ Include the bug description, reproduction steps, expected behavior, environment,
 If the issue involves data parsing or templates, share a minimal reproducible example with private details removed.
 
 ### 2. 功能建议 / Suggest Features
+
 - 使用 `Feature Request` 模板说明你想解决什么问题、适合什么场景、为什么值得做。
 - 讨论接口、模板结构或伦理边界时，请尽量具体。
 
@@ -25,6 +27,7 @@ Use the `Feature Request` form to explain the problem, the use case, and why the
 Be concrete when discussing APIs, template structure, or safety boundaries.
 
 ### 3. 提交代码 / Submit Code
+
 1. Fork 仓库并创建分支。
 2. 阅读 `FOR_AI.md`、`SKILL.md` 以及你要改动的目录。
 3. 保持改动聚焦；一次 PR 只解决一类问题。
@@ -36,6 +39,7 @@ Be concrete when discussing APIs, template structure, or safety boundaries.
 4. Before opening a PR, review docs, naming, formatting, examples, and safety boundaries.
 
 ### 4. 提交新 Relic 模板 / Submit a New Relic Template
+
 - 先用 `New Relic Template` issue 模板说明对象类型、四维定义和数据来源。
 - 在 `templates/` 下新增模板文件，文件名使用 kebab-case，例如 `grandparent.md`、`college-roommate.md`。
 - 模板必须说清楚：适用对象、四维提取方式、推荐数据来源、不适用场景、安全边界。
@@ -49,6 +53,7 @@ For public figures, only non-political figures and only public-source methodolog
 ## 开发环境设置 / Development Setup
 
 ### 基础要求 / Requirements
+
 - Claude Code 或 Kiro
 - Node.js 18+
 - Python 3.9+（仅在运行解析脚本时需要）
@@ -60,6 +65,7 @@ For public figures, only non-political figures and only public-source methodolog
 - Git
 
 ### 快速开始 / Quick Start
+
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill
 cd relic.skill
@@ -74,6 +80,7 @@ python -m venv .venv
 
 建议先阅读这些文件：  
 Recommended reading before you start:
+
 - `FOR_AI.md`
 - `SKILL.md`
 - `soul-shield/consent-protocol.md`
@@ -96,6 +103,7 @@ This project uses Conventional Commits:
 | `chore` | 杂项维护 / maintenance | `chore: update repo metadata` |
 
 规则建议 / Tips:
+
 - 标题简短，使用祈使语气。
 - 一次提交尽量只做一件事。
 - 如果改动影响行为，请在正文解释原因。
@@ -156,5 +164,5 @@ If you are unsure whether a template fits the project, open a `New Relic Templat
 ---
 
 **掠蓝 | relic.skill**  
-GitHub: https://github.com/Ylsssq926/relic.skill  
+GitHub: <https://github.com/Ylsssq926/relic.skill>  
 QQ 群 / QQ Group: **1098169092**

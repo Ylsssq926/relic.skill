@@ -8,9 +8,9 @@ version: 1.0.0
 license: MIT
 ---
 
-> “有些人留下照片，有些人留下笑声，而灵魂锻造炉负责把这些碎片烤成一块会发光的小饼干。”
+# soul-forge — 灵魂锻造炉
 
-# soul-forge
+> “有些人留下照片，有些人留下笑声，而灵魂锻造炉负责把这些碎片烤成一块会发光的小饼干。”
 
 `soul-forge` 用来把零散材料整理成可复用、可追溯、带温度的 Relic 画像。它不追求把对象捏成一个完美无冲突的标签，而是保留真实生命里那些“既这样、也那样”的纹理。
 
@@ -76,18 +76,21 @@ license: MIT
 ## 目录引用
 
 ### 四维规范
+
 - `dimensions/cognition.md`
 - `dimensions/expression.md`
 - `dimensions/behavior.md`
 - `dimensions/emotion.md`
 
 ### 数据采集器
+
 - `collectors/chat-collector.md`
 - `collectors/voice-collector.md`
 - `collectors/photo-collector.md`
 - `collectors/live-collector.md`
 
 ### 参考规则
+
 - `references/evidence-levels.md`
 - `references/conflict-resolution.md`
 
