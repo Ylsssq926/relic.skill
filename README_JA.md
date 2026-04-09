@@ -174,14 +174,27 @@ git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```text
-### 方法三：Kiro ユーザー
+### 方法三：その他の IDE / Agent
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+relic.skill はオープンな SKILL.md 標準に基づいており、この標準をサポートするすべての AI コーディングアシスタントで利用できます：
+
+| IDE / Agent | インストール方法 |
+|-------------|------------------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录 |
+
+> 原則として、SKILL.md を読める agent なら使えます。迷ったらプロジェクトのルートに clone してください。
+
 ### 動作環境
 
-- Claude Code または Kiro（無料で導入可能、Node.js 18+ が必要）
+- 上記いずれかの AI コーディングアシスタント
 - Python 3.9+（任意、データ解析スクリプト用）
 - GPU、ローカルモデル、Docker は不要
 

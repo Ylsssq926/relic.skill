@@ -172,14 +172,27 @@ git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```text
-### 方式三：Kiro 使用者
+### 方式三：其他 IDE / Agent
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+relic.skill 基於開放的 SKILL.md 標準，相容所有支援該標準的 AI 程式設計助手：
+
+| IDE / Agent | 安裝方式 |
+|-------------|---------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录 |
+
+> 原則上，任何能讀取 SKILL.md 的 agent 都能使用。不確定的話，clone 到專案根目錄就行。
+
 ### 環境需求
 
-- Claude Code 或 Kiro（可免費安裝，需要 Node.js 18+）
+- 上述任意一個 AI 程式設計助手
 - Python 3.9+（選用，用於資料解析腳本）
 - 不需要 GPU、本地模型或 Docker
 

@@ -174,14 +174,27 @@ git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```text
-### 방법 3: Kiro 사용자
+### 방법 3: 기타 IDE / Agent
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+relic.skill은 개방형 SKILL.md 표준을 기반으로 하며, 이 표준을 지원하는 모든 AI 코딩 도우미와 호환됩니다:
+
+| IDE / Agent | 설치 방법 |
+|-------------|-----------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录 |
+
+> 원칙적으로 SKILL.md를 읽을 수 있는 agent라면 모두 사용할 수 있습니다. 확실하지 않다면 프로젝트 루트에 clone 하면 됩니다.
+
 ### 환경 요구사항
 
-- Claude Code 또는 Kiro (무료 설치 가능, Node.js 18+ 필요)
+- 위에 나온 AI 코딩 도우미 중 하나
 - Python 3.9+ (선택 사항, 데이터 파싱 스크립트용)
 - GPU, 로컬 모델, Docker 불필요
 

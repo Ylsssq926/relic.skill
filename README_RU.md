@@ -175,14 +175,27 @@ git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```text
-### Способ 3: для пользователей Kiro
+### Способ 3: другие IDE / агенты
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+relic.skill основан на открытом стандарте SKILL.md и совместим с любым ИИ-помощником для программирования, который его поддерживает:
+
+| IDE / Agent | Способ установки |
+|-------------|------------------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录 |
+
+> В целом подойдёт любой agent, который умеет читать SKILL.md. Если не уверены, просто сделайте clone в корень проекта.
+
 ### Требования к окружению
 
-- Claude Code или Kiro (ставятся бесплатно, нужен Node.js 18+)
+- Любой из перечисленных выше ИИ-помощников для программирования
 - Python 3.9+ (необязательно, для скриптов парсинга данных)
 - Не нужны GPU, локальная модель или Docker
 

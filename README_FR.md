@@ -175,14 +175,27 @@ git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```text
-### Option 3 : Pour les utilisateurs de Kiro
+### Option 3 : Autres IDE / agents
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+relic.skill repose sur le standard ouvert SKILL.md et est compatible avec tout assistant de programmation IA qui le prend en charge :
+
+| IDE / Agent | Méthode d'installation |
+|-------------|------------------------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录 |
+
+> En principe, tout agent capable de lire SKILL.md devrait fonctionner. En cas de doute, clonez simplement le dépôt à la racine du projet.
+
 ### Prérequis
 
-- Claude Code ou Kiro (installation gratuite, nécessite Node.js 18+)
+- N'importe lequel des assistants de programmation IA ci-dessus
 - Python 3.9+ (optionnel, pour les scripts de parsing de données)
 - Aucun GPU, aucun modèle local et aucun Docker nécessaires
 
