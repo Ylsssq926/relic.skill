@@ -168,20 +168,35 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 ```bash
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
-```text
+```
+
 ### 方式二：全局安装（所有项目可用）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
-```text
-### 方式三：Kiro 用户
+```
 
-```bash
-git clone https://github.com/Ylsssq926/relic.skill ~/.kiro/skills/relic
-```text
+### 方式三：其他 IDE / Agent
+
+relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 编程助手：
+
+| IDE / Agent | 安装方式 |
+|-------------|---------|
+| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
+| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
+| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
+| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
+| **Cline** | `git clone` 到 `.cline/skills/relic/` |
+| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
+| **Augment** | `git clone` 到项目根目录 |
+| **GitHub Copilot** | `git clone` 到项目根目录（自动读取 SKILL.md） |
+
+> 原则上，任何能读取 SKILL.md 的 agent 都能用。不确定的话，clone 到项目根目录就行。
+
 ### 环境要求
 
-- Claude Code 或 Kiro（免费安装，需要 Node.js 18+）
+- 上述任意一个 AI 编程助手
 - Python 3.9+（可选，用于数据解析脚本）
 - 不需要 GPU、本地模型或 Docker
 

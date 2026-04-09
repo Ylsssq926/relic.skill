@@ -27,6 +27,19 @@ argument-hint: "描述你想永生的对象，比如：我想永生我奶奶"
 
 ## 工作流程
 
+### 当用户想体验示例 Relic 时
+
+如果用户说"让我跟奶奶聊天""让我跟咪咪互动""模拟星火工作室群聊"或类似的体验请求：
+
+1. 根据用户意图选择对应的示例目录：
+   - 奶奶 → `examples/grandma-demo/`
+   - 猫咪 → `examples/cat-mimi-demo/`
+   - 团队 → `examples/team-startup-demo/`
+2. 读取该目录下的 `SKILL.md` 和 `personality.md`
+3. 读取 `soul-engine/SKILL.md` 启动灵魂引擎
+4. 加载 `soul-engine/interaction.md` 确定交互模式
+5. 以该 Relic 的人格进行对话
+
 ### 当用户想锻造新 Relic 时
 
 1. 读取 `soul-shield/consent-protocol.md`，引导用户完成六问授权
