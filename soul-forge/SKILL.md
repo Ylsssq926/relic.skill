@@ -25,6 +25,19 @@ license: MIT
 
 ## 锻造流程：6 步
 
+> 用户不需要一次性准备好所有素材。你来主导对话，一步步引导。
+
+### 启动引导（在第 1 步之前）
+
+当用户说"帮我锻造一个 Relic"但没有给出详细信息时，用以下问题引导：
+
+1. **你想留住谁或什么？** — 一个人、一只宠物、一段关系、一个团队、一个地方、还是一个瞬间？
+2. **ta 叫什么？你们是什么关系？** — 用来确定命名和视角
+3. **你手上有什么素材？** — 聊天记录、照片、语音、还是主要靠你口述？都行，有多少用多少
+4. **有没有一个最能代表 ta 的瞬间或习惯？** — 这个问题帮助快速锁定人格核心
+
+根据回答自动选择模板（`templates/` 目录），然后进入正式的 6 步流程。如果用户素材不多，优先使用 `collectors/live-collector.md` 的实时对话采集模式——你问，用户答，边聊边蒸馏。
+
 1. **确认对象**
    - 明确蒸馏对象是谁或是什么：人类、宠物、关系、地方、团队、时刻、物件。
    - 确认观察边界：单人、多人关系、单次事件、长期状态。
@@ -96,28 +109,24 @@ license: MIT
 
 ## 输出文件结构
 
-推荐将一次锻造结果封装为如下结构：
+一个 Relic = 一个文件夹，包含以下文件：
 
 ```text
-relic-output/
-├─ relic-card.md
-├─ source-manifest.yaml
-├─ evidence-map.md
-├─ conflicts.md
-└─ dimensions/
-   ├─ cognition.md
-   ├─ expression.md
-   ├─ behavior.md
-   └─ emotion.md
+{slug}/
+├── SKILL.md          # Relic 入口 — AI 读这个就知道"ta 是谁"
+├── personality.md    # 四维人格画像
+├── interaction.md    # 交互模式和对话示例
+├── memory.md         # 记忆片段（带证据等级）
+└── manifest.json     # 元数据（来源、时间、指纹、授权）
 ```
 
 ### 文件说明
 
-- `relic-card.md`：对象总览，适合快速阅读。
-- `source-manifest.yaml`：列出数据来源、时间范围、采集器与处理说明。
-- `evidence-map.md`：按结论映射证据，方便回溯。
-- `conflicts.md`：集中记录矛盾特征与适用场景。
-- `dimensions/*.md`：四维详细画像。
+- `SKILL.md`：对象总览 + 对话原则 + 注意事项，适合快速阅读。
+- `personality.md`：四维详细画像，每个维度附带证据和来源。
+- `interaction.md`：交互模式定义 + 多场景对话示例。
+- `memory.md`：具体记忆片段，每段标注证据等级（verbatim/artifact/impression）和来源。
+- `manifest.json`：结构化元数据，包含 slug、类型、来源、证据统计、授权信息、灵魂指纹。
 
 ## 输出原则
 

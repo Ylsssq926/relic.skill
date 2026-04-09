@@ -6,6 +6,20 @@
 
 根据用户的意图，读取对应的入口文件：
 
+### 0. 用户想体验示例 Relic（最常见的第一次使用场景）
+
+```text
+用户可能会说"让我跟奶奶聊天""让我跟咪咪互动""模拟星火工作室群聊"。
+
+根据意图选择示例目录：
+- 奶奶/王秀兰 → examples/grandma-demo/
+- 猫/咪咪 → examples/cat-mimi-demo/
+- 团队/星火 → examples/team-startup-demo/
+
+读取该目录的 SKILL.md 和 personality.md，然后读取 soul-engine/SKILL.md 启动交互。
+不需要用户提供任何数据，直接开始对话。
+```
+
 ### 1. 用户想锻造新 Relic
 
 ```text
