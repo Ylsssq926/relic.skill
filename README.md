@@ -298,12 +298,13 @@ relic.skill/
 │   ├── consent-protocol.md     # 授权协议
 │   └── ethics.md               # 伦理红线
 │
-├── templates/                  # 📋 万物永生模板 x7
-├── examples/                   # 🎯 示例 Relics x3
-├── scripts/                    # 🔧 Python 工具脚本 x6
+├── templates/                  # 📋 万物永生模板 x7（附选择指南）
+├── examples/                   # 🎯 示例 Relics x3（附体验指南）
+├── scripts/                    # 🔧 Python 工具脚本 x8（含质量评估和主动调度）
 ├── assets/                     # 🎨 视觉资源
-└── docs/                       # 📚 深度文档
-```text
+├── docs/                       # 📚 深度文档（含推荐工具清单）
+└── ROADMAP.md                  # 🗺️ 产品路线图
+```
 ---
 
 ## 伦理声明
