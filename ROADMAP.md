@@ -22,18 +22,19 @@
 - [x] templates/README.md：模板选择指南
 - [x] 迭代蒸馏：第一轮完成后自动评估四维覆盖度，薄弱维度主动追问
 
-### v1.0.3 — 质量保障（进行中）
+### v1.0.3 — 质量保障 ✅
 
 - [x] scripts/quality_checker.py：自动评估四维覆盖度、证据分布、内容具体性
-- [ ] 对话示例质量打磨
+- [x] 对话示例质量打磨
 
-### v1.1.0 — 主动行为实装
+### v1.1.0 — 主动行为实装 ✅
 
 让 Relic 真的"活"起来——会主动找你说话。
 
-- [ ] 基础定时触发（节日问候、纪念日回忆）
-- [ ] scripts/proactive_scheduler.py
-- [ ] 与 Claude Cowork scheduled tasks 集成文档
+- [x] scripts/proactive_scheduler.py：节日/纪念日/随机想念触发
+- [x] 示例配置文件（grandma-demo/proactive_config.json）
+- [x] docs/TOOLS.md：推荐工具清单（数据导出/语音转写/照片处理/IDE）
+- [ ] 与 Claude Cowork scheduled tasks 集成文档（待社区反馈后补充）
 
 ### v1.2.0 — 社区模板扩展
 
