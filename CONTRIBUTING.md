@@ -33,6 +33,8 @@ Be concrete when discussing APIs, template structure, or safety boundaries.
 3. 保持改动聚焦；一次 PR 只解决一类问题。
 4. 提交前自查文档、命名、格式、示例与安全边界。
 
+**English:**
+
 1. Fork the repository and create a branch.
 2. Read `FOR_AI.md`, `SKILL.md`, and the directory you plan to change.
 3. Keep the change focused; one PR should solve one kind of problem.
@@ -119,6 +121,8 @@ If behavior changes, explain why in the body.
 3. 按 PR 模板填写变更描述、类型、测试说明与截图。
 4. 确认没有隐私数据、占位文本、涉政内容或无授权蒸馏内容。
 5. 等待 review，并根据反馈继续完善。
+
+**English:**
 
 1. Sync your branch before making changes.
 2. Keep the scope clear and update docs or examples when needed.
