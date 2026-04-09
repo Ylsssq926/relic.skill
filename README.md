@@ -170,13 +170,19 @@ mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
 
-### 方式二：全局安装（所有项目可用）
+### 方式二：npx 一键安装
+
+```bash
+npx -y skills add Ylsssq926/relic.skill
+```
+
+### 方式三：全局安装（所有项目可用）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
 
-### 方式三：其他 IDE / Agent
+### 方式四：其他 IDE / Agent
 
 relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 编程助手：
 
