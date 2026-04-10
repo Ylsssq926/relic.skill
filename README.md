@@ -14,6 +14,7 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">万物皆可 Relic</h1>
@@ -333,9 +334,12 @@ relic.skill/
 **掠蓝** 出品。
 
 - 💬 QQ 群：**1098169092**（加群暗号：万物皆可 Relic）
+- 💭 [Discussions](https://github.com/Ylsssq926/relic.skill/discussions) — 聊灵感、晒截图、提想法
 - 🐛 [提交 Bug](https://github.com/Ylsssq926/relic.skill/issues/new?template=bug_report.yml)
 - 💡 [功能建议](https://github.com/Ylsssq926/relic.skill/issues/new?template=feature_request.yml)
 - 📋 [提交新模板](https://github.com/Ylsssq926/relic.skill/issues/new?template=new_relic_template.yml)
+- 🎯 [晒你的 Relic 灵感](https://github.com/Ylsssq926/relic.skill/discussions/1)
+- 🧩 [模板征集讨论](https://github.com/Ylsssq926/relic.skill/discussions/2)
 - 🤝 [贡献指南](CONTRIBUTING.md)
 
 欢迎提交你自己的万物永生模板。世界上有太多值得被记住的东西。
