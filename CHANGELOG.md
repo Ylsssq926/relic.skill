@@ -10,12 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - ⚙️ 新生成的 Relic 现在会默认带上 `proactive_config.json`
-- 🧪 补了一条 smoke test，把 `writer -> scheduler` 这条第一次体验链路固定下来
+- 🧪 补了一条 smoke test，把 `writer -> scheduler` 这条第一次体验链路钉住了
 
 ### Changed
 
-- ⏰ `proactive_scheduler.py` 不传 `--config` 也能直接工作
-- 🪄 老版本 Relic 如果还没有配置文件，不会先把你卡住，而是会按类型临时补一份保守默认配置
+- ⏰ `proactive_scheduler.py` 现在不传 `--config` 也能直接跑
+- 🪄 老版本 Relic 如果还没有配置文件，也不会先把你挡在门外，而是会按类型临时补一份保守默认配置
 - 📚 README 和路线图都同步到了这套新的默认体验
 - 🧭 `relic_writer.py` 生成的 manifest 补了更现代的兼容字段（`display_name` / `relic_type` / `version` / `subject`）
 
