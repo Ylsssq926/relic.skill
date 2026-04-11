@@ -21,7 +21,7 @@ Relic 风格的消息模板，并以 JSON 输出。
 输出说明：
 - 始终输出 JSON。
 - 命中触发时，默认输出：`type / trigger / message / timestamp`。
-- `--dry-run` 时仅检查是否应触发，不输出实际消息内容，也不更新 state。
+- `--dry-run` 时仅预览是否应触发以及会发送什么消息，不更新 state。
 
 注意：
 - 仅依赖 Python 标准库。
@@ -864,6 +864,10 @@ def classify_relation_kind(relation: str, relic_type: str, display_name: str) ->
     corpus = f"{relation} {display_name} {relic_type}".strip()
     if relic_type == "pet":
         return "pet"
+    if relic_type == "place":
+        return "place"
+    if relic_type == "moment":
+        return "moment"
     if relic_type == "team-culture" or any(token in corpus for token in TEAM_HINTS):
         return "team"
     if any(token in corpus for token in ELDER_RELATIONS):
@@ -874,6 +878,8 @@ def classify_relation_kind(relation: str, relic_type: str, display_name: str) ->
         return "partner"
     if any(token in corpus for token in FRIEND_RELATIONS):
         return "friend"
+    if relic_type == "public-figure":
+        return "public-figure"
     return "generic"
 
 
@@ -901,13 +907,14 @@ def extract_personality_profile(manifest: Dict[str, Any], personality_text: str)
     display_name = first_non_empty(
         [
             str(manifest.get("display_name") or ""),
+            str(manifest.get("title") or ""),
             str(subject.get("name") or ""),
             str(manifest.get("slug") or ""),
             "Relic",
         ]
     )
-    relation = str(subject.get("relation_to_user") or "").strip()
-    relic_type = str(manifest.get("relic_type") or "human").strip() or "human"
+    relation = str(subject.get("relation_to_user") or manifest.get("relationship") or "").strip()
+    relic_type = str(manifest.get("relic_type") or manifest.get("template") or "human").strip() or "human"
     memorial = bool(subject.get("status") == "memorial" or subject.get("deceased_year"))
 
     content = strip_front_matter(personality_text)
@@ -1240,7 +1247,25 @@ def render_random_message(profile: PersonalityProfile, today: date) -> str:
             seed,
         )
 
-    if profile.relation_kind in {"elder", "parent"}:
+    if profile.relation_kind == "place":
+        return stable_choice(
+            [
+                "今天路过一点相似的光线，忽然想起你。你不用急着回头看，我先把那阵熟悉的风留在这儿。",
+                "没什么大事，只是突然想到那个地方的味道和安静。像门刚被轻轻推开了一下。",
+            ],
+            seed,
+        )
+
+    if profile.relation_kind == "moment":
+        return stable_choice(
+            [
+                "今天忽然想起那个时刻。不是要你立刻整理情绪，只是想提醒你：它还在。",
+                "没有特别的原因，就是那个瞬间突然又亮了一下。我来轻轻碰你一下。",
+            ],
+            seed,
+        )
+
+    if profile.relation_kind in {"elder", "parent"}: 
         if "吃饭" in profile.care_topics:
             return stable_choice(
                 [
@@ -1312,6 +1337,57 @@ def resolve_config_path(relic_dir: Path, provided_path: Optional[str]) -> Path:
     if provided_path:
         return Path(provided_path).expanduser()
     return relic_dir / DEFAULT_CONFIG_FILENAME
+
+
+def default_holiday_list_for_relic_type(relic_type: str) -> List[str]:
+    if relic_type == "human":
+        return ["spring_festival", "mid_autumn", "new_year"]
+    if relic_type == "relationship":
+        return ["mid_autumn", "new_year"]
+    if relic_type == "team-culture":
+        return ["new_year"]
+    return []
+
+
+def default_random_interval_days_for_relic_type(relic_type: str) -> int:
+    if relic_type == "pet":
+        return 10
+    if relic_type in {"team-culture", "place", "moment"}:
+        return 21
+    if relic_type == "public-figure":
+        return 30
+    return 14
+
+
+def build_inferred_default_config(manifest: Dict[str, Any]) -> Dict[str, Any]:
+    """在缺少配置文件时，根据 manifest 推断一份保守的默认配置。"""
+    relic_type = str(manifest.get("relic_type") or manifest.get("template") or "human").strip() or "human"
+    holiday_list = default_holiday_list_for_relic_type(relic_type)
+    random_enabled = relic_type != "public-figure"
+    return {
+        "enabled": True,
+        "user_city": None,
+        "holidays": {
+            "enabled": bool(holiday_list),
+            "list": holiday_list,
+        },
+        "anniversaries": {
+            "enabled": False,
+            "dates": [],
+        },
+        "weather": {
+            "enabled": False,
+        },
+        "random_miss": {
+            "enabled": random_enabled,
+            "min_interval_days": default_random_interval_days_for_relic_type(relic_type),
+        },
+        "quiet_hours": {
+            "start": "23:00",
+            "end": "07:00",
+        },
+        "global_max_per_week": 2 if relic_type not in {"place", "moment"} else 1,
+    }
 
 
 def validate_relic_dir(relic_dir: Path) -> tuple[Path, Path]:
@@ -1405,7 +1481,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run",
         action="store_true",
-        help="只检查是否应触发，不输出实际消息，也不更新 state",
+        help="预览是否应触发以及会发送什么消息，不更新 state",
     )
     parser.add_argument(
         "--type",
@@ -1426,15 +1502,23 @@ def main() -> None:
         manifest = load_manifest(manifest_path)
 
         config_path = resolve_config_path(relic_dir, args.config)
-        if not config_path.is_file():
+        inferred_default = False
+        if config_path.is_file():
+            config = normalize_config(read_json_file(config_path))
+        elif args.config:
             raise FileNotFoundError(f"主动行为配置文件不存在：{config_path}")
-        config = normalize_config(read_json_file(config_path))
+        else:
+            config = normalize_config(build_inferred_default_config(manifest))
+            inferred_default = True
 
         state_path = relic_dir / STATE_FILENAME
         state = load_state(state_path)
         now_local = datetime.now().astimezone().replace(tzinfo=None)
 
         decision = decide_trigger(config, state, now_local, args.type)
+        if inferred_default:
+            decision.warnings.append("未找到 proactive_config.json，已按 Relic 类型临时推断默认配置")
+            decision.details["config_source"] = "inferred-default"
 
         if decision.should_trigger:
             personality_text = personality_path.read_text(encoding="utf-8")

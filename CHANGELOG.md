@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2026-04-11
+
+### Added
+
+- ⚙️ `relic_writer.py` now creates a default `proactive_config.json` for every new Relic
+- 🧪 Added a smoke test covering the `writer -> scheduler` out-of-the-box flow
+
+### Changed
+
+- ⏰ `proactive_scheduler.py` now prefers the Relic's default proactive config when `--config` is omitted
+- 🪄 If an older Relic has no config file yet, the scheduler now infers a conservative default from the Relic type instead of hard failing
+- 📚 Updated README and roadmap to reflect the new default proactive experience
+- 🧭 `relic_writer.py` manifests now include modern compatibility keys (`display_name`, `relic_type`, `version`, `subject`)
+
 ## [1.1.1] - 2026-04-11
 
 ### Fixed

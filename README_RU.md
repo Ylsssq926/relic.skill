@@ -170,12 +170,20 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### Способ 2: глобальная установка (доступно во всех проектах)
+
+### Способ 2: установка в одну команду через npx
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### Способ 3: глобальная установка (доступно во всех проектах)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### Способ 3: другие IDE / агенты
+
+### Способ 4: другие IDE / агенты
 
 relic.skill основан на открытом стандарте SKILL.md и совместим с любым ИИ-помощником для программирования, который его поддерживает:
 
@@ -233,10 +241,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Генерация Relic
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# Проверить, заговорит ли он первым
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # Version management
 python scripts/version_manager.py snapshot --slug grandma --note "Первая версия"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> Начиная с v1.1.2 новые Relics, созданные через `relic_writer.py`, уже идут с `proactive_config.json`, так что можно сразу сделать dry-run без ручной настройки и посмотреть, постучался бы он к вам сегодня.
+
 ---
 
 ## Поддерживаемые платформы данных
@@ -297,11 +311,12 @@ relic.skill/
 │   ├── consent-protocol.md     # Протокол согласия
 │   └── ethics.md               # Этические red lines
 │
-├── templates/                  # 📋 Шаблоны бессмертия x7
-├── examples/                   # 🎯 Примеры Relics x3
-├── scripts/                    # 🔧 Утилитарные Python-скрипты x6
+├── templates/                  # 📋 Шаблоны бессмертия x7 (с гайдом по выбору)
+├── examples/                   # 🎯 Примеры Relics x3 (с гайдом по первому знакомству)
+├── scripts/                    # 🔧 Утилитарные Python-скрипты x8 (включая quality checker и proactive scheduler)
 ├── assets/                     # 🎨 Визуальные ресурсы
-└── docs/                       # 📚 Подробная документация
+├── docs/                       # 📚 Подробная документация (включая гайд по инструментам)
+└── ROADMAP.md                  # 🗺️ Дорожная карта продукта
 ```
 ---
 

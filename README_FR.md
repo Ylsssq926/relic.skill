@@ -170,12 +170,20 @@ Chaque information reçoit un niveau de preuve :
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### Option 2 : Installation globale (disponible dans tous les projets)
+
+### Option 2 : Installation en une commande avec npx
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### Option 3 : Installation globale (disponible dans tous les projets)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### Option 3 : Autres IDE / agents
+
+### Option 4 : Autres IDE / agents
 
 relic.skill repose sur le standard ouvert SKILL.md et est compatible avec tout assistant de programmation IA qui le prend en charge :
 
@@ -233,10 +241,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Générer un Relic
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# Voir s'il viendrait vous parler en premier
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # Gestion de version
 python scripts/version_manager.py snapshot --slug grandma --note "Version 1"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> Depuis la v1.1.2, les nouveaux Relics générés par `relic_writer.py` arrivent avec `proactive_config.json`, donc vous pouvez lancer un dry-run sans rien écrire à la main et voir s'il viendrait frapper à votre porte aujourd'hui.
+
 ---
 
 ## Plateformes de données prises en charge
@@ -297,11 +311,12 @@ relic.skill/
 │   ├── consent-protocol.md     # Protocole de consentement
 │   └── ethics.md               # Lignes rouges éthiques
 │
-├── templates/                  # 📋 Modèles d'immortalité x7
-├── examples/                   # 🎯 Exemples de Relics x3
-├── scripts/                    # 🔧 Scripts utilitaires Python x6
+├── templates/                  # 📋 Modèles d'immortalité x7 (avec guide de choix)
+├── examples/                   # 🎯 Exemples de Relics x3 (avec guide de prise en main)
+├── scripts/                    # 🔧 Scripts utilitaires Python x8 (avec le quality checker et le proactive scheduler)
 ├── assets/                     # 🎨 Ressources visuelles
-└── docs/                       # 📚 Documentation approfondie
+├── docs/                       # 📚 Documentation approfondie (avec le guide des outils)
+└── ROADMAP.md                  # 🗺️ Feuille de route du produit
 ```
 ---
 

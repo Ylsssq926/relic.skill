@@ -169,12 +169,20 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### 方法二：グローバルインストール（すべてのプロジェクトで利用可能）
+
+### 方法二：npx ワンコマンドインストール
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### 方法三：グローバルインストール（すべてのプロジェクトで利用可能）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### 方法三：その他の IDE / Agent
+
+### 方法四：その他の IDE / Agent
 
 relic.skill はオープンな SKILL.md 標準に基づいており、この標準をサポートするすべての AI コーディングアシスタントで利用できます：
 
@@ -232,10 +240,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Relic を生成
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# 今日は向こうから来るか、dry-run で見る
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # バージョン管理
 python scripts/version_manager.py snapshot --slug grandma --note "初版"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> v1.1.2 からは、新しく生成した Relic に `proactive_config.json` が最初から入るので、設定を手で書かなくても、そのまま dry-run で「今日は向こうから来るかな」を見られます。
+
 ---
 
 ## 対応データプラットフォーム
@@ -296,11 +310,12 @@ relic.skill/
 │   ├── consent-protocol.md     # 同意プロトコル
 │   └── ethics.md               # 倫理のレッドライン
 │
-├── templates/                  # 📋 万物永生テンプレート x7
-├── examples/                   # 🎯 サンプル Relics x3
-├── scripts/                    # 🔧 Python ツールスクリプト x6
+├── templates/                  # 📋 万物永生テンプレート x7（選び方ガイド付き）
+├── examples/                   # 🎯 サンプル Relics x3（体験ガイド付き）
+├── scripts/                    # 🔧 Python ツールスクリプト x8（quality checker と proactive scheduler を含む）
 ├── assets/                     # 🎨 ビジュアル素材
-└── docs/                       # 📚 詳細ドキュメント
+├── docs/                       # 📚 詳細ドキュメント（tools guide を含む）
+└── ROADMAP.md                  # 🗺️ プロダクトロードマップ
 ```
 ---
 

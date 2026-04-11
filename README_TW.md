@@ -167,12 +167,20 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### 方式二：全域安裝（所有專案都能用）
+
+### 方式二：npx 一鍵安裝
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### 方式三：全域安裝（所有專案都能用）
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### 方式三：其他 IDE / Agent
+
+### 方式四：其他 IDE / Agent
 
 relic.skill 基於開放的 SKILL.md 標準，相容所有支援該標準的 AI 程式設計助手：
 
@@ -230,10 +238,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # 生成 Relic
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# 預覽「它今天會不會主動來敲門」
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # 版本管理
 python scripts/version_manager.py snapshot --slug grandma --note "第一版"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> 從 v1.1.2 開始，新生成的 Relic 會預設附上 `proactive_config.json`，所以不用先手寫設定，也能直接 dry-run 看看「它今天會不會主動來敲門」。
+
 ---
 
 ## 支援的資料平台
@@ -294,11 +308,12 @@ relic.skill/
 │   ├── consent-protocol.md     # 授權協議
 │   └── ethics.md               # 倫理紅線
 │
-├── templates/                  # 📋 萬物永生模板 x7
-├── examples/                   # 🎯 範例 Relics x3
-├── scripts/                    # 🔧 Python 工具腳本 x6
+├── templates/                  # 📋 萬物永生模板 x7（附選擇指南）
+├── examples/                   # 🎯 範例 Relics x3（附體驗指南）
+├── scripts/                    # 🔧 Python 工具腳本 x8（含 quality checker 和 proactive scheduler）
 ├── assets/                     # 🎨 視覺資源
-└── docs/                       # 📚 深入文件
+├── docs/                       # 📚 深入文件（含 tools guide）
+└── ROADMAP.md                  # 🗺️ 產品路線圖
 ```
 ---
 

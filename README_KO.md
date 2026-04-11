@@ -169,12 +169,20 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### 방법 2: 전역 설치 (모든 프로젝트에서 사용 가능)
+
+### 방법 2: npx 원클릭 설치
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### 방법 3: 전역 설치 (모든 프로젝트에서 사용 가능)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### 방법 3: 기타 IDE / Agent
+
+### 방법 4: 기타 IDE / Agent
 
 relic.skill은 개방형 SKILL.md 표준을 기반으로 하며, 이 표준을 지원하는 모든 AI 코딩 도우미와 호환됩니다:
 
@@ -232,10 +240,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Relic 생성
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# 오늘 먼저 찾아올지 dry-run으로 보기
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # 버전 관리
 python scripts/version_manager.py snapshot --slug grandma --note "초판"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> v1.1.2부터는 새로 만든 Relic에 `proactive_config.json`이 기본으로 들어가서, 설정을 먼저 손으로 쓰지 않아도 "오늘 먼저 찾아올까?"를 바로 dry-run으로 볼 수 있습니다.
+
 ---
 
 ## 지원하는 데이터 플랫폼
@@ -296,11 +310,12 @@ relic.skill/
 │   ├── consent-protocol.md     # 동의 프로토콜
 │   └── ethics.md               # 윤리 레드라인
 │
-├── templates/                  # 📋 만물 영생 템플릿 x7
-├── examples/                   # 🎯 예시 Relics x3
-├── scripts/                    # 🔧 Python 도구 스크립트 x6
+├── templates/                  # 📋 만물 영생 템플릿 x7 (선택 가이드 포함)
+├── examples/                   # 🎯 예시 Relics x3 (체험 가이드 포함)
+├── scripts/                    # 🔧 Python 도구 스크립트 x8 (quality checker와 proactive scheduler 포함)
 ├── assets/                     # 🎨 시각 자료
-└── docs/                       # 📚 심화 문서
+├── docs/                       # 📚 심화 문서 (tools guide 포함)
+└── ROADMAP.md                  # 🗺️ 제품 로드맵
 ```
 ---
 

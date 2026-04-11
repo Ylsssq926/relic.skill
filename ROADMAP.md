@@ -36,6 +36,14 @@
 - [x] docs/TOOLS.md：推荐工具清单（数据导出/语音转写/照片处理/IDE）
 - [ ] 与 Claude Cowork scheduled tasks 集成文档（待社区反馈后补充）
 
+### v1.1.2 — 主动行为默认体验 ✅
+
+- [x] `relic_writer.py` 生成的新 Relic 自动附带 `proactive_config.json`
+- [x] `proactive_scheduler.py` 在不显式传 `--config` 时优先读取默认配置
+- [x] 缺少配置文件时会按 Relic 类型临时推断一份保守默认配置
+- [x] 增加 smoke 测试，固定 `writer -> scheduler` 开箱链路
+- [x] README / CHANGELOG 同步到新的默认体验
+
 ### v1.2.0 — 社区模板扩展
 
 - [ ] 接受社区 PR 的第一批新模板（前任、父母、室友等）
@@ -104,7 +112,8 @@
 当前
  ↓
 v1.0.3  质量保障
-v1.1.0  主动行为实装          ← 当前已完成
+v1.1.0  主动行为实装
+v1.1.2  主动行为默认体验      ← 当前已完成
 v1.2.0  社区模板扩展
 v1.3.0  多轮进化
  ↓

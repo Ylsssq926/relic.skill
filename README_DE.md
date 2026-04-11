@@ -170,12 +170,20 @@ Jede Information bekommt ein Evidenzniveau:
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### Option 2: Global installieren (in allen Projekten verfügbar)
+
+### Option 2: Installation in einem Schritt mit npx
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### Option 3: Global installieren (in allen Projekten verfügbar)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### Option 3: Andere IDEs / Agents
+
+### Option 4: Andere IDEs / Agents
 
 relic.skill basiert auf dem offenen SKILL.md-Standard und ist mit allen KI-Programmierassistenten kompatibel, die ihn unterstützen:
 
@@ -233,10 +241,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Ein Relic erzeugen
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# Vorschau, ob es von selbst auf dich zukommt
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # Versionsverwaltung
 python scripts/version_manager.py snapshot --slug grandma --note "Version 1"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> Seit v1.1.2 bekommen neue Relics aus `relic_writer.py` `proactive_config.json` automatisch mit, also kannst du auch ohne Handarbeit erst mal per dry-run schauen, ob es heute von selbst anklopfen würde.
+
 ---
 
 ## Unterstützte Datenplattformen
@@ -297,11 +311,12 @@ relic.skill/
 │   ├── consent-protocol.md     # Zustimmungsprotokoll
 │   └── ethics.md               # Ethische rote Linien
 │
-├── templates/                  # 📋 Unsterblichkeitsvorlagen x7
-├── examples/                   # 🎯 Beispiel-Relics x3
-├── scripts/                    # 🔧 Python-Hilfsskripte x6
+├── templates/                  # 📋 Unsterblichkeitsvorlagen x7 (mit Auswahlhilfe)
+├── examples/                   # 🎯 Beispiel-Relics x3 (mit Guide zum Ausprobieren)
+├── scripts/                    # 🔧 Python-Hilfsskripte x8 (inklusive Quality Checker und Proactive Scheduler)
 ├── assets/                     # 🎨 Visuelle Assets
-└── docs/                       # 📚 Vertiefende Dokumentation
+├── docs/                       # 📚 Vertiefende Dokumentation (inklusive Tools-Guide)
+└── ROADMAP.md                  # 🗺️ Produkt-Roadmap
 ```
 ---
 

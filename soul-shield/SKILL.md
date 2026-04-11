@@ -3,7 +3,7 @@ name: relic-shield
 description: >
   灵魂护盾 — 保护 Relic 不被未授权复制、篡改或滥用。
   提供灵魂指纹、授权协议和伦理框架。可直接调用 /relic-shield。
-version: 1.1.1
+version: 1.1.2
 license: MIT
 user-invocable: true
 argument-hint: "描述你想保护或检查的 Relic，比如：检查我奶奶的授权和指纹"

@@ -2,7 +2,7 @@
 name: relic-talk
 description: >
   灵魂引擎 — 让锻造好的 Relic 活起来。当用户说"跟XX聊天""召唤XX"或直接调用 /relic-talk 时触发。
-version: 1.1.1
+version: 1.1.2
 license: MIT
 user-invocable: true
 argument-hint: "描述你想对话的对象，比如：让我跟奶奶聊天"

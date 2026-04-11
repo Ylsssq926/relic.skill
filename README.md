@@ -238,13 +238,19 @@ python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 # 解析 QQ 聊天记录
 python scripts/qq_parser.py --input chat.txt --output data.json
 
-# 生成 Relic
+# 生成 Relic（会自动附带 proactive_config.json）
 python scripts/relic_writer.py --data data.json --template human --slug grandma
+
+# 预览“它会不会主动来找你”
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # 版本管理
 python scripts/version_manager.py snapshot --slug grandma --note "第一版"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> 从 v1.1.2 开始，`relic_writer.py` 生成的新 Relic 会默认带上 `proactive_config.json`。也就是说，你不需要先手搓配置，就能直接 dry-run 看看“它今天会不会主动来敲门”。
+
 ---
 
 ## 支持的数据平台

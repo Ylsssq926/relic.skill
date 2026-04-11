@@ -170,12 +170,20 @@ Cada pieza de información lleva un nivel de evidencia:
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### Opción 2: Instalación global (disponible en todos los proyectos)
+
+### Opción 2: Instalar en un paso con npx
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### Opción 3: Instalación global (disponible en todos los proyectos)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### Opción 3: Otros IDE / agentes
+
+### Opción 4: Otros IDE / agentes
 
 relic.skill se basa en el estándar abierto SKILL.md y es compatible con cualquier asistente de programación con IA que lo admita:
 
@@ -233,10 +241,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Generar un Relic
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# Ver si te hablaría primero
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # Gestión de versiones
 python scripts/version_manager.py snapshot --slug grandma --note "Versión 1"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> Desde la v1.1.2, los Relics nuevos generados por `relic_writer.py` ya traen `proactive_config.json`, así que puedes hacer un dry-run sin escribir nada a mano y ver si hoy vendría a tocarte la puerta.
+
 ---
 
 ## Plataformas de datos compatibles
@@ -297,11 +311,12 @@ relic.skill/
 │   ├── consent-protocol.md     # Protocolo de consentimiento
 │   └── ethics.md               # Líneas rojas éticas
 │
-├── templates/                  # 📋 Plantillas de inmortalidad x7
-├── examples/                   # 🎯 Relics de ejemplo x3
-├── scripts/                    # 🔧 Scripts utilitarios de Python x6
+├── templates/                  # 📋 Plantillas de inmortalidad x7 (con guía de elección)
+├── examples/                   # 🎯 Relics de ejemplo x3 (con guía para probarlos)
+├── scripts/                    # 🔧 Scripts utilitarios de Python x8 (incluyen el quality checker y el proactive scheduler)
 ├── assets/                     # 🎨 Recursos visuales
-└── docs/                       # 📚 Documentación en profundidad
+├── docs/                       # 📚 Documentación en profundidad (incluye la guía de herramientas)
+└── ROADMAP.md                  # 🗺️ Hoja de ruta del producto
 ```
 ---
 

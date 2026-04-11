@@ -34,6 +34,8 @@ except ImportError:  # pragma: no cover - dependency guard
     date_parser = None
 
 DEFAULT_OUTPUT_DIR = "exes"
+PROJECT_VERSION = "1.1.2"
+DEFAULT_PROACTIVE_CONFIG_FILENAME = "proactive_config.json"
 
 TEMPLATE_CONFIG: Dict[str, Dict[str, Any]] = {
     "human": {
@@ -995,11 +997,73 @@ def build_memory_md(ctx: Dict[str, Any]) -> str:
     return "\n".join(sections) + "\n"
 
 
+def default_holiday_list(template: str) -> List[str]:
+    if template == "human":
+        return ["spring_festival", "mid_autumn", "new_year"]
+    if template == "relationship":
+        return ["mid_autumn", "new_year"]
+    if template == "team-culture":
+        return ["new_year"]
+    return []
+
+
+def default_random_interval_days(template: str) -> int:
+    if template == "pet":
+        return 10
+    if template in {"team-culture", "place", "moment"}:
+        return 21
+    if template == "public-figure":
+        return 30
+    return 14
+
+
+def build_default_proactive_config(ctx: Dict[str, Any]) -> Dict[str, Any]:
+    template = str(ctx["template"])
+    holiday_list = default_holiday_list(template)
+    random_enabled = template != "public-figure"
+    anniversaries_enabled = False
+    anniversary_dates: List[Dict[str, Any]] = []
+
+    return {
+        "enabled": True,
+        "user_city": None,
+        "holidays": {
+            "enabled": bool(holiday_list),
+            "list": holiday_list,
+        },
+        "anniversaries": {
+            "enabled": anniversaries_enabled,
+            "dates": anniversary_dates,
+        },
+        "weather": {
+            "enabled": False,
+        },
+        "random_miss": {
+            "enabled": random_enabled,
+            "min_interval_days": default_random_interval_days(template),
+        },
+        "quiet_hours": {
+            "start": "23:00",
+            "end": "07:00",
+        },
+        "global_max_per_week": 2 if template not in {"place", "moment"} else 1,
+    }
+
+
 def build_manifest(ctx: Dict[str, Any], data_files: Sequence[Path], output_dir: Path) -> Dict[str, Any]:
     return {
         "schema_version": "relic.skill/1.0",
         "generated_at": now_iso(),
         "slug": ctx["slug"],
+        "display_name": ctx["subject_name"],
+        "relic_type": ctx["template"],
+        "language": "zh-CN",
+        "version": PROJECT_VERSION,
+        "subject": {
+            "name": ctx["subject_name"],
+            "relation_to_user": ctx["relationship"],
+            "description": ctx["summary"],
+        },
         "title": ctx["subject_name"],
         "template": ctx["template"],
         "template_label": ctx["template_label"],
@@ -1025,7 +1089,14 @@ def build_manifest(ctx: Dict[str, Any], data_files: Sequence[Path], output_dir: 
             "is_relic_not_real_person": True,
             "boundaries": ctx["boundaries"],
         },
-        "files": ["SKILL.md", "personality.md", "interaction.md", "memory.md", "manifest.json"],
+        "files": [
+            "SKILL.md",
+            "personality.md",
+            "interaction.md",
+            "memory.md",
+            DEFAULT_PROACTIVE_CONFIG_FILENAME,
+            "manifest.json",
+        ],
     }
 
 
@@ -1039,6 +1110,7 @@ def write_relic_folder(ctx: Dict[str, Any], data_files: Sequence[Path], output_r
     write_text(relic_dir / "personality.md", build_personality_md(ctx))
     write_text(relic_dir / "interaction.md", build_interaction_md(ctx))
     write_text(relic_dir / "memory.md", build_memory_md(ctx))
+    write_json(relic_dir / DEFAULT_PROACTIVE_CONFIG_FILENAME, build_default_proactive_config(ctx))
     write_json(relic_dir / "manifest.json", build_manifest(ctx, data_files, relic_dir))
     return relic_dir
 

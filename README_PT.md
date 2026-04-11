@@ -170,12 +170,20 @@ Cada pedaço de informação recebe um nível de evidência:
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
 ```
-### Opção 2: instalação global (disponível em todos os projetos)
+
+### Opção 2: instalar em um comando com npx
+
+```bash
+npx skills add Ylsssq926/relic.skill
+```
+
+### Opção 3: instalação global (disponível em todos os projetos)
 
 ```bash
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
-### Opção 3: outros IDEs / agentes
+
+### Opção 4: outros IDEs / agentes
 
 relic.skill é baseado no padrão aberto SKILL.md e é compatível com qualquer assistente de programação com IA que o suporte:
 
@@ -233,10 +241,16 @@ python scripts/qq_parser.py --input chat.txt --output data.json
 # Gera um Relic
 python scripts/relic_writer.py --data data.json --template human --slug grandma
 
+# Ver se ele puxaria assunto primeiro
+python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+
 # Version management
 python scripts/version_manager.py snapshot --slug grandma --note "Primeira versão"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
+
+> Desde a v1.1.2, os novos Relics gerados por `relic_writer.py` já vêm com `proactive_config.json`, então dá para fazer um dry-run sem escrever nada na mão e ver se ele bateria na sua porta hoje.
+
 ---
 
 ## Plataformas de Dados Suportadas
@@ -297,11 +311,12 @@ relic.skill/
 │   ├── consent-protocol.md     # Protocolo de consentimento
 │   └── ethics.md               # Red lines éticas
 │
-├── templates/                  # 📋 Templates de Imortalidade x7
-├── examples/                   # 🎯 Exemplos de Relics x3
-├── scripts/                    # 🔧 Scripts utilitários em Python x6
+├── templates/                  # 📋 Templates de Imortalidade x7 (com guia de escolha)
+├── examples/                   # 🎯 Exemplos de Relics x3 (com guia para experimentar)
+├── scripts/                    # 🔧 Scripts utilitários em Python x8 (incluindo quality checker e proactive scheduler)
 ├── assets/                     # 🎨 Recursos visuais
-└── docs/                       # 📚 Documentação aprofundada
+├── docs/                       # 📚 Documentação aprofundada (com guia de ferramentas)
+└── ROADMAP.md                  # 🗺️ Roadmap do produto
 ```
 ---
 
