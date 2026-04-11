@@ -249,7 +249,7 @@ python scripts/version_manager.py snapshot --slug grandma --note "第一版"
 python scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
-> 从 v1.1.2 开始，`relic_writer.py` 生成的新 Relic 会默认带上 `proactive_config.json`。也就是说，你不需要先手搓配置，就能直接 dry-run 看看“它今天会不会主动来敲门”。
+> 从 v1.1.2 开始，新生成的 Relic 会默认带上 `proactive_config.json`。不用先手填配置，你就能先 dry-run 看一眼：它今天会不会突然来敲一下门。
 
 ---
 
