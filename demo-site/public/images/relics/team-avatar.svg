@@ -1,0 +1,49 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">团队头像插画</title>
+  <desc id="desc">暖色纸面背景中的三人协作头像，中间有电脑屏幕光，呈现深夜一起做事的感觉。</desc>
+  <defs>
+    <linearGradient id="paper" x1="24" y1="18" x2="294" y2="304" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBF8F2"/>
+      <stop offset="1" stop-color="#F1E8DC"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(252 82) rotate(138.743) scale(118.784 90.3656)">
+      <stop stop-color="#F3C597" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#F3C597" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(82 86) rotate(21.8014) scale(116.682 81.5367)">
+      <stop stop-color="#DCE7F0" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#DCE7F0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="screenGlow" x1="0" y1="0" x2="0" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF5FA"/>
+      <stop offset="1" stop-color="#D6E0EA"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="320" height="320" fill="url(#paper)"/>
+  <ellipse cx="252" cy="82" rx="98" ry="76" fill="url(#warmGlow)"/>
+  <ellipse cx="84" cy="88" rx="92" ry="64" fill="url(#coolGlow)"/>
+  <ellipse cx="162" cy="278" rx="120" ry="32" fill="#CBD4DD" fill-opacity="0.42"/>
+
+  <g transform="translate(32 54)">
+    <rect x="90" y="114" width="78" height="52" rx="10" fill="#475E75"/>
+    <rect x="98" y="122" width="62" height="36" rx="8" fill="url(#screenGlow)"/>
+    <path d="M116 170H142" stroke="#5E7387" stroke-width="6" stroke-linecap="round"/>
+
+    <circle cx="54" cy="70" r="22" fill="#EFCDB4"/>
+    <path d="M36 58C39 37 55 24 74 26C87 27 99 36 102 50C94 39 84 34 72 34C58 34 47 41 36 58Z" fill="#5F534D"/>
+    <path d="M8 202C11 156 27 118 54 118C79 118 96 156 100 202H8Z" fill="#7D8C6F"/>
+
+    <circle cx="128" cy="54" r="28" fill="#EFCDB4"/>
+    <path d="M104 45C109 19 129 2 153 6C170 8 184 22 188 40C177 27 164 22 150 22C131 22 116 30 104 45Z" fill="#6A5343"/>
+    <path d="M74 202C78 144 101 96 128 96C155 96 178 144 182 202H74Z" fill="#C88A66"/>
+
+    <circle cx="206" cy="68" r="22" fill="#EFCDB4"/>
+    <path d="M190 66C190 46 204 30 223 30C236 30 248 38 252 50C244 40 235 36 225 36C211 36 200 46 190 66Z" fill="#506A84"/>
+    <path d="M162 202C165 155 181 118 206 118C231 118 247 155 250 202H162Z" fill="#6F8FB1"/>
+
+    <path d="M42 164C61 145 84 135 110 136" stroke="#EFCDB4" stroke-width="12" stroke-linecap="round"/>
+    <path d="M90 144C103 134 115 129 128 128C141 129 153 134 166 144" stroke="#EFCDB4" stroke-width="12" stroke-linecap="round"/>
+    <path d="M147 140C172 134 194 141 215 162" stroke="#EFCDB4" stroke-width="12" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">橘猫头像插画</title>
+  <desc id="desc">暖色纸面背景中的橘猫半身像，神态放松，带有柔和条纹与真实宠物感。</desc>
+  <defs>
+    <linearGradient id="paper" x1="24" y1="18" x2="292" y2="304" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBF8F2"/>
+      <stop offset="1" stop-color="#F1E8DC"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(248 82) rotate(138.743) scale(118.784 90.3656)">
+      <stop stop-color="#F3C597" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#F3C597" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(82 86) rotate(21.8014) scale(116.682 81.5367)">
+      <stop stop-color="#DCE7F0" stop-opacity="0.94"/>
+      <stop offset="1" stop-color="#DCE7F0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="320" fill="url(#paper)"/>
+  <ellipse cx="248" cy="82" rx="96" ry="76" fill="url(#warmGlow)"/>
+  <ellipse cx="84" cy="88" rx="92" ry="64" fill="url(#coolGlow)"/>
+  <ellipse cx="160" cy="274" rx="118" ry="30" fill="#CCD5DE" fill-opacity="0.42"/>
+
+  <g transform="translate(40 34)">
+    <path d="M32 122L56 70L90 116" fill="#E2A766"/>
+    <path d="M150 110L172 54L207 101" fill="#E2A766"/>
+    <path d="M48 120L66 86L84 115" fill="#F2C391"/>
+    <path d="M161 108L176 78L194 101" fill="#F2C391"/>
+    <ellipse cx="120" cy="144" rx="88" ry="76" fill="#E2A766"/>
+    <ellipse cx="120" cy="160" rx="54" ry="42" fill="#F6E7D4"/>
+    <circle cx="104" cy="140" r="4" fill="#4D3B31"/>
+    <circle cx="134" cy="140" r="4" fill="#4D3B31"/>
+    <path d="M91 142C97 136 102 136 108 142" stroke="#855B3D" stroke-width="3.8" stroke-linecap="round"/>
+    <path d="M130 142C136 136 141 136 147 142" stroke="#855B3D" stroke-width="3.8" stroke-linecap="round"/>
+    <path d="M111 166C117 172 123 172 129 166" stroke="#B1735A" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M76 136C68 139 58 145 47 152" stroke="#F8EDD9" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M76 151C65 154 54 160 43 168" stroke="#F8EDD9" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M164 136C172 139 182 145 193 152" stroke="#F8EDD9" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M164 151C175 154 186 160 197 168" stroke="#F8EDD9" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M16 282C24 216 54 176 120 176C186 176 216 216 224 282H16Z" fill="#D89B5A"/>
+    <path d="M53 205C72 189 94 180 120 180C146 180 168 189 187 205L178 282H62L53 205Z" fill="#E8BA85"/>
+    <path d="M71 218C84 231 97 239 114 242" stroke="#C67E4D" stroke-width="8" stroke-linecap="round" opacity="0.68"/>
+    <path d="M169 218C156 231 143 239 126 242" stroke="#C67E4D" stroke-width="8" stroke-linecap="round" opacity="0.68"/>
+  </g>
+</svg>

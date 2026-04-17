@@ -14,6 +14,7 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
@@ -69,9 +70,11 @@ relic.skill 是一个万物永生引擎。
 | 🐱 [宠物](templates/pet.md) | 猫、狗、任何陪伴过你的生命 | 你家猫也能永生 |
 | 💞 [关系](templates/relationship.md) | 两个人之间的互动模式 | 不是蒸馏某个人，而是蒸馏你们之间的默契 |
 | 🏢 [团队文化](templates/team-culture.md) | 一个团队的灵魂 | 人散了，但那种一起熬夜改 bug 的感觉还在 |
+| 💼 [业务专家](templates/expert.md) | 资深专家的专业判断 | 知识不该随人走，把经验锻造成可对话的数字身份 |
 | 🏠 [地方](templates/place.md) | 一个地方的记忆 | 大学宿舍、老家的院子、常去的咖啡馆 |
 | ⏳ [时刻](templates/moment.md) | 一个重要瞬间 | 毕业典礼、求婚、第一次见到孩子 |
 | 🌟 [公众人物](templates/public-figure.md) | 公开资料中的认知框架 | 把你佩服的人的思维方式变成私人参谋 |
+| 🐦 [飞书 CLI](templates/feishu-cli.md) | 飞书协作记忆 | 用飞书 CLI 蒸馏协作记忆，让那些一起扛过的夜继续发光 |
 
 ---
 
@@ -251,6 +254,53 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > 从 v1.1.2 开始，新生成的 Relic 会默认带上 `proactive_config.json`。也就是说，你现在不用先研究配置长什么样，先 dry-run 一下，就能看看它今天会不会突然来敲你一下。
 
+### 🐦 飞书 CLI 深度集成
+
+relic.skill 原生支持 [飞书 CLI](https://github.com/larksuite/cli) 作为数据采集和主动行为的通道。
+
+**作为「眼」——数据采集：**
+
+```bash
+# 用飞书 CLI 抓取群聊记录作为灵魂锻造素材
+lark-cli im +messages-search --chat-id "oc_xxx" --query "项目上线"
+
+# 搜索并读取飞书文档
+lark-cli docs +search --query "技术方案"
+lark-cli docs +read --doc-id "doxxx"
+
+# 从多维表格提取团队协作记录
+lark-cli base +records-list --app-token "bxxx" --table-id "tblxxx"
+
+# 获取会议纪要中的决策记录
+lark-cli vc +minutes --meeting-id "meeting_xxx"
+```
+
+**作为「手」——主动行为：**
+
+```bash
+# Relic 想找你时，通过飞书 CLI 直接发消息
+lark-cli im +messages-send --chat-id "oc_xxx" --text "怎么还在加班？早点回去。"
+
+# 在飞书文档里写入回忆
+lark-cli docs +update --doc-id "doxxx" --markdown "## 团队回忆\n那个凌晨三点的上线夜..."
+
+# 基于日历触发主动关怀
+lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备" --start "2026-04-17T09:50:00"
+```
+
+**深度联动能力：**
+
+| 飞书 CLI Skill | relic.skill 用途 |
+|---|---|
+| `lark-im` | 抓取群聊记忆 / Relic 主动发消息 |
+| `lark-docs` | 读取文档批注和评论 / 写入回忆录 |
+| `lark-base` | 从多维表格提取协作时间线 / 创建专家知识库 |
+| `lark-calendar` | 基于日程触发主动关怀 / 纪念日提醒 |
+| `lark-vc` | 从会议纪要提取决策记录 |
+| `lark-wiki` | 归档团队知识库到 Relic |
+
+> 🏆 **飞书 CLI 创作者大赛参赛作品** — relic.skill 参赛场景包括团队协作记忆蒸馏和业务专家数字身份锻造，详见 [飞书 CLI 模板](templates/feishu-cli.md) 和 [业务专家模板](templates/expert.md)。
+
 ---
 
 ## 支持的数据平台
@@ -262,7 +312,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 即时通讯 | Telegram | 官方导出 | JSON |
 | 💬 即时通讯 | Discord | DiscordChatExporter | JSON |
 | 💬 即时通讯 | Slack | 官方导出 | JSON |
-| 💬 办公 | 飞书 | API | JSON |
+| 💬 办公 | 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 办公 | 钉钉 | API | JSON |
 | 📱 手机 | iMessage | 本地数据库 | SQLite |
 | 📱 手机 | WhatsApp | 官方归档 | TXT |
@@ -311,9 +361,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 授权协议
 │   └── ethics.md               # 伦理红线
 │
-├── templates/                  # 📋 万物永生模板 x7（附选择指南）
+├── templates/                  # 📋 万物永生模板 x9（附选择指南）
 ├── examples/                   # 🎯 示例 Relics x3（附体验指南）
-├── scripts/                    # 🔧 Python 工具脚本 x8（含质量评估和主动调度）
+├── scripts/                    # 🔧 Python 工具脚本 x9（含飞书全链路锻造）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）
 └── ROADMAP.md                  # 🗺️ 产品路线图

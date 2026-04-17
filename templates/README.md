@@ -10,9 +10,11 @@
 | 一只猫、一条狗 | [pet.md](pet.md) | 四维重定义为习性/互动/情绪/节奏，猫不说人话 |
 | 两个人之间的默契 | [relationship.md](relationship.md) | 蒸馏的不是某个人，是你们之间的互动模式 |
 | 一个团队的感觉 | [team-culture.md](team-culture.md) | 决策风格、群聊画风、内部梗、协作节奏 |
+| 资深专家的专业判断 | [expert.md](expert.md) | 飞书 CLI 深度联动，知识结构化到多维表格，日历触发主动关怀 |
 | 一个地方的记忆 | [place.md](place.md) | 感官优先：声音、气味、光线、温度 |
 | 一个重要瞬间 | [moment.md](moment.md) | 聚焦单一时间窗口，场景细节 + 情感峰值 |
 | 一个你佩服的公众人物 | [public-figure.md](public-figure.md) | 仅限公开资料，提取认知框架当私人参谋 |
+| 飞书里的协作记忆 | [feishu-cli.md](feishu-cli.md) | IM / Docs / Base / Calendar / Wiki / VC 全链路 |
 
 ## 不确定？
 

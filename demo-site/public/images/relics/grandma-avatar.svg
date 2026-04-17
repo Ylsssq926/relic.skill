@@ -1,0 +1,43 @@
+<svg width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">奶奶头像插画</title>
+  <desc id="desc">暖色纸面背景中的奶奶半身像，带有灰白发髻和柔和笑意。</desc>
+  <defs>
+    <linearGradient id="paper" x1="26" y1="18" x2="292" y2="304" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBF8F2"/>
+      <stop offset="1" stop-color="#F1E8DC"/>
+    </linearGradient>
+    <radialGradient id="warmGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(250 80) rotate(137.49) scale(120.034 92.3918)">
+      <stop stop-color="#F3C597" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#F3C597" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="coolGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(78 84) rotate(24.37) scale(122.134 86.8365)">
+      <stop stop-color="#DCE7F0" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#DCE7F0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="320" height="320" fill="url(#paper)"/>
+  <ellipse cx="252" cy="82" rx="96" ry="78" fill="url(#warmGlow)"/>
+  <ellipse cx="84" cy="86" rx="92" ry="66" fill="url(#coolGlow)"/>
+  <ellipse cx="164" cy="280" rx="120" ry="34" fill="#CAD4DE" fill-opacity="0.45"/>
+
+  <g transform="translate(50 24)">
+    <circle cx="178" cy="52" r="22" fill="#D6D1CB"/>
+    <path d="M58 118C58 72 92 36 136 36C181 36 212 74 212 119V139C212 187 180 217 136 217C90 217 58 186 58 139V118Z" fill="#D6D1CB"/>
+    <ellipse cx="137" cy="118" rx="53" ry="64" fill="#EFCDB4"/>
+    <path d="M90 90C96 61 117 42 145 42C172 42 193 61 199 90C191 75 169 63 144 63C118 63 100 73 90 90Z" fill="#C8C3BD"/>
+    <path d="M94 92C103 72 120 62 144 62C170 62 188 72 195 92V131C195 166 171 192 137 192C103 192 81 166 81 131V100C86 98 89 95 94 92Z" fill="#F3D5BD"/>
+    <circle cx="125" cy="116" r="3.8" fill="#5D4A3F"/>
+    <circle cx="150" cy="116" r="3.8" fill="#5D4A3F"/>
+    <path d="M118 119C124 115 129 115 135 119" stroke="#8D6B57" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M142 119C148 115 153 115 159 119" stroke="#8D6B57" stroke-width="3.6" stroke-linecap="round"/>
+    <path d="M127 145C133 150 141 150 147 145" stroke="#B1735A" stroke-width="4.5" stroke-linecap="round"/>
+    <circle cx="107" cy="136" r="6.5" fill="#E6B5A0" fill-opacity="0.38"/>
+    <circle cx="168" cy="136" r="6.5" fill="#E6B5A0" fill-opacity="0.38"/>
+    <rect x="121" y="171" width="31" height="30" rx="15" fill="#EFCDB4"/>
+    <path d="M32 284C40 217 63 178 137 178C210 178 234 217 242 284H32Z" fill="#8EA0B2"/>
+    <path d="M90 200C104 185 118 178 137 178C157 178 174 186 188 201L180 284H94L90 200Z" fill="#F4E9DB"/>
+    <path d="M113 191C126 194 147 194 160 191C167 207 167 226 160 243C151 248 141 251 128 254C117 235 113 213 113 191Z" fill="#C88A66"/>
+    <path d="M129 191C112 207 112 229 120 250" stroke="#B87A58" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>
