@@ -6,6 +6,7 @@ export const RELIC_TYPES = {
   place: "地方",
   moment: "时刻",
   "public-figure": "公众人物",
+  expert: "业务专家",
   "feishu-cli": "飞书 CLI",
 } as const;
 
@@ -79,6 +80,14 @@ export const RELIC_TYPE_OPTIONS: readonly RelicTypeOption[] = [
     accentTo: "#3b82c4",
   },
   {
+    value: "expert",
+    label: "业务专家",
+    emoji: "💼",
+    description: "知识不该随人走，把经验锻造成可对话的数字身份。",
+    accentFrom: "#10b981",
+    accentTo: "#3b82f6",
+  },
+  {
     value: "feishu-cli",
     label: "飞书 CLI",
     emoji: "🐦",
@@ -104,6 +113,7 @@ export const RELIC_TYPE_ACCENTS: Record<RelicTypeKey, string> = {
   place: "from-amber-500/60 via-yellow-500/50 to-orange-300/60",
   moment: "from-slate-300/70 via-brand-300/60 to-indigo-400/60",
   "public-figure": "from-violet-400/80 via-brand-400/70 to-indigo-400/70",
+  expert: "from-emerald-400/80 via-teal-400/70 to-blue-400/70",
   "feishu-cli": "from-blue-400/80 via-blue-500/70 to-indigo-400/70",
 };
 
@@ -115,6 +125,7 @@ export const RELIC_TYPE_BADGE_STYLES: Record<RelicTypeKey, string> = {
   place: "border-warm-place/20 bg-warm-place/10 text-warm-place",
   moment: "border-warm-moment/20 bg-warm-moment/10 text-warm-moment",
   "public-figure": "border-warm-public/20 bg-warm-public/10 text-warm-public",
+  expert: "border-emerald-400/20 bg-emerald-500/10 text-emerald-600",
   "feishu-cli": "border-blue-400/20 bg-blue-500/10 text-blue-500",
 };
 

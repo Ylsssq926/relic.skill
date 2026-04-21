@@ -11,6 +11,7 @@
 | Telegram | 导出聊天包、JSON、HTML | `.json` `.html` | 可保留频道、群组、私聊结构 |
 | Slack | 工作区导出、频道归档 | `.json`（ZIP 包内） | 线程回复与表情反应要单独保留 |
 | Discord | 导出文本、截图、频道记录 | `.json` `.txt` 图片 OCR | 需标记频道与服务器上下文 |
+| 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API / 官方导出 | `lark-cli im +messages-search` `lark-cli im +messages-list` `.json` | 支持群聊搜索、消息历史、媒体下载；可联动文档批注和会议纪要 |
 | iMessage | 备份解析结果、截图、结构化导出 | `chat.db`（SQLite） `.csv` `.pdf` 图片 OCR | 要保留蓝绿气泡之外的时间与附件信息 |
 
 额外支持：

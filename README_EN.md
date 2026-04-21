@@ -14,6 +14,7 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
 </p>
 
 <h1 align="center">Everything Deserves a Relic</h1>
@@ -47,11 +48,11 @@
 
 ## What Is This?
 
-relic.skill is an engine for digital immortality.
+relic.skill is a digital immortality engine.
 
-It can forge anything you care about—a person, a cat, a relationship, a team, a place, a moment—into an interactive digital soul from scattered fragments of data.
+It takes scattered fragments of data—chat logs, photos, voice memos, whatever you've got—and turns them into something alive. A person, a cat, a relationship, a team, a place, a moment. Anything you care about.
 
-Not a cold archive. A grandma who asks whether you have eaten dumplings during Lunar New Year. A cat that suddenly starts parkour at 3 a.m. A product manager who somehow always has one more requirement change.
+Not a cold archive. A grandma who nags you about eating properly during Lunar New Year. A cat that goes full parkour mode at 3 a.m. A product manager who always has "just one more small change."
 
 > The name comes from the Relic chip in Cyberpunk 2077—a biochip that can store a digitized personality.
 > This project is not about cyberpunk. It is about **remembering**.
@@ -71,6 +72,8 @@ Not just people. Everything deserves a Relic.
 | 🏠 [Place](templates/place.md) | The memory of a place | A college dorm, the yard back home, the café you always visited |
 | ⏳ [Moment](templates/moment.md) | A moment that mattered | Graduation, a proposal, the first time you saw your child |
 | 🌟 [Public Figure](templates/public-figure.md) | A cognitive framework distilled from public material | Turn the way someone thinks into your own private advisor |
+| 💼 [Expert](templates/expert.md) | Domain expert's professional judgment | Knowledge shouldn't walk out the door when people do |
+| 🐦 [Feishu CLI](templates/feishu-cli.md) | Feishu collaboration memory | Distill team memories through Feishu CLI — those late nights still glow |
 
 ---
 
@@ -189,15 +192,15 @@ relic.skill is based on the open SKILL.md standard and is compatible with any AI
 
 | IDE / Agent | Installation Method |
 |-------------|---------------------|
-| **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
-| **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
-| **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
-| **Windsurf** | `git clone` 到 `.windsurf/skills/relic/` |
-| **Cline** | `git clone` 到 `.cline/skills/relic/` |
-| **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
-| **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
-| **Augment** | `git clone` 到项目根目录 |
-| **GitHub Copilot** | `git clone` 到项目根目录 |
+| **Claude Code** | `git clone` into `.claude/skills/relic/` |
+| **Kiro** | `git clone` into `.kiro/skills/relic/` |
+| **Cursor** | `git clone` into `.cursor/skills/relic/` or project root |
+| **Windsurf** | `git clone` into `.windsurf/skills/relic/` |
+| **Cline** | `git clone` into `.cline/skills/relic/` |
+| **OpenCode** | `git clone` into `.opencode/skill/relic/` |
+| **Codex CLI** | `git clone` into `codex-skills/relic/` |
+| **Augment** | `git clone` into project root |
+| **GitHub Copilot** | `git clone` into project root |
 
 > In principle, any agent that can read SKILL.md should work. If you're not sure, just clone into the project root.
 
@@ -253,6 +256,45 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ---
 
+### 🐦 Feishu CLI Integration
+
+relic.skill supports [Feishu CLI](https://github.com/larksuite/cli) as both a data collection channel and a proactive behavior channel. Before use, install and configure your token following the [Feishu CLI documentation](https://github.com/larksuite/cli). You can distill team memories from Feishu conversations, docs, and bases, or let your Relic send messages through Feishu.
+
+**Data Collection Example:**
+
+```bash
+# Collect Feishu IM history
+python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+
+# Collect Feishu Docs
+python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+```
+
+**Proactive Behavior Example:**
+
+```python
+# Let your Relic send a Feishu message
+from feishu_cli import send_message
+
+send_message(
+    chat_id="oc_xxx",
+    content="Hey team, remember to push before you leave today."
+)
+```
+
+**Supported Feishu Capabilities:**
+
+| Capability | Data Collection | Proactive Behavior |
+|------------|-----------------|-------------------|
+| 💬 Feishu IM | ✅ Chat history export | ✅ Send messages / reactions |
+| 📄 Feishu Docs | ✅ Doc content extraction | ✅ Comment / mention |
+| 📊 Feishu Base | ✅ Table data export | ✅ Create / update records |
+| 📅 Feishu Calendar | ✅ Event history | ✅ Create reminders |
+
+🏆 This project is a submission to the Feishu CLI Creator Contest — see the [Feishu CLI template](templates/feishu-cli.md) and [Expert template](templates/expert.md) for contest scenarios.
+
+---
+
 ## Supported Data Platforms
 
 | Type | Platform | Export Method | Format |
@@ -262,7 +304,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 Messaging | Telegram | Official export | JSON |
 | 💬 Messaging | Discord | DiscordChatExporter | JSON |
 | 💬 Messaging | Slack | Official export | JSON |
-| 💬 Work | Feishu | API | JSON |
+| 💬 Work | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 Work | DingTalk | API | JSON |
 | 📱 Mobile | iMessage | Local database | SQLite |
 | 📱 Mobile | WhatsApp | Official archive | TXT |
@@ -311,9 +353,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Consent protocol
 │   └── ethics.md               # Ethical red lines
 │
-├── templates/                  # 📋 Templates for everything x7 (with a selection guide)
+├── templates/                  # 📋 Templates for everything x9 (with a selection guide)
 ├── examples/                   # 🎯 Example Relics x3 (with a quick walkthrough)
-├── scripts/                    # 🔧 Python utility scripts x8 (including the quality checker and proactive scheduler)
+├── scripts/                    # 🔧 Python utility scripts x9 (including Feishu full-chain forging)
 ├── assets/                     # 🎨 Visual assets
 ├── docs/                       # 📚 In-depth docs (including the tools guide)
 └── ROADMAP.md                  # 🗺️ Product roadmap
@@ -343,6 +385,8 @@ Made by **掠蓝 (Luelan)**.
 - 💡 [Feature Request](https://github.com/Ylsssq926/relic.skill/issues/new?template=feature_request.yml)
 - 📋 [Submit a New Template](https://github.com/Ylsssq926/relic.skill/issues/new?template=new_relic_template.yml)
 - 🤝 [Contribution Guide](CONTRIBUTING.md)
+
+Drop by with ideas, screenshots, templates, or wild-but-serious thoughts. Chinese and English both welcome.
 
 Your own template for preserving something that matters is welcome here. This world is full of things worth remembering.
 

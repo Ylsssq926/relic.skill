@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">Tudo merece um Relic</h1>
@@ -71,6 +73,8 @@ Não é só para pessoas. Tudo merece um Relic.
 | 🏠 [Lugar](templates/place.md) | A memória de um lugar | Um dormitório da faculdade, o quintal de casa, o café de sempre |
 | ⏳ [Momento](templates/moment.md) | Um instante importante | Formatura, pedido de casamento, a primeira vez que você viu seu filho |
 | 🌟 [Figura pública](templates/public-figure.md) | Um framework cognitivo destilado de materiais públicos | Transforme a forma de pensar de alguém que você admira em um conselheiro privado |
+| 💼 [Especialista](templates/expert.md) | Julgamento profissional de especialistas | O conhecimento não deveria ir embora com as pessoas |
+| 🐦 [Feishu CLI](templates/feishu-cli.md) | Memória de colaboração Feishu | Destile memórias de equipe com Feishu CLI — aquelas noites juntos continuam brilhando |
 
 ---
 
@@ -251,6 +255,36 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > Desde a v1.1.2, os novos Relics gerados por `relic_writer.py` já vêm com `proactive_config.json`, então dá para fazer um dry-run sem escrever nada na mão e ver se ele bateria na sua porta hoje.
 
+### 🐦 Integração com Feishu CLI
+
+Use o [Feishu CLI](https://github.com/larksuite/cli) para coletar memórias de equipe do Feishu (Lark) e destilá-las em um Relic.
+
+```bash
+# Coletar mensagens de chat em grupo do Feishu
+lark-im export --chat-id "oc_xxx" --output feishu_chat.json
+
+# Coletar documentos do Feishu
+lark-docs export --doc-id "doxcnxxx" --output feishu_docs.json
+
+# Forjar um Relic a partir dos dados do Feishu
+python scripts/feishu_forge.py \
+  --chat feishu_chat.json \
+  --docs feishu_docs.json \
+  --template team-culture \
+  --slug spark-studio
+```
+
+**Capacidades do Feishu CLI:**
+
+| Módulo | O que coleta | Uso no Relic |
+|--------|--------------|--------------|
+| `lark-im` | Mensagens de grupo, mensagens privadas | Padrões de interação da equipe, estilo de comunicação |
+| `lark-docs` | Documentos, planilhas, wikis | Conhecimento da equipe, processos de decisão |
+| `lark-base` | Tabelas multidimensionais, bancos de dados | Dados estruturados da equipe, fluxos de trabalho |
+| `lark-calendar` | Eventos de calendário, reuniões | Ritmo da equipe, momentos importantes |
+
+🏆 Este projeto participa do Concurso de Criadores Feishu CLI — veja o [modelo Feishu CLI](templates/feishu-cli.md) e o [modelo Especialista](templates/expert.md).
+
 ---
 
 ## Plataformas de Dados Suportadas
@@ -262,7 +296,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 Mensagens | Telegram | Exportação oficial | JSON |
 | 💬 Mensagens | Discord | DiscordChatExporter | JSON |
 | 💬 Mensagens | Slack | Exportação oficial | JSON |
-| 💬 Trabalho | Feishu | API | JSON |
+| 💬 Trabalho | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 Trabalho | DingTalk | API | JSON |
 | 📱 Mobile | iMessage | Banco de dados local | SQLite |
 | 📱 Mobile | WhatsApp | Arquivo oficial | TXT |
@@ -311,9 +345,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Protocolo de consentimento
 │   └── ethics.md               # Red lines éticas
 │
-├── templates/                  # 📋 Templates de Imortalidade x7 (com guia de escolha)
+├── templates/                  # 📋 Modelos para tudo x9 (com guia de seleção)
 ├── examples/                   # 🎯 Exemplos de Relics x3 (com guia para experimentar)
-├── scripts/                    # 🔧 Scripts utilitários em Python x8 (incluindo quality checker e proactive scheduler)
+├── scripts/                    # 🔧 Scripts Python x9 (incluindo forja completa Feishu)
 ├── assets/                     # 🎨 Recursos visuais
 ├── docs/                       # 📚 Documentação aprofundada (com guia de ferramentas)
 └── ROADMAP.md                  # 🗺️ Roadmap do produto

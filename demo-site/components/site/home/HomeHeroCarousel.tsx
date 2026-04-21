@@ -32,20 +32,26 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
     [activeIndex, relics],
   );
 
-  if (!activeRelic) return null;
+  if (!activeRelic || relics.length === 0) return null;
 
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-[16/10] overflow-hidden bg-background-soft sm:aspect-[16/9]">
-        <Image
-          src={activeRelic.coverUrl}
-          alt={dict.hero.coverAlt(activeRelic.displayName)}
-          fill
-          sizes="(min-width: 1024px) 32rem, (min-width: 640px) 60vw, 100vw"
-          className="object-cover transition-transform duration-700 ease-entrance hover:scale-[1.03]"
-          priority
-          unoptimized
-        />
+        {relics.map((relic, index) => (
+          <Image
+            key={relic.id}
+            src={relic.coverUrl}
+            alt={dict.hero.coverAlt(relic.displayName)}
+            fill
+            sizes="(min-width: 1024px) 32rem, (min-width: 640px) 60vw, 100vw"
+            className={`object-cover object-[center_15%] transition-opacity duration-500 ease-entrance ${
+              index === activeIndex ? "opacity-100" : "opacity-0"
+            }`}
+            priority={index === 0}
+            loading={index === 0 ? undefined : "eager"}
+            unoptimized
+          />
+        ))}
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-transparent to-transparent" />
 
         <div className="absolute left-5 right-5 top-5 flex items-start justify-between gap-3">
@@ -80,34 +86,45 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
         </div>
       </div>
 
-      <div className="space-y-4 p-6">
-        <div className="flex items-start gap-4">
-          <Avatar
-            name={activeRelic.displayName}
-            src={activeRelic.avatarUrl}
-            size="lg"
-            className="rounded-full border-[3px] border-surface shadow-medium"
-          />
-          <div className="min-w-0 flex-1 space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-lg font-bold text-foreground">
-                {activeRelic.displayName}
-              </h3>
-              <span className="rounded-full bg-background-soft px-2.5 py-0.5 text-xs text-foreground-faint">
-                {dict.types[activeRelic.type]}
-              </span>
+      <div className="relative space-y-4 p-6">
+        {relics.map((relic, index) => (
+          <div
+            key={relic.id}
+            className={`transition-opacity duration-300 ${
+              index === activeIndex
+                ? "opacity-100"
+                : "pointer-events-none absolute inset-0 opacity-0"
+            }`}
+          >
+            <div className="flex items-start gap-4">
+              <Avatar
+                name={relic.displayName}
+                src={relic.avatarUrl}
+                size="lg"
+                className="rounded-full border-[3px] border-surface shadow-medium"
+              />
+              <div className="min-w-0 flex-1 space-y-1.5">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-lg font-bold text-foreground">
+                    {relic.displayName}
+                  </h3>
+                  <span className="rounded-full bg-background-soft px-2.5 py-0.5 text-xs text-foreground-faint">
+                    {dict.types[relic.type]}
+                  </span>
+                </div>
+                <p className="text-sm leading-relaxed text-foreground-muted">
+                  {relic.detail}
+                </p>
+              </div>
             </div>
-            <p className="text-sm leading-relaxed text-foreground-muted">
-              {activeRelic.detail}
-            </p>
-          </div>
-        </div>
 
-        <div className="rounded-xl bg-background-soft p-4 text-sm leading-relaxed text-foreground-secondary">
-          <span className="font-medium text-foreground">「</span>
-          {activeRelic.dialogs[0]?.relic}
-          <span className="font-medium text-foreground">」</span>
-        </div>
+            <div className="rounded-xl bg-background-soft p-4 text-sm leading-relaxed text-foreground-secondary">
+              <span className="font-medium text-foreground">「</span>
+              {relic.dialogs[0]?.relic}
+              <span className="font-medium text-foreground">」</span>
+            </div>
+          </div>
+        ))}
       </div>
 
       <div className="flex items-center justify-between border-t border-border/60 px-6 py-4">

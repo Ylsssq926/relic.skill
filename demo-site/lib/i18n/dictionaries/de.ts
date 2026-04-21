@@ -255,6 +255,7 @@ const de: Dictionary = {
     place: "Place",
     moment: "Moment",
     "public-figure": "Public Figure",
+    expert: "Fachexperte",
     "feishu-cli": "Feishu CLI",
   },
   typeDesc: {
@@ -265,6 +266,7 @@ const de: Dictionary = {
     place: "Let memorable places keep responding to you",
     moment: "Turn important moments into revisit-able portals",
     "public-figure": "Distill a conversable cognitive frame from public data",
+    expert: "Wissen sollte nicht mit Menschen gehen — schmieden Sie Erfahrung in eine dialogfähige digitale Identität",
     "feishu-cli": "Zusammenarbeitsmemorien mit Feishu CLI destillieren — die durchgemachten Nächte weiter leuchten lassen",
   },
   chat: {
@@ -306,7 +308,7 @@ const de: Dictionary = {
     roadmapDesc: "Everything deserves a Relic — but one step at a time.",
   },
   homeData: {
-    templateCount: "8 Templates",
+    templateCount: "9 Templates",
     templateDesc: "Put important existences into their proper containers.",
     shieldPoints: [
       "Six-question consent protocol: agree first, then begin",

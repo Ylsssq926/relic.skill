@@ -4,7 +4,7 @@ const en: Dictionary = {
   site: {
     title: "relic.skill",
     tagline: "Everything deserves a Relic",
-    description: "Preserve the people and memories you care about, in a gentler way.",
+    description: "Turn the people and things you care about into digital souls you can actually talk to.",
   },
   nav: {
     home: "Home",
@@ -18,8 +18,8 @@ const en: Dictionary = {
   hero: {
     badge: "relic.skill · Digital Immortality Engine",
     title: "GitHub for Souls",
-    subtitle: "Everything can be a Relic. Not a cold archive, but a familiar presence that still responds to you.",
-    body: "Take the people, cats, relationships, teams, places, and moments you care about — gather them from scattered data fragments, and forge them into an interactive, experienceable, ever-evolving digital soul.",
+    subtitle: "Everything can be a Relic. Not a dead archive — something that actually talks back.",
+    body: "Take the people, cats, relationships, teams, places, and moments you care about — pull them from scattered chat logs and photos, and forge them into a digital soul that talks, remembers, and grows.",
     hint: "It could be a grandma who asks \"did you eat dumplings yet?\" on New Year's, or a cat that suddenly starts parkour at 3 AM.",
     tryExample: "Try Example Relics",
     docs: "Docs",
@@ -31,7 +31,7 @@ const en: Dictionary = {
   },
   features: {
     title: "More Than Chat Logs — Living Memory",
-    subtitle: "A four-dimensional soul architecture that gives digital presence warmth, logic, and boundaries.",
+    subtitle: "A four-layer soul architecture: how it thinks, speaks, acts, and feels.",
     items: {
       cognition: { title: "Cognition", desc: "How it thinks — values, reasoning, priorities" },
       expression: { title: "Expression", desc: "How it speaks — tone, catchphrases, rhythm" },
@@ -46,7 +46,7 @@ const en: Dictionary = {
   },
   highlights: {
     title: "Why relic.skill",
-    subtitle: "Not another chatbot framework — a complete digital soul forging system",
+    subtitle: "Not another chatbot framework — this is a full soul forging system",
     items: {
       forge: { title: "Soul Forge", desc: "Distill a four-dimensional soul from chat logs, photos, and text — not simple copying, but understanding the essence" },
       engine: { title: "Soul Engine", desc: "Let digital souls converse, proactively care, and grow over time" },
@@ -59,7 +59,7 @@ const en: Dictionary = {
   cta: {
     badge: "Open Source · Local First · Digital Immortality",
     title: "The real death is when the last person who remembers you forgets.",
-    subtitle: "What we can do isn't declaring eternity for anyone. It's keeping a light on, before time smooths everything away, for those who came, loved, and left an echo.",
+    subtitle: "We can't promise eternity. But we can keep a light on for those who came, loved, and left something behind — before time washes it all away.",
     tags: {
       ethics: "Ethics First",
       docs: "Full Docs",
@@ -78,7 +78,7 @@ const en: Dictionary = {
   demo: {
     badge: "Experience Space",
     title: "Awaken a Memory",
-    subtitle: "No upload needed. Feel pre-distilled souls in a safe sandbox. Behind every card lies a connection that once shone bright.",
+    subtitle: "No upload needed. Try pre-made souls in a sandbox. Every card is a connection that mattered.",
     selectorTitle: "Archives",
     selectorHint: "Pick a memory to start talking.",
     emptyTitle: "No Archive Selected",
@@ -92,7 +92,7 @@ const en: Dictionary = {
     quickTry: "Quick Try",
     scenarioNewYear: "🧧 New Year",
     scenarioBirthday: "🎂 Birthday",
-    scenarioRandom: "� Random Thought",
+    scenarioRandom: "💭 Random Thought",
     inputPlaceholder: "Say something gentle...",
     send: "Send",
     thinking: "Thinking",
@@ -230,7 +230,7 @@ const en: Dictionary = {
     ],
   },
   footer: {
-    tagline: "Preserve the people and memories you care about, in a gentler way.",
+    tagline: "Turn the people and things you care about into digital souls you can actually talk to.",
     product: "Product",
     resources: "Resources",
     community: "Community",
@@ -255,6 +255,7 @@ const en: Dictionary = {
     place: "Place",
     moment: "Moment",
     "public-figure": "Public Figure",
+    expert: "Business Expert",
     "feishu-cli": "Feishu CLI",
   },
   typeDesc: {
@@ -265,6 +266,7 @@ const en: Dictionary = {
     place: "Let memorable places keep responding to you",
     moment: "Turn important moments into revisit-able portals",
     "public-figure": "Distill a conversable cognitive frame from public data",
+    expert: "Knowledge shouldn't walk out the door — forge expertise into a conversable digital identity",
     "feishu-cli": "Distill collaboration memories with Feishu CLI — let those late nights together keep glowing",
   },
   chat: {
@@ -306,7 +308,7 @@ const en: Dictionary = {
     roadmapDesc: "Everything deserves a Relic — but one step at a time.",
   },
   homeData: {
-    templateCount: "8 Templates",
+    templateCount: "9 Templates",
     templateDesc: "Put important existences into their proper containers.",
     shieldPoints: [
       "Six-question consent protocol: agree first, then begin",

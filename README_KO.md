@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">모든 것에 Relic을</h1>
@@ -71,6 +73,8 @@ relic.skill은 모든 것을 영생시키는 엔진입니다.
 | 🏠 [장소](templates/place.md) | 어떤 장소의 기억 | 대학 기숙사, 고향집 마당, 자주 가던 카페 |
 | ⏳ [순간](templates/moment.md) | 중요한 한순간 | 졸업식, 프러포즈, 처음 아이를 만난 순간 |
 | 🌟 [공적 인물](templates/public-figure.md) | 공개 자료 속 인지 프레임 | 존경하는 사람의 사고방식을 나만의 참모로 만든다 |
+| 💼 [비즈니스 전문가](templates/expert.md) | 전문가의 판단력 | 지식은 사람과 함께 떠나서는 안 됩니다 — 경험을 대화 가능한 디지털 정체성으로 |
+| 🐦 [페이슈 CLI](templates/feishu-cli.md) | 페이슈 협업 기억 | 페이슈 CLI로 팀 기억을 증류 — 함께 버텨낸 밤들이 계속 빛나도록 |
 
 ---
 
@@ -252,6 +256,45 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ---
 
+### 🐦 페이슈 CLI 통합
+
+relic.skill은 [Feishu CLI](https://github.com/larksuite/cli)를 데이터 수집 채널 및 능동적 행동 채널로 지원합니다. 페이슈 대화, 문서, 베이스에서 팀 기억을 증류하거나, Relic이 페이슈를 통해 메시지를 보내도록 할 수 있습니다.
+
+**데이터 수집 예시:**
+
+```bash
+# 페이슈 IM 기록 수집
+python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+
+# 페이슈 문서 수집
+python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+```
+
+**능동적 행동 예시:**
+
+```python
+# Relic이 페이슈 메시지를 보내도록 하기
+from feishu_cli import send_message
+
+send_message(
+    chat_id="oc_xxx",
+    content="Hey team, remember to push before you leave today."
+)
+```
+
+**지원되는 페이슈 기능:**
+
+| 기능 | 데이터 수집 | 능동적 행동 |
+|------|-----------|-----------|
+| 💬 Feishu IM | ✅ 채팅 기록 내보내기 | ✅ 메시지 전송 / 반응 |
+| 📄 Feishu Docs | ✅ 문서 내용 추출 | ✅ 댓글 / 멘션 |
+| 📊 Feishu Base | ✅ 테이블 데이터 내보내기 | ✅ 레코드 생성 / 업데이트 |
+| 📅 Feishu Calendar | ✅ 이벤트 기록 | ✅ 리마인더 생성 |
+
+🏆 이 프로젝트는 Feishu CLI Creator Contest 출품작입니다 — 콘테스트 시나리오는 [Feishu CLI 템플릿](templates/feishu-cli.md) 및 [Expert 템플릿](templates/expert.md)을 참조하세요.
+
+---
+
 ## 지원하는 데이터 플랫폼
 
 | 유형 | 플랫폼 | 수집 방법 | 형식 |
@@ -261,7 +304,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 메신저 | Telegram | 공식 내보내기 | JSON |
 | 💬 메신저 | Discord | DiscordChatExporter | JSON |
 | 💬 메신저 | Slack | 공식 내보내기 | JSON |
-| 💬 업무 | Feishu | API | JSON |
+| 💬 업무 | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 업무 | DingTalk | API | JSON |
 | 📱 모바일 | iMessage | 로컬 데이터베이스 | SQLite |
 | 📱 모바일 | WhatsApp | 공식 아카이브 | TXT |
@@ -310,9 +353,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 동의 프로토콜
 │   └── ethics.md               # 윤리 레드라인
 │
-├── templates/                  # 📋 만물 영생 템플릿 x7 (선택 가이드 포함)
+├── templates/                  # 📋 만물영생 템플릿 x9 (선택 가이드 포함)
 ├── examples/                   # 🎯 예시 Relics x3 (체험 가이드 포함)
-├── scripts/                    # 🔧 Python 도구 스크립트 x8 (quality checker와 proactive scheduler 포함)
+├── scripts/                    # 🔧 Python 유틸리티 스크립트 x9 (페이슈 전체 체인 단조 포함)
 ├── assets/                     # 🎨 시각 자료
 ├── docs/                       # 📚 심화 문서 (tools guide 포함)
 └── ROADMAP.md                  # 🗺️ 제품 로드맵

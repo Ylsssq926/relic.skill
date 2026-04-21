@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">Tout mérite un Relic</h1>
@@ -71,6 +73,8 @@ Pas seulement les humains. Tout mérite un Relic.
 | 🏠 [Lieu](templates/place.md) | La mémoire d'un lieu | Une chambre universitaire, la cour de la maison familiale, le café où vous alliez souvent |
 | ⏳ [Moment](templates/moment.md) | Un instant important | Une remise de diplôme, une demande en mariage, la première fois que vous avez vu votre enfant |
 | 🌟 [Figure publique](templates/public-figure.md) | Un cadre cognitif distillé à partir de matériaux publics | Transformez la manière de penser de quelqu'un que vous admirez en conseiller privé |
+| 💼 [Expert](templates/expert.md) | Jugement professionnel d'experts | Le savoir ne devrait pas partir avec les gens |
+| 🐦 [Feishu CLI](templates/feishu-cli.md) | Mémoire de collaboration Feishu | Distillez les souvenirs d'équipe avec Feishu CLI — ces nuits ensemble brillent encore |
 
 ---
 
@@ -251,6 +255,31 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > Depuis la v1.1.2, les nouveaux Relics générés par `relic_writer.py` arrivent avec `proactive_config.json`, donc vous pouvez lancer un dry-run sans rien écrire à la main et voir s'il viendrait frapper à votre porte aujourd'hui.
 
+### 🐦 Intégration Feishu CLI
+
+Intégration native avec [Feishu CLI](https://github.com/larksuite/cli) pour la distillation de mémoire d'équipe et le comportement proactif.
+
+```bash
+# Collecter les messages de groupe Feishu (30 derniers jours)
+feishu-cli im list-messages --chat-id oc_xxx --start-time 2024-01-01 | \
+  python scripts/feishu_forge.py --type im --output data/feishu_im.json
+
+# Comportement proactif : envoyer un rappel de réunion
+python scripts/proactive_feishu.py \
+  --relic exes/team-culture \
+  --trigger calendar_event \
+  --chat-id oc_xxx
+```
+
+| Capacité | Commande Feishu CLI | Cas d'usage |
+|------|------|------|
+| 💬 Messagerie instantanée | `feishu-cli im list-messages` | Distillation de culture d'équipe |
+| 📄 Documents | `feishu-cli docs export` | Distillation d'experts |
+| 📊 Multidimensionnel | `feishu-cli base export` | Distillation de relations |
+| 📅 Calendrier | `feishu-cli calendar list-events` | Comportement proactif |
+
+🏆 Ce projet participe au Concours des Créateurs Feishu CLI — voir le [modèle Feishu CLI](templates/feishu-cli.md) et le [modèle Expert](templates/expert.md).
+
 ---
 
 ## Plateformes de données prises en charge
@@ -262,7 +291,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 Messagerie | Telegram | Export officiel | JSON |
 | 💬 Messagerie | Discord | DiscordChatExporter | JSON |
 | 💬 Messagerie | Slack | Export officiel | JSON |
-| 💬 Travail | Feishu | API | JSON |
+| 💬 Travail | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 Travail | DingTalk | API | JSON |
 | 📱 Mobile | iMessage | Base de données locale | SQLite |
 | 📱 Mobile | WhatsApp | Archive officielle | TXT |
@@ -311,9 +340,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Protocole de consentement
 │   └── ethics.md               # Lignes rouges éthiques
 │
-├── templates/                  # 📋 Modèles d'immortalité x7 (avec guide de choix)
+├── templates/                  # 📋 Modèles pour tout x9 (avec guide de sélection)
 ├── examples/                   # 🎯 Exemples de Relics x3 (avec guide de prise en main)
-├── scripts/                    # 🔧 Scripts utilitaires Python x8 (avec le quality checker et le proactive scheduler)
+├── scripts/                    # 🔧 Scripts Python x9 (incluant la forge complète Feishu)
 ├── assets/                     # 🎨 Ressources visuelles
 ├── docs/                       # 📚 Documentation approfondie (avec le guide des outils)
 └── ROADMAP.md                  # 🗺️ Feuille de route du produit

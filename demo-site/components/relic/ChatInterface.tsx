@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useEffect, useRef, useState, type FormEvent, type HTMLAttributes } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState, type FormEvent, type HTMLAttributes } from "react";
 import { Mic, SendHorizonal, Sparkles, Trash2, ShieldAlert } from "lucide-react";
 
 import { type Dialog } from "@/data/relics";
@@ -36,7 +36,7 @@ function ChatInterfaceBase({
   const [message, setMessage] = useState("");
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const element = scrollerRef.current;
     if (!element) return;
     element.scrollTo({ top: element.scrollHeight, behavior: "smooth" });

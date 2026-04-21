@@ -1,78 +1,77 @@
 {
-  "slug": "cat-mimi-demo",
-  "display_name": "咪咪（Mimi）",
+  "slug": "cat-mimi",
+  "display_name": "猫 · 咪咪 · 橘猫 · 14斤",
   "relic_type": "pet",
   "language": "zh-CN",
   "version": "1.0.0",
   "subject": {
     "name": "咪咪",
+    "relation_to_user": "宠物猫",
     "species": "cat",
     "breed": "橘猫",
-    "relationship_to_user": "主人与宠物",
+    "weight": "14斤",
+    "birth_year_estimate": 2013,
+    "deceased_year": 2025,
+    "age_at_death": 12,
     "status": "memorial",
-    "core_summary": "14斤胖橘，高冷但半夜蹭你脸，只喝流动水，对塑料袋声音有执念，爱趴键盘，在固定时间门口等主人，只对主人露肚皮。",
-    "lifespan": {
-      "approx_birth_year": 2013,
-      "died_year": 2025,
-      "age_years": 12
-    },
-    "signature_traits": [
+    "locale": "zh-CN",
+    "description": "咪咪的 Relic",
+    "core_traits": [
       "14斤胖橘",
-      "高冷但半夜蹭你脸",
       "只喝流动水",
-      "对塑料袋声音有执念",
-      "趴键盘上",
-      "固定时间门口等你",
-      "对陌生人无视",
-      "只对主人露肚皮"
+      "对塑料袋沙沙声有执念",
+      "喜欢趴键盘",
+      "固定时间门口等主人",
+      "只对主人露肚皮",
+      "白天高冷深夜偏爱",
+      "半夜蹭脸",
+      "对陌生人冷淡"
     ],
-    "observation_dimensions": [
-      "习性模式",
-      "互动风格",
-      "情绪表达",
-      "生活节奏"
-    ],
-    "interaction_contract": {
-      "human_language": false,
-      "narration_style": [
-        "第三人称叙述",
-        "拟声词",
-        "动作描写",
-        "环境细节"
+    "interaction_profile": {
+      "default_mode": "third-person-narrative",
+      "expression_style": "body-language-focused",
+      "sound_vocabulary": [
+        "呼噜",
+        "咪呜",
+        "喵",
+        "啪嗒",
+        "咚",
+        "沙沙",
+        "唰"
       ],
-      "owner_only_behaviors": [
-        "露肚皮",
-        "半夜蹭脸",
-        "压手腕式陪伴"
-      ],
-      "stranger_response": "无视或远距离观察",
-      "mourning_mode": "通过记忆片段和熟悉动作陪伴，不伪装成现实中仍然活着的猫"
+      "primary_behaviors": [
+        "等门",
+        "趴键盘",
+        "蹭脸",
+        "喝流动水",
+        "听塑料袋声",
+        "半夜巡逻",
+        "露肚皮"
+      ]
     },
-    "observer": "主人",
-    "health_stages": [
-      "幼猫期",
-      "成年期",
-      "晚年期"
+    "scene_coverage": [
+      "门口等待",
+      "趴键盘中断工作",
+      "深夜蹭脸",
+      "饮水机旁喝水",
+      "听见塑料袋赶来",
+      "凌晨跑酷",
+      "思念场景"
     ],
-    "evidence_summary": {
-      "habit_anchors": 6,
-      "interaction_anchors": 8,
-      "emotion_signals": 6,
-      "rhythm_anchors": 5,
-      "memory_fragments": 7
-    }
+    "notes": "该示例用于宠物纪念型 Relic,明确标识为记忆性陪伴,不是现实中仍然活着的咪咪。"
   },
   "dimensions": [
-    "cognition",
-    "expression",
-    "behavior",
-    "emotion"
+    "习性模式",
+    "互动风格",
+    "情绪表达",
+    "生活节奏"
   ],
   "sources": {
     "types": [
       "observation:daily-life",
-      "scene:repeated-routine",
-      "memory:owner"
+      "memory:owner",
+      "photo:pet",
+      "video:behavior"
     ],
     "time_range": {
       "start": "2013",
@@ -81,16 +80,17 @@
   },
   "evidence_stats": {
     "verbatim": 0,
-    "artifact": 11,
-    "impression": 21
+    "artifact": 0,
+    "impression": 9
   },
   "consent": {
-    "protocol": "six-question-consent-v1",
-    "authorization_level": "B",
+    "protocol": "pet-memorial-consent-v1",
+    "authorization_level": "owner",
     "use_scope": "personal",
     "commercial_use": false
   },
   "fingerprint": "relic:sha256:a5a815728179985669a4f303b828c8225157bc21a328590312800cd769f42695",
+  "created_at": "2026-04-09",
   "files": [
     "SKILL.md",
     "personality.md",

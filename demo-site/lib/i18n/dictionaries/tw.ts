@@ -255,6 +255,7 @@ const tw: Dictionary = {
     place: "地方",
     moment: "時刻",
     "public-figure": "公眾人物",
+    expert: "業務專家",
     "feishu-cli": "飛書 CLI",
   },
   typeDesc: {
@@ -265,7 +266,8 @@ const tw: Dictionary = {
     place: "Let memorable places keep responding to you",
     moment: "Turn important moments into revisit-able portals",
     "public-figure": "Distill a conversable cognitive frame from public data",
-    "feishu-cli": "用飛書 CLI 蒸餾協作記憶，讓那些一起扛過的夜繼續發光",
+    expert: "知識不該隨人走,把經驗鍛造成可對話的數位身份",
+    "feishu-cli": "用飛書 CLI 蒸餾協作記憶,讓那些一起扛過的夜繼續發光",
   },
   chat: {
     fallback: "Try asking something else, or tap a scenario button below",
@@ -306,7 +308,7 @@ const tw: Dictionary = {
     roadmapDesc: "Everything deserves a Relic — but one step at a time.",
   },
   homeData: {
-    templateCount: "8 Templates",
+    templateCount: "9 Templates",
     templateDesc: "Put important existences into their proper containers.",
     shieldPoints: [
       "Six-question consent protocol: agree first, then begin",

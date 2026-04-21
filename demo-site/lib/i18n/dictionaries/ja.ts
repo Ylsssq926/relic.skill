@@ -255,6 +255,7 @@ const ja: Dictionary = {
     place: "場所",
     moment: "瞬間",
     "public-figure": "公人",
+    expert: "ビジネスエキスパート",
     "feishu-cli": "Feishu CLI",
   },
   typeDesc: {
@@ -265,7 +266,8 @@ const ja: Dictionary = {
     place: "記憶のある場所があなたに応え続ける",
     moment: "大切な瞬間を再訪可能なポータルに",
     "public-figure": "公開データから対話可能な認知フレームを蒸留",
-    "feishu-cli": "Feishu CLI で協働記憶を蒸留 — 一緒に戦った夜を輝かせ続ける",
+    expert: "知識は人と共に去るべきではない——経験を対話可能なデジタルアイデンティティに鍛造する",
+    "feishu-cli": "Feishu CLI で協働記憶を蒸馏 — 一緒に戦った夜を輝かせ続ける",
   },
   chat: {
     fallback: "別のことを聞いてみて、または下のシナリオボタンをタップして",
@@ -306,7 +308,7 @@ const ja: Dictionary = {
     roadmapDesc: "すべてに Relic を — でも一歩ずつ。",
   },
   homeData: {
-    templateCount: "8 テンプレート",
+    templateCount: "9 テンプレート",
     templateDesc: "大切な存在を適切な容器に入れる。",
     shieldPoints: [
       "6問同意プロトコル：まず同意してから始める",

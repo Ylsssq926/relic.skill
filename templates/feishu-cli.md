@@ -1,6 +1,8 @@
 # 🐦 飞书 CLI — 协作记忆蒸馏模板
 
-> 用飞书 CLI 蒸馏团队协作记忆，让那些一起扛过的夜继续发光。
+> **命令格式说明**:本文档中的 `lark-cli` 命令基于 [飞书 CLI 官方文档](https://github.com/larksuite/cli)。使用前请先运行 `lark-cli --help` 和 `lark-cli im --help` 等验证命令是否存在。如命令格式不匹配,请参考官方文档调整。会议纪要请使用 `lark-cli minutes` 模块，视频会议请使用 `lark-cli vc` 模块，两者是独立的。
+
+> 用飞书 CLI 蒸馏团队协作记忆,让那些一起扛过的夜继续发光。
 
 ## 适用场景
 
@@ -10,6 +12,8 @@
 - 项目里程碑纪念——用 CLI 导出的群聊记录，是最真实的周年纪念
 
 ## 数据采集（飞书 CLI 作为「眼」）
+
+⚠️ 采集前请确保已获得相关人员的知情同意，详见文末合规声明。
 
 ### 群聊记录
 
@@ -21,7 +25,7 @@ lark-cli im +messages-search --chat-id "oc_xxx" --query "项目上线"
 lark-cli im +messages-list --chat-id "oc_xxx" --page-all
 
 # 下载群聊中的媒体文件
-lark-cli im +resources-download --file-key "file_xxx" --output ./relic-data/
+lark-cli im +messages-resources-download --message-id "om_xxx" --file-key "file_xxx" --output ./relic-data/
 ```
 
 ### 文档批注
@@ -48,10 +52,11 @@ lark-cli calendar +agenda --start "2025-01-01" --end "2025-12-31"
 
 ```bash
 # 获取会议纪要和 AI 摘要
-lark-cli vc +minutes --meeting-id "meeting_xxx"
+lark-cli minutes +get --meeting-id "meeting_xxx"
 
 # 获取会议录音
 lark-cli vc +recordings --meeting-id "meeting_xxx"
+# 注：如需获取会议纪要，请使用 lark-cli minutes +get
 ```
 
 ## 主动行为（飞书 CLI 作为「手」）
@@ -77,30 +82,34 @@ lark-cli docs +update --doc-id "doxxx" --markdown "## 团队回忆\n那个凌晨
 
 ```bash
 # 在纪念日/生日创建提醒事件
-lark-cli calendar +create --summary "老王入职纪念日" --start "2026-04-14T09:00:00"
+lark-cli calendar +create --summary "老王入职纪念日" --start "2026-04-14T09:00:00" --end "2026-04-14T10:00:00"
 
 # 基于日程触发主动关怀（赛博导师场景）
-lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备" --start "2026-04-17T09:50:00"
+lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备" --start "2026-04-17T09:50:00" --end "2026-04-17T09:55:00"
 ```
 
 ## 四维灵魂提取
 
 ### 认知框架 (Cognition)
+
 - 从飞书文档的评论和批注中提取思维模式
 - 从群聊讨论中提取决策逻辑和优先级
 - 从 OKR 文档中提取价值观和目标导向
 
 ### 表达风格 (Expression)
+
 - 从飞书消息中提取语气、口癖、表情使用习惯
 - 从文档评论中提取写作风格和表达偏好
 - 从会议发言中提取语言节奏
 
 ### 行为模式 (Behavior)
+
 - 从飞书日历中提取工作节奏和习惯
 - 从多维表格记录中提取协作模式
 - 从消息回复时间中提取响应习惯
 
 ### 情感接口 (Emotion)
+
 - 从群聊互动中提取关心和鼓励的表达方式
 - 从文档批注中提取对项目的情感投入
 - 从会议中的语气变化中提取情绪模式
@@ -117,6 +126,7 @@ python scripts/lark_expert_forge.py --expert "张工" --email "zhang@company.com
 ```
 
 关键能力：
+
 - **多维语料抓取** — IM 群聊 + 飞书文档 + 知识库 + 会议纪要
 - **知识结构化** — 蒸馏结果写入飞书多维表格，团队可直观查看和修正
 - **日历联动** — 基于新人日程主动提醒（评审前发 Checklist、拜访前发话术）

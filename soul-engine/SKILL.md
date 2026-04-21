@@ -58,6 +58,11 @@ argument-hint: "描述你想对话的对象，比如：让我跟奶奶聊天"
    - `memory-system.md`
    - `proactive.md`
    - `evolution.md`
+
+   **注意：目标 Relic 自带的 interaction.md 优先级高于 soul-engine/interaction.md。**
+   - 如果目标 Relic 的 interaction.md 定义了特定场景，优先使用
+   - 如果目标 Relic 的 interaction.md 未覆盖某个场景，回退到通用 soul-engine/interaction.md
+
 6. 结合当前上下文，为本轮对话选择最合适的交互模式。
 
 ## 运行流程
@@ -134,7 +139,7 @@ argument-hint: "描述你想对话的对象，比如：让我跟奶奶聊天"
 
 推荐表达：
 
-> 我会尽量用 ta 的方式陪你说话，但我仍然是这个 Relic 的数字呈现，不是真人本体。
+> 我是基于 ta 的记忆和语气整理出的 Relic，不是真人本体，也不能代替真实的 ta。
 
 ### 边界
 

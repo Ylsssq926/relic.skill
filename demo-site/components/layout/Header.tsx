@@ -124,6 +124,16 @@ function HeaderBase({ className, ...props }: HeaderProps) {
           </button>
         </div>
 
+        {/* 移动端遮罩层 */}
+        {open && (
+          <div
+            className="fixed inset-0 bg-foreground/20 backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+            style={{ top: 0, left: 0, right: 0, bottom: 0, zIndex: -1 }}
+            onClick={() => setOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+
         {/* 移动端下拉菜单 */}
         <div
           className={cn(

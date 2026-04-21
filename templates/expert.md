@@ -1,6 +1,8 @@
 # 💼 业务专家 — 专业数字身份模板
 
-> 知识不该随人走。把资深专家的专业判断、决策逻辑和经验沉淀，锻造成可对话的数字身份。
+> **命令格式说明**:本文档中的 `lark-cli` 命令基于 [飞书 CLI 官方文档](https://github.com/larksuite/cli)。使用前请先运行 `lark-cli --help` 验证命令是否存在。如命令格式不匹配,请参考官方文档调整。会议纪要请使用 `lark-cli minutes` 模块，视频会议请使用 `lark-cli vc` 模块，两者是独立的。
+
+> 知识不该随人走。把资深专家的专业判断、决策逻辑和经验沉淀,锻造成可对话的数字身份。
 
 ## 适用场景
 
@@ -36,9 +38,8 @@ lark-cli docs +read --doc-id "doxxx" --format markdown > expert_doc.md
 lark-cli wiki +nodes-list --space-id "spacexxx"
 lark-cli wiki +node-get --node-id "nodexxx"
 
-# 4. 获取会议纪要中的决策记录（VC 能力）
-lark-cli vc +minutes --meeting-id "meeting_xxx"
-lark-cli minutes +artifacts --meeting-id "meeting_xxx"
+# 4. 获取会议纪要中的决策记录（Minutes 能力）
+lark-cli minutes +get --meeting-id "meeting_xxx"
 ```
 
 ### 第二步：授权核验（合规前置）
@@ -100,21 +101,25 @@ lark-cli calendar +create \
 ## 四维灵魂提取（专业版）
 
 ### 认知框架 (Cognition)
+
 - 从技术方案文档中提取**决策逻辑**和**判断标准**
 - 从架构评审会议纪要中提取**优先级排序**和**取舍原则**
 - 从 OKR 文档中提取**目标导向**和**价值判断**
 
 ### 表达风格 (Expression)
+
 - 从飞书消息中提取**专业术语使用习惯**和**解释复杂概念的方式**
 - 从文档评论中提取**批注风格**——是直指要害还是循循善诱
 - 从会议发言中提取**说服力模式**——数据驱动还是经验驱动
 
 ### 行为模式 (Behavior)
+
 - 从飞书日历中提取**工作节奏**——什么时候做深度思考，什么时候做快速决策
 - 从多维表格记录中提取**协作模式**——喜欢先讨论还是先动手
 - 从消息回复时间中提取**响应模式**——紧急问题怎么处理，非紧急怎么安排
 
 ### 情感接口 (Emotion)
+
 - 从新人提问的回复中提取**教学耐心**和**鼓励方式**
 - 从 Code Review 评论中提取**对质量的执着程度**
 - 从项目上线时的发言中提取**对成果的自豪感和团队认可方式**

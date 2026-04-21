@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">すべてに Relic を</h1>
@@ -71,6 +73,8 @@ relic.skill は、あらゆるものを永生化するエンジンです。
 | 🏠 [場所](templates/place.md) | ある場所の記憶 | 大学の寮、実家の庭、通い慣れたカフェ |
 | ⏳ [瞬間](templates/moment.md) | 大切な一瞬 | 卒業式、プロポーズ、初めて子どもに会った日 |
 | 🌟 [公的人物](templates/public-figure.md) | 公開資料に表れた認知フレーム | 尊敬する人の思考法を、あなただけの参謀に変える |
+| 💼 [ビジネスエキスパート](templates/expert.md) | 専門家の判断力 | 知識は人と共に去るべきではない——経験を対話可能なデジタルアイデンティティに |
+| 🐦 [飛書 CLI](templates/feishu-cli.md) | 飛書コラボレーション記憶 | 飛書 CLI でチームの記憶を蒸留——あの夜を一緒に乗り越えた記憶が輝き続ける |
 
 ---
 
@@ -252,6 +256,45 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ---
 
+### 🐦 飛書 CLI 統合
+
+relic.skill は [Feishu CLI](https://github.com/larksuite/cli) をデータ収集チャネルおよび能動的行動チャネルとしてサポートしています。飛書の会話、ドキュメント、ベースからチームの記憶を蒸留したり、Relic に飛書経由でメッセージを送信させたりできます。
+
+**データ収集の例：**
+
+```bash
+# 飛書 IM 履歴を収集
+python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+
+# 飛書ドキュメントを収集
+python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+```
+
+**能動的行動の例：**
+
+```python
+# Relic に飛書メッセージを送信させる
+from feishu_cli import send_message
+
+send_message(
+    chat_id="oc_xxx",
+    content="Hey team, remember to push before you leave today."
+)
+```
+
+**サポートされる飛書機能：**
+
+| 機能 | データ収集 | 能動的行動 |
+|------|-----------|-----------|
+| 💬 Feishu IM | ✅ チャット履歴エクスポート | ✅ メッセージ送信 / リアクション |
+| 📄 Feishu Docs | ✅ ドキュメント内容抽出 | ✅ コメント / メンション |
+| 📊 Feishu Base | ✅ テーブルデータエクスポート | ✅ レコード作成 / 更新 |
+| 📅 Feishu Calendar | ✅ イベント履歴 | ✅ リマインダー作成 |
+
+🏆 このプロジェクトは Feishu CLI Creator Contest への応募作品です — コンテストシナリオについては [Feishu CLI テンプレート](templates/feishu-cli.md) および [Expert テンプレート](templates/expert.md) をご覧ください。
+
+---
+
 ## 対応データプラットフォーム
 
 | 種類 | プラットフォーム | 取得方法 | 形式 |
@@ -261,7 +304,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 インスタントメッセージ | Telegram | 公式エクスポート | JSON |
 | 💬 インスタントメッセージ | Discord | DiscordChatExporter | JSON |
 | 💬 インスタントメッセージ | Slack | 公式エクスポート | JSON |
-| 💬 業務 | Feishu | API | JSON |
+| 💬 業務 | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 業務 | DingTalk | API | JSON |
 | 📱 モバイル | iMessage | ローカルデータベース | SQLite |
 | 📱 モバイル | WhatsApp | 公式アーカイブ | TXT |
@@ -310,9 +353,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 同意プロトコル
 │   └── ethics.md               # 倫理のレッドライン
 │
-├── templates/                  # 📋 万物永生テンプレート x7（選び方ガイド付き）
+├── templates/                  # 📋 万物永生テンプレート x9（選択ガイド付き）
 ├── examples/                   # 🎯 サンプル Relics x3（体験ガイド付き）
-├── scripts/                    # 🔧 Python ツールスクリプト x8（quality checker と proactive scheduler を含む）
+├── scripts/                    # 🔧 Python ユーティリティスクリプト x9（飛書全チェーン鍛造含む）
 ├── assets/                     # 🎨 ビジュアル素材
 ├── docs/                       # 📚 詳細ドキュメント（tools guide を含む）
 └── ROADMAP.md                  # 🗺️ プロダクトロードマップ

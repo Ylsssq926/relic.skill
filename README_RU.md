@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">Всё заслуживает Relic</h1>
@@ -71,6 +73,8 @@ relic.skill — это движок бессмертия для всего.
 | 🏠 [Место](templates/place.md) | Память о месте | Комната в общежитии, двор родного дома, любимая кофейня |
 | ⏳ [Момент](templates/moment.md) | Важное мгновение | Выпускной, предложение руки и сердца, первая встреча с ребёнком |
 | 🌟 [Публичная фигура](templates/public-figure.md) | Cognitive framework, дистиллированный из публичных материалов | Превратите способ мышления человека, которым вы восхищаетесь, в личного советника |
+| 💼 [Эксперт](templates/expert.md) | Профессиональное суждение экспертов | Знания не должны уходить с людьми |
+| 🐦 [Feishu CLI](templates/feishu-cli.md) | Память о совместной работе в Feishu | Дистиллируйте командные воспоминания через Feishu CLI — те ночи вместе продолжают светить |
 
 ---
 
@@ -251,6 +255,36 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > Начиная с v1.1.2 новые Relics, созданные через `relic_writer.py`, уже идут с `proactive_config.json`, так что можно сразу сделать dry-run без ручной настройки и посмотреть, постучался бы он к вам сегодня.
 
+### 🐦 Интеграция с Feishu CLI
+
+Используйте [Feishu CLI](https://github.com/larksuite/cli) для сбора командных воспоминаний из Feishu (Lark) и дистилляции их в Relic.
+
+```bash
+# Собрать сообщения из группового чата Feishu
+lark-im export --chat-id "oc_xxx" --output feishu_chat.json
+
+# Собрать документы Feishu
+lark-docs export --doc-id "doxcnxxx" --output feishu_docs.json
+
+# Выковать Relic из данных Feishu
+python scripts/feishu_forge.py \
+  --chat feishu_chat.json \
+  --docs feishu_docs.json \
+  --template team-culture \
+  --slug spark-studio
+```
+
+**Возможности Feishu CLI:**
+
+| Модуль | Что собирает | Применение в Relic |
+|--------|--------------|-------------------|
+| `lark-im` | Сообщения из групповых чатов, личные сообщения | Паттерны взаимодействия команды, стиль общения |
+| `lark-docs` | Документы, таблицы, вики | Знания команды, процессы принятия решений |
+| `lark-base` | Многомерные таблицы, базы данных | Структурированные данные команды, рабочие процессы |
+| `lark-calendar` | События календаря, встречи | Ритм команды, важные моменты |
+
+🏆 Этот проект участвует в конкурсе создателей Feishu CLI — см. [шаблон Feishu CLI](templates/feishu-cli.md) и [шаблон Эксперта](templates/expert.md).
+
 ---
 
 ## Поддерживаемые платформы данных
@@ -262,7 +296,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 Мессенджеры | Telegram | Официальный экспорт | JSON |
 | 💬 Мессенджеры | Discord | DiscordChatExporter | JSON |
 | 💬 Мессенджеры | Slack | Официальный экспорт | JSON |
-| 💬 Работа | Feishu | API | JSON |
+| 💬 Работа | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 Работа | DingTalk | API | JSON |
 | 📱 Mobile | iMessage | Локальная база данных | SQLite |
 | 📱 Mobile | WhatsApp | Официальный архив | TXT |
@@ -311,9 +345,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Протокол согласия
 │   └── ethics.md               # Этические red lines
 │
-├── templates/                  # 📋 Шаблоны бессмертия x7 (с гайдом по выбору)
+├── templates/                  # 📋 Шаблоны для всего x9 (с руководством по выбору)
 ├── examples/                   # 🎯 Примеры Relics x3 (с гайдом по первому знакомству)
-├── scripts/                    # 🔧 Утилитарные Python-скрипты x8 (включая quality checker и proactive scheduler)
+├── scripts/                    # 🔧 Python-скрипты x9 (включая полную цепочку ковки Feishu)
 ├── assets/                     # 🎨 Визуальные ресурсы
 ├── docs/                       # 📚 Подробная документация (включая гайд по инструментам)
 └── ROADMAP.md                  # 🗺️ Дорожная карта продукта

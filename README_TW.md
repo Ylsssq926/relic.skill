@@ -12,6 +12,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">萬物皆可 Relic</h1>
@@ -69,6 +71,8 @@ relic.skill 是一個萬物永生引擎。
 | 🏠 [地方](templates/place.md) | 一個地方的記憶 | 大學宿舍、老家的院子、常去的咖啡館 |
 | ⏳ [時刻](templates/moment.md) | 一個重要瞬間 | 畢業典禮、求婚、第一次見到孩子 |
 | 🌟 [公眾人物](templates/public-figure.md) | 公開資料中的認知框架 | 把你敬佩的人的思考方式變成私人參謀 |
+| 💼 [業務專家](templates/expert.md) | 資深專家的專業判斷 | 知識不該隨人走，把經驗鍛造成可對話的數位身份 |
+| 🐦 [飛書 CLI](templates/feishu-cli.md) | 飛書協作記憶 | 用飛書 CLI 蒸餾協作記憶，讓那些一起扛過的夜繼續發光 |
 
 ---
 
@@ -250,6 +254,45 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ---
 
+### 🐦 飛書 CLI 深度整合
+
+relic.skill 支援 [Feishu CLI](https://github.com/larksuite/cli) 作為資料收集通道和主動行為通道。你可以從飛書對話、文件、多維表格中蒸餾團隊記憶，或讓你的 Relic 透過飛書發送訊息。
+
+**資料收集範例：**
+
+```bash
+# 收集飛書 IM 歷史
+python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+
+# 收集飛書文件
+python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+```
+
+**主動行為範例：**
+
+```python
+# 讓你的 Relic 發送飛書訊息
+from feishu_cli import send_message
+
+send_message(
+    chat_id="oc_xxx",
+    content="Hey team, remember to push before you leave today."
+)
+```
+
+**支援的飛書能力：**
+
+| 能力 | 資料收集 | 主動行為 |
+|------|---------|---------|
+| 💬 Feishu IM | ✅ 聊天記錄匯出 | ✅ 發送訊息 / 回應 |
+| 📄 Feishu Docs | ✅ 文件內容提取 | ✅ 評論 / 提及 |
+| 📊 Feishu Base | ✅ 表格資料匯出 | ✅ 建立 / 更新記錄 |
+| 📅 Feishu Calendar | ✅ 事件歷史 | ✅ 建立提醒 |
+
+🏆 本專案為飛書 CLI 創作者大賽參賽作品 — 參賽場景請見 [飛書 CLI 模板](templates/feishu-cli.md) 和 [Expert 模板](templates/expert.md)。
+
+---
+
 ## 支援的資料平台
 
 | 類型 | 平台 | 取得方式 | 格式 |
@@ -259,7 +302,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 即時通訊 | Telegram | 官方匯出 | JSON |
 | 💬 即時通訊 | Discord | DiscordChatExporter | JSON |
 | 💬 即時通訊 | Slack | 官方匯出 | JSON |
-| 💬 工作 | Feishu | API | JSON |
+| 💬 工作 | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 工作 | DingTalk | API | JSON |
 | 📱 手機 | iMessage | 本機資料庫 | SQLite |
 | 📱 手機 | WhatsApp | 官方封存 | TXT |
@@ -308,9 +351,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 授權協議
 │   └── ethics.md               # 倫理紅線
 │
-├── templates/                  # 📋 萬物永生模板 x7（附選擇指南）
+├── templates/                  # 📋 萬物永生模板 x9（附選擇指南）
 ├── examples/                   # 🎯 範例 Relics x3（附體驗指南）
-├── scripts/                    # 🔧 Python 工具腳本 x8（含 quality checker 和 proactive scheduler）
+├── scripts/                    # 🔧 Python 工具腳本 x9（含飛書全鏈路鍛造）
 ├── assets/                     # 🎨 視覺資源
 ├── docs/                       # 📚 深入文件（含 tools guide）
 └── ROADMAP.md                  # 🗺️ 產品路線圖

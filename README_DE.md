@@ -14,6 +14,8 @@
   <a href="https://github.com/Ylsssq926/relic.skill/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
   <a href="#"><img src="https://img.shields.io/badge/Claude_Code-compatible-blueviolet" alt="Claude Code Compatible"></a>
   <a href="#"><img src="https://img.shields.io/badge/Kiro-compatible-blue" alt="Kiro Compatible"></a>
+  <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
+  <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
 <h1 align="center">Alles verdient ein Relic</h1>
@@ -71,6 +73,8 @@ Nicht nur Menschen. Alles verdient ein Relic.
 | 🏠 [Ort](templates/place.md) | Die Erinnerung an einen Ort | Ein Wohnheimzimmer, der Hof zu Hause, das Café, in das du immer gegangen bist |
 | ⏳ [Moment](templates/moment.md) | Ein wichtiger Augenblick | Abschlussfeier, Heiratsantrag, das erste Mal, als du dein Kind gesehen hast |
 | 🌟 [Öffentliche Figur](templates/public-figure.md) | Ein kognitiver Rahmen aus öffentlichen Materialien | Mach die Denkweise einer bewunderten Person zu deinem privaten Berater |
+| 💼 [Experte](templates/expert.md) | Professionelles Urteil von Experten | Wissen sollte nicht mit Menschen gehen |
+| 🐦 [Feishu CLI](templates/feishu-cli.md) | Feishu Kollaborationserinnerung | Destilliere Team-Erinnerungen mit Feishu CLI — die gemeinsamen Nächte leuchten weiter |
 
 ---
 
@@ -251,6 +255,31 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > Seit v1.1.2 bekommen neue Relics aus `relic_writer.py` `proactive_config.json` automatisch mit, also kannst du auch ohne Handarbeit erst mal per dry-run schauen, ob es heute von selbst anklopfen würde.
 
+### 🐦 Feishu CLI Integration
+
+Native Integration mit [Feishu CLI](https://github.com/larksuite/cli) für Team-Erinnerungsdestillation und proaktives Verhalten.
+
+```bash
+# Feishu-Gruppennachrichten sammeln (letzte 30 Tage)
+feishu-cli im list-messages --chat-id oc_xxx --start-time 2024-01-01 | \
+  python scripts/feishu_forge.py --type im --output data/feishu_im.json
+
+# Proaktives Verhalten: Meeting-Erinnerung senden
+python scripts/proactive_feishu.py \
+  --relic exes/team-culture \
+  --trigger calendar_event \
+  --chat-id oc_xxx
+```
+
+| Fähigkeit | Feishu CLI Befehl | Anwendungsfall |
+|------|------|------|
+| 💬 Instant Messaging | `feishu-cli im list-messages` | Teamkultur-Destillation |
+| 📄 Dokumente | `feishu-cli docs export` | Experten-Destillation |
+| 📊 Multidimensional | `feishu-cli base export` | Beziehungs-Destillation |
+| 📅 Kalender | `feishu-cli calendar list-events` | Proaktives Verhalten |
+
+🏆 Dieses Projekt nimmt am Feishu CLI Creator Contest teil — siehe [Feishu CLI Vorlage](templates/feishu-cli.md) und [Experten-Vorlage](templates/expert.md).
+
 ---
 
 ## Unterstützte Datenplattformen
@@ -262,7 +291,7 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 | 💬 Messaging | Telegram | Offizieller Export | JSON |
 | 💬 Messaging | Discord | DiscordChatExporter | JSON |
 | 💬 Messaging | Slack | Offizieller Export | JSON |
-| 💬 Arbeit | Feishu | API | JSON |
+| 💬 Arbeit | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
 | 💬 Arbeit | DingTalk | API | JSON |
 | 📱 Mobil | iMessage | Lokale Datenbank | SQLite |
 | 📱 Mobil | WhatsApp | Offizielles Archiv | TXT |
@@ -311,9 +340,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Zustimmungsprotokoll
 │   └── ethics.md               # Ethische rote Linien
 │
-├── templates/                  # 📋 Unsterblichkeitsvorlagen x7 (mit Auswahlhilfe)
+├── templates/                  # 📋 Vorlagen für alles x9 (mit Auswahlhilfe)
 ├── examples/                   # 🎯 Beispiel-Relics x3 (mit Guide zum Ausprobieren)
-├── scripts/                    # 🔧 Python-Hilfsskripte x8 (inklusive Quality Checker und Proactive Scheduler)
+├── scripts/                    # 🔧 Python-Skripte x9 (einschließlich Feishu-Vollkettenschmiedung)
 ├── assets/                     # 🎨 Visuelle Assets
 ├── docs/                       # 📚 Vertiefende Dokumentation (inklusive Tools-Guide)
 └── ROADMAP.md                  # 🗺️ Produkt-Roadmap

@@ -3,9 +3,9 @@ name: relic
 description: >
   万物永生引擎 — 把任何你在乎的东西锻造成可交互的数字灵魂。
   当用户说"帮我锻造/蒸馏/创建一个 Relic"、"我想永生XX"、"把XX做成 Relic"时触发。
-  支持蒸馏对象：人类、宠物、关系、团队文化、地方、时刻、公众人物。
+  支持蒸馏对象：人类、宠物、关系、团队文化、地方、时刻、公众人物、业务专家、飞书协作记忆。
   支持数据源：微信、QQ、Telegram、Discord、Slack、飞书、iMessage、照片、语音、实时对话。
-version: 1.1.2
+version: 1.2.0
 license: MIT
 user-invocable: true
 argument-hint: "描述你想永生的对象，比如：我想永生我奶奶"
@@ -24,6 +24,15 @@ argument-hint: "描述你想永生的对象，比如：我想永生我奶奶"
 - **灵魂锻造炉** (`soul-forge/`) — 从数据中提取四维灵魂画像
 - **灵魂引擎** (`soul-engine/`) — 让锻造好的 Relic 活起来
 - **灵魂护盾** (`soul-shield/`) — 保护 Relic 不被滥用
+
+## 快速触发词表
+
+| 用户意图 | 触发词示例 | 执行路径 |
+|---------|-----------|---------|
+| 体验示例 Relic | "让我跟奶奶聊天""召唤咪咪""模拟星火群聊" | 体验示例流程 |
+| 锻造新 Relic | "帮我锻造""蒸馏我奶奶""创建一个 Relic""我想永生XX" | 锻造新 Relic 流程 |
+| 跟已有 Relic 聊天 | "跟XX聊天""召唤XX""让XX回我" | 已有 Relic 聊天流程 |
+| 保护 Relic | "检查授权""生成指纹""伦理审查" | 保护流程 |
 
 ## 工作流程
 
@@ -74,6 +83,8 @@ argument-hint: "描述你想永生的对象，比如：我想永生我奶奶"
 | 地方 | `templates/place.md` | 一个地方的记忆 |
 | 时刻 | `templates/moment.md` | 一个重要瞬间 |
 | 公众人物 | `templates/public-figure.md` | 公开资料中的认知框架 |
+| 业务专家 | `templates/expert.md` | 资深专家的专业判断 |
+| 飞书 CLI | `templates/feishu-cli.md` | 飞书协作记忆 |
 
 ## Relic 输出格式
 

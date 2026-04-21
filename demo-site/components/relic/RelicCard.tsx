@@ -58,6 +58,11 @@ function RelicCardInner({
         <div className="absolute left-4 top-4">
           <Badge type={resolvedType}>{dict.types[resolvedType]}</Badge>
         </div>
+        {resolvedType === "feishu-cli" && (
+          <span className="absolute right-4 top-4 rounded-full bg-blue-500/90 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+            🏆 参赛作品
+          </span>
+        )}
       </div>
 
       {/* 信息区 */}

@@ -20,16 +20,18 @@ export const metadata: Metadata = {
   authors: [{ name: "掠蓝" }],
   openGraph: {
     title: "relic.skill - 万物皆可 Relic",
-    description: "让重要的人与记忆，以更温柔、更清晰的方式留下来。",
+    description: "把你在乎的东西锻造成可交互的数字灵魂。",
     url: "https://relic.luelan.online",
     siteName: "relic.skill",
     locale: "zh_CN",
     type: "website",
+    images: [{ url: "/images/relic-og.jpg", width: 1200, height: 630, alt: "relic.skill" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "relic.skill - 万物皆可 Relic",
-    description: "让重要的人与记忆，以更温柔、更清晰的方式留下来。",
+    description: "把你在乎的东西锻造成可交互的数字灵魂。",
+    images: ["/images/relic-og.jpg"],
   },
 };
 

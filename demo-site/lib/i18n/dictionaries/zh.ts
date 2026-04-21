@@ -2,7 +2,7 @@ const zh = {
   site: {
     title: "relic.skill",
     tagline: "万物皆可 Relic",
-    description: "把重要的人与记忆，以更温柔的方式留下来。",
+    description: "把你在乎的东西锻造成可交互的数字灵魂。",
   },
   nav: {
     home: "首页",
@@ -16,8 +16,8 @@ const zh = {
   hero: {
     badge: "relic.skill · 万物永生引擎",
     title: "给灵魂开个 GitHub",
-    subtitle: "万物皆可 Relic。不是冷冰冰的档案，而是能继续回应你的熟悉存在。",
-    body: "把你在乎的人、猫、关系、团队、地方和时刻，从散落的数据碎片里整理出来，锻造成一个可交互、可体验、可继续完善的数字灵魂。",
+    subtitle: "万物皆可 Relic。可以是过年问你吃饺子了没的奶奶，也可以是半夜突然开始跑酷的猫。",
+    body: "把你在乎的人、猫、关系、团队、地方和时刻，从散落的数据碎片里整理出来，锻造成一个能聊天、能回应、能继续更新的数字灵魂。",
     hint: "它可以是在过年时问你「吃饺子了没」的奶奶，也可以是半夜突然开始跑酷的猫。",
     tryExample: "体验示例 Relic",
     docs: "文档",
@@ -29,7 +29,7 @@ const zh = {
   },
   features: {
     title: "不只是聊天记录，是活的记忆",
-    subtitle: "四维灵魂架构，让数字存在有温度、有逻辑、有边界。",
+    subtitle: "四维灵魂架构，让数字存在能想、能说、能做、能感受。",
     items: {
       cognition: { title: "认知框架", desc: "它怎么想世界——价值观、判断逻辑、优先级" },
       expression: { title: "表达风格", desc: "它怎么说话——语气、口癖、节奏感" },
@@ -44,7 +44,7 @@ const zh = {
   },
   highlights: {
     title: "为什么选择 relic.skill",
-    subtitle: "不是又一个聊天机器人框架，而是一套完整的数字灵魂锻造体系",
+    subtitle: "不是又一个聊天机器人框架，而是一套数字灵魂锻造工具",
     items: {
       forge: { title: "灵魂锻造炉", desc: "从聊天记录、照片、文字中蒸馏出四维灵魂——不是简单复制，而是理解本质" },
       engine: { title: "灵魂引擎", desc: "让数字灵魂可以对话、可以主动关心、可以随时间成长" },
@@ -57,7 +57,7 @@ const zh = {
   cta: {
     badge: "开源 · 本地优先 · 万物永生",
     title: "真正的死亡，是最后一个记得你的人也忘了你。",
-    subtitle: "我们能做的，不是替谁宣布永恒。而是在时间把一切磨平之前，替那些来过、爱过、留下过回声的存在，轻轻地留一盏灯。",
+    subtitle: "我们做不到永恒。但在时间把一切磨平之前，至少能替那些来过、爱过的存在，留一盏灯。",
     tags: {
       ethics: "伦理先行",
       docs: "文档完整",
@@ -76,7 +76,7 @@ const zh = {
   demo: {
     badge: "体验中心",
     title: "唤醒一段记忆",
-    subtitle: "无需上传任何素材，直接在安全沙盒中感受基于真实数据蒸馏的预设灵魂。每一个卡片背后，都是一段曾经闪耀过的真实联系。",
+    subtitle: "无需上传素材，直接体验基于真实数据蒸馏的预设灵魂。每个卡片背后，都是一段真实存在过的联系。",
     selectorTitle: "档案列表",
     selectorHint: "选择一个记忆体，开始交流。",
     emptyTitle: "还没有选择示例档案",
@@ -90,7 +90,7 @@ const zh = {
     quickTry: "快速体验",
     scenarioNewYear: "🧧 过年问候",
     scenarioBirthday: "🎂 生日祝福",
-    scenarioRandom: "� 随机想念",
+    scenarioRandom: "💭 随机想念",
     inputPlaceholder: "轻声说些什么...",
     send: "发送",
     thinking: "沉思",
@@ -228,7 +228,7 @@ const zh = {
     ],
   },
   footer: {
-    tagline: "把重要的人与记忆，以更温柔的方式留下来。",
+    tagline: "把你在乎的东西锻造成可交互的数字灵魂。",
     product: "产品",
     resources: "资源",
     community: "社区",
@@ -253,17 +253,19 @@ const zh = {
     place: "地方",
     moment: "时刻",
     "public-figure": "公众人物",
+    expert: "业务专家",
     "feishu-cli": "飞书 CLI",
   },
   typeDesc: {
     human: "任何人的思维方式和说话习惯",
     pet: "把陪伴过你的生命留在身边",
     relationship: "留住你们之间独有的默契",
-    team: "人散了，但协作的感觉还在",
+    team: "人散了,但协作的感觉还在",
     place: "让有记忆的地方继续回应你",
     moment: "把重要瞬间做成可再次抵达的入口",
     "public-figure": "用公开资料提炼可对话的认知框架",
-    "feishu-cli": "用飞书 CLI 蒸馏协作记忆，让那些一起扛过的夜继续发光",
+    expert: "知识不该随人走,把经验锻造成可对话的数字身份",
+    "feishu-cli": "用飞书 CLI 蒸馏协作记忆,让那些一起扛过的夜继续发光",
   },
   chat: {
     fallback: "试试问我别的吧，或者点击下面的情景触发按钮",
@@ -304,7 +306,7 @@ const zh = {
     roadmapDesc: "万物皆可 Relic — 但得一步一步来。",
   },
   homeData: {
-    templateCount: "8 种模板",
+    templateCount: "9 种模板",
     templateDesc: "把重要存在放进对应的容器里。",
     shieldPoints: [
       "六问授权协议：先同意，再开始",

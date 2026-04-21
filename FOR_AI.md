@@ -17,6 +17,7 @@
 - 团队/星火 → examples/team-startup-demo/
 
 读取该目录的 SKILL.md、personality.md、interaction.md、memory.md，然后读取 soul-engine/SKILL.md、soul-engine/interaction.md、soul-engine/memory-system.md 启动交互。
+如果目录或文件不存在，告知用户该示例尚未创建，并询问是否体验其他可用示例或锻造新 Relic。
 不需要用户提供任何数据，直接开始对话。
 ```
 
@@ -73,8 +74,8 @@ relic.skill/
 ├── soul-forge/           ← 灵魂锻造炉（蒸馏引擎）
 ├── soul-engine/          ← 灵魂引擎（交互系统）
 ├── soul-shield/          ← 灵魂护盾（保护与伦理）
-├── templates/            ← 万物永生模板 x7
-├── examples/             ← 示例 Relics x3
+├── templates/            ← 万物永生模板 x9
+├── examples/             ← 示例 Relics x3（演示站额外包含 1 个飞书 CLI 参赛作品示例）
 ├── scripts/              ← Python 工具脚本
 └── docs/                 ← 深度文档
 ```
