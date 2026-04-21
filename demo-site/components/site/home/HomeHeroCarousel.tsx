@@ -86,45 +86,48 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
         </div>
       </div>
 
-      <div className="relative space-y-4 p-6">
-        {relics.map((relic, index) => (
-          <div
-            key={relic.id}
-            className={`transition-opacity duration-300 ${
-              index === activeIndex
-                ? "opacity-100"
-                : "pointer-events-none absolute inset-0 opacity-0"
-            }`}
-          >
-            <div className="flex items-start gap-4">
-              <Avatar
-                name={relic.displayName}
-                src={relic.avatarUrl}
-                size="lg"
-                className="rounded-full border-[3px] border-surface shadow-medium"
-              />
-              <div className="min-w-0 flex-1 space-y-1.5">
-                <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-lg font-bold text-foreground">
-                    {relic.displayName}
-                  </h3>
-                  <span className="rounded-full bg-background-soft px-2.5 py-0.5 text-xs text-foreground-faint">
-                    {dict.types[relic.type]}
-                  </span>
+      <div className="relative p-6">
+        <div className="grid">
+          {relics.map((relic, index) => (
+            <div
+              key={relic.id}
+              style={{ gridArea: "1 / 1" }}
+              className={`space-y-4 transition-opacity duration-300 ${
+                index === activeIndex
+                  ? "opacity-100"
+                  : "pointer-events-none opacity-0"
+              }`}
+            >
+              <div className="flex items-start gap-4">
+                <Avatar
+                  name={relic.displayName}
+                  src={relic.avatarUrl}
+                  size="lg"
+                  className="rounded-full border-[3px] border-surface shadow-medium"
+                />
+                <div className="min-w-0 flex-1 space-y-1.5">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h3 className="text-lg font-bold text-foreground">
+                      {relic.displayName}
+                    </h3>
+                    <span className="rounded-full bg-background-soft px-2.5 py-0.5 text-xs text-foreground-faint">
+                      {dict.types[relic.type]}
+                    </span>
+                  </div>
+                  <p className="text-sm leading-relaxed text-foreground-muted">
+                    {relic.detail}
+                  </p>
                 </div>
-                <p className="text-sm leading-relaxed text-foreground-muted">
-                  {relic.detail}
-                </p>
+              </div>
+
+              <div className="rounded-xl bg-background-soft p-4 text-sm leading-relaxed text-foreground-secondary">
+                <span className="font-medium text-foreground">「</span>
+                {relic.dialogs[0]?.relic}
+                <span className="font-medium text-foreground">」</span>
               </div>
             </div>
-
-            <div className="rounded-xl bg-background-soft p-4 text-sm leading-relaxed text-foreground-secondary">
-              <span className="font-medium text-foreground">「</span>
-              {relic.dialogs[0]?.relic}
-              <span className="font-medium text-foreground">」</span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <div className="flex items-center justify-between border-t border-border/60 px-6 py-4">

@@ -322,7 +322,7 @@ class ExpertForge:
         log("step", "获取会议纪要...")
 
         result = run_lark_cli(
-            ["vc", "+minutes", "--meeting-id", "meeting_xxx"],
+            ["minutes", "+get", "--meeting-id", "meeting_xxx"],
             dry_run=self.dry_run,
         )
 
