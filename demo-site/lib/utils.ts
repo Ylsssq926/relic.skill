@@ -5,14 +5,14 @@ export function cn(...classes: ClassValue[]): string {
   return twMerge(clsx(classes));
 }
 
-export function formatDate(timestamp: number | string | Date): string {
+export function formatDate(timestamp: number | string | Date, locale: string = "zh-CN"): string {
   const date = timestamp instanceof Date ? timestamp : new Date(timestamp);
 
   if (Number.isNaN(date.getTime())) {
     return "无效日期";
   }
 
-  return new Intl.DateTimeFormat("zh-CN", {
+  return new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

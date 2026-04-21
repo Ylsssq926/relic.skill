@@ -46,6 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    {/* TODO: 当实现路由级 i18n 时,lang 应该动态化 */}
     <html lang="zh-CN">
       <body className="min-h-screen bg-background text-foreground antialiased relative z-0">
         <I18nProvider>
