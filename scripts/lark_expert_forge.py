@@ -18,7 +18,7 @@ import subprocess
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Dict, List, Optional, Union
 
 
 class Colors:
@@ -43,7 +43,7 @@ def log(level: str, msg: str) -> None:
     print(f"  {prefix} {msg}")
 
 
-def run_lark_cli(args: list[str], dry_run: bool = False) -> Optional[dict | str]:
+def run_lark_cli(args: List[str], dry_run: bool = False) -> Optional[Union[Dict, str]]:
     cmd = ["lark-cli"] + args
     if dry_run:
         log("info", f"[DRY-RUN] {Colors.BOLD}{' '.join(cmd)}{Colors.ENDC}")
@@ -82,7 +82,7 @@ class ExpertForge:
         self.output_dir = Path(output_dir) / expert_name
         self.dry_run = dry_run
         self.skip_consent = skip_consent
-        self.data: dict[str, Any] = {
+        self.data: Dict[str, Any] = {
             "expert": expert_name,
             "email": expert_email,
             "forge_time": datetime.now().isoformat(),
@@ -292,6 +292,7 @@ class ExpertForge:
 
         log("step", "搜索知识库节点...")
 
+        # TODO: 替换为实际的知识库 space_id，可通过 lark-cli wiki spaces list 获取
         result = run_lark_cli(
             ["wiki", "+nodes-list", "--space-id", "spacexxx"],
             dry_run=self.dry_run,
@@ -321,6 +322,7 @@ class ExpertForge:
 
         log("step", "获取会议纪要...")
 
+        # TODO: 替换为实际的会议 ID，可通过 lark-cli calendar +event-list 获取
         result = run_lark_cli(
             ["minutes", "+get", "--meeting-id", "meeting_xxx"],
             dry_run=self.dry_run,
@@ -353,6 +355,7 @@ class ExpertForge:
 
         log("step", f"创建「Relic 专家知识库 - {self.expert_name}」多维表格...")
 
+        # TODO: 替换为实际的文件夹 token，可通过 lark-cli drive +folders-list 获取
         result = run_lark_cli(
             [
                 "base",
@@ -421,6 +424,7 @@ class ExpertForge:
 
         for entry in knowledge_entries:
             fields_data = json.dumps(entry, ensure_ascii=False)
+            # TODO: 替换为实际的数据表 ID，可通过 lark-cli base +tables-list 获取
             run_lark_cli(
                 [
                     "base",
@@ -600,6 +604,24 @@ class ExpertForge:
         with open(manifest_path, "w", encoding="utf-8") as f:
             json.dump(relic_config["manifest"], f, ensure_ascii=False, indent=2)
         log("ok", f"Manifest 已生成: {manifest_path}")
+
+        # 调用 relic_writer.py 生成完整 Relic 文件夹
+        if not self.dry_run:
+            relic_writer_cmd = [
+                "python", "scripts/relic_writer.py",
+                "--data", str(self.output_dir / "relic_config.json"),
+                "--template", "expert",
+                "--slug", self.expert_name.lower().replace(" ", "-"),
+            ]
+            log("info", f"正在生成 Relic 文件夹...")
+            result = subprocess.run(relic_writer_cmd, capture_output=True, text=True, timeout=60)
+            if result.returncode == 0:
+                log("ok", f"Relic 文件夹已生成")
+            else:
+                log("warn", f"relic_writer.py 执行失败，请手动运行：{' '.join(relic_writer_cmd)}")
+                log("info", result.stderr[:200] if result.stderr else "无错误信息")
+        else:
+            log("info", f"[DRY-RUN] 将调用: python scripts/relic_writer.py --data {self.output_dir}/relic_config.json --template expert --slug {self.expert_name.lower().replace(' ', '-')}")
 
     def forge(self) -> None:
         print(f"\n{Colors.BOLD}{Colors.HEADER}═══════════════════════════════════════{Colors.ENDC}")

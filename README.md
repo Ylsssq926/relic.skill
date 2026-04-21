@@ -193,6 +193,7 @@ npx -y skills add Ylsssq926/relic.skill
 ### 方式三：全局安装（所有项目可用）
 
 ```bash
+mkdir -p ~/.claude/skills
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
 
@@ -209,8 +210,8 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 | **Cline** | `git clone` 到 `.cline/skills/relic/` |
 | **OpenCode** | `git clone` 到 `.opencode/skill/relic/` |
 | **Codex CLI** | `git clone` 到 `codex-skills/relic/` |
-| **Augment** | `git clone` 到项目根目录 |
-| **GitHub Copilot** | `git clone` 到项目根目录（自动读取 SKILL.md） |
+| **Augment** | `git clone` 到 `.augment/skills/relic/` |
+| **GitHub Copilot** | `git clone` 到 `.github/skills/relic/` |
 
 > 原则上，任何能读取 SKILL.md 的 agent 都能用。不确定的话，clone 到项目根目录就行。
 
@@ -303,7 +304,7 @@ lark-cli --help
 lark-cli im +messages-search --chat-id "oc_xxx" --query "项目上线"
 
 # 搜索并读取飞书文档
-lark-cli docs +read --doc-id "doxxx"
+lark-cli docs +fetch --doc-id "doxxx"
 ```
 
 **作为「手」——主动行为：**

@@ -33,8 +33,8 @@
 
 ```text
 请读取 soul-engine/SKILL.md，然后加载目标 Relic 的文件夹。
-需要读取的文件：{relic}/SKILL.md, {relic}/personality.md, {relic}/memory.md
-交互规则见 soul-engine/interaction.md
+需要读取的文件：{relic}/SKILL.md, {relic}/personality.md, {relic}/interaction.md, {relic}/memory.md
+交互规则见 soul-engine/interaction.md（目标 Relic 自带的 interaction.md 优先级更高）
 ```
 
 ### 3. 用户想保护 Relic
@@ -64,6 +64,7 @@
 - python scripts/version_manager.py --help
 - python scripts/quality_checker.py --help
 - python scripts/proactive_scheduler.py --help
+- python scripts/lark_expert_forge.py --help
 ```
 
 ## 项目结构速览

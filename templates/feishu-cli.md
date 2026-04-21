@@ -32,10 +32,10 @@ lark-cli im +messages-resources-download --message-id "om_xxx" --file-key "file_
 
 ```bash
 # 读取飞书文档内容（含评论和批注）
-lark-cli docs +read --doc-id "doxxx"
+lark-cli docs +fetch --doc-id "doxxx"
 
-# 搜索知识库文档
-lark-cli wiki +nodes-list --space-id "spacexxx"
+# 搜索知识库文档（使用 API 命令层）
+lark-cli wiki nodes list --space-id "spacexxx"
 ```
 
 ### 协作时间线
@@ -47,19 +47,18 @@ lark-cli base +record-list --app-token "bxxx" --table-id "tblxxx"
 # 查看今日议程
 lark-cli calendar +agenda
 
-# 查看指定日期范围的日程
-lark-cli calendar +event-list --start-time "2025-01-01T00:00:00" --end-time "2025-12-31T23:59:59"
+# 查看日历事件（使用 API 命令层）
+lark-cli calendar events instance_view --params '{"calendar_id":"primary","start_time":"1700000000","end_time":"1700086400"}'
 ```
 
 ### 会议纪要
 
 ```bash
-# 获取会议纪要和 AI 摘要
-lark-cli minutes +get --meeting-id "meeting_xxx"
+# 获取会议纪要（使用 vc 模块的 notes 功能）
+lark-cli vc +notes --meeting-ids "meeting_xxx"
 
 # 获取会议录音
-lark-cli vc +recordings --meeting-id "meeting_xxx"
-# 注：如需获取会议纪要，请使用 lark-cli minutes +get
+lark-cli vc +recording --meeting-id "meeting_xxx"
 ```
 
 ## 主动行为（飞书 CLI 作为「手」）

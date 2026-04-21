@@ -32,14 +32,14 @@ lark-cli im +messages-list --chat-id "oc_xxx" --page-all --format json > expert_
 
 # 2. 搜索专家撰写的飞书文档（Docs 能力）
 lark-cli docs +search --query "技术方案"
-lark-cli docs +read --doc-id "doxxx" --format markdown > expert_doc.md
+lark-cli docs +fetch --doc-id "doxxx" --format markdown > expert_doc.md
 
 # 3. 提取知识库中的专业内容（Wiki 能力）
-lark-cli wiki +nodes-list --space-id "spacexxx"
+lark-cli wiki nodes list --space-id "spacexxx"
 lark-cli wiki +node-get --node-id "nodexxx"
 
-# 4. 获取会议纪要中的决策记录（Minutes 能力）
-lark-cli minutes +get --meeting-id "meeting_xxx"
+# 4. 获取会议纪要中的决策记录（VC 能力）
+lark-cli vc +notes --meeting-ids "meeting_xxx"
 ```
 
 ### 第二步：授权核验（合规前置）
@@ -91,7 +91,7 @@ lark-cli base +record-create \
 lark-cli calendar +agenda
 
 # 读取新人的日历，识别关键事件
-lark-cli calendar +event-list --start-time "2026-04-17T00:00:00" --end-time "2026-04-24T23:59:59"
+lark-cli calendar events instance_view --params '{"calendar_id":"primary","start_time":"1714089600","end_time":"1714694400"}'
 
 # 在新人有重要会议前，创建提醒
 lark-cli calendar +create \

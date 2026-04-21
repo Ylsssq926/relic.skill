@@ -78,6 +78,14 @@ Optional: create a virtual environment if you plan to run Python scripts:
 
 ```bash
 python -m venv .venv
+
+# 激活虚拟环境（Windows）
+.venv\Scripts\activate
+# 或 macOS/Linux
+source .venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
 ```
 
 建议先阅读这些文件：  

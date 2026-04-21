@@ -187,6 +187,7 @@ npx skills add Ylsssq926/relic.skill
 ### Option 3: Global install (available in every project)
 
 ```bash
+mkdir -p ~/.claude/skills
 git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
 ```
 
@@ -203,8 +204,8 @@ relic.skill is based on the open SKILL.md standard and is compatible with any AI
 | **Cline** | `git clone` into `.cline/skills/relic/` |
 | **OpenCode** | `git clone` into `.opencode/skill/relic/` |
 | **Codex CLI** | `git clone` into `codex-skills/relic/` |
-| **Augment** | `git clone` into project root |
-| **GitHub Copilot** | `git clone` into project root |
+| **Augment** | `git clone` into `.augment/skills/relic/` |
+| **GitHub Copilot** | `git clone` into `.github/skills/relic/` |
 
 > In principle, any agent that can read SKILL.md should work. If you're not sure, just clone into the project root.
 
