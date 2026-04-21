@@ -1,7 +1,7 @@
 # 🐦 飞书 CLI — 协作记忆蒸馏模板
 
 > **命令格式说明**:本文档中的 `lark-cli` 命令基于 [飞书 CLI 官方文档](https://github.com/larksuite/cli)。使用前请先运行 `lark-cli --help` 和 `lark-cli im --help` 等验证命令是否存在。如命令格式不匹配,请参考官方文档调整。会议纪要请使用 `lark-cli minutes` 模块，视频会议请使用 `lark-cli vc` 模块，两者是独立的。
-
+>
 > 用飞书 CLI 蒸馏团队协作记忆,让那些一起扛过的夜继续发光。
 
 ## 适用场景
