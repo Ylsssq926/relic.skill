@@ -17,13 +17,15 @@ export default function HomeExampleCard({ relic }: HomeExampleCardProps) {
     <Link href={`/demo?relic=${relic.id}`} className="group block h-full">
       <div className="flex h-full flex-col overflow-hidden rounded-xl border border-border/60 bg-surface shadow-soft transition-all duration-[350ms] ease-entrance hover:-translate-y-1 hover:shadow-card">
         <div className="relative border-b border-border/40 bg-warm-gradient px-6 py-5">
-          {relic.type === "feishu-cli" && (
-            <span className="absolute right-3 top-3 rounded-full bg-blue-500/90 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
-              🏆 参赛作品
-            </span>
-          )}
           <div className="relative flex items-start justify-between gap-3">
-            <Badge type={relic.type}>{dict.types[relic.type]}</Badge>
+            <div className="flex items-center gap-1.5">
+              <Badge type={relic.type}>{dict.types[relic.type]}</Badge>
+              {relic.type === "feishu-cli" && (
+                <span className="rounded-full bg-blue-500/90 px-2 py-0.5 text-xs font-medium text-white">
+                  🏆 参赛
+                </span>
+              )}
+            </div>
             <span className="rounded-full bg-background/80 px-2.5 py-0.5 text-xs text-foreground-faint">
               #{relic.id}
             </span>

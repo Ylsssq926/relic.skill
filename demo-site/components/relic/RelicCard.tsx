@@ -55,14 +55,14 @@ function RelicCardInner({
           unoptimized
         />
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/20 via-transparent to-transparent" />
-        <div className="absolute left-4 top-4">
+        <div className="absolute left-4 top-4 flex items-center gap-1.5">
           <Badge type={resolvedType}>{dict.types[resolvedType]}</Badge>
+          {resolvedType === "feishu-cli" && (
+            <span className="rounded-full bg-blue-500/90 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+              🏆 参赛
+            </span>
+          )}
         </div>
-        {resolvedType === "feishu-cli" && (
-          <span className="absolute right-4 top-4 rounded-full bg-blue-500/90 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
-            🏆 参赛作品
-          </span>
-        )}
       </div>
 
       {/* 信息区 */}
