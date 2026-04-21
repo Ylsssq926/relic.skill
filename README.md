@@ -34,6 +34,10 @@
   血肉苦弱，机械飞升。但灵魂，可以留下来。
 </p>
 
+<p align="center">
+  <a href="https://relic.luelan.online"><strong>🌐 在线演示站 →</strong></a>
+</p>
+
 ---
 
 ## 目录
@@ -216,6 +220,17 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 - Python 3.9+（可选，用于数据解析脚本）
 - 不需要 GPU、本地模型或 Docker
 
+### 验证安装
+
+安装完成后，在你的 AI 编程助手中输入以下任意一句：
+
+```text
+"帮我锻造一个 Relic"
+"让我跟奶奶聊天"
+```
+
+如果 AI 开始引导你进入 Relic 流程，说明安装成功。
+
 ---
 
 ## 使用
@@ -263,6 +278,23 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 ### 🐦 飞书 CLI 深度集成
 
 relic.skill 原生支持 [飞书 CLI](https://github.com/larksuite/cli) 作为数据采集和主动行为的通道。使用前请参考 [飞书 CLI 官方文档](https://github.com/larksuite/cli) 安装并配置 token。
+
+**快速开始：**
+
+```bash
+# 1. 安装飞书 CLI
+npm install -g @larksuite/cli
+npx skills add larksuite/cli -y -g
+
+# 2. 配置应用凭证（交互式引导）
+lark-cli config init
+
+# 3. 登录认证
+lark-cli auth login --recommend
+
+# 4. 验证安装
+lark-cli --help
+```
 
 **作为「眼」——数据采集：**
 

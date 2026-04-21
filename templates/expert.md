@@ -78,7 +78,7 @@ lark-cli base +tables-create \
   --fields '[{"field_name":"知识领域","type":1},{"field_name":"核心观点","type":1},{"field_name":"证据来源","type":1},{"field_name":"置信度","type":2}]'
 
 # 写入蒸馏后的知识点
-lark-cli base +records-create \
+lark-cli base +record-create \
   --app-token "bxxx" \
   --table-id "tblxxx" \
   --fields '{"知识领域":"系统架构","核心观点":"先验证假设再写代码，不要一上来就重构","证据来源":"2025-03 架构评审会议纪要","置信度":95}'
@@ -87,8 +87,11 @@ lark-cli base +records-create \
 ### 第四步：赛博导师入驻日历（Calendar 能力）
 
 ```bash
+# 查看今日议程
+lark-cli calendar +agenda
+
 # 读取新人的日历，识别关键事件
-lark-cli calendar +agenda --start "2026-04-17" --end "2026-04-24"
+lark-cli calendar +event-list --start-time "2026-04-17T00:00:00" --end-time "2026-04-24T23:59:59"
 
 # 在新人有重要会议前，创建提醒
 lark-cli calendar +create \
@@ -133,7 +136,7 @@ lark-cli calendar +create \
 | 新人日历出现「客户拜访」 | 提前10分钟发销售话术提醒 | `lark-cli im +messages-send` |
 | 新人日历出现「技术评审」 | 发送架构评审 Checklist | `lark-cli im +messages-send` |
 | 专家入职周年 | 在群里发一段经验总结 | `lark-cli im +messages-send` |
-| 多维表格新增记录 | 自动更新知识库并通知 | `lark-cli base +records-create` |
+| 多维表格新增记录 | 自动更新知识库并通知 | `lark-cli base +record-create` |
 | 关键项目里程碑 | 在文档中写入经验回顾 | `lark-cli docs +update` |
 
 ## 合规声明

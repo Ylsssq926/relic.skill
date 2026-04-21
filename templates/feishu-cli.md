@@ -42,10 +42,13 @@ lark-cli wiki +nodes-list --space-id "spacexxx"
 
 ```bash
 # 从多维表格提取项目时间线
-lark-cli base +records-list --app-token "bxxx" --table-id "tblxxx"
+lark-cli base +record-list --app-token "bxxx" --table-id "tblxxx"
 
-# 查看团队日历事件
-lark-cli calendar +agenda --start "2025-01-01" --end "2025-12-31"
+# 查看今日议程
+lark-cli calendar +agenda
+
+# 查看指定日期范围的日程
+lark-cli calendar +event-list --start-time "2025-01-01T00:00:00" --end-time "2025-12-31T23:59:59"
 ```
 
 ### 会议纪要

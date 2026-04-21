@@ -27,6 +27,10 @@
   Flesh is weak. Machines ascend. But souls? Souls can stay.
 </p>
 
+<p align="center">
+  <a href="https://relic.luelan.online"><strong>🌐 Live Demo →</strong></a>
+</p>
+
 ---
 
 ## Table of Contents
@@ -259,6 +263,23 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 ### 🐦 Feishu CLI Integration
 
 relic.skill supports [Feishu CLI](https://github.com/larksuite/cli) as both a data collection channel and a proactive behavior channel. Before use, install and configure your token following the [Feishu CLI documentation](https://github.com/larksuite/cli). You can distill team memories from Feishu conversations, docs, and bases, or let your Relic send messages through Feishu.
+
+**Quick Start:**
+
+```bash
+# 1. Install Feishu CLI
+npm install -g @larksuite/cli
+npx skills add larksuite/cli -y -g
+
+# 2. Configure app credentials (interactive)
+lark-cli config init
+
+# 3. Login
+lark-cli auth login --recommend
+
+# 4. Verify
+lark-cli --help
+```
 
 **Data Collection Example:**
 

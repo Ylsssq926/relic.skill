@@ -424,7 +424,7 @@ class ExpertForge:
             run_lark_cli(
                 [
                     "base",
-                    "+records-create",
+                    "+record-create",
                     "--app-token",
                     app_token,
                     "--table-id",
@@ -456,11 +456,11 @@ class ExpertForge:
         result = run_lark_cli(
             [
                 "calendar",
-                "+agenda",
-                "--start",
-                today.strftime("%Y-%m-%d"),
-                "--end",
-                end_date.strftime("%Y-%m-%d"),
+                "+event-list",
+                "--start-time",
+                today.strftime("%Y-%m-%dT00:00:00"),
+                "--end-time",
+                end_date.strftime("%Y-%m-%dT23:59:59"),
             ],
             dry_run=self.dry_run,
         )
