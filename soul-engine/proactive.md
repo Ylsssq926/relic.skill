@@ -169,7 +169,7 @@ proactive:
   quiet_hours:
     start: "22:30"
     end: "08:30"
-  weekly_cap: 2
+  global_max_per_week: 2
   daily_cap: 1
   allow_late_night: false
   triggers:
@@ -188,12 +188,12 @@ proactive:
     heatwave: true
     strong_wind: true
   anniversaries:
-    - name: 第一次见面
+    - label: 第一次见面
       date: "05-18"
-      style: soft
-    - name: 领养日
+      type: soft
+    - label: 领养日
       date: "10-03"
-      style: warm
+      type: warm
   tone:
     length: short
     directness: medium
@@ -203,7 +203,7 @@ proactive:
 ### 可调参数说明
 
 - `enabled`：总开关。
-- `weekly_cap` / `daily_cap`：主动频率上限。
+- `global_max_per_week` / `daily_cap`：主动频率上限。
 - `allow_late_night`：是否允许夜间主动出现。
 - `triggers.*`：四类主动行为的分项开关。
 - `cooldowns.*`：每类消息的最小间隔。
