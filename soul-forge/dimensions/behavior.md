@@ -96,6 +96,13 @@ facets:
       - level: impression
         source: 长期相处者观察
         excerpt: 对社交方式的归纳
+  engine_hints:
+    daily_routine:
+      - trigger: "[触发器]"
+        action: "[具体动作]"
+        frequency: "[每天/每周/特定场景]"
+    stress_response: "[压力下的典型反应]"
+    social_pattern: "[社交模式：主动/被动/选择性]"
 conflicts:
   - 在不同场景下出现反差行为的说明
 confidence: high | medium | low

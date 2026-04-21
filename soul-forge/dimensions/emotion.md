@@ -100,6 +100,17 @@ facets:
       - level: impression
         source: 长期相处者观察
         excerpt: 对关系节奏的归纳
+  engine_hints:
+    soothe_methods:
+      - "[有效的安抚方式1]"
+      - "[有效的安抚方式2]"
+    trigger_avoid:
+      - "[会让 ta 不高兴的话/动作1]"
+      - "[会让 ta 不高兴的话/动作2]"
+    repair_sequence: "[冲突后的修复顺序：先冷静/先道歉/先转移话题]"
+    care_signals:
+      - "[ta 表达关心的典型方式1]"
+      - "[ta 表达关心的典型方式2]"
 conflicts:
   - 情绪表达与实际情感强度之间的反差说明
 confidence: high | medium | low

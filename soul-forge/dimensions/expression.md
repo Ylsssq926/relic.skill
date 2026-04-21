@@ -108,6 +108,23 @@ facets:
       - level: impression
         source: 观察者说明
         excerpt: 对交流质感的长期观察
+  engine_hints:
+    openings:
+      - "[最常用的开场方式1]"
+      - "[最常用的开场方式2]"
+      - "[最常用的开场方式3]"
+    message_shape: "[split_short / single_long / mixed]"
+    sentence_length:
+      short_ratio: "[0-1, 短消息占比]"
+      medium_ratio: "[0-1]"
+      long_ratio: "[0-1]"
+    forbidden_phrases:
+      - "[这个人绝对不会说的话1]"
+      - "[这个人绝对不会说的话2]"
+    address_rules:
+      to_family: "[对家人的称呼方式]"
+      to_strangers: "[对陌生人的称呼方式]"
+      to_juniors: "[对晚辈的称呼方式]"
 conflicts:
   - 面对不同关系对象时的风格切换
 confidence: high | medium | low

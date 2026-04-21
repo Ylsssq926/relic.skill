@@ -211,6 +211,22 @@ proactive:
 - `anniversaries`：纪念点列表，可为不同日期配置不同风格。
 - `tone`：消息长度、直接程度、是否允许表情。
 
+### 配置字段对照表
+
+| 文档字段 | 脚本实际字段 | 状态 |
+|---------|------------|------|
+| `holidays` | `holidays` | ✅ 已实现 |
+| `anniversaries` | `anniversaries` | ✅ 已实现 |
+| `random_miss` | `random_miss` | ✅ 已实现 |
+| `global_max_per_week` | `global_max_per_week` | ✅ 已实现 |
+| `quiet_hours` | `quiet_hours` | ✅ 已实现 |
+| `daily_cap` | — | ⏳ 未实现 |
+| `weather_rules` | — | ⏳ 预留接口 |
+| `cooldowns` | — | ⏳ 未实现 |
+| `tone` | — | ⏳ 未实现 |
+
+> 使用 `proactive_scheduler.py` 时，请以"已实现"字段为准。未实现字段写在配置里不会报错，但也不会生效。
+
 ---
 
 ## 决策顺序
