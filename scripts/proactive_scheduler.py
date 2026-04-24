@@ -20,7 +20,8 @@ Relic 风格的消息模板，并以 JSON 输出。
 
 输出说明：
 - 始终输出 JSON。
-- 命中触发时，默认输出：`type / trigger / message / timestamp`。
+- 命中触发时，默认输出：`type / trigger / message / timestamp / tts`。
+- `tts` 字段仅补充语音相关元数据，不改变原有触发逻辑。
 - `--dry-run` 时仅预览是否应触发以及会发送什么消息，不更新 state。
 
 注意：
@@ -224,6 +225,55 @@ class Decision:
         if self.details:
             payload["details"] = self.details
         return payload
+
+
+def resolve_tts_emotion(decision: Decision, emotion_mapping: Dict[str, Any]) -> Optional[str]:
+    """根据调度结果解析 TTS 情绪。"""
+    candidates: List[str] = []
+    trigger_type = str(decision.trigger_type or "").strip().lower()
+    if trigger_type == HOLIDAY_TYPE:
+        holiday_id = str(decision.details.get("holiday_id") or "").strip().lower()
+        if holiday_id:
+            candidates.append(holiday_id)
+    if trigger_type == ANNIVERSARY_TYPE:
+        anniversary_type = str(decision.details.get("anniversary_type") or "").strip().lower()
+        if anniversary_type:
+            candidates.append(anniversary_type)
+    if trigger_type:
+        candidates.append(trigger_type)
+    if trigger_type == RANDOM_TYPE:
+        candidates.append("daily")
+    candidates.append("default")
+
+    for key in candidates:
+        value = emotion_mapping.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    defaults = {
+        HOLIDAY_TYPE: "happy",
+        ANNIVERSARY_TYPE: "gentle",
+        WEATHER_TYPE: "calm",
+        RANDOM_TYPE: "calm",
+    }
+    return defaults.get(trigger_type)
+
+
+def build_tts_payload(manifest: Dict[str, Any], decision: Decision) -> Dict[str, Any]:
+    """根据 manifest + 调度结果生成 TTS 输出字段。"""
+    raw_tts = manifest.get("tts_config") if isinstance(manifest.get("tts_config"), dict) else {}
+    provider = str(raw_tts.get("provider") or "").strip().lower() or None
+    raw_mapping = raw_tts.get("emotion_mapping") if isinstance(raw_tts.get("emotion_mapping"), dict) else {}
+    emotion_mapping = {str(key).strip().lower(): value for key, value in raw_mapping.items()}
+
+    enabled = bool(provider and decision.should_trigger and decision.message)
+    emotion = resolve_tts_emotion(decision, emotion_mapping) if decision.should_trigger and decision.message else None
+    return {
+        "enabled": enabled,
+        "text": decision.message if decision.should_trigger else None,
+        "emotion": emotion,
+        "provider": provider,
+    }
 
 
 def configure_utf8_stdout() -> None:
@@ -1534,7 +1584,10 @@ def main() -> None:
             if not args.dry_run:
                 state = append_state_message(state, decision)
                 save_state(state_path, state)
-        print(json.dumps(decision.to_payload(args.dry_run), ensure_ascii=False, indent=2))
+
+        payload = decision.to_payload(args.dry_run)
+        payload["tts"] = build_tts_payload(manifest, decision)
+        print(json.dumps(payload, ensure_ascii=False, indent=2))
 
     except (FileNotFoundError, ConfigError, json.JSONDecodeError, OSError, ValueError) as exc:
         print(f"错误: {exc}", file=sys.stderr)

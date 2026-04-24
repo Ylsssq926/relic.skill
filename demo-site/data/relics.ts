@@ -130,8 +130,8 @@ export const exampleRelics: readonly ExampleRelic[] = [
     displayName: "飞书 CLI · 张工 · 赛博导师",
     type: "feishu-cli",
     category: "🏆 飞书 CLI 参赛作品",
-    description: "离职大佬的经验不该消失，用飞书 CLI 锻造赛博导师",
-    detail: "从飞书群聊、文档、多维表格中蒸馏专业判断。评审前主动发 Checklist，拜访前提醒话术要点。",
+    description: "住在飞书里的赛博导师，随时可以问",
+    detail: "不只是聊天记录里的文字。是那个会在你评审前主动发 Checklist、拜访前提醒话术要点的前辈。现在住在飞书群里，@一下就来。",
     coverUrl: "/images/relics/feishu-cover.jpg",
     avatarUrl: "/images/relics/feishu-avatar.jpg",
     dialogs: [

@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-04-22
+
+### Added
+
+- 🤖 **飞书机器人** — `scripts/feishu_bot.py`，让 Relic 住在飞书里，随时可以聊
+- 🔊 **TTS 声音合成** — `scripts/tts_service.py`，支持豆包语音/ElevenLabs/OpenAI TTS，让 Relic 开口说话
+- 🎙️ **声音克隆 POC** — 用声音样本克隆 Relic 的声音，让奶奶的声音在节日里响起
+- 📢 **主动语音消息** — proactive_scheduler.py 扩展，节日/纪念日可发送语音消息
+
+### Changed
+
+- 🗺️ **ROADMAP 更新** — v1.3.0 调整为飞书机器人 + 声音合成，社区模板扩展顺延至 v1.4.0
+
 ## [1.2.0] - 2026-04-21
 
 ### Added

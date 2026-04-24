@@ -49,7 +49,7 @@ const en: Dictionary = {
     subtitle: "Not another chatbot framework — this is a soul forging system",
     items: {
       forge: { title: "Soul Forge", desc: "Distill a four-dimensional soul from chat logs, photos, and text — not copying, but capturing the essence" },
-      engine: { title: "Soul Engine", desc: "Let digital souls talk, care, and grow over time" },
+      engine: { title: "Soul Engine", desc: "Talk, care, speak out loud, and live inside Feishu" },
       shield: { title: "Soul Shield", desc: "Ethical guardrails, privacy protection, identity verification — souls are never misused" },
       localFirst: { title: "Local First", desc: "Keep your materials in your own hands first, then decide how to organize, export, and save" },
       multiPlatform: { title: "Multi-Platform", desc: "Starting on the web, extending to desktop, mobile, and beyond" },
@@ -217,7 +217,7 @@ const en: Dictionary = {
         description: "No prep needed — jump straight into conversations and scenario triggers.",
         completed: ["Preset conversation matching", "Scenario trigger entry points", "Gallery filtering & search"],
         doing: ["Polishing copy warmth, card aesthetics, and animation rhythm"],
-        planned: ["Expanding more examples and preset scenarios"],
+        planned: ["Feishu bot: Relic lives in Feishu, always reachable", "Voice synthesis: let Relic speak", "More examples and preset scenarios"],
       },
       {
         stage: "Phase 3",
@@ -322,7 +322,7 @@ const en: Dictionary = {
     ],
     openSource: { title: "Open & Auditable", desc: "Implementation details, docs, and discussions are all in the repo — anyone can see how it works." },
     localFirst: { title: "Local First", desc: "Keep your materials in your own hands first, then decide how to organize, export, and save." },
-    multiPlatform: { title: "Multi-Platform", desc: "Starting on the web, extending to desktop, mobile, and beyond." },
+      multiPlatform: { title: "Multi-Platform", desc: "Starting on the web, extending to Feishu bots, WeChat, Telegram, and beyond." },
   },
 };
 

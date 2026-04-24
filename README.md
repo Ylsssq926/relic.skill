@@ -276,6 +276,47 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 > 从 v1.1.2 开始，新生成的 Relic 会默认带上 `proactive_config.json`。也就是说，你现在不用先研究配置长什么样，先 dry-run 一下，就能看看它今天会不会突然来敲你一下。
 
+### 飞书机器人
+
+奶奶不只在聊天记录里。现在她住在飞书群里了，@一下就来，就像以前在家族群里一样。
+
+让 Relic 住在飞书里，随时可以聊：
+
+```bash
+# 启动飞书机器人（需要配置飞书应用凭证）
+python scripts/feishu_bot.py --relic exes/grandma
+
+# 测试模式（不实际发送）
+python scripts/feishu_bot.py --relic exes/grandma --dry-run --test-message "奶奶，我今天加班到十一点"
+
+# 多 Relic 模式（根据用户命令切换）
+python scripts/feishu_bot.py --relic-dir exes/ --multi-relic
+```
+
+配置飞书应用凭证（`.env` 文件）：
+
+```bash
+FEISHU_APP_ID=cli_xxx
+FEISHU_APP_SECRET=xxx
+FEISHU_VERIFICATION_TOKEN=xxx
+AI_API_KEY=sk-xxx
+AI_PROVIDER=claude  # 或 openai
+```
+
+### 声音合成
+
+过年的时候，不只是文字消息。是奶奶真的声音，说"吃饺子了没"。
+
+让 Relic 开口说话：
+
+```bash
+# 合成语音（豆包语音）
+python scripts/tts_service.py --relic exes/grandma --text "过年了，吃饺子了没" --mode holiday
+
+# 声音克隆（需要声音样本）
+python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
+```
+
 ### 🐦 飞书 CLI 深度集成
 
 relic.skill 原生支持 [飞书 CLI](https://github.com/larksuite/cli) 作为数据采集和主动行为的通道。使用前请参考 [飞书 CLI 官方文档](https://github.com/larksuite/cli) 安装并配置 token。

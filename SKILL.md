@@ -7,7 +7,7 @@ description: >
   "我想和已故/离开的XX聊天"、"让我跟XX继续说话"时触发。
   支持蒸馏对象：人类、宠物、关系、团队文化、地方、时刻、公众人物、业务专家、飞书协作记忆。
   支持数据源：微信、QQ、Telegram、Discord、Slack、飞书、iMessage、照片、语音、实时对话。
-version: 1.2.0
+version: 1.3.0
 license: MIT
 user-invocable: true
 argument-hint: "描述你想永生的对象，比如：我想永生我奶奶"
