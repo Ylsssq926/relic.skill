@@ -33,8 +33,13 @@ try:
 except ImportError:  # pragma: no cover - dependency guard
     date_parser = None
 
+try:  # pragma: no cover - import path differs between script/module usage
+    from .manifest_schema import migrate_manifest
+except ImportError:  # pragma: no cover - direct script execution
+    from manifest_schema import migrate_manifest
+
 DEFAULT_OUTPUT_DIR = "exes"
-PROJECT_VERSION = "1.1.2"
+PROJECT_VERSION = "1.4.0"
 DEFAULT_PROACTIVE_CONFIG_FILENAME = "proactive_config.json"
 
 TEMPLATE_CONFIG: Dict[str, Dict[str, Any]] = {
@@ -1051,25 +1056,129 @@ def build_default_proactive_config(ctx: Dict[str, Any]) -> Dict[str, Any]:
 
 
 def build_manifest(ctx: Dict[str, Any], data_files: Sequence[Path], output_dir: Path) -> Dict[str, Any]:
-    return {
-        "schema_version": "relic.skill/1.0",
-        "generated_at": now_iso(),
+    generated_at = now_iso()
+    template = str(ctx["template"])
+    canonical_kind = "team" if template == "team-culture" else template
+
+    core_drives: List[str] = []
+    for item in [*ctx["keywords"], *ctx["recurring_phrases"], *ctx["facts"]]:
+        text = str(item).strip()
+        if text and text not in core_drives:
+            core_drives.append(text)
+    core_drives = core_drives or [ctx["summary"]]
+
+    care_priorities = [str(item).strip() for item in ctx["keywords"] if str(item).strip()]
+    if template in {"human", "relationship"}:
+        channel_style = "wechat-family-chat"
+    elif template in {"team-culture", "public-figure", "expert", "feishu-cli"}:
+        channel_style = "professional-chat"
+    else:
+        channel_style = "casual"
+
+    relationship_text = str(ctx["relationship"])
+    relationship_lower = relationship_text.lower()
+    intimate_markers = ("奶奶", "爷爷", "外婆", "外公", "妈妈", "爸爸", "爱人", "伴侣", "老公", "老婆", "对象", "grandma", "grandpa", "mom", "dad", "wife", "husband", "partner")
+
+    if canonical_kind == "team":
+        identity_status = "team"
+        distance = "professional"
+    elif canonical_kind == "place":
+        identity_status = "place"
+        distance = "close"
+    elif canonical_kind in {"relationship", "moment"}:
+        identity_status = "fictional"
+        distance = "intimate" if canonical_kind == "relationship" else "close"
+    elif canonical_kind == "public-figure":
+        identity_status = "living"
+        distance = "public"
+    elif canonical_kind in {"expert", "feishu-cli"}:
+        identity_status = "living"
+        distance = "professional"
+    elif canonical_kind == "pet" or any(marker.lower() in relationship_lower for marker in intimate_markers):
+        identity_status = "living"
+        distance = "intimate"
+    else:
+        identity_status = "living"
+        distance = "close"
+
+    legacy_manifest = {
+        "schema_version": "1.4.0",
+        "generated_at": generated_at,
+        "generated_by": "scripts/relic_writer.py",
+        "created_at": generated_at,
+        "id": ctx["slug"],
+        "kind": canonical_kind,
         "slug": ctx["slug"],
         "display_name": ctx["subject_name"],
-        "relic_type": ctx["template"],
+        "relic_type": template,
         "language": "zh-CN",
+        "locale": "zh-CN",
         "version": PROJECT_VERSION,
+        "identity": {
+            "name": ctx["subject_name"],
+            "status": identity_status,
+            "summary": ctx["summary"],
+            "core_drives": core_drives,
+            "attributes": {
+                "template_label": ctx["template_label"],
+                "time_range": ctx["time_range_text"],
+            },
+        },
+        "relationship": {
+            "default_relation_to_user": ctx["relationship"],
+            "distance": distance,
+            "care_priorities": care_priorities,
+            "repair_style": "",
+        },
+        "conversation": {
+            "default_language": "zh-CN",
+            "default_mode": "daily",
+            "speech_style": {
+                "channel_style": channel_style,
+                "message_shape": "mixed",
+                "voice_prefix": "",
+                "dialect_hint": "",
+                "emoji_style": "none" if channel_style == "professional-chat" else "occasional",
+            },
+            "instinct_order": (
+                ["attune", "care", "recall", "reassure"]
+                if template in {"human", "pet", "relationship"}
+                else ["clarify", "organize", "guide", "ground"]
+            ),
+            "disclosure_policy": {
+                "identity": "必须明确说明这是 Relic，不是真人在线。",
+                "evidence": "证据不足时直接说明，不要硬编细节。",
+                "boundaries": "；".join(ctx["boundaries"]),
+            },
+        },
+        "compliance": {
+            "consent": {
+                "protocol": "six-question-consent-v1",
+                "authorization_level": "B",
+                "use_scope": "personal",
+                "commercial_use": False,
+            },
+            "is_relic_not_real_person": True,
+        },
         "subject": {
             "name": ctx["subject_name"],
             "relation_to_user": ctx["relationship"],
+            "status": identity_status,
             "description": ctx["summary"],
+            "core_traits": core_drives,
+            "locale": "zh-CN",
+            "interaction_profile": {
+                "default_mode": "daily",
+                "default_channel": channel_style,
+                "message_shape": "mixed",
+                "primary_care_topics": care_priorities,
+            },
         },
         "title": ctx["subject_name"],
-        "template": ctx["template"],
+        "template": template,
         "template_label": ctx["template_label"],
         "template_file": f"templates/{ctx['template']}.md",
         "summary": ctx["summary"],
-        "relationship": ctx["relationship"],
         "time_range": ctx["time_range_text"],
         "output_dir": str(output_dir),
         "source_files": [str(path) for path in data_files],
@@ -1085,6 +1194,17 @@ def build_manifest(ctx: Dict[str, Any], data_files: Sequence[Path], output_dir: 
             "devices": ctx["devices"],
             "locations": ctx["locations"],
         },
+        "evidence_stats": {
+            "verbatim": ctx["message_count"],
+            "artifact": ctx["photo_count"],
+            "impression": ctx["memory_count"],
+        },
+        "consent": {
+            "protocol": "six-question-consent-v1",
+            "authorization_level": "B",
+            "use_scope": "personal",
+            "commercial_use": False,
+        },
         "safety": {
             "is_relic_not_real_person": True,
             "boundaries": ctx["boundaries"],
@@ -1098,6 +1218,7 @@ def build_manifest(ctx: Dict[str, Any], data_files: Sequence[Path], output_dir: 
             "manifest.json",
         ],
     }
+    return migrate_manifest(legacy_manifest)
 
 
 def write_relic_folder(ctx: Dict[str, Any], data_files: Sequence[Path], output_root: Path, force: bool) -> Path:

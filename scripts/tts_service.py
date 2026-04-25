@@ -2,7 +2,7 @@
 
 为 Relic 提供统一的文字转语音（TTS）接口，支持以下能力：
 - 统一的 `TTSService.synthesize()` 调用方式
-- 多服务商接入：豆包语音 / ElevenLabs / OpenAI TTS
+- 多服务商接入：豆包语音 / MiniMax / ElevenLabs / OpenAI TTS
 - 从 Relic `manifest.json` 中读取 `tts_config`
 - 从 `voice_samples/` 目录读取样本进行声音克隆
 - 输出 mp3 / wav 音频文件
@@ -22,6 +22,7 @@
 - DOUBAO_APP_ID
 - DOUBAO_ACCESS_TOKEN
 - ELEVENLABS_API_KEY
+- MINIMAX_API_KEY
 - OPENAI_API_KEY
 
 说明：
@@ -35,6 +36,7 @@ import argparse
 import base64
 import io
 import json
+import logging
 import mimetypes
 import os
 import re
@@ -56,6 +58,7 @@ except ImportError as exc:  # pragma: no cover - 依赖保护
 else:
     REQUESTS_IMPORT_ERROR = None
 
+LOGGER = logging.getLogger("relic.tts_service")
 DEFAULT_OUTPUT_FORMAT = "mp3"
 DEFAULT_TIMEOUT = 90
 AUDIO_FILE_SUFFIXES = {
@@ -160,6 +163,20 @@ def configure_utf8_stdout() -> None:
             stream.reconfigure(encoding="utf-8", errors="replace")
         except (AttributeError, ValueError):
             continue
+
+
+def configure_logging() -> None:
+    """为脚本配置一个轻量日志输出。"""
+    if logging.getLogger().handlers:
+        return
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
+
+
+def is_missing_credential_error(exc: Exception) -> bool:
+    """判断异常是否属于缺少 API key / token / app id。"""
+    message = str(exc)
+    markers = ("API_KEY", "ACCESS_TOKEN", "APP_ID", "缺少环境变量")
+    return any(marker in message for marker in markers)
 
 
 def read_json_file(path: Path) -> Any:
@@ -276,6 +293,7 @@ def provider_class_for_name(provider: str) -> Type["TTSService"]:
         return {
             "doubao": DoubaoTTS,
             "elevenlabs": ElevenLabsTTS,
+            "minimax": MiniMaxTTS,
             "openai": OpenAITTS,
         }[normalized]
     except KeyError as exc:
@@ -317,22 +335,26 @@ class TTSService:
         return self.provider_name
 
     @classmethod
-    def from_relic(cls, relic_dir: str) -> "TTSService":
-        """从 Relic 配置创建 TTS 服务。
-
-        读取 `<relic>/manifest.json` 中的 `tts_config`，并返回具体 provider 的实例。
-        """
+    def from_relic(cls, relic_dir: str) -> Optional["TTSService"]:
+        """从 Relic 配置创建 TTS 服务。"""
         relic_path = ensure_relic_dir(relic_dir)
+        manifest_path = relic_path / "manifest.json"
+        if not manifest_path.exists():
+            return None
+
         manifest = load_relic_manifest(relic_path)
-        raw_tts = manifest.get("tts_config")
+        media_config = manifest.get("media") if isinstance(manifest.get("media"), dict) else {}
+        raw_tts = media_config.get("tts")
         if raw_tts is None:
-            raise TTSConfigError(f"manifest.json 中缺少 tts_config：{relic_path / 'manifest.json'}")
+            raw_tts = manifest.get("tts_config")
+        if raw_tts is None:
+            return None
         if not isinstance(raw_tts, dict):
-            raise TTSConfigError("manifest.json 中的 tts_config 必须是 object")
+            raise TTSConfigError("manifest.json 中的 media.tts / tts_config 必须是 object")
 
         provider = clean_optional_text(raw_tts.get("provider"))
         if not provider:
-            raise TTSConfigError("manifest.json 中的 tts_config.provider 不能为空")
+            return None
 
         merged_config = dict(raw_tts)
         merged_config["_relic_slug"] = clean_optional_text(manifest.get("slug")) or relic_path.name
@@ -659,6 +681,196 @@ class DoubaoTTS(TTSService):
             time.sleep(poll_interval)
 
         raise TTSError(f"豆包声音复刻超时，speaker_id={generated_voice_id}，最后状态={last_status}")
+
+
+class MiniMaxTTS(TTSService):
+    """MiniMax TTS / 声音克隆实现。"""
+
+    provider_name = "minimax"
+    default_voice_id = "female-tianmei"
+    default_model = "speech-2.8-turbo"
+    tts_url = "https://api.minimax.io/v1/t2a_v2"
+    file_upload_url = "https://api.minimax.io/v1/files/upload"
+    clone_url = "https://api.minimax.io/v1/voice_clone"
+
+    def _headers(self) -> Dict[str, str]:
+        """生成 MiniMax 请求头。"""
+        api_key = clean_optional_text(os.environ.get("MINIMAX_API_KEY"))
+        if not api_key and not self.dry_run:
+            raise TTSConfigError("缺少环境变量 MINIMAX_API_KEY")
+        return {
+            "Authorization": f"Bearer {api_key or 'dry-run-key'}",
+        }
+
+    def _voice_setting(self, voice_id: str, emotion: Optional[str]) -> Dict[str, Any]:
+        """构造 MiniMax 的 voice_setting。"""
+        raw_settings = self.config.get("voice_setting") if isinstance(self.config.get("voice_setting"), dict) else {}
+        explicit_speed = raw_settings.get("speed") is not None or self.config.get("speed") is not None
+        explicit_vol = raw_settings.get("vol") is not None or self.config.get("vol") is not None
+        explicit_pitch = raw_settings.get("pitch") is not None or self.config.get("pitch") is not None
+
+        speed = float(raw_settings.get("speed") or self.config.get("speed") or 1.0)
+        vol = float(raw_settings.get("vol") or self.config.get("vol") or 1.0)
+        pitch = int(raw_settings.get("pitch") or self.config.get("pitch") or 0)
+
+        presets: Dict[str, Dict[str, Any]] = {
+            "calm": {"speed": 1.0, "vol": 1.0, "pitch": 0},
+            "gentle": {"speed": 0.95, "vol": 1.0, "pitch": -1},
+            "happy": {"speed": 1.06, "vol": 1.02, "pitch": 1},
+            "sad": {"speed": 0.90, "vol": 0.96, "pitch": -2},
+            "warm": {"speed": 0.98, "vol": 1.03, "pitch": 0},
+        }
+        preset = presets.get((emotion or "").lower()) if emotion else None
+        if preset:
+            if not explicit_speed:
+                speed = float(preset["speed"])
+            if not explicit_vol:
+                vol = float(preset["vol"])
+            if not explicit_pitch:
+                pitch = int(preset["pitch"])
+
+        return {
+            "voice_id": voice_id,
+            "speed": speed,
+            "vol": vol,
+            "pitch": pitch,
+        }
+
+    def _audio_setting(self, output_format: str) -> Dict[str, Any]:
+        """构造 MiniMax 的 audio_setting。"""
+        file_format = output_format.lower()
+        if file_format != "mp3":
+            raise TTSConfigError("MiniMax 当前仅支持输出 mp3")
+
+        raw_settings = self.config.get("audio_setting") if isinstance(self.config.get("audio_setting"), dict) else {}
+        sample_rate = int(raw_settings.get("sample_rate") or self.config.get("sample_rate") or 32000)
+        bitrate = int(raw_settings.get("bitrate") or self.config.get("bitrate") or 128000)
+        return {
+            "sample_rate": sample_rate,
+            "bitrate": bitrate,
+            "format": file_format,
+        }
+
+    def _synthesize_bytes(
+        self,
+        *,
+        text: str,
+        voice_id: str,
+        output_format: str,
+        emotion: Optional[str],
+    ) -> bytes:
+        """调用 MiniMax 一次性 TTS 接口。"""
+        audio_setting = self._audio_setting(output_format)
+        audio_setting["format"] = output_format.lower()
+        payload: Dict[str, Any] = {
+            "model": clean_optional_text(self.config.get("model")) or self.default_model,
+            "text": text,
+            "voice_setting": self._voice_setting(voice_id, emotion),
+            "audio_setting": audio_setting,
+        }
+
+        response = self._post_json(
+            self.tts_url,
+            headers={**self._headers(), "Content-Type": "application/json"},
+            payload=payload,
+            provider="MiniMax TTS",
+            timeout=max(self.timeout, 120),
+        )
+        try:
+            body = response.json()
+        except ValueError as exc:
+            raise TTSError("MiniMax TTS 返回了无法解析的 JSON") from exc
+
+        if not isinstance(body, dict):
+            raise TTSError("MiniMax TTS 返回格式异常")
+
+        base_resp = body.get("base_resp") if isinstance(body.get("base_resp"), dict) else {}
+        if int(base_resp.get("status_code") or 0) != 0:
+            raise TTSError(f"MiniMax TTS 合成失败：{base_resp.get('status_msg') or body}")
+
+        data = body.get("data") if isinstance(body.get("data"), dict) else {}
+        audio_hex = clean_optional_text(data.get("audio"))
+        if not audio_hex:
+            raise TTSError("MiniMax TTS 返回空音频数据")
+        try:
+            return bytes.fromhex(audio_hex)
+        except ValueError as exc:
+            raise TTSError("MiniMax TTS 返回的音频数据不是合法 hex") from exc
+
+    def clone_voice(self, sample_dir: Optional[str] = None, voice_name: Optional[str] = None) -> str:
+        """使用 MiniMax 文件上传 + 声音克隆流程返回 voice_id。"""
+        samples_path = self.resolve_sample_dir(sample_dir)
+        sample_files = collect_audio_files(samples_path)
+        sample_file = choose_largest_audio(sample_files)
+        requested_voice_id = safe_identifier(
+            clean_optional_text(voice_name)
+            or clean_optional_text(self.config.get("voice_id"))
+            or clean_optional_text(self.config.get("voice_name"))
+            or f"relic-{self.slug}-{uuid.uuid4().hex[:8]}",
+            fallback=f"relic-{uuid.uuid4().hex[:8]}",
+        )
+
+        if self.dry_run:
+            self.voice_id = requested_voice_id
+            return requested_voice_id
+
+        with sample_file.open("rb") as handle:
+            upload_response = self._post_multipart(
+                self.file_upload_url,
+                headers=self._headers(),
+                data={"purpose": "voice_clone"},
+                files=[("file", (sample_file.name, handle, guess_mime_type(sample_file)))],
+                provider="MiniMax 文件上传",
+                timeout=max(self.timeout, 180),
+            )
+
+        try:
+            upload_body = upload_response.json()
+        except ValueError as exc:
+            raise TTSError("MiniMax 文件上传返回了无法解析的 JSON") from exc
+
+        if not isinstance(upload_body, dict):
+            raise TTSError("MiniMax 文件上传返回格式异常")
+
+        upload_base_resp = upload_body.get("base_resp") if isinstance(upload_body.get("base_resp"), dict) else {}
+        if int(upload_base_resp.get("status_code") or 0) != 0:
+            raise TTSError(f"MiniMax 文件上传失败：{upload_base_resp.get('status_msg') or upload_body}")
+
+        file_info = upload_body.get("file") if isinstance(upload_body.get("file"), dict) else {}
+        file_id = clean_optional_text(file_info.get("file_id"))
+        if not file_id:
+            raise TTSError(f"MiniMax 文件上传未返回 file_id：{upload_body}")
+
+        response = self._post_json(
+            self.clone_url,
+            headers={**self._headers(), "Content-Type": "application/json"},
+            payload={
+                "file_id": file_id,
+                "voice_id": requested_voice_id,
+            },
+            provider="MiniMax 声音克隆",
+            timeout=max(self.timeout, 180),
+        )
+
+        try:
+            body = response.json()
+        except ValueError as exc:
+            raise TTSError("MiniMax 声音克隆返回了无法解析的 JSON") from exc
+
+        if not isinstance(body, dict):
+            raise TTSError("MiniMax 声音克隆返回格式异常")
+
+        base_resp = body.get("base_resp") if isinstance(body.get("base_resp"), dict) else {}
+        if int(base_resp.get("status_code") or 0) != 0:
+            raise TTSError(f"MiniMax 声音克隆失败：{base_resp.get('status_msg') or body}")
+
+        voice_id = clean_optional_text(body.get("voice_id"))
+        if not voice_id:
+            data = body.get("data") if isinstance(body.get("data"), dict) else {}
+            voice_id = clean_optional_text(data.get("voice_id"))
+        voice_id = voice_id or requested_voice_id
+        self.voice_id = voice_id
+        return voice_id
 
 
 class ElevenLabsTTS(TTSService):
@@ -1007,7 +1219,7 @@ def create_argument_parser() -> argparse.ArgumentParser:
     """构建 CLI 参数解析器。"""
     parser = argparse.ArgumentParser(description="relic.skill TTS 服务脚本")
     parser.add_argument("--relic", help="Relic 目录路径，读取 manifest.json 中的 tts_config")
-    parser.add_argument("--provider", choices=["doubao", "elevenlabs", "openai"], help="TTS provider；若不传则尝试从 Relic 配置读取")
+    parser.add_argument("--provider", choices=["doubao", "elevenlabs", "minimax", "openai"], help="TTS provider；若不传则尝试从 Relic 配置读取")
     parser.add_argument("--voice-id", help="服务商 voice_id；不传则优先读取 manifest.json，再使用 provider 默认值")
     parser.add_argument("--text", help="要合成的文本")
     parser.add_argument("--output", help="输出文件路径，后缀决定输出格式；默认自动生成 .mp3")
@@ -1032,8 +1244,10 @@ def validate_args(args: argparse.Namespace) -> None:
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """CLI 入口。"""
     configure_utf8_stdout()
+    configure_logging()
     parser = create_argument_parser()
     args = parser.parse_args(argv)
+    service: Optional[TTSService] = None
 
     try:
         validate_args(args)
@@ -1069,7 +1283,27 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print(json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
 
-    except (FileNotFoundError, PermissionError, ValueError, TTSConfigError, TTSError, OSError, json.JSONDecodeError) as exc:
+    except TTSConfigError as exc:
+        if is_missing_credential_error(exc):
+            LOGGER.warning("%s", exc)
+            payload: Dict[str, Any] = {
+                "ok": False,
+                "provider": service.provider if service is not None else clean_optional_text(args.provider),
+                "dry_run": bool(args.dry_run),
+                "reason": str(exc),
+            }
+            if args.clone_voice:
+                payload["voice_id"] = None
+                payload["sample_dir"] = args.sample_dir
+            else:
+                payload["voice_id"] = clean_optional_text(args.voice_id) or (service.voice_id if service is not None else None)
+                payload["output_path"] = None
+                payload["emotion"] = clean_optional_text(args.emotion) or (service.emotion_for_mode(args.mode) if service is not None else None)
+            print(json.dumps(payload, ensure_ascii=False, indent=2))
+            return 0
+        print(f"错误: {exc}", file=sys.stderr)
+        return 1
+    except (FileNotFoundError, PermissionError, ValueError, TTSError, OSError, json.JSONDecodeError) as exc:
         print(f"错误: {exc}", file=sys.stderr)
         return 1
 
