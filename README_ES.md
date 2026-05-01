@@ -220,7 +220,7 @@ relic.skill se basa en el estándar abierto SKILL.md y es compatible con cualqui
 En Claude Code / Kiro, solo di:
 
 ```text
-"Ayúdame a forjar un Relic. Quiero volver inmortal a mi abuela"
+"Ayúdame a despertar un Relic. Quiero volver inmortal a mi abuela"
 "Mi gato se fue. Quiero convertirlo en un Relic"
 "Ayúdame a destilar la cultura de nuestro equipo. Estamos a punto de separarnos"
 "Quiero preservar el patrón de la relación entre nosotros"
@@ -228,8 +228,8 @@ En Claude Code / Kiro, solo di:
 ### Comandos Slash
 
 ```text
-/relic              — Inicia el flujo de forja de Relic
-/relic-forge        — Entra directamente en el Soul Forge
+/relic              — Inicia el flujo de despertar de Relic
+/relic-forge        — Entra directamente en el Soul Awakener
 /relic-talk         — Habla con un Relic existente
 /relic-shield       — Protege tu Relic
 ```
@@ -311,7 +311,7 @@ relic.skill/
 ├── SKILL.md                    # Entrada principal — Relic Engine
 ├── FOR_AI.md                   # Entrada de un paso para AI
 │
-├── soul-forge/                 # 🔥 Soul Forge — extrae almas de los datos
+├── soul-forge/                 # 🔥 Soul Awakener — despierta almas de los datos
 │   ├── SKILL.md
 │   ├── dimensions/             # Marco de extracción en cuatro dimensiones
 │   │   ├── cognition.md        #   Patrones de cognición
@@ -322,7 +322,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   Historial de chat
 │   │   ├── voice-collector.md  #   Voz / audio
 │   │   ├── photo-collector.md  #   Fotos / video
-│   │   └── live-collector.md   #   Conversación en vivo (forja en vivo)
+│   │   └── live-collector.md   #   Conversación en vivo (despertar en vivo)
 │   └── references/
 │       ├── evidence-levels.md  #   Estándar de niveles de evidencia
 │       └── conflict-resolution.md  # Estrategia de resolución de conflictos

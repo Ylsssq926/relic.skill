@@ -19,7 +19,7 @@ const tw: Dictionary = {
     badge: "relic.skill · 數位永生引擎",
     title: "給靈魂開個 GitHub",
     subtitle: "萬物皆可 Relic。不是冰冷的檔案庫，而是會回應你的熟悉存在。",
-    body: "把你在乎的人、貓、關係、團隊、地方和時刻——從散落的數據碎片裡整理出來，鍛造成一個能聊天、能回應、能持續進化的數位靈魂。",
+    body: "把你在乎的人、貓、關係、團隊、地方和時刻——從散落的數據碎片裡整理出來，喚醒成一個能聊天、能回應、能持續進化的數位靈魂。",
     hint: "可能是過年問你「吃餃子了沒」的奶奶，也可能是凌晨三點突然開始跑酷的貓。",
     tryExample: "體驗示例 Relic",
     docs: "文件",
@@ -46,9 +46,9 @@ const tw: Dictionary = {
   },
   highlights: {
     title: "為什麼選擇 relic.skill",
-    subtitle: "不是又一個聊天機器人框架——而是完整的數位靈魂鍛造系統",
+    subtitle: "不是又一個聊天機器人框架——而是完整的數位靈魂喚醒系統",
     items: {
-      forge: { title: "靈魂鍛造爐", desc: "從聊天記錄、照片、文字中蒸餾出四維靈魂——不是簡單複製，而是理解本質" },
+      forge: { title: "靈魂喚醒室", desc: "從聊天記錄、照片、文字中蒸餾出四維靈魂——不是簡單複製，而是理解本質" },
       engine: { title: "靈魂引擎", desc: "讓數位靈魂能對話、能主動關心、能隨時間成長" },
       shield: { title: "靈魂護盾", desc: "倫理防護、隱私保護、身份驗證——確保靈魂不被濫用" },
       localFirst: { title: "本地優先", desc: "重要素材優先留在自己手裡，再決定如何整理、匯出和保存。" },
@@ -68,6 +68,7 @@ const tw: Dictionary = {
     },
     tryExample: "立即體驗示例",
     readDocs: "閱讀文件",
+    startForge: "喚醒ta",
     githubRepo: "GitHub 儲存庫",
   },
   templates: {
@@ -266,7 +267,7 @@ const tw: Dictionary = {
     place: "讓有記憶的地方繼續回應你",
     moment: "把重要瞬間做成可再次抵達的入口",
     "public-figure": "用公開資料提煉可對話的認知框架",
-    expert: "知識不該隨人走，把經驗鍛造成可對話的數位身份",
+    expert: "知識不該隨人走，把經驗喚醒成可對話的數位身份",
     "feishu-cli": "用飛書 CLI 蒸餾協作記憶，讓那些一起扛過的夜繼續發光",
   },
   chat: {

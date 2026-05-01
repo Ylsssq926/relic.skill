@@ -85,6 +85,27 @@
     "use_scope": "educational-demo",
     "commercial_use": false
   },
+  "media": {
+    "tts": {
+      "enabled": true,
+      "provider": "minimax",
+      "voice_id": "",
+      "emotion_mapping": {
+        "daily": "calm",
+        "urgent": "concerned",
+        "celebration": "happy",
+        "retrospective": "gentle"
+      },
+      "note": "团队成员各有声音，可以为不同角色配置不同 voice_id"
+    },
+    "image": {
+      "enabled": true,
+      "provider": "seedream",
+      "style": "modern_illustration",
+      "cover_prompt": "创业团队办公室,飞书界面,海底捞外卖盒,深夜加班氛围,现代插画风格",
+      "note": "替换 provider 为 openai 或 gemini 如果没有 Seedream API Key"
+    }
+  },
   "fingerprint": "relic:sha256:4f8b16a198e0fac609c9b1bc945d2ce9e42232bd0ee44e4f108a7bb6ba3d40a8",
   "created_at": "2026-04-09",
   "files": [

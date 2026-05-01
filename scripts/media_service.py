@@ -211,7 +211,7 @@ class MediaService:
 def create_argument_parser() -> argparse.ArgumentParser:
     """构建 CLI 参数解析器。"""
     parser = argparse.ArgumentParser(description="relic.skill 媒体服务统一层")
-    parser.add_argument("--relic", required=True, help="Relic 目录路径，读取 manifest.json 中的 tts_config / image_config")
+    parser.add_argument("--relic", required=True, help="Relic 目录路径，读取 manifest.json 中的 media.tts / media.image（兼容 tts_config / image_config）")
     parser.add_argument("--text", help="要合成的文本")
     parser.add_argument("--mode", default="daily", help="语音模式名；会尝试映射到情绪，例如 holiday / late_night")
     parser.add_argument("--avatar", action="store_true", help="生成头像图")

@@ -17,15 +17,15 @@
 - 团队/星火 → examples/team-startup-demo/
 
 读取该目录的 SKILL.md、personality.md、interaction.md、memory.md，然后读取 soul-engine/SKILL.md、soul-engine/interaction.md、soul-engine/memory-system.md 启动交互。
-如果目录或文件不存在，告知用户该示例尚未创建，并询问是否体验其他可用示例或锻造新 Relic。
+如果目录或文件不存在，告知用户该示例尚未创建，并询问是否体验其他可用示例或唤醒新 Relic。
 不需要用户提供任何数据，直接开始对话。
 ```
 
-### 1. 用户想锻造新 Relic
+### 1. 用户想唤醒新 Relic
 
 ```text
-请读取 soul-forge/SKILL.md，然后按流程引导用户完成锻造。
-锻造前必须先读取 soul-shield/consent-protocol.md 完成授权。
+请读取 soul-forge/SKILL.md,然后按流程引导用户完成唤醒。
+唤醒前必须先读取 soul-shield/consent-protocol.md 完成授权。
 根据蒸馏对象类型，从 templates/ 选择合适的模板。
 ```
 
@@ -72,7 +72,7 @@
 ```text
 relic.skill/
 ├── SKILL.md              ← 主入口（你现在应该先读这个）
-├── soul-forge/           ← 灵魂锻造炉（蒸馏引擎）
+├── soul-forge/           ← 灵魂唤醒室（蒸馏引擎）
 ├── soul-engine/          ← 灵魂引擎（交互系统）
 ├── soul-shield/          ← 灵魂护盾（保护与伦理）
 ├── templates/            ← 万物永生模板 x9

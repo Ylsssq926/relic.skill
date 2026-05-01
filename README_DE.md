@@ -229,7 +229,7 @@ In Claude Code / Kiro einfach sagen:
 
 ```text
 /relic              — Den Relic-Schmiedeablauf starten
-/relic-forge        — Direkt in die Soul Forge springen
+/relic-forge        — Direkt in die Soul Awakener springen
 /relic-talk         — Mit einem bestehenden Relic sprechen
 /relic-shield       — Dein Relic schützen
 ```
@@ -311,7 +311,7 @@ relic.skill/
 ├── SKILL.md                    # Haupteinstieg — Relic Engine
 ├── FOR_AI.md                   # Ein-Klick-Einstieg für AI
 │
-├── soul-forge/                 # 🔥 Soul Forge — Seelen aus Daten extrahieren
+├── soul-forge/                 # 🔥 Soul Awakener — Seelen aus Daten erwecken
 │   ├── SKILL.md
 │   ├── dimensions/             # Vierdimensionales Extraktions-Framework
 │   │   ├── cognition.md        #   Kognitionsmuster
@@ -322,7 +322,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   Chatverläufe
 │   │   ├── voice-collector.md  #   Stimme / Audio
 │   │   ├── photo-collector.md  #   Fotos / Video
-│   │   └── live-collector.md   #   Live-Gespräch (Live-Schmiedung)
+│   │   └── live-collector.md   #   Live-Gespräch (Live-Erweckung)
 │   └── references/
 │       ├── evidence-levels.md  #   Standard für Evidenzstufen
 │       └── conflict-resolution.md  # Strategie zur Behandlung von Widersprüchen

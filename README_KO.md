@@ -227,8 +227,8 @@ Claude Code / Kiro에서 바로 이렇게 말하세요:
 ### Slash 명령어
 
 ```text
-/relic              — Relic 단련 플로우 시작
-/relic-forge        — 곧바로 영혼 단련로로 들어가기
+/relic              — Relic 각성 플로우 시작
+/relic-forge        — 곧바로 영혼 각성소로 들어가기
 /relic-talk         — 이미 있는 Relic과 대화하기
 /relic-shield       — 당신의 Relic 지키기
 ```
@@ -324,7 +324,7 @@ relic.skill/
 ├── SKILL.md                    # 메인 엔트리 — Relic 엔진
 ├── FOR_AI.md                   # AI 원클릭 엔트리
 │
-├── soul-forge/                 # 🔥 영혼 단련로 — 데이터에서 영혼을 추출
+├── soul-forge/                 # 🔥 영혼 각성소 — 데이터에서 영혼을 깨우기
 │   ├── SKILL.md
 │   ├── dimensions/             # 4차원 추출 프레임워크
 │   │   ├── cognition.md        #   인지 패턴
@@ -335,7 +335,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   대화 기록
 │   │   ├── voice-collector.md  #   음성/오디오
 │   │   ├── photo-collector.md  #   사진/영상
-│   │   └── live-collector.md   #   실시간 대화(생체 단련)
+│   │   └── live-collector.md   #   실시간 대화(생체 각성)
 │   └── references/
 │       ├── evidence-levels.md  #   증거 레벨 기준
 │       └── conflict-resolution.md  # 모순 처리 전략

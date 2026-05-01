@@ -1,0 +1,25 @@
+{
+  "enabled": true,
+  "user_city": "北京",
+  "holidays": {
+    "enabled": true,
+    "list": ["spring_festival", "mid_autumn", "birthday:1990-05-15"]
+  },
+  "anniversaries": {
+    "enabled": true,
+    "dates": [
+      {"date": "2025-02-14", "label": "咪咪离开的日子", "type": "bittersweet"},
+      {"date": "2013-06-01", "label": "第一次把咪咪带回家", "type": "happy"},
+      {"date": "2020-03-20", "label": "咪咪第一次趴键盘", "type": "happy"}
+    ]
+  },
+  "weather": {
+    "enabled": false
+  },
+  "random_miss": {
+    "enabled": true,
+    "min_interval_days": 7
+  },
+  "quiet_hours": {"start": "23:00", "end": "06:00"},
+  "global_max_per_week": 3
+}

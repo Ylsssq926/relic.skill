@@ -39,7 +39,7 @@ except ImportError:  # pragma: no cover - direct script execution
     from manifest_schema import migrate_manifest
 
 DEFAULT_OUTPUT_DIR = "exes"
-PROJECT_VERSION = "1.4.0"
+PROJECT_VERSION = "1.4.1"
 DEFAULT_PROACTIVE_CONFIG_FILENAME = "proactive_config.json"
 
 TEMPLATE_CONFIG: Dict[str, Dict[str, Any]] = {

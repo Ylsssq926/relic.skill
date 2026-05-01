@@ -207,7 +207,8 @@ class TelegramBot:
         try:
             profile = self.engine.load_relic(normalized)
             return profile.slug
-        except Exception:
+        except (ConfigurationError, OSError, ValueError, TypeError):
+            LOGGER.debug("解析 Relic 目标失败：%s", target, exc_info=True)
             return None
 
     def _get_relic_dir(self, relic_slug: str) -> str:
@@ -471,47 +472,74 @@ class TelegramBot:
     # 响应执行 / 发送消息
     # ------------------------------------------------------------------
     def _execute_plan(self, chat_id: str, plan: ResponsePlan) -> None:
-        """依次执行引擎返回的消息计划。"""
+        """兼容旧调用：解析 relic_dir 后执行完整 ResponsePlan。"""
+        relic_slug = plan.relic_slug or self.default_relic_slug
+        relic_dir = self._get_relic_dir(relic_slug) if relic_slug else str(self.base_relic_dir)
+        self._execute_response_plan(plan=plan, chat_id=chat_id, relic_dir=relic_dir)
+
+    def _execute_response_plan(self, plan: ResponsePlan, chat_id: str, relic_dir: str) -> None:
+        """执行 ResponsePlan，补齐 TTS / 图片生成并发送到 Telegram。"""
+        media: Optional[MediaService] = None
+
+        def ensure_media_service() -> MediaService:
+            nonlocal media
+            if media is None:
+                media = MediaService.from_relic(relic_dir)
+                apply_dry_run(media, self.config.dry_run)
+            return media
+
         for msg in plan.messages:
-            self._execute_message(chat_id, msg, plan.mode, plan.relic_slug)
+            try:
+                if msg.kind == "text":
+                    self._send_text(chat_id, msg.text)
+                    continue
 
-    def _execute_message(self, chat_id: str, msg: OutgoingMessage, mode: str, relic_slug: str) -> None:
-        """把 OutgoingMessage 转成 Telegram API 调用。"""
-        try:
-            if msg.kind == "text":
-                self._send_text(chat_id, msg.text)
-                return
+                if msg.kind == "audio":
+                    media_path = msg.media_path
+                    if not media_path and msg.text:
+                        try:
+                            media_service = ensure_media_service()
+                            if media_service.has_tts:
+                                media_path = media_service.synthesize_speech(msg.text, mode=plan.mode) or ""
+                        except Exception as exc:
+                            LOGGER.warning("Telegram TTS 生成失败，降级为文字：%s", exc)
+                    if media_path:
+                        result = self._send_voice(chat_id, media_path)
+                        if result.get("ok"):
+                            continue
+                    if msg.text:
+                        self._send_text(chat_id, msg.text)
+                    continue
 
-            if msg.kind == "audio":
-                media_path = msg.media_path
-                if not media_path:
-                    media = MediaService.from_relic(self._get_relic_dir(relic_slug))
-                    apply_dry_run(media, self.config.dry_run)
-                    if media.has_tts:
-                        media_path = media.synthesize_speech(msg.text, mode=mode) or ""
-                if media_path:
-                    result = self._send_voice(chat_id, media_path)
-                    if result.get("ok"):
-                        return
+                if msg.kind == "image":
+                    image_path = msg.media_path
+                    if not image_path:
+                        try:
+                            media_service = ensure_media_service()
+                            if media_service.has_image:
+                                image_path = media_service.generate_avatar() or ""
+                        except Exception as exc:
+                            LOGGER.warning("Telegram 图像生成失败：%s", exc)
+                    if image_path:
+                        result = self._send_photo(chat_id, image_path, caption=msg.text)
+                        if result.get("ok"):
+                            continue
+                    if msg.text:
+                        self._send_text(chat_id, msg.text)
+                    continue
+
+                if msg.kind == "card":
+                    card_text = "\n\n".join(part for part in [msg.title, msg.text] if part).strip()
+                    if card_text:
+                        self._send_text(chat_id, card_text)
+                    continue
+
                 if msg.text:
                     self._send_text(chat_id, msg.text)
-                return
-
-            if msg.kind == "image":
-                if msg.media_path:
-                    result = self._send_photo(chat_id, msg.media_path, caption=msg.text)
-                    if result.get("ok"):
-                        return
+            except Exception:
+                LOGGER.exception("执行 Telegram 出站消息失败：kind=%s relic_dir=%s", msg.kind, relic_dir)
                 if msg.text:
                     self._send_text(chat_id, msg.text)
-                return
-
-            if msg.text:
-                self._send_text(chat_id, msg.text)
-        except Exception:
-            LOGGER.exception("执行 Telegram 出站消息失败：kind=%s relic=%s", msg.kind, relic_slug)
-            if msg.text:
-                self._send_text(chat_id, msg.text)
 
     def _send_text(self, chat_id: str, text: str) -> Dict[str, Any]:
         """通过 Telegram sendMessage 发送文本消息。"""

@@ -1183,7 +1183,10 @@ def build_service_from_args(args: argparse.Namespace) -> TTSService:
     if args.relic:
         relic_path = ensure_relic_dir(args.relic)
         manifest = load_relic_manifest(relic_path)
-        raw_tts = manifest.get("tts_config")
+        media_config = manifest.get("media") if isinstance(manifest.get("media"), dict) else {}
+        raw_tts = media_config.get("tts")
+        if raw_tts is None:
+            raw_tts = manifest.get("tts_config")
         if isinstance(raw_tts, dict):
             merged_config.update(raw_tts)
         merged_config["_relic_slug"] = clean_optional_text(manifest.get("slug")) or relic_path.name
@@ -1195,7 +1198,7 @@ def build_service_from_args(args: argparse.Namespace) -> TTSService:
 
     provider = clean_optional_text(args.provider) or clean_optional_text(merged_config.get("provider"))
     if not provider:
-        raise TTSConfigError("请通过 --provider 指定服务商，或在 Relic 的 manifest.json 中配置 tts_config.provider")
+        raise TTSConfigError("请通过 --provider 指定服务商，或在 Relic 的 manifest.json 中配置 media.tts.provider / tts_config.provider")
 
     if args.voice_id:
         merged_config["voice_id"] = args.voice_id
@@ -1218,7 +1221,7 @@ def build_service_from_args(args: argparse.Namespace) -> TTSService:
 def create_argument_parser() -> argparse.ArgumentParser:
     """构建 CLI 参数解析器。"""
     parser = argparse.ArgumentParser(description="relic.skill TTS 服务脚本")
-    parser.add_argument("--relic", help="Relic 目录路径，读取 manifest.json 中的 tts_config")
+    parser.add_argument("--relic", help="Relic 目录路径，读取 manifest.json 中的 media.tts / tts_config")
     parser.add_argument("--provider", choices=["doubao", "elevenlabs", "minimax", "openai"], help="TTS provider；若不传则尝试从 Relic 配置读取")
     parser.add_argument("--voice-id", help="服务商 voice_id；不传则优先读取 manifest.json，再使用 provider 默认值")
     parser.add_argument("--text", help="要合成的文本")

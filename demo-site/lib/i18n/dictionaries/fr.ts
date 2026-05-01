@@ -68,6 +68,7 @@ const fr: Dictionary = {
     },
     tryExample: "Essayer les Exemples Maintenant",
     readDocs: "Lire la Documentation",
+    startForge: "Réveiller",
     githubRepo: "Dépôt GitHub",
   },
   templates: {

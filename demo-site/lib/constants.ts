@@ -83,7 +83,7 @@ export const RELIC_TYPE_OPTIONS: readonly RelicTypeOption[] = [
     value: "expert",
     label: "业务专家",
     emoji: "💼",
-    description: "知识不该随人走，把经验锻造成可对话的数字身份。",
+    description: "知识不该随人走，把经验唤醒成可对话的数字身份。",
     accentFrom: "#10b981",
     accentTo: "#3b82f6",
   },

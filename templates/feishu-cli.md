@@ -118,12 +118,12 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 
 ## 业务专家场景
 
-除了团队协作记忆，飞书 CLI 还支持**业务专家数字身份锻造**——把离职大佬、金牌客服、顶级销售的专业判断蒸馏成可对话的赛博导师。
+除了团队协作记忆，飞书 CLI 还支持**业务专家数字身份唤醒**——把离职大佬、金牌客服、顶级销售的专业判断蒸馏成可对话的赛博导师。
 
-详细用法见 [业务专家模板](expert.md) 和一键锻造脚本 `scripts/lark_expert_forge.py`。
+详细用法见 [业务专家模板](expert.md) 和一键唤醒脚本 `scripts/lark_expert_forge.py`。
 
 ```bash
-# 全链路锻造：授权 → 采集 → 结构化 → 主动关怀 → 生成 Relic
+# 全链路唤醒：授权 → 采集 → 结构化 → 主动关怀 → 生成 Relic
 python scripts/lark_expert_forge.py --expert "张工" --email "zhang@company.com" --chat-id "oc_xxx" --dry-run
 ```
 

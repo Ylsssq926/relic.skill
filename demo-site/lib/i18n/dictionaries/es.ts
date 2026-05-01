@@ -68,6 +68,7 @@ const es: Dictionary = {
     },
     tryExample: "Probar Ejemplos Ahora",
     readDocs: "Leer la Documentación",
+    startForge: "Despertar",
     githubRepo: "Repositorio GitHub",
   },
   templates: {

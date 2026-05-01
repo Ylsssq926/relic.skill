@@ -17,15 +17,16 @@ Relic 风格的消息模板，并以 JSON 输出。
     python scripts/proactive_scheduler.py --relic examples/grandma-demo --config examples/grandma-demo/proactive_config.json
     python scripts/proactive_scheduler.py --relic examples/grandma-demo --dry-run
     python scripts/proactive_scheduler.py --relic examples/grandma-demo --type holiday
+    python scripts/proactive_scheduler.py --relic examples/grandma-demo --execute
 
 输出说明：
 - 始终输出 JSON。
 - 命中触发时，默认输出：`type / trigger / message / timestamp / tts`。
-- `tts` 字段仅补充语音相关元数据，不改变原有触发逻辑。
+- `tts` 字段默认补充语音相关元数据；加上 `--execute` 后会额外写入 `audio_path` / `error`。
 - `--dry-run` 时仅预览是否应触发以及会发送什么消息，不更新 state。
 
 注意：
-- 仅依赖 Python 标准库。
+- 默认仅依赖 Python 标准库；当使用 `--execute` 并触发 TTS 时，会复用 `scripts/tts_service.py` 的依赖与配置。
 - 天气能力当前仅保留接口；若启用但缺少 API key，会输出提示信息。
 - 农历节日通过内置农历换算逻辑支持 1900-2099 年。
 """
@@ -261,12 +262,19 @@ def resolve_tts_emotion(decision: Decision, emotion_mapping: Dict[str, Any]) -> 
 
 def build_tts_payload(manifest: Dict[str, Any], decision: Decision) -> Dict[str, Any]:
     """根据 manifest + 调度结果生成 TTS 输出字段。"""
-    raw_tts = manifest.get("tts_config") if isinstance(manifest.get("tts_config"), dict) else {}
+    media_config = manifest.get("media") if isinstance(manifest.get("media"), dict) else {}
+    raw_tts = media_config.get("tts")
+    if raw_tts is None:
+        raw_tts = manifest.get("tts_config")
+    raw_tts = raw_tts if isinstance(raw_tts, dict) else {}
+
     provider = str(raw_tts.get("provider") or "").strip().lower() or None
     raw_mapping = raw_tts.get("emotion_mapping") if isinstance(raw_tts.get("emotion_mapping"), dict) else {}
     emotion_mapping = {str(key).strip().lower(): value for key, value in raw_mapping.items()}
 
-    enabled = bool(provider and decision.should_trigger and decision.message)
+    enabled_value = raw_tts.get("enabled")
+    config_enabled = enabled_value if isinstance(enabled_value, bool) else True
+    enabled = bool(config_enabled and provider and decision.should_trigger and decision.message)
     emotion = resolve_tts_emotion(decision, emotion_mapping) if decision.should_trigger and decision.message else None
     return {
         "enabled": enabled,
@@ -274,6 +282,87 @@ def build_tts_payload(manifest: Dict[str, Any], decision: Decision) -> Dict[str,
         "emotion": emotion,
         "provider": provider,
     }
+
+
+def resolve_image_scene_hint(decision: Decision) -> Optional[str]:
+    """根据调度结果解析主动图片场景提示。"""
+    explicit_scene_hint = str(decision.details.get("scene_hint") or "").strip()
+    if explicit_scene_hint:
+        return explicit_scene_hint
+
+    trigger_type = str(decision.trigger_type or "").strip().lower()
+    if trigger_type in {HOLIDAY_TYPE, ANNIVERSARY_TYPE}:
+        label = str(decision.details.get("label") or "").strip()
+        if label:
+            return label
+    return None
+
+
+def build_image_payload(manifest: Dict[str, Any], decision: Decision) -> Dict[str, Any]:
+    """根据 manifest + 调度结果生成图片输出字段。"""
+    media_config = manifest.get("media") if isinstance(manifest.get("media"), dict) else {}
+    raw_image = media_config.get("image")
+    if raw_image is None:
+        raw_image = manifest.get("image_config")
+    raw_image = raw_image if isinstance(raw_image, dict) else {}
+
+    provider = str(raw_image.get("provider") or "").strip().lower() or None
+    enabled_value = raw_image.get("enabled")
+    config_enabled = enabled_value if isinstance(enabled_value, bool) else True
+    scene_hint = resolve_image_scene_hint(decision)
+
+    prompt = ""
+    image_type = "cover"
+    for candidate_type, value in (
+        ("cover", raw_image.get("cover_prompt")),
+        ("cover", raw_image.get("prompt")),
+        ("cover", raw_image.get("image_prompt")),
+        ("avatar", raw_image.get("avatar_prompt")),
+    ):
+        candidate_prompt = str(value or "").strip()
+        if candidate_prompt:
+            image_type = candidate_type
+            prompt = candidate_prompt
+            break
+
+    enabled = bool(config_enabled and provider and decision.should_trigger and decision.message and prompt)
+    return {
+        "enabled": enabled,
+        "provider": provider,
+        "type": image_type,
+        "prompt": prompt or None,
+        "image_prompt": prompt or None,
+        "scene_hint": scene_hint,
+    }
+
+
+def maybe_execute_tts(relic_dir: Path, payload: Dict[str, Any], *, dry_run: bool = False) -> Dict[str, Any]:
+    """当 payload 中声明启用 TTS 时，实际调用 tts_service 生成音频路径。"""
+    tts_payload = payload.get("tts")
+    if not isinstance(tts_payload, dict) or not tts_payload.get("enabled"):
+        return payload
+
+    text = str(tts_payload.get("text") or payload.get("message") or "").strip()
+    if not text:
+        tts_payload["error"] = "missing_tts_text"
+        return payload
+
+    try:
+        try:  # pragma: no cover - 兼容包导入 / 脚本直跑
+            from scripts.tts_service import TTSService
+        except ImportError:  # pragma: no cover - direct script execution
+            from tts_service import TTSService  # type: ignore[no-redef]
+
+        tts = TTSService.from_relic(str(relic_dir))
+        if tts is None:
+            raise RuntimeError("manifest 未配置可用的 TTS 服务")
+        tts.dry_run = bool(dry_run)
+        emotion = str(tts_payload.get("emotion") or "").strip() or None
+        audio_path = tts.synthesize(text=text, emotion=emotion)
+        tts_payload["audio_path"] = audio_path
+    except Exception as exc:  # pragma: no cover - 外部依赖与网络调用
+        tts_payload["error"] = str(exc)
+    return payload
 
 
 def configure_utf8_stdout() -> None:
@@ -1538,6 +1627,11 @@ def parse_args() -> argparse.Namespace:
         choices=SUPPORTED_TYPES,
         help="只检查指定类型（holiday/weather/anniversary/random）",
     )
+    parser.add_argument(
+        "--execute",
+        action="store_true",
+        help="在命中触发且已配置 TTS 时，额外生成语音文件并把 audio_path 写入输出 JSON",
+    )
     return parser.parse_args()
 
 
@@ -1587,6 +1681,9 @@ def main() -> None:
 
         payload = decision.to_payload(args.dry_run)
         payload["tts"] = build_tts_payload(manifest, decision)
+        payload["image"] = build_image_payload(manifest, decision)
+        if args.execute and payload.get("tts", {}).get("enabled"):
+            payload = maybe_execute_tts(relic_dir, payload, dry_run=bool(args.dry_run))
         print(json.dumps(payload, ensure_ascii=False, indent=2))
 
     except (FileNotFoundError, ConfigError, json.JSONDecodeError, OSError, ValueError) as exc:

@@ -35,7 +35,7 @@ const ko: Dictionary = {
     badge: "오픈소스 · 로컬 퍼스트 · 디지털 영생", title: "진짜 죽음은, 당신을 기억하는 마지막 사람이 잊었을 때.",
     subtitle: "우리가 할 수 있는 건, 누군가를 위해 영원을 선언하는 게 아니야. 시간이 모든 것을 평평하게 만들기 전에, 왔고, 사랑했고, 울림을 남긴 존재를 위해, 조용히 불빛을 켜두는 것.",
     tags: { ethics: "윤리 우선", docs: "완전한 문서", community: "커뮤니티 주도", evolution: "항상 진화" },
-    tryExample: "예제 지금 체험", readDocs: "문서 읽기", githubRepo: "GitHub 리포",
+    tryExample: "예제 지금 체험", readDocs: "문서 읽기",     startForge: "깨우기", githubRepo: "GitHub 리포",
   },
   templates: { label: "템플릿 체계", title: "모든 것에 Relic을", description: "사람, 고양이, 팀, 장소, 순간, 관계 — 다른 존재를, 다른 방식으로 기록하고 응답하다." },
   demo: {

@@ -89,6 +89,28 @@
     "use_scope": "personal",
     "commercial_use": false
   },
+  "media": {
+    "tts": {
+      "enabled": true,
+      "provider": "minimax",
+      "voice_id": "",
+      "emotion_mapping": {
+        "daily": "calm",
+        "affectionate": "gentle",
+        "playful": "happy",
+        "missing": "gentle"
+      },
+      "note": "替换 voice_id 为你克隆的猫叫声 ID，或使用 MiniMax 内置音色"
+    },
+    "image": {
+      "enabled": true,
+      "provider": "seedream",
+      "style": "soft_illustration",
+      "avatar_prompt": "14斤橘猫,圆脸,琥珀色眼睛,慵懒姿态,温暖光线,中式插画风格",
+      "cover_prompt": "橘猫趴在键盘上,午后阳光,温馨家居氛围",
+      "note": "替换 provider 为 openai 或 gemini 如果没有 Seedream API Key"
+    }
+  },
   "fingerprint": "relic:sha256:a5a815728179985669a4f303b828c8225157bc21a328590312800cd769f42695",
   "created_at": "2026-04-09",
   "files": [

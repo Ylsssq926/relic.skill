@@ -51,7 +51,7 @@
 
 relic.skill est un moteur d'immortalité pour toute chose.
 
-Il peut forger tout ce qui vous importe — une personne, un chat, une relation, une équipe, un lieu, un instant — en une âme numérique interactive à partir de fragments de données éparpillés.
+Il peut éveiller tout ce qui vous importe — une personne, un chat, une relation, une équipe, un lieu, un instant — en une âme numérique interactive à partir de fragments de données éparpillés.
 
 Ce n'est pas une archive froide. C'est une grand-mère qui, au Nouvel An, vous demande d'elle-même si vous avez mangé des dumplings. C'est un chat qui se met soudain à faire du parkour à trois heures du matin. C'est ce product manager qui revient toujours avec une nouvelle modification de requirements.
 
@@ -220,7 +220,7 @@ relic.skill repose sur le standard ouvert SKILL.md et est compatible avec tout a
 Dans Claude Code / Kiro, dites simplement :
 
 ```text
-"Aide-moi à forger un Relic. Je veux rendre ma grand-mère immortelle"
+"Aide-moi à éveiller un Relic. Je veux rendre ma grand-mère immortelle"
 "Mon chat est parti. Je veux le transformer en Relic"
 "Aide-moi à distiller la culture de notre équipe. On est sur le point de se séparer"
 "Je veux préserver la dynamique de notre relation"
@@ -228,8 +228,8 @@ Dans Claude Code / Kiro, dites simplement :
 ### Commandes Slash
 
 ```text
-/relic              — Démarrer le flux de forge Relic
-/relic-forge        — Entrer directement dans le Soul Forge
+/relic              — Démarrer le flux d'éveil Relic
+/relic-forge        — Entrer directement dans le Soul Awakener
 /relic-talk         — Discuter avec un Relic existant
 /relic-shield       — Protéger votre Relic
 ```
@@ -311,7 +311,7 @@ relic.skill/
 ├── SKILL.md                    # Entrée principale — Relic Engine
 ├── FOR_AI.md                   # Entrée en un clic pour AI
 │
-├── soul-forge/                 # 🔥 Soul Forge — extraire les âmes depuis les données
+├── soul-forge/                 # 🔥 Soul Awakener — éveiller les âmes depuis les données
 │   ├── SKILL.md
 │   ├── dimensions/             # Cadre d'extraction en quatre dimensions
 │   │   ├── cognition.md        #   Schémas de cognition
@@ -322,7 +322,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   Historique de chat
 │   │   ├── voice-collector.md  #   Voix / audio
 │   │   ├── photo-collector.md  #   Photos / vidéo
-│   │   └── live-collector.md   #   Conversation en direct (forge en direct)
+│   │   └── live-collector.md   #   Conversation en direct (éveil en direct)
 │   └── references/
 │       ├── evidence-levels.md  #   Standard de niveaux de preuve
 │       └── conflict-resolution.md  # Stratégie de résolution des contradictions

@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-05-01
+
+### 飞书这边，先稳住了
+
+上一版把 RelicEngine 抽出来，飞书终于不再背着一整颗灵魂跑。
+
+这一版没有急着堆新平台，而是回头把飞书这条路铺平一点：消息进来能验，重复消息能挡，媒体 dry-run 能跑完，多 Relic 切换有测试守着。以后再往飞书里加主动推送、状态命令、暂停恢复，就不是摸黑改了。
+
+### Added
+
+- 🧪 **飞书适配测试** — 新增 `tests/test_feishu_bot.py`，覆盖签名、challenge、富文本解析、群聊 @、重复消息、dry-run、媒体降级、HTTP 错误、token 缓存、多 Relic 切换和 Flask Webhook route
+- 🛠️ **飞书实用命令** — 新增 `/status`、`/reset`、`/pause`、`/resume`，方便在真实聊天里查看状态、清空上下文、临时让机器人安静下来
+- 🧩 **Flask 依赖声明** — `requirements.txt` 补上 Flask，避免飞书 Webhook 服务部署时才发现少依赖
+
+### Changed
+
+- 🔧 **飞书发送计划拆分** — `_execute_response_plan()` 拆成文本/卡片/语音/图片几个小分支，后续改媒体消息不用再碰一大坨逻辑
+- 📦 **飞书 dry-run 更像真链路** — dry-run 上传图片/音频时不再要求本地文件真实存在，可以完整验证“生成路径 → 上传 → 发送”的计划
+- 🧭 **版本号推进到 1.4.1** — `relic_writer.py` 新生成的 Relic 会标记为当前项目版本
+
+### Fixed
+
+- 飞书 v2 事件的 `header.token` 现在也会参与 Verification Token 校验，不再只看顶层 `token`
+- 飞书 API 返回非 0 code 或非 JSON 响应时，会给出明确错误，不再让问题藏在后面
+- Git Bash 会把 `/status` 这类测试参数改成 Windows 路径；本地 `--test-message` 现在会把它认回来
+- 多 Relic 模式下 `/relics` 和 `/relic slug` 已有回归测试保护，避免群里切错人格
+
 ## [1.4.0] - 2026-04-25
 
 ### 灵魂引擎，独立了

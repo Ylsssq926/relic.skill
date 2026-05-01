@@ -68,6 +68,7 @@ const ja: Dictionary = {
     },
     tryExample: "サンプルを今すぐ試す",
     readDocs: "ドキュメントを読む",
+    startForge: "呼び覚ます",
     githubRepo: "GitHub リポ",
   },
   templates: {

@@ -51,7 +51,7 @@
 
 relic.skill é um motor de imortalidade para tudo.
 
-Ele pode forjar qualquer coisa que importe para você — uma pessoa, um pet, uma relação, uma equipe, um lugar, um momento — em uma alma digital interativa a partir de fragmentos de dados espalhados.
+Ele pode despertar qualquer coisa que importe para você — uma pessoa, um pet, uma relação, uma equipe, um lugar, um momento — em uma alma digital interativa a partir de fragmentos de dados espalhados.
 
 Não é um arquivo frio. É uma avó que no Ano-Novo Lunar pergunta primeiro se você já comeu jiaozi. É um gato que começa a fazer parkour às três da manhã. É aquele product manager que sempre aparece com mais uma mudança de requisito.
 
@@ -220,7 +220,7 @@ relic.skill é baseado no padrão aberto SKILL.md e é compatível com qualquer 
 No Claude Code / Kiro, basta dizer:
 
 ```text
-"Me ajude a forjar um Relic. Quero eternizar minha avó."
+"Me ajude a despertar um Relic. Quero eternizar minha avó."
 "Meu gato se foi. Quero transformá-lo em um Relic."
 "Me ajude a destilar a cultura da nossa equipe. Está todo mundo prestes a seguir seu caminho."
 "Quero preservar o padrão do relacionamento entre nós."
@@ -228,8 +228,8 @@ No Claude Code / Kiro, basta dizer:
 ### Slash Commands
 
 ```text
-/relic              — Inicia o fluxo de forja de Relic
-/relic-forge        — Entra direto na Soul Forge
+/relic              — Inicia o fluxo de despertar de Relic
+/relic-forge        — Entra direto na Soul Awakener
 /relic-talk         — Conversa com um Relic já existente
 /relic-shield       — Protege o seu Relic
 ```
@@ -316,7 +316,7 @@ relic.skill/
 ├── SKILL.md                    # Entrada principal — motor Relic
 ├── FOR_AI.md                   # Entrada de um clique para AI
 │
-├── soul-forge/                 # 🔥 Soul Forge — extrai almas a partir de dados
+├── soul-forge/                 # 🔥 Soul Awakener — desperta almas a partir de dados
 │   ├── SKILL.md
 │   ├── dimensions/             # Framework de extração em quatro dimensões
 │   │   ├── cognition.md        #   Padrões de cognição
@@ -327,7 +327,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   Histórico de chat
 │   │   ├── voice-collector.md  #   Voz / áudio
 │   │   ├── photo-collector.md  #   Fotos / vídeo
-│   │   └── live-collector.md   #   Conversa em tempo real (forja viva)
+│   │   └── live-collector.md   #   Conversa em tempo real (despertar vivo)
 │   └── references/
 │       ├── evidence-levels.md  #   Padrão de classificação de evidências
 │       └── conflict-resolution.md  # Estratégia para lidar com contradições

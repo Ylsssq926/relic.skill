@@ -224,16 +224,16 @@ relic.skill is based on the open SKILL.md standard and is compatible with any AI
 In Claude Code / Kiro, just say:
 
 ```text
-"Help me forge a Relic. I want to preserve my grandma."
+"Help me awaken a Relic. I want to preserve my grandma."
 "My cat is gone. I want to turn it into a Relic."
-"Help me distill our team culture. We’re about to go our separate ways."
+"Help me distill our team culture. We're about to go our separate ways."
 "I want to preserve the pattern of the relationship between us."
 ```
 ### Slash Commands
 
 ```text
-/relic              — Start the Relic forging flow
-/relic-forge        — Jump straight into the soul forge
+/relic              — Start the Relic awakening flow
+/relic-forge        — Jump straight into the Soul Awakener
 /relic-talk         — Chat with an existing Relic
 /relic-shield       — Protect your Relic
 ```
@@ -346,7 +346,7 @@ relic.skill/
 ├── SKILL.md                    # Main entry — Relic engine
 ├── FOR_AI.md                   # One-step entry for AI
 │
-├── soul-forge/                 # 🔥 Soul Forge — extract souls from data
+├── soul-forge/                 # 🔥 Soul Awakener — awaken souls from data
 │   ├── SKILL.md
 │   ├── dimensions/             # Four-dimension extraction framework
 │   │   ├── cognition.md        #   Cognition patterns
@@ -357,7 +357,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   Chat history
 │   │   ├── voice-collector.md  #   Voice / audio
 │   │   ├── photo-collector.md  #   Photos / video
-│   │   └── live-collector.md   #   Live conversation (live forging)
+│   │   └── live-collector.md   #   Live conversation (live awakening)
 │   └── references/
 │       ├── evidence-levels.md  #   Evidence grading standard
 │       └── conflict-resolution.md  # Conflict handling strategy

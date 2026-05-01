@@ -68,11 +68,11 @@ export default function HomeCTASection() {
               <ActionLink href="/demo" stretch="always" size="lg">
                 {dict.cta.tryExample}
               </ActionLink>
+              <ActionLink href={`${GITHUB_URL}/blob/main/docs/SETUP.md`} variant="secondary" stretch="always" size="lg">
+                {dict.cta.startForge}
+              </ActionLink>
               <ActionLink href={DOCS_URL} variant="secondary" stretch="always" size="lg">
                 {dict.cta.readDocs}
-              </ActionLink>
-              <ActionLink href={GITHUB_URL} variant="secondary" stretch="always" size="lg">
-                {dict.cta.githubRepo}
               </ActionLink>
             </ActionGroup>
           </div>

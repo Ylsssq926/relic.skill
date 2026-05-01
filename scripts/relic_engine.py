@@ -1568,6 +1568,8 @@ class RelicEngine:
             text = str(payload.get("message") or "").strip()
             self._append_session_message(session, "assistant", text)
             session.is_first_turn = False
+            tts_payload = payload.get("tts") if isinstance(payload.get("tts"), dict) else {}
+            image_payload = payload.get("image") if isinstance(payload.get("image"), dict) else {}
             metadata = {
                 "proactive": {
                     "type": payload.get("type"),
@@ -1575,11 +1577,44 @@ class RelicEngine:
                     "reason": payload.get("reason"),
                     "details": payload.get("details") or {},
                     "warnings": payload.get("warnings") or [],
-                    "tts": payload.get("tts") or {},
+                    "tts": tts_payload,
+                    "image": image_payload,
                 }
             }
+
+            messages: List[OutgoingMessage] = []
+            tts_enabled = bool(tts_payload.get("enabled"))
+            tts_text = str(tts_payload.get("text") or text).strip()
+            if tts_enabled and tts_text:
+                audio_metadata = dict(metadata)
+                audio_metadata["tts_payload"] = tts_payload
+                audio_metadata["fallback_text"] = text
+                messages.append(OutgoingMessage(kind="audio", text=tts_text, metadata=audio_metadata))
+            else:
+                messages.append(OutgoingMessage(kind="text", text=text, metadata=metadata))
+
+            image_prompt = str(
+                image_payload.get("prompt")
+                or image_payload.get("image_prompt")
+                or payload.get("image_prompt")
+                or ""
+            ).strip()
+            scene_hint = str(image_payload.get("scene_hint") or payload.get("scene_hint") or "").strip()
+            image_enabled = bool(image_payload.get("enabled"))
+            if image_enabled and (image_prompt or scene_hint):
+                image_metadata = dict(metadata)
+                image_metadata.update(
+                    {
+                        "image_prompt": image_prompt,
+                        "image_type": str(image_payload.get("type") or "cover"),
+                    }
+                )
+                if scene_hint:
+                    image_metadata["scene_hint"] = scene_hint
+                messages.append(OutgoingMessage(kind="image", text="", metadata=image_metadata))
+
             return ResponsePlan(
-                messages=[OutgoingMessage(kind="text", text=text, metadata=metadata)],
+                messages=messages,
                 mode=str(payload.get("type") or session.current_mode or "daily"),
                 relic_slug=profile.slug,
                 session_key=session_key,
@@ -1663,6 +1698,7 @@ class RelicEngine:
 
             payload = decision.to_payload(False)
             payload["tts"] = module.build_tts_payload(profile.manifest, decision)
+            payload["image"] = module.build_image_payload(profile.manifest, decision)
             return payload
         except Exception:
             LOGGER.exception("调用 proactive_scheduler 失败")
@@ -1674,6 +1710,7 @@ class RelicEngine:
                 "warnings": ["proactive scheduler failed"],
                 "details": {},
                 "tts": {},
+                "image": {},
             }
 
     # ------------------------------------------------------------------

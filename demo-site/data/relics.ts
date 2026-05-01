@@ -28,6 +28,7 @@ export interface ExampleRelic {
     readonly random: RelicScenario;
   };
   readonly fallback: string;
+  readonly techTags?: readonly string[];
 }
 
 export const exampleRelics: readonly ExampleRelic[] = [
@@ -61,6 +62,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
       random: { user: "奶奶,我突然想你了", relic: "想我啦?那就多跟我说说话。最近怎么样,有没有按时吃饭睡觉?别总一个人硬扛着。" },
     },
     fallback: "你先把自己照顾好,别总让我操心。再跟我说说你今天过得怎么样?",
+    techTags: ["语音合成", "主动关怀", "情感记忆"],
   },
   {
     id: "mimi",
@@ -92,6 +94,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
       random: { user: "咪咪,我突然想你了", relic: "喵。 [半夜突然跳到你枕边,用胡子蹭了蹭你的脸,然后安心团成一个橘色小月亮,呼噜声像小马达]" },
     },
     fallback: "喵? [歪头看着你,耳朵轻轻抖了一下,像是在等你把话说得更明白一点]",
+    techTags: ["宠物纪念", "情感陪伴", "行为模拟"],
   },
   {
     id: "spark-studio",
@@ -123,6 +126,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
       random: { user: "我突然想你们了", relic: "PM: 有空吗,我有个新想法\nCTO: 你先说是不是今天上线\n实习生: 我先笑一下\n运营: 我已经开始想标题了\n设计: 我已经打开 Figma 了" },
     },
     fallback: "PM: 这个话题先记下来\nCTO: 给我一点上下文\n运营: 或者你直接说重点也行",
+    techTags: ["团队文化", "多角色对话", "协作记忆"],
   },
   {
     id: "feishu-cli-demo",
@@ -154,6 +158,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
       random: { user: "我突然翻到了以前的飞书聊天", relic: "那个凌晨三点的需求讨论，你最后说「再试一次」。\n那个 200 条未读的周一早晨，你第一个回的是「我来」。\n那个永远在改的最终版文档，每版都有大家的批注和鼓励。\n那些深夜的消息，都是我们一起活过的证据。" },
     },
     fallback: "这个问题我先记在文档里。\n我看看能不能用 CLI 查一下相关记录。\n或者你直接在群里说，大家都会看到的。",
+    techTags: ["飞书CLI", "知识蒸馏", "专家数字身份"],
   },
 ];
 

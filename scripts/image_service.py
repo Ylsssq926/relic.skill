@@ -863,7 +863,10 @@ def load_cli_context(args: argparse.Namespace) -> Tuple[Optional[Path], Dict[str
     if args.relic:
         relic_path = ensure_relic_dir(args.relic)
         manifest = load_relic_manifest(relic_path)
-        raw_image = manifest.get("image_config")
+        media_config = manifest.get("media") if isinstance(manifest.get("media"), dict) else {}
+        raw_image = media_config.get("image")
+        if raw_image is None:
+            raw_image = manifest.get("image_config")
         if isinstance(raw_image, dict):
             merged_config.update(raw_image)
         merged_config["_relic_slug"] = clean_optional_text(manifest.get("slug")) or relic_path.name
@@ -880,7 +883,7 @@ def build_service_from_args(
     """根据 CLI 参数构造图像服务实例。"""
     provider = clean_optional_text(args.provider) or clean_optional_text(merged_config.get("provider"))
     if not provider:
-        raise ImageConfigError("请通过 --provider 指定图像服务商，或在 Relic 的 manifest.json 中配置 image_config.provider")
+        raise ImageConfigError("请通过 --provider 指定图像服务商，或在 Relic 的 manifest.json 中配置 media.image.provider / image_config.provider")
 
     if args.output_format:
         merged_config["output_format"] = args.output_format
@@ -952,7 +955,7 @@ def build_request_from_args(
 def create_argument_parser() -> argparse.ArgumentParser:
     """构建 CLI 参数解析器。"""
     parser = argparse.ArgumentParser(description="relic.skill 图像生成服务脚本")
-    parser.add_argument("--relic", help="Relic 目录路径，读取 manifest.json 中的 image_config")
+    parser.add_argument("--relic", help="Relic 目录路径，读取 manifest.json 中的 media.image / image_config")
     parser.add_argument("--provider", choices=["seedream", "openai", "google", "imagen"], help="图像 provider；若不传则尝试从 Relic 配置读取")
     parser.add_argument("--prompt", help="基础提示词；若不传且指定 --relic --type avatar/cover，则自动从 manifest 构造")
     parser.add_argument("--negative-prompt", help="负面提示词")

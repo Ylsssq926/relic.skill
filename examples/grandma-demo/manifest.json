@@ -67,16 +67,25 @@
   },
   "media": {
     "tts": {
-      "enabled": false,
-      "provider": "",
-      "voice_id": "",
-      "emotion_mapping": {}
+      "enabled": true,
+      "provider": "minimax",
+      "voice_id": "female-tianmei",
+      "emotion_mapping": {
+        "daily": "calm",
+        "late_night": "gentle",
+        "holiday": "happy",
+        "memory": "gentle",
+        "conflict": "calm"
+      },
+      "note": "替换 voice_id 为你克隆的声音 ID，或使用 MiniMax 内置音色"
     },
     "image": {
-      "enabled": false,
-      "provider": "",
+      "enabled": true,
+      "provider": "seedream",
       "style": "soft_illustration",
-      "avatar_prompt": ""
+      "avatar_prompt": "温柔的中国奶奶，家常花衬衫，厨房灯光，中式插画风格",
+      "cover_prompt": "北方家庭厨房，奶奶在包饺子，午后金色阳光，温暖氛围",
+      "note": "替换 provider 为 openai 或 gemini 如果没有 Seedream API Key"
     }
   },
   "automation": {

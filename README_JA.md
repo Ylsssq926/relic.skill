@@ -228,7 +228,7 @@ Claude Code / Kiro でそのままこう言ってください：
 
 ```text
 /relic              — Relic 鍛造フローを開始
-/relic-forge        — 直接、魂の鍛造炉に入る
+/relic-forge        — 直接、魂の覚醒室に入る
 /relic-talk         — 既存の Relic と会話する
 /relic-shield       — あなたの Relic を守る
 ```
@@ -324,7 +324,7 @@ relic.skill/
 ├── SKILL.md                    # メイン入口 — Relic エンジン
 ├── FOR_AI.md                   # AI ワンクリック入口
 │
-├── soul-forge/                 # 🔥 魂の鍛造炉 — データから魂を抽出する
+├── soul-forge/                 # 🔥 魂の覚醒室 — データから魂を目覚めさせる
 │   ├── SKILL.md
 │   ├── dimensions/             # 四次元抽出フレームワーク
 │   │   ├── cognition.md        #   認知パターン
@@ -335,7 +335,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   チャット履歴
 │   │   ├── voice-collector.md  #   音声/オーディオ
 │   │   ├── photo-collector.md  #   写真/動画
-│   │   └── live-collector.md   #   リアルタイム会話（生体鍛造）
+│   │   └── live-collector.md   #   リアルタイム会話（生体覚醒）
 │   └── references/
 │       ├── evidence-levels.md  #   証拠レベル基準
 │       └── conflict-resolution.md  # 矛盾処理戦略

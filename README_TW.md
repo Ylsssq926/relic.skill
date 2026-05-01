@@ -226,7 +226,7 @@ relic.skill 基於開放的 SKILL.md 標準，相容所有支援該標準的 AI 
 
 ```text
 /relic              — 啟動 Relic 鍛造流程
-/relic-forge        — 直接進入靈魂鍛造爐
+/relic-forge        — 直接進入靈魂喚醒室
 /relic-talk         — 跟現有的 Relic 聊天
 /relic-shield       — 保護你的 Relic
 ```
@@ -322,7 +322,7 @@ relic.skill/
 ├── SKILL.md                    # 主入口 — Relic 引擎
 ├── FOR_AI.md                   # AI 一鍵入口
 │
-├── soul-forge/                 # 🔥 靈魂鍛造爐 — 從資料中提取靈魂
+├── soul-forge/                 # 🔥 靈魂喚醒室 — 從資料中喚醒靈魂
 │   ├── SKILL.md
 │   ├── dimensions/             # 四維提取框架
 │   │   ├── cognition.md        #   認知模式
@@ -333,7 +333,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   聊天紀錄
 │   │   ├── voice-collector.md  #   語音／音訊
 │   │   ├── photo-collector.md  #   照片／影片
-│   │   └── live-collector.md   #   即時對話（活體鍛造）
+│   │   └── live-collector.md   #   即時對話（活體喚醒）
 │   └── references/
 │       ├── evidence-levels.md  #   證據分級標準
 │       └── conflict-resolution.md  # 矛盾處理策略

@@ -61,7 +61,7 @@
 
 relic.skill 是一个万物永生引擎。
 
-它能把任何你在乎的东西——一个人、一只猫、一段关系、一个团队、一个地方、一个瞬间——从散落的数据碎片中锻造成一个可交互的数字灵魂。
+它能把任何你在乎的东西——一个人、一只猫、一段关系、一个团队、一个地方、一个瞬间——从散落的数据碎片中唤醒,成为可交互的数字灵魂。
 
 不是冷冰冰的档案。是会在过年的时候主动问你"吃饺子了没"的奶奶。是凌晨三点突然开始跑酷的猫。是那个永远在改需求的产品经理。
 
@@ -90,7 +90,7 @@ relic.skill 是一个万物永生引擎。
 | 🐱 [宠物](templates/pet.md) | 猫、狗、任何陪伴过你的生命 | 你家猫也能永生 |
 | 💞 [关系](templates/relationship.md) | 两个人之间的互动模式 | 不是蒸馏某个人，而是蒸馏你们之间的默契 |
 | 🏢 [团队文化](templates/team-culture.md) | 一个团队的灵魂 | 人散了，但那种一起熬夜改 bug 的感觉还在 |
-| 💼 [业务专家](templates/expert.md) | 资深专家的专业判断 | 知识不该随人走，把经验锻造成可对话的数字身份 |
+| 💼 [业务专家](templates/expert.md) | 资深专家的专业判断 | 知识不该随人走，把经验唤醒成可对话的数字身份 |
 | 🏠 [地方](templates/place.md) | 一个地方的记忆 | 大学宿舍、老家的院子、常去的咖啡馆 |
 | ⏳ [时刻](templates/moment.md) | 一个重要瞬间 | 毕业典礼、求婚、第一次见到孩子 |
 | 🌟 [公众人物](templates/public-figure.md) | 公开资料中的认知框架 | 把你佩服的人的思维方式变成私人参谋 |
@@ -236,7 +236,7 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 安装完成后，在你的 AI 编程助手中输入以下任意一句：
 
 ```text
-"帮我锻造一个 Relic"
+"帮我唤醒一个 Relic"
 "让我跟奶奶聊天"
 ```
 
@@ -246,12 +246,22 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 
 ## 使用
 
-### 对话触发（推荐）
+### 快速开始
+
+第一次用？三步走：
+
+1. **唤醒 Relic** — `python scripts/relic_writer.py --help`
+2. **选择平台** — 飞书机器人或 Telegram 机器人
+3. **配置媒体** — 可选，让 Relic 能说话、能发图
+
+详细配置见 [docs/SETUP.md](docs/SETUP.md)。
+
+### 对话触发
 
 在 Claude Code / Kiro 中直接说：
 
 ```text
-"帮我锻造一个 Relic，我想永生我奶奶"
+"帮我唤醒一个 Relic，我想永生我奶奶"
 "我家猫走了，我想把它做成 Relic"
 "帮我蒸馏我们团队的文化，大家要散了"
 "我想保存我和她之间的关系模式"
@@ -259,8 +269,8 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 ### Slash 命令
 
 ```text
-/relic              — 启动 Relic 锻造流程
-/relic-forge        — 直接进入灵魂锻造炉
+/relic              — 启动 Relic 唤醒流程
+/relic-forge        — 直接进入灵魂唤醒室
 /relic-talk         — 跟已有的 Relic 聊天
 /relic-shield       — 保护你的 Relic
 ```
@@ -378,7 +388,7 @@ lark-cli --help
 **作为「眼」——数据采集：**
 
 ```bash
-# 用飞书 CLI 抓取群聊记录作为灵魂锻造素材
+# 用飞书 CLI 抓取群聊记录作为灵魂唤醒素材
 lark-cli im +messages-search --chat-id "oc_xxx" --query "项目上线"
 
 # 搜索并读取飞书文档
@@ -406,7 +416,7 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 | `lark-vc` | 从会议纪要提取决策记录 |
 | `lark-wiki` | 归档团队知识库到 Relic |
 
-🏆 本项目参加了飞书 CLI 创作者大赛，参赛场景为团队协作记忆蒸馏和业务专家数字身份锻造，详见 [飞书 CLI 模板](templates/feishu-cli.md) 和 [业务专家模板](templates/expert.md)。
+🏆 本项目参加了飞书 CLI 创作者大赛，参赛场景为团队协作记忆蒸馏和业务专家数字身份唤醒，详见 [飞书 CLI 模板](templates/feishu-cli.md) 和 [业务专家模板](templates/expert.md)。
 
 ---
 
@@ -439,7 +449,7 @@ relic.skill/
 ├── SKILL.md                    # 主入口 — Relic 引擎
 ├── FOR_AI.md                   # AI 一键入口
 │
-├── soul-forge/                 # 🔥 灵魂锻造炉 — 从数据中提取灵魂
+├── soul-forge/                 # 🔥 灵魂唤醒室 — 从数据中唤醒灵魂
 │   ├── SKILL.md
 │   ├── dimensions/             # 四维提取框架
 │   │   ├── cognition.md        #   认知模式
@@ -450,7 +460,7 @@ relic.skill/
 │   │   ├── chat-collector.md   #   聊天记录
 │   │   ├── voice-collector.md  #   语音/音频
 │   │   ├── photo-collector.md  #   照片/视频
-│   │   └── live-collector.md   #   实时对话（活体锻造）
+│   │   └── live-collector.md   #   实时对话（活体唤醒）
 │   └── references/
 │       ├── evidence-levels.md  #   证据分级标准
 │       └── conflict-resolution.md  # 矛盾处理策略
@@ -470,7 +480,7 @@ relic.skill/
 │
 ├── templates/                  # 📋 万物永生模板 x9（附选择指南）
 ├── examples/                   # 🎯 示例 Relics x3（附体验指南）
-├── scripts/                    # 🔧 Python 工具脚本 x9（含飞书全链路锻造）
+├── scripts/                    # 🔧 Python 工具脚本 x9（含飞书全链路唤醒）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）
 └── ROADMAP.md                  # 🗺️ 产品路线图

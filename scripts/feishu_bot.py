@@ -46,13 +46,11 @@ from __future__ import annotations
 import argparse
 import hashlib
 import hmac
-import io
 import json
 import logging
 import mimetypes
 import os
 import re
-import sys
 import threading
 import time
 import urllib.error
@@ -60,7 +58,7 @@ import urllib.request
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Sequence, Tuple
 
 try:  # pragma: no cover - import guard
     from flask import Flask, jsonify, request
@@ -74,6 +72,11 @@ try:  # pragma: no cover - package import
     from scripts.relic_engine import (
         AIProviderError,
         ConfigurationError,
+        DEFAULT_ANTHROPIC_BASE_URL,
+        DEFAULT_ANTHROPIC_VERSION,
+        DEFAULT_CLAUDE_MODEL,
+        DEFAULT_OPENAI_BASE_URL,
+        DEFAULT_OPENAI_MODEL,
         EngineConfig,
         IncomingMessage,
         OutgoingMessage,
@@ -82,12 +85,18 @@ try:  # pragma: no cover - package import
         ResponsePlan,
         Session,
         SUPPORTED_AI_PROVIDERS,
+        configure_utf8_stdio,
     )
 except ImportError:  # pragma: no cover - direct script execution
     from media_service import MediaService  # type: ignore[no-redef]
     from relic_engine import (  # type: ignore[no-redef]
         AIProviderError,
         ConfigurationError,
+        DEFAULT_ANTHROPIC_BASE_URL,
+        DEFAULT_ANTHROPIC_VERSION,
+        DEFAULT_CLAUDE_MODEL,
+        DEFAULT_OPENAI_BASE_URL,
+        DEFAULT_OPENAI_MODEL,
         EngineConfig,
         IncomingMessage,
         OutgoingMessage,
@@ -96,6 +105,7 @@ except ImportError:  # pragma: no cover - direct script execution
         ResponsePlan,
         Session,
         SUPPORTED_AI_PROVIDERS,
+        configure_utf8_stdio,
     )
 
 
@@ -105,11 +115,6 @@ DEFAULT_PORT = 8080
 DEFAULT_HOST = "0.0.0.0"
 DEFAULT_MAX_SESSION_MESSAGES = 20
 DEFAULT_FEISHU_BASE_URL = "https://open.feishu.cn"
-DEFAULT_OPENAI_BASE_URL = "https://api.openai.com"
-DEFAULT_ANTHROPIC_BASE_URL = "https://api.anthropic.com"
-DEFAULT_CLAUDE_MODEL = "claude-3-5-haiku-20241022"
-DEFAULT_OPENAI_MODEL = "gpt-4o-mini"
-DEFAULT_ANTHROPIC_VERSION = "2023-06-01"
 TOKEN_REFRESH_BUFFER_SECONDS = 120
 MESSAGE_DEDUP_TTL_SECONDS = 60 * 60
 REQUEST_SKEW_SECONDS = 10 * 60
@@ -117,6 +122,15 @@ REQUEST_SKEW_SECONDS = 10 * 60
 AT_TAG_RE = re.compile(r"<at\b[^>]*?>.*?</at>", re.IGNORECASE | re.DOTALL)
 WHITESPACE_RE = re.compile(r"\s+")
 RELIC_LIST_RE = re.compile(r"^(?:/relics|/list-relics|列出(?:所有)?relic|relic列表|有哪些relic)$", re.IGNORECASE)
+STATUS_CMD_RE = re.compile(r"^(?:/status|状态|当前状态)$", re.IGNORECASE)
+RESET_CMD_RE = re.compile(r"^(?:/reset|重置(?:会话|上下文)?|清空(?:会话|上下文)?)$", re.IGNORECASE)
+PAUSE_CMD_RE = re.compile(r"^(?:/pause|暂停(?:回复|聊天)?|先别回)$", re.IGNORECASE)
+RESUME_CMD_RE = re.compile(r"^(?:/resume|恢复(?:回复|聊天)?|继续回复)$", re.IGNORECASE)
+MSYS_CONVERTED_SLASH_RE = re.compile(
+    r"^[A-Za-z]:[\\/].*[\\/](?P<command>status|reset|pause|resume|relics|list-relics)(?P<rest>\s+.*)?$",
+    re.IGNORECASE,
+)
+MSYS_CONVERTED_RELIC_RE = re.compile(r"^[A-Za-z]:[\\/].*[\\/]relic(?P<rest>\s+.*)?$", re.IGNORECASE)
 
 
 class RequestValidationError(RuntimeError):
@@ -203,19 +217,6 @@ class BotConfig:
         return self.feishu_signing_secret or self.feishu_app_secret
 
 
-def configure_utf8_stdio() -> None:
-    """尽量确保 Windows 下 stdout / stderr 为 UTF-8。"""
-    for name in ("stdout", "stderr"):
-        stream = getattr(sys, name)
-        try:
-            stream.reconfigure(encoding="utf-8", errors="replace")
-            continue
-        except (AttributeError, ValueError):
-            pass
-        if hasattr(stream, "buffer"):
-            setattr(sys, name, io.TextIOWrapper(stream.buffer, encoding="utf-8", errors="replace"))
-
-
 def configure_logging(debug: bool = False) -> None:
     """初始化日志。"""
     logging.basicConfig(
@@ -271,6 +272,7 @@ class RelicBot:
         self._token_cache: Dict[str, Any] = {"value": None, "expires_at": 0.0}
         self._cache_lock = threading.RLock()
         self._processed_message_ids: Dict[str, float] = {}
+        self._paused_scopes: set[str] = set()
         self._relic_dirs_by_slug: Dict[str, Path] = {}
         self._media_cache: Dict[str, MediaService] = {}
         self.default_relic_slug: Optional[str] = None
@@ -333,15 +335,37 @@ class RelicBot:
         target = relic_slug or self.default_relic_slug or str(self.base_relic_dir)
         return self._load_engine_relic(target)
 
+    def _restore_msys_converted_slash_command(self, text: str) -> str:
+        """还原 Git Bash 把 /status 这类参数改成 Windows 路径的情况。"""
+        clean_text = (text or "").strip()
+        match = MSYS_CONVERTED_RELIC_RE.match(clean_text)
+        if match:
+            return f"/relic{match.group('rest') or ''}".strip()
+        match = MSYS_CONVERTED_SLASH_RE.match(clean_text)
+        if match:
+            return f"/{match.group('command')}{match.group('rest') or ''}".strip()
+        return clean_text
+
     def detect_intent(self, message_text: str) -> Dict[str, Any]:
         """识别消息意图，并为旧版 ``/relics`` 指令保留兼容分支。
 
-        除 ``/relics`` 列表命令外，其余判断全部交给 ``RelicEngine.detect_intent()``。
+        除平台侧命令外，其余判断全部交给 ``RelicEngine.detect_intent()``。
         """
-        clean_text = self._strip_mentions(message_text).strip()
-        if self.config.multi_relic and RELIC_LIST_RE.match(clean_text):
+        clean_text = self._restore_msys_converted_slash_command(self._strip_mentions(message_text))
+        command_type = ""
+        if STATUS_CMD_RE.match(clean_text):
+            command_type = "status"
+        elif RESET_CMD_RE.match(clean_text):
+            command_type = "reset"
+        elif PAUSE_CMD_RE.match(clean_text):
+            command_type = "pause"
+        elif RESUME_CMD_RE.match(clean_text):
+            command_type = "resume"
+        elif self.config.multi_relic and RELIC_LIST_RE.match(clean_text):
+            command_type = "list_relics"
+        if command_type:
             return {
-                "type": "list_relics",
+                "type": command_type,
                 "clean_text": clean_text,
                 "relic_slug": "",
                 "proactive_type": "",
@@ -362,6 +386,30 @@ class RelicBot:
         """按 ``user_id + chat_id + relic_slug`` 获取或创建会话。"""
         return self.engine.get_session(user_id=user_id, chat_id=chat_id, relic_slug=relic_slug)
 
+    def _pause_scope_key(self, user_id: str, chat_id: str) -> str:
+        """构造某个用户在某个会话里的暂停键。"""
+        return f"{user_id}:{chat_id}"
+
+    def _is_paused(self, user_id: str, chat_id: str) -> bool:
+        """判断当前用户会话是否已暂停回复。"""
+        with self._cache_lock:
+            return self._pause_scope_key(user_id, chat_id) in self._paused_scopes
+
+    def _set_paused(self, user_id: str, chat_id: str, paused: bool) -> None:
+        """暂停或恢复当前用户会话。"""
+        key = self._pause_scope_key(user_id, chat_id)
+        with self._cache_lock:
+            if paused:
+                self._paused_scopes.add(key)
+            else:
+                self._paused_scopes.discard(key)
+
+    def _reset_session(self, user_id: str, chat_id: str, relic_slug: str) -> None:
+        """清空当前用户在当前 chat/relic 下的会话。"""
+        session_key = self.engine._session_key(user_id, chat_id, relic_slug)
+        with self.engine._lock:
+            self.engine._sessions.pop(session_key, None)
+
     def validate_request(
         self,
         raw_body: bytes,
@@ -372,7 +420,8 @@ class RelicBot:
     ) -> None:
         """验证飞书 Webhook 请求。"""
         configured_token = self.config.feishu_verification_token.strip()
-        body_token = str(payload.get("token") or "").strip()
+        header = payload.get("header") if isinstance(payload.get("header"), Mapping) else {}
+        body_token = str(payload.get("token") or header.get("token") or "").strip()
 
         if configured_token and body_token and body_token != configured_token:
             raise RequestValidationError("Verification Token 不匹配")
@@ -479,6 +528,39 @@ class RelicBot:
                 self._mark_message_processed(message_id)
             return {"status": "success", "handled": True, "intent": "list_relics"}
 
+        if intent_type == "status":
+            reply = self._build_status_text(user_id=user_id, chat_id=chat_id, relic_slug=active_relic_slug)
+            self._send_text_response(chat_id=chat_id, text=reply, relic_slug=active_relic_slug)
+            if message_id:
+                self._mark_message_processed(message_id)
+            return {"status": "success", "handled": True, "intent": "status"}
+
+        if intent_type == "reset":
+            self._reset_session(user_id=user_id, chat_id=chat_id, relic_slug=active_relic_slug)
+            self._send_text_response(chat_id=chat_id, text="这段会话已经清空了。我们可以从这里重新开始。", relic_slug=active_relic_slug)
+            if message_id:
+                self._mark_message_processed(message_id)
+            return {"status": "success", "handled": True, "intent": "reset"}
+
+        if intent_type == "pause":
+            self._set_paused(user_id=user_id, chat_id=chat_id, paused=True)
+            self._send_text_response(chat_id=chat_id, text="好，我先安静下来。需要我继续时发 /resume。", relic_slug=active_relic_slug)
+            if message_id:
+                self._mark_message_processed(message_id)
+            return {"status": "success", "handled": True, "intent": "pause"}
+
+        if intent_type == "resume":
+            self._set_paused(user_id=user_id, chat_id=chat_id, paused=False)
+            self._send_text_response(chat_id=chat_id, text="我回来了。你继续说就行。", relic_slug=active_relic_slug)
+            if message_id:
+                self._mark_message_processed(message_id)
+            return {"status": "success", "handled": True, "intent": "resume"}
+
+        if self._is_paused(user_id=user_id, chat_id=chat_id):
+            if message_id:
+                self._mark_message_processed(message_id)
+            return {"status": "success", "ignored": True, "reason": "paused"}
+
         if not is_direct_chat and not is_mentioned and intent_type == "chat":
             if message_id:
                 self._mark_message_processed(message_id)
@@ -560,61 +642,135 @@ class RelicBot:
             self._media_cache[cache_key] = media
         return media
 
-    def _deliver_plan(self, chat_id: str, plan: ResponsePlan) -> List[Dict[str, Any]]:
-        """把引擎的 ``ResponsePlan`` 执行成飞书消息调用。"""
-        profile = self.load_relic(plan.relic_slug)
+    def _make_plan_media_loader(self, relic_dir: str) -> Callable[[], MediaService]:
+        """为单个 ResponsePlan 构造懒加载 MediaService 的闭包。"""
+        media: Optional[MediaService] = None
+
+        def ensure_media_service() -> MediaService:
+            nonlocal media
+            if media is not None:
+                return media
+            try:
+                media = MediaService.from_relic(relic_dir)
+            except Exception as exc:  # pragma: no cover - 防御性兜底
+                LOGGER.warning("初始化 MediaService 失败：%s", exc)
+                media = MediaService(tts=None, image=None, relic_dir=Path(relic_dir), manifest={})
+            if media.tts is not None:
+                media.tts.dry_run = self.config.dry_run
+            if media.image is not None:
+                media.image.dry_run = self.config.dry_run
+            return media
+
+        return ensure_media_service
+
+    def _send_card_plan_message(self, chat_id: str, message: OutgoingMessage, profile: RelicProfile) -> Dict[str, Any]:
+        """发送 card 类型的计划消息。"""
+        card_payload = message.metadata.get("card") if isinstance(message.metadata, Mapping) else None
+        if isinstance(card_payload, Mapping):
+            return self.send_message(chat_id=chat_id, msg_type="interactive", content=card_payload)
+        return self.send_card_message(chat_id=chat_id, title=message.title or profile.display_name, text=message.text)
+
+    def _send_audio_plan_message(
+        self,
+        chat_id: str,
+        plan: ResponsePlan,
+        message: OutgoingMessage,
+        ensure_media_service: Callable[[], MediaService],
+    ) -> Optional[Dict[str, Any]]:
+        """发送 audio 类型的计划消息，失败时降级为文本。"""
+        file_key = ""
+        audio_path = message.media_path
+        if isinstance(message.metadata, Mapping):
+            file_key = str(message.metadata.get("file_key") or "")
+        if not file_key and not audio_path and message.text:
+            try:
+                media_service = ensure_media_service()
+                if media_service.has_tts:
+                    audio_path = media_service.synthesize_speech(message.text, mode=plan.mode) or ""
+            except Exception as exc:
+                LOGGER.warning("TTS 生成失败，降级为文字：%s", exc)
+        if not file_key and audio_path:
+            try:
+                file_key = self.upload_audio(audio_path)
+            except Exception as exc:
+                LOGGER.warning("音频上传失败，降级为文字：%s", exc)
+        if file_key:
+            return self.send_audio_message(chat_id=chat_id, file_key=file_key)
+        if message.text:
+            LOGGER.warning("音频消息缺少 file_key / media_path，降级为文本发送")
+            return self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug)
+        return None
+
+    def _send_image_plan_message(
+        self,
+        chat_id: str,
+        plan: ResponsePlan,
+        message: OutgoingMessage,
+        ensure_media_service: Callable[[], MediaService],
+    ) -> Optional[Dict[str, Any]]:
+        """发送 image 类型的计划消息，失败时降级为文本。"""
+        image_key = ""
+        image_path = message.media_path
+        if isinstance(message.metadata, Mapping):
+            image_key = str(message.metadata.get("image_key") or "")
+        if not image_key and not image_path:
+            try:
+                media_service = ensure_media_service()
+                if media_service.has_image:
+                    image_path = media_service.generate_avatar() or ""
+            except Exception as exc:
+                LOGGER.warning("图像生成失败：%s", exc)
+        if not image_key and image_path:
+            try:
+                image_key = self.upload_image(image_path)
+            except Exception as exc:
+                LOGGER.warning("图片上传失败：%s", exc)
+        if image_key:
+            return self.send_image_message(chat_id=chat_id, image_key=image_key)
+        if message.text:
+            LOGGER.warning("图片消息缺少 image_key / media_path，降级为文本发送")
+            return self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug)
+        return None
+
+    def _execute_response_plan(self, plan: ResponsePlan, chat_id: str, relic_dir: str) -> List[Dict[str, Any]]:
+        """执行 ResponsePlan，把所有消息真正发送到飞书。"""
+        profile = self.load_relic(plan.relic_slug or None)
+        ensure_media_service = self._make_plan_media_loader(relic_dir)
         results: List[Dict[str, Any]] = []
 
         for message in plan.messages:
+            result: Optional[Dict[str, Any]]
             if message.kind == "text":
-                results.append(self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug))
-                continue
-
-            if message.kind == "card":
-                card_payload = message.metadata.get("card") if isinstance(message.metadata, Mapping) else None
-                if isinstance(card_payload, Mapping):
-                    results.append(self.send_message(chat_id=chat_id, msg_type="interactive", content=card_payload))
-                else:
-                    results.append(
-                        self.send_card_message(
-                            chat_id=chat_id,
-                            title=message.title or profile.display_name,
-                            text=message.text,
-                        )
-                    )
-                continue
-
-            if message.kind == "image":
-                image_key = ""
-                if isinstance(message.metadata, Mapping):
-                    image_key = str(message.metadata.get("image_key") or "")
-                if not image_key and message.media_path:
-                    image_key = self.upload_image(message.media_path)
-                if image_key:
-                    results.append(self.send_image_message(chat_id=chat_id, image_key=image_key))
-                elif message.text:
-                    LOGGER.warning("图片消息缺少 image_key / media_path，降级为文本发送")
-                    results.append(self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug))
-                continue
-
-            if message.kind == "audio":
-                file_key = ""
-                if isinstance(message.metadata, Mapping):
-                    file_key = str(message.metadata.get("file_key") or "")
-                if not file_key and message.media_path:
-                    file_key = self.upload_audio(message.media_path)
-                if file_key:
-                    results.append(self.send_audio_message(chat_id=chat_id, file_key=file_key))
-                elif message.text:
-                    LOGGER.warning("音频消息缺少 file_key / media_path，降级为文本发送")
-                    results.append(self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug))
-                continue
-
-            fallback_text = message.text or f"[{message.kind}]"
-            LOGGER.warning("未识别的消息类型 %s，降级为文本发送", message.kind)
-            results.append(self._send_text_response(chat_id=chat_id, text=fallback_text, relic_slug=plan.relic_slug))
+                result = self._send_text_response(chat_id=chat_id, text=message.text, relic_slug=plan.relic_slug)
+            elif message.kind == "card":
+                result = self._send_card_plan_message(chat_id=chat_id, message=message, profile=profile)
+            elif message.kind == "audio":
+                result = self._send_audio_plan_message(
+                    chat_id=chat_id,
+                    plan=plan,
+                    message=message,
+                    ensure_media_service=ensure_media_service,
+                )
+            elif message.kind == "image":
+                result = self._send_image_plan_message(
+                    chat_id=chat_id,
+                    plan=plan,
+                    message=message,
+                    ensure_media_service=ensure_media_service,
+                )
+            else:
+                fallback_text = message.text or f"[{message.kind}]"
+                LOGGER.warning("未识别的消息类型 %s，降级为文本发送", message.kind)
+                result = self._send_text_response(chat_id=chat_id, text=fallback_text, relic_slug=plan.relic_slug)
+            if result is not None:
+                results.append(result)
 
         return results
+
+    def _deliver_plan(self, chat_id: str, plan: ResponsePlan) -> List[Dict[str, Any]]:
+        """兼容旧调用：解析 relic_dir 后执行 ResponsePlan。"""
+        profile = self.load_relic(plan.relic_slug or None)
+        return self._execute_response_plan(plan=plan, chat_id=chat_id, relic_dir=str(profile.relic_dir))
 
     def _send_text_response(self, chat_id: str, text: str, relic_slug: str) -> Dict[str, Any]:
         """按配置选择文本或卡片形式发送纯文本回复。"""
@@ -622,6 +778,20 @@ class RelicBot:
             profile = self.load_relic(relic_slug)
             return self.send_card_message(chat_id=chat_id, title=profile.display_name, text=text)
         return self.send_text_message(chat_id=chat_id, text=text)
+
+    def _build_status_text(self, user_id: str, chat_id: str, relic_slug: str) -> str:
+        """构建当前飞书会话状态。"""
+        profile = self.load_relic(relic_slug)
+        paused = "已暂停" if self._is_paused(user_id=user_id, chat_id=chat_id) else "正常"
+        mode = "多 Relic" if self.config.multi_relic else "单 Relic"
+        return "\n".join(
+            [
+                f"当前 Relic：{profile.display_name}（{profile.slug}）",
+                f"运行模式：{mode}",
+                f"回复状态：{paused}",
+                f"dry-run：{'开启' if self.config.dry_run else '关闭'}",
+            ]
+        )
 
     def _build_relic_list_text(self, user_id: str, chat_id: str = "") -> str:
         """构建多 Relic 列表文案。"""
@@ -772,12 +942,12 @@ class RelicBot:
     def upload_image(self, file_path: str) -> str:
         """上传本地图片到飞书并返回 ``image_key``。"""
         path = Path(file_path).expanduser().resolve()
-        if not path.is_file():
-            raise FeishuAPIError(f"图片文件不存在：{path}")
-
         if self.config.dry_run:
             LOGGER.info("[DRY-RUN] 将上传飞书图片：%s", path)
             return f"dry-run-image-{path.stem}"
+
+        if not path.is_file():
+            raise FeishuAPIError(f"图片文件不存在：{path}")
 
         token = self._get_tenant_access_token()
         mime_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
@@ -801,12 +971,12 @@ class RelicBot:
     def upload_audio(self, file_path: str) -> str:
         """上传本地音频到飞书并返回 ``file_key``。"""
         path = Path(file_path).expanduser().resolve()
-        if not path.is_file():
-            raise FeishuAPIError(f"音频文件不存在：{path}")
-
         if self.config.dry_run:
             LOGGER.info("[DRY-RUN] 将上传飞书音频：%s", path)
             return f"dry-run-file-{path.stem}"
+
+        if not path.is_file():
+            raise FeishuAPIError(f"音频文件不存在：{path}")
 
         token = self._get_tenant_access_token()
         file_type = self._guess_feishu_audio_type(path)
@@ -1151,16 +1321,36 @@ def run_test_message(bot: RelicBot, test_message: str, user_id: str = "local-use
     intent = bot.detect_intent(test_message)
     active_slug = bot.get_active_relic_slug(user_id, chat_id=chat_id)
 
+    intent_type = str(intent.get("type") or "chat")
     result: Dict[str, Any] = {
         "mode": "test-message",
-        "input": test_message,
-        "intent": str(intent.get("type") or "chat"),
+        "input": str(intent.get("clean_text") or test_message),
+        "intent": intent_type,
         "active_relic": active_slug,
         "dry_run": bot.config.dry_run,
     }
 
-    if str(intent.get("type") or "") == "list_relics":
+    if intent_type == "list_relics":
         result["reply"] = bot._build_relic_list_text(user_id=user_id, chat_id=chat_id)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if intent_type == "status":
+        result["reply"] = bot._build_status_text(user_id=user_id, chat_id=chat_id, relic_slug=active_slug)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if intent_type == "reset":
+        bot._reset_session(user_id=user_id, chat_id=chat_id, relic_slug=active_slug)
+        result["reply"] = "这段会话已经清空了。我们可以从这里重新开始。"
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if intent_type == "pause":
+        bot._set_paused(user_id=user_id, chat_id=chat_id, paused=True)
+        result["reply"] = "好，我先安静下来。需要我继续时发 /resume。"
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if intent_type == "resume":
+        bot._set_paused(user_id=user_id, chat_id=chat_id, paused=False)
+        result["reply"] = "我回来了。你继续说就行。"
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
 

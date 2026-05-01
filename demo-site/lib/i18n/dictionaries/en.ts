@@ -46,9 +46,9 @@ const en: Dictionary = {
   },
   highlights: {
     title: "Why relic.skill",
-    subtitle: "Not another chatbot framework — this is a soul forging system",
+    subtitle: "Not another chatbot framework — this is a soul awakening system",
     items: {
-      forge: { title: "Soul Forge", desc: "Distill a four-dimensional soul from chat logs, photos, and text — not copying, but capturing the essence" },
+      forge: { title: "Soul Awakener", desc: "Distill a four-dimensional soul from chat logs, photos, and text — not copying, but capturing the essence" },
       engine: { title: "Soul Engine", desc: "Talk, care, speak out loud, and live inside Feishu" },
       shield: { title: "Soul Shield", desc: "Ethical guardrails, privacy protection, identity verification — souls are never misused" },
       localFirst: { title: "Local First", desc: "Keep your materials in your own hands first, then decide how to organize, export, and save" },
@@ -68,6 +68,7 @@ const en: Dictionary = {
     },
     tryExample: "Try Examples Now",
     readDocs: "Read the Docs",
+    startForge: "Awaken",
     githubRepo: "GitHub Repo",
   },
   templates: {

@@ -55,3 +55,7 @@ exes/
 *.bak
 *.cache
 .pytest_cache/
+
+# 运行时状态文件
+.proactive_state.json
+*/.proactive_state.json

@@ -2,7 +2,7 @@ const zh = {
   site: {
     title: "relic.skill",
     tagline: "万物皆可 Relic",
-    description: "把你在乎的东西锻造成可交互的数字灵魂。",
+    description: "把你在乎的东西唤醒成可交互的数字灵魂。",
   },
   nav: {
     home: "首页",
@@ -17,7 +17,7 @@ const zh = {
     badge: "relic.skill · 万物永生引擎",
     title: "给灵魂开个 GitHub",
     subtitle: "万物皆可 Relic。可以是过年问你吃饺子了没的奶奶，也可以是半夜突然开始跑酷的猫。",
-    body: "把你在乎的人、猫、关系、团队、地方和时刻，从散落的数据碎片里整理出来，锻造成一个能聊天、能回应、能继续更新的数字灵魂。",
+    body: "把你在乎的人、猫、关系、团队、地方和时刻，从散落的数据碎片里整理出来，唤醒成一个能聊天、能回应、能继续更新的数字灵魂。",
     hint: "它可以是在过年时问你「吃饺子了没」的奶奶，也可以是半夜突然开始跑酷的猫。",
     tryExample: "体验示例 Relic",
     docs: "文档",
@@ -44,13 +44,13 @@ const zh = {
   },
   highlights: {
     title: "为什么选择 relic.skill",
-    subtitle: "不是又一个聊天机器人框架，而是一套数字灵魂锻造工具",
+    subtitle: "不是又一个聊天机器人框架，而是一套数字灵魂唤醒工具",
     items: {
-      forge: { title: "灵魂锻造炉", desc: "从聊天记录、照片、文字中蒸馏出四维灵魂——不是简单复制，而是理解本质" },
-      engine: { title: "灵魂引擎", desc: "让数字灵魂可以对话、可以主动关心、可以开口说话、可以住在飞书里" },
+      forge: { title: "灵魂唤醒室", desc: "从聊天记录、照片、文字中蒸馏出四维灵魂——不是简单复制，而是理解本质" },
+      engine: { title: "灵魂引擎", desc: "五层动态提示词，每轮根据当前模式、记忆、关系重新构建——不是静态模板，是真正的上下文感知" },
       shield: { title: "灵魂护盾", desc: "伦理红线、隐私保护、身份验证——确保灵魂不被滥用" },
       localFirst: { title: "本地优先", desc: "优先把重要材料留在自己手里，再决定如何整理、导出和保存。" },
-      multiPlatform: { title: "多平台延展", desc: "从网页体验出发，往飞书机器人、微信、Telegram 和更多平台延展。" },
+      multiPlatform: { title: "跨平台部署", desc: "同一个 Relic，可以住在飞书、Telegram 里。RelicEngine 平台无关，接入新平台只需适配消息层" },
       multiModal: { title: "多模态未来", desc: "语音合成、表情驱动、图像理解——让数字生命以最自然的方式回到你身边。" },
     },
   },
@@ -66,6 +66,7 @@ const zh = {
     },
     tryExample: "立即体验示例",
     readDocs: "阅读文档",
+    startForge: "唤醒ta",
     githubRepo: "GitHub 仓库",
   },
   templates: {
@@ -228,7 +229,7 @@ const zh = {
     ],
   },
   footer: {
-    tagline: "把你在乎的东西锻造成可交互的数字灵魂。",
+    tagline: "把你在乎的东西唤醒成可交互的数字灵魂。",
     product: "产品",
     resources: "资源",
     community: "社区",
@@ -264,7 +265,7 @@ const zh = {
     place: "让有记忆的地方继续回应你",
     moment: "把重要瞬间做成可再次抵达的入口",
     "public-figure": "用公开资料提炼可对话的认知框架",
-    expert: "知识不该随人走,把经验锻造成可对话的数字身份",
+    expert: "知识不该随人走,把经验唤醒成可对话的数字身份",
     "feishu-cli": "用飞书 CLI 蒸馏协作记忆,让那些一起扛过的夜继续发光",
   },
   chat: {

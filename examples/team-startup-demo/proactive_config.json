@@ -1,0 +1,27 @@
+{
+  "enabled": true,
+  "user_city": "北京",
+  "holidays": {
+    "enabled": true,
+    "list": ["new_year", "national_day", "mid_autumn"]
+  },
+  "anniversaries": {
+    "enabled": true,
+    "dates": [
+      {"date": "2022-04-01", "label": "星火工作室成立日", "type": "happy"},
+      {"date": "2025-07-01", "label": "团队解散日", "type": "bittersweet"},
+      {"date": "2022-06-01", "label": "第一次产品上线", "type": "happy"},
+      {"date": "2023-09-10", "label": "第一次线上事故", "type": "bittersweet"},
+      {"date": "2024-12-31", "label": "最后一次周五海底捞", "type": "bittersweet"}
+    ]
+  },
+  "weather": {
+    "enabled": false
+  },
+  "random_miss": {
+    "enabled": true,
+    "min_interval_days": 10
+  },
+  "quiet_hours": {"start": "23:00", "end": "09:00"},
+  "global_max_per_week": 2
+}
