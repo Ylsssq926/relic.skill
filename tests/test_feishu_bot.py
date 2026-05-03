@@ -306,6 +306,22 @@ class FeishuBotAdapterTest(unittest.TestCase):
         self.assertIn("当前 Relic", payload["reply"])
         handle_message.assert_not_called()
 
+    def test_run_test_message_handles_relic_switch_without_chat_reply(self) -> None:
+        bot = self.make_bot(multi_relic=True, relic_dir=str(REPO_ROOT / "examples"))
+        output = io.StringIO()
+
+        with patch.object(bot.engine, "handle_message") as handle_message, redirect_stdout(output):
+            exit_code = run_test_message(bot, "C:/Program Files/Git/relic cat-mimi")
+
+        payload = json.loads(output.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["input"], "/relic cat-mimi")
+        self.assertEqual(payload["intent"], "switch_relic")
+        self.assertEqual(payload["active_relic"], "cat-mimi")
+        self.assertIn("已切换到", payload["reply"])
+        self.assertEqual(bot.get_active_relic_slug("local-user", chat_id="local-chat"), "cat-mimi")
+        handle_message.assert_not_called()
+
     def test_dry_run_send_text_message_returns_feishu_payload(self) -> None:
         bot = self.make_bot()
 

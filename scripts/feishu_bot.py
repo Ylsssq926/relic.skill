@@ -1353,6 +1353,17 @@ def run_test_message(bot: RelicBot, test_message: str, user_id: str = "local-use
         result["reply"] = "我回来了。你继续说就行。"
         print(json.dumps(result, ensure_ascii=False, indent=2))
         return 0
+    if intent_type == "switch_relic":
+        target = str(intent.get("relic_slug") or "").strip()
+        if target:
+            bot.set_active_relic_for_user(user_id, target, chat_id=chat_id)
+            profile = bot.load_relic(target)
+            result["active_relic"] = profile.slug
+            result["reply"] = f"已切换到 {profile.display_name}（{profile.slug}）。现在你可以直接和 TA 说话了。"
+        else:
+            result["reply"] = bot.engine._build_switch_failure_text()
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
 
     incoming = IncomingMessage(
         platform="feishu-test",
