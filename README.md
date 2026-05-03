@@ -38,6 +38,10 @@
   <a href="https://relic.luelan.online"><strong>🌐 在线演示站 →</strong></a>
 </p>
 
+<p align="center">
+  <a href="https://socialistic.ai/en/skill/relic-skill-1e4602?utm_source=github&utm_medium=readme&utm_campaign=xhs_github_koc_creator_b2&utm_content=hyperlink"><strong>✨ 点击在线体验 →</strong></a>
+</p>
+
 ---
 
 ## 目录
