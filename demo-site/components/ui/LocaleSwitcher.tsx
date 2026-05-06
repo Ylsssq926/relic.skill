@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Globe } from "lucide-react";
-import { LOCALE_LABELS, LOCALES, type Locale } from "@/lib/i18n/config";
+import { LOCALE_LABELS, LOCALES } from "@/lib/i18n/config";
 import { useI18n } from "@/components/providers/I18nProvider";
 
 export default function LocaleSwitcher() {

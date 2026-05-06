@@ -87,6 +87,19 @@ MIME_TYPES = {
     ".wav": "audio/wav",
 }
 BOT_MENTION_RE_TEMPLATE = r"(?<![\w_])@{username}\b"
+MSYS_CONVERTED_SLASH_RE = re.compile(
+    r"^[A-Za-z]:[\\/].*[\\/](?P<command>start|help|relic|relics|proactive)(?P<rest>\s+.*)?$",
+    re.IGNORECASE,
+)
+
+
+def restore_msys_converted_slash_command(text: str) -> str:
+    """还原 Git Bash 把 /command 参数转换成 Windows 路径的情况。"""
+    clean_text = (text or "").strip()
+    match = MSYS_CONVERTED_SLASH_RE.match(clean_text)
+    if match:
+        return f"/{match.group('command')}{match.group('rest') or ''}".strip()
+    return clean_text
 
 
 @dataclass
@@ -306,7 +319,7 @@ class TelegramBot:
 
     def _plan_command(self, incoming: IncomingMessage) -> Optional[ResponsePlan]:
         """把命令解析成平台无关的响应计划。"""
-        text = incoming.text.strip()
+        text = restore_msys_converted_slash_command(incoming.text)
         if not text.startswith("/"):
             return None
 
@@ -1165,11 +1178,12 @@ def run_test_message(
     chat_id: str = "local-chat",
 ) -> int:
     """本地模拟一条 Telegram 消息，不启动服务也不真正发消息。"""
+    normalized_message = restore_msys_converted_slash_command(test_message)
     incoming = IncomingMessage(
         platform="telegram",
         user_id=user_id,
         chat_id=chat_id,
-        text=test_message,
+        text=normalized_message,
         message_id="local-test-message",
         timestamp=time.time(),
         is_direct_chat=True,
@@ -1177,7 +1191,7 @@ def run_test_message(
         raw={"mode": "test-message"},
     )
 
-    if test_message.strip().startswith("/"):
+    if normalized_message.strip().startswith("/"):
         plan = bot._plan_command(incoming) or ResponsePlan(messages=[])
     else:
         active_slug = bot._get_active_relic_slug(user_id, chat_id)

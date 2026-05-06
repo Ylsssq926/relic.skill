@@ -31,6 +31,11 @@
   <a href="https://relic.luelan.online"><strong>🌐 Live Demo →</strong></a>
 </p>
 
+<p align="center">
+  <a href="https://socialistic.ai/en/skill/relic-skill-1e4602?utm_source=github&utm_medium=readme&utm_campaign=xhs_github_koc_creator_b2&utm_content=hyperlink"><strong>✨ Try Online (No Installation) →</strong></a><br>
+  <sub>Hosted demo. Do not upload sensitive data.</sub>
+</p>
+
 ---
 
 ## Table of Contents

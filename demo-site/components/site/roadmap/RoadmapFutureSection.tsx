@@ -1,7 +1,5 @@
 "use client";
 
-import { Compass, Map } from "lucide-react";
-
 import FadeIn from "@/components/animations/FadeIn";
 import { ActionGroup, ActionLink } from "@/components/site/ActionGroup";
 import Section from "@/components/site/SectionBlock";
