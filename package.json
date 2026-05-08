@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "framer-motion": "^12.38.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.59.1"
+  }
+}
