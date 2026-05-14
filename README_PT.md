@@ -18,6 +18,12 @@
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_Concurso_de_Criadores_Feishu_CLI-1º_lugar_·_Popularidade-ff7a45?style=for-the-badge" alt="Concurso de Criadores Feishu CLI · 1º lugar em Popularidade">
+  </a>
+</p>
+
 <h1 align="center">Tudo merece um Relic</h1>
 
 <p align="center">
@@ -283,7 +289,7 @@ python scripts/feishu_forge.py \
 | `lark-base` | Tabelas multidimensionais, bancos de dados | Dados estruturados da equipe, fluxos de trabalho |
 | `lark-calendar` | Eventos de calendário, reuniões | Ritmo da equipe, momentos importantes |
 
-🏆 Este projeto participa do Concurso de Criadores Feishu CLI — veja o [modelo Feishu CLI](templates/feishu-cli.md) e o [modelo Especialista](templates/expert.md).
+🏆 **1º lugar no Concurso de Criadores Feishu CLI — categoria Popularidade.** Obrigado a todos que votaram — veja o [modelo Feishu CLI](templates/feishu-cli.md) e o [modelo Especialista](templates/expert.md).
 
 ---
 

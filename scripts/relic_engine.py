@@ -506,7 +506,7 @@ class RelicEngine:
                 canonical_manifest = load_manifest(manifest_path)
                 manifest = migrate_manifest(raw_manifest)
             except Exception:
-                LOGGER.debug("manifest_schema canonical load failed: %s", manifest_path, exc_info=True)
+                LOGGER.warning("manifest_schema canonical load failed: %s", manifest_path, exc_info=True)
 
         slug = str(manifest.get("slug") or (canonical_manifest.id if canonical_manifest else "") or relic_path.name).strip() or relic_path.name
         display_name = str((canonical_manifest.display_name if canonical_manifest else "") or manifest.get("display_name") or slug).strip() or slug
@@ -647,6 +647,13 @@ class RelicEngine:
         except Exception:
             LOGGER.exception("生成回复失败")
             reply = "我刚刚有点卡住了，稍等一下再跟我说一遍吧。"
+            # 失败时的 fallback 回复不写入 session messages，不更新 is_first_turn
+            return ResponsePlan(
+                messages=self._reply_text_to_messages(reply),
+                mode=mode,
+                relic_slug=active_profile.slug,
+                session_key=self._session_key(msg.user_id, msg.chat_id, active_profile.slug),
+            )
         reply = reply.strip() or "我刚刚有点走神了，你再跟我说一遍？"
 
         self._append_session_message(active_session, "assistant", reply)
@@ -1629,6 +1636,25 @@ class RelicEngine:
                 session_key=session_key,
             )
 
+        # fallback 路径也要检查 quiet_hours 和 weekly_cap
+        fallback_reason = str(payload.get("reason") or "")
+        if fallback_reason == "quiet_hours":
+            reply = "当前处于免打扰时段"
+            return ResponsePlan(
+                messages=[OutgoingMessage(kind="text", text=reply)],
+                mode=session.current_mode,
+                relic_slug=profile.slug,
+                session_key=session_key,
+            )
+        if fallback_reason == "weekly_cap_reached":
+            reply = "本周主动次数已达上限"
+            return ResponsePlan(
+                messages=[OutgoingMessage(kind="text", text=reply)],
+                mode=session.current_mode,
+                relic_slug=profile.slug,
+                session_key=session_key,
+            )
+
         synthetic_user_message = (
             "请你主动发来一条消息。要求：不要复述用户命令；像真的主动来找对方一样开口；"
             "长度控制在 1 到 4 条消息；保持当前 Relic 的口吻。"
@@ -1995,4 +2021,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == "__main__":
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
     raise SystemExit(main())

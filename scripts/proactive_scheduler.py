@@ -39,6 +39,8 @@ import json
 import os
 import re
 import sys
+import tempfile
+import threading
 from dataclasses import dataclass, field
 from datetime import date, datetime, time, timedelta
 from pathlib import Path
@@ -48,6 +50,8 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence
 STATE_FILENAME = ".proactive_state.json"
 DEFAULT_CONFIG_FILENAME = "proactive_config.json"
 MAX_STATE_HISTORY = 50
+
+_STATE_LOCK = threading.Lock()
 
 HOLIDAY_TYPE = "holiday"
 ANNIVERSARY_TYPE = "anniversary"
@@ -390,11 +394,22 @@ def read_json_file(path: Path) -> Any:
 
 
 def write_json_file(path: Path, payload: Any) -> None:
-    """以 UTF-8 JSON 写入文件。"""
+    """以 UTF-8 JSON 写入文件（原子替换）。"""
     path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8") as handle:
-        json.dump(payload, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
+    fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp_path, str(path))
+    except BaseException:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
 
 
 def ensure_mapping(value: Any, field_name: str) -> Dict[str, Any]:
@@ -545,46 +560,48 @@ def normalize_config(raw: Any) -> Dict[str, Any]:
 
 def load_state(state_path: Path) -> Dict[str, Any]:
     """读取并规范 state。"""
-    if not state_path.exists():
-        return {"last_messages": [], "consecutive_no_reply": 0}
+    with _STATE_LOCK:
+        if not state_path.exists():
+            return {"last_messages": [], "consecutive_no_reply": 0}
 
-    raw = read_json_file(state_path)
-    mapping = raw if isinstance(raw, dict) else {}
-    raw_messages = mapping.get("last_messages") if isinstance(mapping.get("last_messages"), list) else []
-    messages: List[Dict[str, Any]] = []
+        raw = read_json_file(state_path)
+        mapping = raw if isinstance(raw, dict) else {}
+        raw_messages = mapping.get("last_messages") if isinstance(mapping.get("last_messages"), list) else []
+        messages: List[Dict[str, Any]] = []
 
-    for item in raw_messages:
-        if not isinstance(item, dict):
-            continue
-        timestamp = item.get("timestamp")
-        if not isinstance(timestamp, str) or not timestamp.strip():
-            continue
-        messages.append(
-            {
-                "timestamp": timestamp,
-                "type": item.get("type") if isinstance(item.get("type"), str) else None,
-                "trigger": item.get("trigger") if isinstance(item.get("trigger"), str) else None,
-                "message": item.get("message") if isinstance(item.get("message"), str) else None,
-            }
-        )
+        for item in raw_messages:
+            if not isinstance(item, dict):
+                continue
+            timestamp = item.get("timestamp")
+            if not isinstance(timestamp, str) or not timestamp.strip():
+                continue
+            messages.append(
+                {
+                    "timestamp": timestamp,
+                    "type": item.get("type") if isinstance(item.get("type"), str) else None,
+                    "trigger": item.get("trigger") if isinstance(item.get("trigger"), str) else None,
+                    "message": item.get("message") if isinstance(item.get("message"), str) else None,
+                }
+            )
 
-    consecutive = mapping.get("consecutive_no_reply", 0)
-    if isinstance(consecutive, bool) or not isinstance(consecutive, int):
-        consecutive = 0
+        consecutive = mapping.get("consecutive_no_reply", 0)
+        if isinstance(consecutive, bool) or not isinstance(consecutive, int):
+            consecutive = 0
 
-    return {
-        "last_messages": messages[-MAX_STATE_HISTORY:],
-        "consecutive_no_reply": max(0, consecutive),
-    }
+        return {
+            "last_messages": messages[-MAX_STATE_HISTORY:],
+            "consecutive_no_reply": max(0, consecutive),
+        }
 
 
 def save_state(state_path: Path, state: Dict[str, Any]) -> None:
-    """保存 state。"""
+    """保存 state（线程安全 + 原子写入）。"""
     payload = {
         "last_messages": list(state.get("last_messages", []))[-MAX_STATE_HISTORY:],
         "consecutive_no_reply": int(state.get("consecutive_no_reply", 0)),
     }
-    write_json_file(state_path, payload)
+    with _STATE_LOCK:
+        write_json_file(state_path, payload)
 
 
 def parse_state_timestamp(value: str) -> Optional[datetime]:
@@ -1692,4 +1709,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
     main()

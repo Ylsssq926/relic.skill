@@ -17,6 +17,10 @@ const ja: Dictionary = {
   },
   hero: {
     badge: "relic.skill · デジタル永生エンジン",
+    award: {
+      label: "🏆 Feishu CLI クリエイターコンテスト · 人気部門 第1位",
+      ariaLabel: "Feishu CLI クリエイターコンテスト人気部門第1位の詳細",
+    },
     title: "魂に GitHub を",
     subtitle: "すべてに Relic を。冷たいアーカイブじゃなく、あなたに応えてくれる存在。",
     body: "大切な人、猫、関係、チーム、場所、瞬間——散らばったデータから、対話でき、体験でき、進化し続けるデジタルソウルを鍛える。",

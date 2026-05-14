@@ -4,7 +4,11 @@ const ko: Dictionary = {
   site: { title: "relic.skill", tagline: "모든 것에 Relic을", description: "소중한 사람과 기억을, 더 따뜻한 방식으로 남기다." },
   nav: { home: "홈", demo: "체험", gallery: "갤러리", roadmap: "로드맵", tryNow: "지금 시도", openMenu: "메뉴 열기", closeMenu: "메뉴 닫기" },
   hero: {
-    badge: "relic.skill · 디지털 영생 엔진", title: "영혼에 GitHub을", subtitle: "모든 것에 Relic을. 차가운 아카이브가 아니라, 당신에게 응답하는 익숙한 존재.",
+    badge: "relic.skill · 디지털 영생 엔진",
+    award: {
+      label: "🏆 Feishu CLI 크리에이터 콘테스트 · 인기상 1위",
+      ariaLabel: "Feishu CLI 크리에이터 콘테스트 인기상 1위 자세히 보기",
+    }, title: "영혼에 GitHub을", subtitle: "모든 것에 Relic을. 차가운 아카이브가 아니라, 당신에게 응답하는 익숙한 존재.",
     body: "소중한 사람, 고양이, 관계, 팀, 장소, 순간 — 흩어진 데이터 조각에서 모아, 대화할 수 있고, 체험할 수 있고, 계속 발전하는 디지털 소울을 단련하다.",
     hint: "설날에 \"만두 먹었어?\"라고 물어보는 할머니일 수도 있고, 새벽 3시에 갑자기 뛰어다니는 고양이일 수도 있어.",
     tryExample: "예제 Relic 체험", docs: "문서", tryNow: "지금 시도 →", prevExample: "이전 예제", nextExample: "다음 예제",

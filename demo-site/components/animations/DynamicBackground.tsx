@@ -95,11 +95,14 @@ export default function DynamicBackground() {
       init();
     };
 
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(document.documentElement);
     window.addEventListener("resize", handleResize);
     init();
     render();
 
     return () => {
+      resizeObserver.disconnect();
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
     };

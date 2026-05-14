@@ -16,6 +16,12 @@
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_飛書_CLI_創作者大賽-人氣賽道_第一名-ff7a45?style=for-the-badge" alt="飛書 CLI 創作者大賽 · 人氣賽道第一名">
+  </a>
+</p>
+
 <h1 align="center">萬物皆可 Relic</h1>
 
 <p align="center">
@@ -289,7 +295,7 @@ send_message(
 | 📊 Feishu Base | ✅ 表格資料匯出 | ✅ 建立 / 更新記錄 |
 | 📅 Feishu Calendar | ✅ 事件歷史 | ✅ 建立提醒 |
 
-🏆 本專案為飛書 CLI 創作者大賽參賽作品 — 參賽場景請見 [飛書 CLI 模板](templates/feishu-cli.md) 和 [Expert 模板](templates/expert.md)。
+🏆 **飛書 CLI 創作者大賽 · 人氣賽道第一名。** 感謝每個把「協作記憶」這件事放進心裡的人——參賽場景請見 [飛書 CLI 模板](templates/feishu-cli.md) 和 [Expert 模板](templates/expert.md)。
 
 ---
 

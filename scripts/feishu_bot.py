@@ -426,6 +426,9 @@ class RelicBot:
         if configured_token and body_token and body_token != configured_token:
             raise RequestValidationError("Verification Token 不匹配")
 
+        if configured_token and not body_token:
+            raise RequestValidationError("请求缺少 Verification Token")
+
         if not self.config.signing_secret:
             self._verify_signature(timestamp=timestamp, nonce=nonce, body=raw_body, signature=signature)
             return
@@ -457,8 +460,10 @@ class RelicBot:
         """验证飞书事件签名（官方规则）。"""
         signing_secret = self.config.feishu_signing_secret or self.config.feishu_app_secret
         if not signing_secret:
-            LOGGER.warning("⚠️  未配置签名密钥，跳过签名校验（仅建议开发环境）")
-            return True
+            if self.config.dry_run:
+                LOGGER.warning("⚠️  未配置签名密钥，跳过签名校验（dry_run 模式）")
+                return True
+            raise ValueError("FEISHU_SIGNING_SECRET is required in production mode")
         content = timestamp + nonce + signing_secret + body.decode("utf-8")
         expected = hashlib.sha256(content.encode("utf-8")).hexdigest()
         return hmac.compare_digest(expected, signature)
@@ -1100,6 +1105,9 @@ class RelicBot:
         if not token:
             raise FeishuAPIError(f"tenant_access_token 响应缺少 token：{result}")
 
+        if expires_in < 300:
+            expires_in = 7200
+
         expires_at = time.time() + max(0, expires_in - TOKEN_REFRESH_BUFFER_SECONDS)
         with self._cache_lock:
             self._token_cache = {"value": token, "expires_at": expires_at}
@@ -1441,4 +1449,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == "__main__":
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
     raise SystemExit(main())

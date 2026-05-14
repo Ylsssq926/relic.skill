@@ -18,6 +18,12 @@
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_Feishu_CLI_Creator_Contest-Platz_1_·_Publikumspreis-ff7a45?style=for-the-badge" alt="Feishu CLI Creator Contest · Platz 1 im Publikumspreis">
+  </a>
+</p>
+
 <h1 align="center">Alles verdient ein Relic</h1>
 
 <p align="center">
@@ -278,7 +284,7 @@ python scripts/proactive_feishu.py \
 | 📊 Multidimensional | `feishu-cli base export` | Beziehungs-Destillation |
 | 📅 Kalender | `feishu-cli calendar list-events` | Proaktives Verhalten |
 
-🏆 Dieses Projekt nimmt am Feishu CLI Creator Contest teil — siehe [Feishu CLI Vorlage](templates/feishu-cli.md) und [Experten-Vorlage](templates/expert.md).
+🏆 **Platz 1 beim Feishu CLI Creator Contest — Kategorie Publikumspreis.** Vielen Dank an alle, die abgestimmt haben — siehe [Feishu CLI Vorlage](templates/feishu-cli.md) und [Experten-Vorlage](templates/expert.md).
 
 ---
 

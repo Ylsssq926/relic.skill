@@ -18,6 +18,12 @@
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_Feishu_CLI_크리에이터_콘테스트-인기상_1위-ff7a45?style=for-the-badge" alt="Feishu CLI 크리에이터 콘테스트 · 인기상 1위">
+  </a>
+</p>
+
 <h1 align="center">모든 것에 Relic을</h1>
 
 <p align="center">
@@ -291,7 +297,7 @@ send_message(
 | 📊 Feishu Base | ✅ 테이블 데이터 내보내기 | ✅ 레코드 생성 / 업데이트 |
 | 📅 Feishu Calendar | ✅ 이벤트 기록 | ✅ 리마인더 생성 |
 
-🏆 이 프로젝트는 Feishu CLI Creator Contest 출품작입니다 — 콘테스트 시나리오는 [Feishu CLI 템플릿](templates/feishu-cli.md) 및 [Expert 템플릿](templates/expert.md)을 참조하세요.
+🏆 **Feishu CLI 크리에이터 콘테스트 인기상 1위를 받았어요.** 투표해주신 모든 분들께 감사드립니다 — 응모 시나리오는 [Feishu CLI 템플릿](templates/feishu-cli.md)과 [Expert 템플릿](templates/expert.md)에서 확인하실 수 있어요.
 
 ---
 

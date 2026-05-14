@@ -17,6 +17,10 @@ const de: Dictionary = {
   },
   hero: {
     badge: "relic.skill · Digitale Unsterblichkeitsmaschine",
+    award: {
+      label: "🏆 Feishu CLI Creator Contest · Platz 1 im Publikumspreis",
+      ariaLabel: "Mehr zum ersten Platz im Publikumspreis des Feishu CLI Creator Contest",
+    },
     title: "GitHub für Seelen",
     subtitle: "Alles kann ein Relic sein. Kein kaltes Archiv, sondern eine vertraute Präsenz, die Ihnen noch antwortet.",
     body: "Nehmen Sie die Menschen, Katzen, Beziehungen, Teams, Orte und Momente, die Ihnen wichtig sind — sammeln Sie sie aus verstreuten Datenfragmenten und schmieden Sie sie zu einer interaktiven, erlebbaren, sich ständig weiterentwickelnden digitalen Seele.",

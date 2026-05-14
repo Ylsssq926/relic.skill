@@ -846,7 +846,7 @@ class TelegramBot:
                             offset = max(offset, update_id + 1)
                         except Exception as exc:
                             LOGGER.error("处理 update %d 失败: %s", update_id, exc)
-                            offset = max(offset, update_id + 1)
+                            # 不推进 offset，让下次重试这条消息
                 except Exception as exc:
                     LOGGER.error("getUpdates 失败: %s", exc)
                 time.sleep(self.config.polling_interval)
@@ -1283,4 +1283,9 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
 
 
 if __name__ == "__main__":
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
     raise SystemExit(main())

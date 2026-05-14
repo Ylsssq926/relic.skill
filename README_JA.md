@@ -18,6 +18,12 @@
   <a href="https://github.com/Ylsssq926/relic.skill/discussions"><img src="https://img.shields.io/github/discussions/Ylsssq926/relic.skill" alt="Discussions"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_Feishu_CLI_クリエイターコンテスト-人気部門_第1位-ff7a45?style=for-the-badge" alt="Feishu CLI クリエイターコンテスト · 人気部門 第1位">
+  </a>
+</p>
+
 <h1 align="center">すべてに Relic を</h1>
 
 <p align="center">
@@ -291,7 +297,7 @@ send_message(
 | 📊 Feishu Base | ✅ テーブルデータエクスポート | ✅ レコード作成 / 更新 |
 | 📅 Feishu Calendar | ✅ イベント履歴 | ✅ リマインダー作成 |
 
-🏆 このプロジェクトは Feishu CLI Creator Contest への応募作品です — コンテストシナリオについては [Feishu CLI テンプレート](templates/feishu-cli.md) および [Expert テンプレート](templates/expert.md) をご覧ください。
+🏆 **Feishu CLI Creator Contest 人気部門 第1位を受賞しました。** 投票してくださった皆さま、本当にありがとうございました——応募シナリオは [Feishu CLI テンプレート](templates/feishu-cli.md) と [Expert テンプレート](templates/expert.md) からどうぞ。
 
 ---
 

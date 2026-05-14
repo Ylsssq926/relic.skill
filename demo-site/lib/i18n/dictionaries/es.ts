@@ -17,6 +17,10 @@ const es: Dictionary = {
   },
   hero: {
     badge: "relic.skill · Motor de Inmortalidad Digital",
+    award: {
+      label: "🏆 Concurso de Creadores Feishu CLI · 1.º en Popularidad",
+      ariaLabel: "Más sobre el primer lugar en la categoría Popularidad del Concurso de Creadores Feishu CLI",
+    },
     title: "GitHub para Almas",
     subtitle: "Todo puede ser un Relic. No un archivo frío, sino una presencia familiar que aún te responde.",
     body: "Toma a las personas, gatos, relaciones, equipos, lugares y momentos que te importan — reúnelos de fragmentos de datos dispersos, y forja un alma digital interactiva, experimentable y en constante evolución.",
