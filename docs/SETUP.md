@@ -114,7 +114,7 @@ python scripts/feishu_bot.py --relic exes/grandma
 
 ```text
 [INFO] Feishu bot started for Relic: grandma
-[INFO] Listening on http://0.0.0.0:8000/webhook
+[INFO] Listening on http://0.0.0.0:8080/webhook
 ```
 
 ### 2.6 测试

@@ -59,3 +59,7 @@ exes/
 # 运行时状态文件
 .proactive_state.json
 */.proactive_state.json
+
+# 声音样本
+voice_samples/
+*/voice_samples/
