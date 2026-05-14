@@ -21,11 +21,11 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
 
   useEffect(() => {
     if (relics.length <= 1) return;
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % relics.length);
     }, 4500);
-    return () => window.clearInterval(timer);
-  }, [relics.length]);
+    return () => window.clearTimeout(timer);
+  }, [relics.length, activeIndex]);
 
   const activeRelic = useMemo(
     () => relics[activeIndex] ?? relics[0],
