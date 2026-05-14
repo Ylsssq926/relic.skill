@@ -66,7 +66,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
   },
   {
     id: "mimi",
-    slug: "cat-demo",
+    slug: "cat-mimi-demo",
     displayName: "猫 · 咪咪 · 橘猫 · 14斤",
     type: "pet",
     category: "猫",
@@ -98,7 +98,7 @@ export const exampleRelics: readonly ExampleRelic[] = [
   },
   {
     id: "spark-studio",
-    slug: "team-demo",
+    slug: "team-startup-demo",
     displayName: "团队 · 星火工作室 · 5人创业团队",
     type: "team",
     category: "创业",

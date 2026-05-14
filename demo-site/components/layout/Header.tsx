@@ -140,6 +140,8 @@ function HeaderBase({ className, ...props }: HeaderProps) {
             "overflow-hidden transition-all duration-300 lg:hidden",
             open ? "max-h-80 opacity-100 pb-3" : "max-h-0 opacity-0",
           )}
+          aria-hidden={!open}
+          inert={!open}
         >
           <div className="rounded-xl border border-border-strong bg-surface p-2 shadow-medium">
             {navItems.map((item) =>
