@@ -17,6 +17,10 @@ const tw: Dictionary = {
   },
   hero: {
     badge: "relic.skill · 數位永生引擎",
+    award: {
+      label: "🏆 飛書 CLI 創作者大賽 · 人氣賽道第一名",
+      ariaLabel: "飛書 CLI 創作者大賽人氣賽道第一名詳情",
+    },
     title: "給靈魂開個 GitHub",
     subtitle: "萬物皆可 Relic。不是冰冷的檔案庫，而是會回應你的熟悉存在。",
     body: "把你在乎的人、貓、關係、團隊、地方和時刻——從散落的數據碎片裡整理出來，喚醒成一個能聊天、能回應、能持續進化的數位靈魂。",

@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="templates/feishu-cli.md">
-    <img src="https://img.shields.io/badge/🏆_飞书_CLI_创作者大赛-参赛作品-3370ff?style=for-the-badge" alt="飞书 CLI 创作者大赛参赛作品">
+    <img src="https://img.shields.io/badge/🏆_飞书_CLI_创作者大赛-人气赛道_第一名-ff7a45?style=for-the-badge" alt="飞书 CLI 创作者大赛 · 人气赛道第一名">
   </a>
 </p>
 
@@ -421,7 +421,7 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 | `lark-vc` | 从会议纪要提取决策记录 |
 | `lark-wiki` | 归档团队知识库到 Relic |
 
-🏆 本项目参加了飞书 CLI 创作者大赛，参赛场景为团队协作记忆蒸馏和业务专家数字身份唤醒，详见 [飞书 CLI 模板](templates/feishu-cli.md) 和 [业务专家模板](templates/expert.md)。
+🏆 **飞书 CLI 创作者大赛 · 人气赛道第一名。** 谢谢每个把"协作记忆"这件事放进心里的人——参赛场景是团队记忆蒸馏和业务专家数字身份唤醒，玩法在 [飞书 CLI 模板](templates/feishu-cli.md) 和 [业务专家模板](templates/expert.md) 里。
 
 ---
 

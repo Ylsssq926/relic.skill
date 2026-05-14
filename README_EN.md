@@ -17,6 +17,12 @@
   <a href="https://github.com/larksuite/cli"><img src="https://img.shields.io/badge/Feishu_CLI-compatible-3370ff" alt="Feishu CLI Compatible"></a>
 </p>
 
+<p align="center">
+  <a href="templates/feishu-cli.md">
+    <img src="https://img.shields.io/badge/🏆_Feishu_CLI_Creator_Contest-Popularity_Track_%231-ff7a45?style=for-the-badge" alt="Feishu CLI Creator Contest · #1 in the Popularity track">
+  </a>
+</p>
+
 <h1 align="center">Everything Deserves a Relic</h1>
 
 <p align="center">
@@ -318,7 +324,7 @@ send_message(
 | 📊 Feishu Base | ✅ Table data export | ✅ Create / update records |
 | 📅 Feishu Calendar | ✅ Event history | ✅ Create reminders |
 
-🏆 This project is a submission to the Feishu CLI Creator Contest — see the [Feishu CLI template](templates/feishu-cli.md) and [Expert template](templates/expert.md) for contest scenarios.
+🏆 **First place in the Feishu CLI Creator Contest — Popularity track.** Huge thanks to everyone who voted. The scenarios live in the [Feishu CLI template](templates/feishu-cli.md) and the [Expert template](templates/expert.md).
 
 ---
 

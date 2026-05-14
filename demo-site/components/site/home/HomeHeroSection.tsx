@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Sparkles, Trophy } from "lucide-react";
 
 import HomeHeroCarousel from "@/components/site/home/HomeHeroCarousel";
 import { ActionGroup, ActionLink } from "@/components/site/ActionGroup";
@@ -9,6 +10,8 @@ import Surface from "@/components/site/Surface";
 import { useI18n } from "@/components/providers/I18nProvider";
 import { exampleRelics } from "@/data/relics";
 import { DOCS_URL, GITHUB_URL } from "@/lib/constants";
+
+const FEISHU_TEMPLATE_URL = `${GITHUB_URL}/blob/main/templates/feishu-cli.md`;
 
 export default function HomeHeroSection() {
   const { dict } = useI18n();
@@ -27,6 +30,17 @@ export default function HomeHeroSection() {
 
         <div className="relative grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center lg:gap-14 xl:gap-18">
           <div className="max-w-2xl space-y-7">
+            <Link
+              href={FEISHU_TEMPLATE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={dict.hero.award.ariaLabel}
+              className="inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-gradient-to-r from-amber-100 via-orange-100 to-amber-100 px-4 py-1.5 text-sm font-semibold text-amber-900 shadow-soft transition-transform hover:scale-[1.02] hover:shadow-medium dark:border-amber-400/40 dark:from-amber-500/20 dark:via-orange-500/20 dark:to-amber-500/20 dark:text-amber-100"
+            >
+              <Trophy className="h-4 w-4" aria-hidden="true" />
+              {dict.hero.award.label}
+            </Link>
+
             <div className="inline-flex items-center gap-2.5 rounded-full border border-border-strong bg-surface px-4 py-2 text-sm font-medium text-foreground-secondary">
               <Sparkles className="h-4 w-4 text-brand" aria-hidden="true" />
               {dict.hero.badge}

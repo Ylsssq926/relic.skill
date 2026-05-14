@@ -17,6 +17,10 @@ const en: Dictionary = {
   },
   hero: {
     badge: "relic.skill · Digital Immortality Engine",
+    award: {
+      label: "🏆 Feishu CLI Creator Contest · #1 in the Popularity track",
+      ariaLabel: "Read more about winning the Popularity track at the Feishu CLI Creator Contest",
+    },
     title: "GitHub for Souls",
     subtitle: "Everything can be a Relic. Not a dead archive — something that talks back.",
     body: "Take the people, cats, relationships, teams, places, and moments you care about — pull them from scattered chat logs and photos, and turn them into a digital soul that talks, remembers, and grows.",
