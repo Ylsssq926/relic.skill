@@ -35,7 +35,7 @@
 </p>
 
 <p align="center">
-  <a href="https://relic.luelan.online"><strong>🌐 在线演示站 →</strong></a>
+  <a href="https://relic.luelanai.com"><strong>🌐 在线演示站 →</strong></a>
 </p>
 
 <p align="center">

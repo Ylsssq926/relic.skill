@@ -21,4 +21,4 @@ ssh $SSH_OPTS "$SERVER_USER@$SERVER_HOST" "rm -rf $REMOTE_DIR/* && mkdir -p $REM
 scp $SSH_OPTS -r "$OUT_DIR"/* "$SERVER_USER@$SERVER_HOST:$REMOTE_DIR/"
 
 echo "✅ 部署完成!"
-echo "🌐 访问: https://relic.luelan.online"
+echo "🌐 访问: https://relic.luelanai.com"

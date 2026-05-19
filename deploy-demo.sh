@@ -25,4 +25,4 @@ echo "🔧 配置 Nginx..."
 # 如需启用站点，可将 deploy/nginx-relic-demo.conf 同步到服务器的 Nginx 配置目录。
 
 echo "✅ 部署完成!"
-echo "🌐 访问: https://relic.luelan.online"
+echo "🌐 访问: https://relic.luelanai.com"

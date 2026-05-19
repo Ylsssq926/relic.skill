@@ -1,0 +1,44 @@
+[
+  {
+    "relicId": "grandma",
+    "variant": "cover",
+    "filename": "grandma-cover.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/grandma-cover.jpg",
+    "status": "generated"
+  },
+  {
+    "relicId": "grandma",
+    "variant": "avatar",
+    "filename": "grandma-avatar.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/grandma-avatar.jpg",
+    "status": "generated"
+  },
+  {
+    "relicId": "cat",
+    "variant": "cover",
+    "filename": "cat-cover.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/cat-cover.jpg",
+    "status": "generated"
+  },
+  {
+    "relicId": "cat",
+    "variant": "avatar",
+    "filename": "cat-avatar.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/cat-avatar.jpg",
+    "status": "generated"
+  },
+  {
+    "relicId": "team",
+    "variant": "cover",
+    "filename": "team-cover.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/team-cover.jpg",
+    "status": "generated"
+  },
+  {
+    "relicId": "team",
+    "variant": "avatar",
+    "filename": "team-avatar.jpg",
+    "outputFilePath": "C:/Personal/Azure Glance/apps/luelan-Immortality/demo-api/generated/demo-image-candidates/pollinations-v1/team-avatar.jpg",
+    "status": "generated"
+  }
+]
