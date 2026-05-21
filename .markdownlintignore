@@ -1,0 +1,14 @@
+node_modules/
+.git/
+dist/
+build/
+out/
+.next/
+# 生成的 spec/plan 目录（AI 工具临时输出，不强制 lint）
+.codeartsdoer/
+.narrafork/
+.kiro/
+.codebuddy/
+# IDE shim 副本（同步生成）
+.cursor/rules/
+.trae/rules/
