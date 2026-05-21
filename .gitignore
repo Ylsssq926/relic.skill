@@ -63,3 +63,23 @@ exes/
 # 声音样本
 voice_samples/
 */voice_samples/
+
+# ===== AI 工具临时产出（本地保留，不进仓库）=====
+.catpaw/
+.codeartsdoer/
+.narrafork/
+.kiro/
+.codebuddy/
+.cursor/
+.trae/
+.reference/
+
+# ===== 测试与图片生成产物 =====
+test-results/
+playwright-report/
+demo-api/generated/
+demo-image-plans/
+
+# ===== 文档草稿 =====
+demo-site-copy.md
+article-woshipm.md

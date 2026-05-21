@@ -30,13 +30,6 @@ jobs:
             !build
             !out
             !.next
-            !.codeartsdoer
-            !.narrafork
-            !.kiro
-            !.codebuddy
-            !.cursor
-            !.trae
-            !.reference
 
   py-compile:
     name: Python Compile Check
