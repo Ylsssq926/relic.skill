@@ -24,6 +24,19 @@ jobs:
         with:
           globs: |
             **/*.md
+            !node_modules
+            !.git
+            !dist
+            !build
+            !out
+            !.next
+            !.codeartsdoer
+            !.narrafork
+            !.kiro
+            !.codebuddy
+            !.cursor
+            !.trae
+            !.reference
 
   py-compile:
     name: Python Compile Check
