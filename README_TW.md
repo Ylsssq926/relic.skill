@@ -47,7 +47,6 @@
 - [倫理聲明](#倫理聲明)
 - [社群](#社群)
 - [相關專案](#相關專案)
-- [Star History](#star-history)
 
 ---
 
@@ -405,18 +404,6 @@ relic.skill 站在巨人的肩膀上。感謝這些專案帶來的啟發：
 | [awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | 「萬物皆可 Skill」類專案索引 |
 | [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | Nuwa — 蒸餾名人思考方式的 meta-tool |
 | [colleague-skill](https://github.com/titanwings/colleague-skill) | 同事蒸餾專案，把冰冷的告別變成溫暖的 Skill |
-
----
-
-## Star History
-
-<a href="https://star-history.com/#Ylsssq926/relic.skill&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
- </picture>
-</a>
 
 ---
 

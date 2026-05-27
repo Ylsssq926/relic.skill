@@ -58,7 +58,6 @@
 - [伦理声明](#伦理声明)
 - [社区](#社区)
 - [相关项目](#相关项目)
-- [Star History](#star-history)
 
 ---
 
@@ -535,18 +534,6 @@ relic.skill 站在巨人的肩膀上。感谢这些项目的启发：
 | [awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | 万物皆可 Skill 项目索引 |
 | [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | 女娲 — 蒸馏名人思维的元工具 |
 | [colleague-skill](https://github.com/titanwings/colleague-skill) | 同事蒸馏，将冰冷的离别化为温暖的 Skill |
-
----
-
-## Star History
-
-<a href="https://star-history.com/#Ylsssq926/relic.skill&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
- </picture>
-</a>
 
 ---
 

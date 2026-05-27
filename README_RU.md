@@ -49,7 +49,6 @@
 - [Этическое заявление](#этическое-заявление)
 - [Сообщество](#сообщество)
 - [Связанные проекты](#связанные-проекты)
-- [Star History](#star-history)
 
 ---
 
@@ -399,18 +398,6 @@ relic.skill стоит на плечах гигантов. Спасибо эти
 | [awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | Индекс проектов, построенных вокруг идеи, что Skill можно сделать из чего угодно |
 | [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | Nuwa — meta-tool для дистилляции мышления заметных людей |
 | [colleague-skill](https://github.com/titanwings/colleague-skill) | Проект дистилляции коллег, превращающий холодное прощание в тёплый Skill |
-
----
-
-## Star History
-
-<a href="https://star-history.com/#Ylsssq926/relic.skill&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
- </picture>
-</a>
 
 ---
 

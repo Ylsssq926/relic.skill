@@ -49,7 +49,6 @@
 - [Déclaration éthique](#déclaration-éthique)
 - [Communauté](#communauté)
 - [Projets liés](#projets-liés)
-- [Star History](#star-history)
 
 ---
 
@@ -394,18 +393,6 @@ relic.skill se tient sur les épaules de géants. Merci à ces projets pour l'in
 | [awesome-persona-skills](https://github.com/tmstack/awesome-persona-skills) | Un index de projets construits sur l'idée que tout peut devenir un Skill |
 | [nuwa-skill](https://github.com/alchaincyf/nuwa-skill) | Nuwa — un méta-outil pour distiller la manière de penser de figures publiques remarquables |
 | [colleague-skill](https://github.com/titanwings/colleague-skill) | Un projet de distillation de collègues qui transforme un adieu froid en Skill chaleureux |
-
----
-
-## Star History
-
-<a href="https://star-history.com/#Ylsssq926/relic.skill&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Ylsssq926/relic.skill&type=Date" />
- </picture>
-</a>
 
 ---
 
