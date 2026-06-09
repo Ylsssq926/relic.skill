@@ -18,13 +18,13 @@
 
 **Steps:**
 
-1. Replace the outdated old-domain facts with `https://relic.luelanai.com` as the canonical demo domain.
+1. Keep `https://relic.luelan.online` as the canonical demo domain.
 2. Keep the existing tone and compact bullet style.
 3. Do not rewrite the brand voice sections.
 
 **Verify:**
 
-- `git grep -n "relic.luelan.online" -- ':!demo-site/node_modules'` should not find tracked product/docs references except git internals.
+- The retired demo domain should not appear in tracked product/docs references.
 
 ## Task 2: Align demo-site dependency metadata
 

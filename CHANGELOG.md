@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.1] - 2026-06-09
+
+### 第一阶段，漂亮收尾
+
+拿到 **飞书 CLI 创作者大赛 · 人气赛道第一名** 之后，relic.skill 没继续乱加功能，而是把项目收拾得更稳一点：演示站、CI、依赖、仓库卫生和发布文案都对齐了。
+
+### Changed
+
+- 🏆 README 和品牌文档保留获奖成绩：飞书 CLI 创作者大赛 · 人气赛道第一名
+- 🌐 演示站入口统一回到当前稳定域名 `https://relic.luelan.online`
+- ✅ CI 增加 demo-site 检查：`npm ci`、typecheck、lint、build
+- 🔒 demo-site 升级 Next.js 安全补丁，并修正 lucide-react 版本锁定
+- 🧹 移除 Star History 曲线和误提交的生成产物，仓库更轻一点
+
 ## [1.4.1] - 2026-05-01
 
 ### 飞书这边，先稳住了

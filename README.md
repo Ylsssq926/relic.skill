@@ -35,7 +35,7 @@
 </p>
 
 <p align="center">
-  <a href="https://relic.luelanai.com"><strong>🌐 在线演示站 →</strong></a>
+  <a href="https://relic.luelan.online"><strong>🌐 在线演示站 →</strong></a>
 </p>
 
 <p align="center">
@@ -74,13 +74,15 @@ relic.skill 是一个万物永生引擎。
 
 ---
 
-## 🆕 v1.4.0 新特性
+## 🛠️ v1.5.1 结项维护版
 
-- 🧠 **灵魂引擎独立** — 对话的心脏可以装进任何平台,飞书和 Telegram 用的是同一套引擎
-- 🤖 **Telegram Bot** — Relic 现在也能住在 Telegram 里,支持 Webhook 和 Long Polling
-- 🔊 **MiniMax TTS** — 中文声音克隆,10 秒样本就能开始,情绪表达更自然
-- 🎨 **图像生成** — Seedream 中式插画 + OpenAI GPT Image + Google Imagen 4
-- 📋 **manifest.json v1.4.0** — 正式配置 schema,身份/关系/媒体/主动行为各归其位
+这版不堆新玩具,只把门面擦亮、地基踩实,给第一阶段收个漂亮尾。
+
+- 🏆 **飞书 CLI 创作者大赛 · 人气赛道第一名** — 团队记忆蒸馏这条路,被认真看见了
+- 🌐 **演示站回到稳定域名** — 在线体验统一指向 `https://relic.luelan.online`
+- ✅ **CI 更靠谱** — Markdown、Python、demo-site 类型检查 / lint / build 都有人守门
+- 🧹 **仓库更清爽** — 清掉截图、生成计划、AI 工具临时产物,把 Star History 曲线也撤下来了
+- 🔒 **依赖更稳** — demo-site 补上 Next.js 安全补丁,结项前少一点悬念
 
 ---
 
