@@ -20,6 +20,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.tsbuildinfo
 
 # ===== OS =====
 .DS_Store
@@ -76,7 +77,9 @@ voice_samples/
 
 # ===== 测试与图片生成产物 =====
 test-results/
+**/test-results/
 playwright-report/
+**/playwright-report/
 demo-api/generated/
 demo-image-plans/
 

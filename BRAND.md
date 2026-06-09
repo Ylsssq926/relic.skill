@@ -95,12 +95,12 @@ NO: melancholic depression aesthetic
 
 ## 当前线上事实
 
-- 域名：`https://relic.luelan.online`（演示站，但**也是 GitHub 项目主推**）
-- 服务器：上海 `121.4.98.150`（静态站）
+- 主推演示域名：`https://relic.luelanai.com`（README 与 demo-site metadata 当前使用）
+- 旧演示域名：`https://relic.luelan.online`（历史域名，迁移期可能仍可访问）
 - GitHub: `Ylsssq926/relic.skill`
 - GitHub 描述：**"万物皆可 Relic — 给灵魂开个 GitHub | Universal Digital Immortality Engine 🧬"**
 - 项目分类：`opensource`（标 `🏆 人气第一` 在个人主站）
-- **新域 `relic.luelanai.com` 自动 301 跳回旧域**
+- 部署配置：`deploy/nginx-relic-demo*.conf` 与 `deploy-demo*.sh` 以 `relic.luelanai.com` 为准
 
 ## 重要边界（产品红线）
 
