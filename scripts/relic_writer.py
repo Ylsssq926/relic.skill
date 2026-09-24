@@ -259,6 +259,20 @@ STOPWORDS = {
 }
 TOKEN_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_\-]{1,}|[\u4e00-\u9fff]{2,6}")
 
+# 中文按 2-6 字定长硬切会把句子拦腰截断
+# （"你别光顾着干活不吃饭啊" → "你别光顾着干" + "活不吃饭啊"），
+# 所以关键词改为按标点切小句，保留完整的语义单元。
+CLAUSE_SPLIT_PATTERN = re.compile(r"[，。！？；：、,.!?;:\n\r\t（）()\[\]【】“”\"'‘’…—]+")
+ENGLISH_TOKEN_PATTERN = re.compile(r"[A-Za-z][A-Za-z0-9_\-]{1,}")
+MAX_CLAUSE_CHARS = 24
+
+# 聊天记录里代表"整理者自己"的发送者名。判定被蒸馏对象时必须排除，
+# 否则会把用户说的话当成被蒸馏对象的特征。
+SELF_SENDER_MARKERS = {
+    "我", "me", "self", "本人", "自己", "user", "用户", "我本人", "自己本人",
+    "myself", "owner", "整理者", "记录者",
+}
+
 
 LEXICONS = {
     "care": ["早点睡", "记得吃", "辛苦", "别怕", "抱抱", "休息", "照顾", "没事", "平安", "慢慢来"],
@@ -486,16 +500,29 @@ def normalize_photos(photos: Sequence[Any]) -> List[Dict[str, Any]]:
 
 
 def extract_keywords(messages: Sequence[Dict[str, Any]], facts: Sequence[Any], extra_texts: Sequence[str], limit: int = 10) -> List[str]:
+    """提炼高频表达。
+
+    先按标点切成小句再统计，而不是按固定字数硬切——后者会把
+    "你别光顾着干活不吃饭啊" 拦腰切成 "你别光顾着干" + "活不吃饭啊"。
+    """
     counter: Counter[str] = Counter()
     corpus: List[str] = [message.get("content", "") for message in messages]
     corpus.extend(str(item) for item in facts)
     corpus.extend(text for text in extra_texts if text)
     for block in corpus:
-        for token in TOKEN_PATTERN.findall(block):
-            normalized = token.lower()
-            if normalized in STOPWORDS or len(normalized) < 2:
+        for clause in CLAUSE_SPLIT_PATTERN.split(block):
+            clause = clause.strip()
+            if not clause:
                 continue
-            counter[token] += 1
+            if 2 <= len(clause) <= MAX_CLAUSE_CHARS and re.fullmatch(r"[\u4e00-\u9fff]+", clause):
+                if clause not in STOPWORDS:
+                    counter[clause] += 1
+                continue
+            for token in ENGLISH_TOKEN_PATTERN.findall(clause):
+                normalized = token.lower()
+                if normalized in STOPWORDS or len(normalized) < 2:
+                    continue
+                counter[token] += 1
     return [token for token, _count in counter.most_common(limit)]
 
 
@@ -568,6 +595,58 @@ def collect_participants(messages: Sequence[Dict[str, Any]], limit: int = 6) -> 
     return [{"name": name, "count": count} for name, count in counter.most_common(limit)]
 
 
+def infer_subject_sender(messages: Sequence[Dict[str, Any]], subject_name: str, override_name: Optional[str]) -> Optional[str]:
+    """判定聊天记录里哪一方是被蒸馏对象。
+
+    优先级：显式 --name > meta.subject_name > 排除"我 / me / 自己"等自我标记后的最高频发送者。
+
+    这一步不能省——否则整理者自己说的话会被当成被蒸馏对象的特征写进人格画像。
+    """
+    if not messages:
+        return None
+    counter: Counter[str] = Counter()
+    for message in messages:
+        name = str(message.get("sender_name") or "").strip()
+        if name:
+            counter[name] += 1
+    if not counter:
+        return None
+    for candidate in (override_name, subject_name):
+        candidate_text = str(candidate).strip() if candidate else ""
+        # 自我标记永远不是被蒸馏对象，即使它被推断成了 subject_name
+        if candidate_text and candidate_text.lower() not in SELF_SENDER_MARKERS and candidate_text in counter:
+            return candidate_text
+    others = {name: count for name, count in counter.items() if name.lower() not in SELF_SENDER_MARKERS}
+    if others:
+        return max(others, key=others.get)
+    return counter.most_common(1)[0][0]
+
+
+def filter_by_sender(messages: Sequence[Dict[str, Any]], sender: Optional[str]) -> List[Dict[str, Any]]:
+    """只保留某个发送者的消息；sender 为空时原样返回。"""
+    if not sender:
+        return list(messages)
+    matched = [m for m in messages if str(m.get("sender_name") or "").strip() == sender]
+    return matched or list(messages)
+
+
+def pick_subject_quotes(messages: Sequence[Dict[str, Any]], subject_sender: Optional[str], limit: int = 4) -> List[str]:
+    """挑出被蒸馏对象的原话，供 verbatim 证据使用。"""
+    pool = filter_by_sender(messages, subject_sender)
+    seen: set = set()
+    quotes: List[str] = []
+    ranked = sorted(pool, key=lambda m: (len(m.get("content", "")), m.get("timestamp") or 0), reverse=True)
+    for message in ranked:
+        content = re.sub(r"\s+", " ", str(message.get("content") or "")).strip()
+        if not content or content in seen:
+            continue
+        seen.add(content)
+        quotes.append(content)
+        if len(quotes) >= limit:
+            break
+    return quotes
+
+
 def summarize_devices(photos: Sequence[Dict[str, Any]], limit: int = 4) -> List[str]:
     counter: Counter[str] = Counter()
     for photo in photos:
@@ -614,7 +693,7 @@ def pick_representative_messages(messages: Sequence[Dict[str, Any]], limit: int 
     return picked
 
 
-def build_memory_entries(data: Dict[str, Any], messages: Sequence[Dict[str, Any]], photos: Sequence[Dict[str, Any]]) -> List[Dict[str, str]]:
+def build_memory_entries(data: Dict[str, Any], messages: Sequence[Dict[str, Any]], photos: Sequence[Dict[str, Any]], subject_sender: Optional[str] = None) -> List[Dict[str, str]]:
     entries: List[Dict[str, str]] = []
     for index, item in enumerate(data.get("memories", []), start=1):
         if isinstance(item, str) and item.strip():
@@ -625,7 +704,8 @@ def build_memory_entries(data: Dict[str, Any], messages: Sequence[Dict[str, Any]
             body = str(first_non_empty(item.get("content"), item.get("summary"), item.get("description"), json.dumps(item, ensure_ascii=False)))
             entries.append({"title": title, "when": when, "source": "输入 JSON", "body": body})
 
-    for message in pick_representative_messages(messages, limit=5):
+    # 只取被蒸馏对象自己的消息，避免把整理者的话当成 ta 的记忆
+    for message in pick_representative_messages(filter_by_sender(messages, subject_sender), limit=5):
         sender = str(message.get("sender_name") or "未知发送者")
         when = str(message.get("datetime") or "未标注时间")
         body = message.get("content", "").strip()
@@ -666,9 +746,14 @@ def infer_subject_name(data: Dict[str, Any], messages: Sequence[Dict[str, Any]],
         chat_name = messages[0].get("chat_name")
         if chat_name:
             return str(chat_name)
-        participants = collect_participants(messages, limit=1)
-        if participants:
-            return str(participants[0]["name"])
+        participants = collect_participants(messages, limit=10)
+        # 只挑非"我 / me / 自己"的发送者——整理者自己不是被蒸馏对象。
+        # 只按频率取人会在"用户话更多"的聊天记录里认错对象。
+        for item in participants:
+            if str(item["name"]).strip().lower() not in SELF_SENDER_MARKERS:
+                return str(item["name"])
+        # 整段记录只有整理者自己在说话：材料里根本不存在被蒸馏对象，
+        # 宁可退到 slug，也不要把"我"当成主体写进人格画像。
     return slug
 
 
@@ -713,14 +798,21 @@ def build_context(data: Dict[str, Any], template: str, slug: str, override_name:
     config = TEMPLATE_CONFIG[template]
     messages = normalize_messages(data.get("messages", []))
     photos = normalize_photos(data.get("photos", []))
-    memory_entries = build_memory_entries(data, messages, photos)
     participants = collect_participants(messages)
-    keywords = extract_keywords(messages, data.get("facts", []), ensure_string_list((data.get("meta") or {}).get("summary")))
-    recurring_phrases = extract_recurring_phrases(messages)
-    signal_counts = analyze_signal_counts(messages)
-    avg_length = average_message_length(messages)
-    active_bucket = summarize_active_bucket(messages)
+
+    # 先判定"谁是被蒸馏对象"，再只从 ta 自己的话里提取特征。
+    # 顺序不能反——否则整理者说的话会混进人格画像。
     subject_name = infer_subject_name(data, messages, slug, override_name)
+    subject_sender = infer_subject_sender(messages, subject_name, override_name)
+    subject_messages = filter_by_sender(messages, subject_sender)
+    subject_quotes = pick_subject_quotes(messages, subject_sender, limit=6)
+
+    memory_entries = build_memory_entries(data, messages, photos, subject_sender)
+    keywords = extract_keywords(subject_messages, data.get("facts", []), ensure_string_list((data.get("meta") or {}).get("summary")))
+    recurring_phrases = extract_recurring_phrases(subject_messages)
+    signal_counts = analyze_signal_counts(subject_messages)
+    avg_length = average_message_length(subject_messages)
+    active_bucket = summarize_active_bucket(subject_messages)
     relationship = infer_relationship(data, template, override_relationship)
     time_range_text = format_time_range(messages, photos)
     devices = summarize_devices(photos)
@@ -737,6 +829,10 @@ def build_context(data: Dict[str, Any], template: str, slug: str, override_name:
         "boundaries": config["boundaries"],
         "slug": slug,
         "subject_name": subject_name,
+        "subject_sender": subject_sender,
+        "subject_messages": subject_messages,
+        "subject_quotes": subject_quotes,
+        "subject_message_count": len(subject_messages),
         "relationship": relationship,
         "messages": messages,
         "photos": photos,
@@ -772,34 +868,38 @@ def explicit_dimension_lines(ctx: Dict[str, Any], title: str) -> List[str]:
 
 def build_cognition_lines(ctx: Dict[str, Any]) -> List[str]:
     return [
-        f"材料里反复出现的关键词集中在 {join_items(ctx['keywords'], fallback='日常细节')}，说明 {ctx['subject_name']} 常从这些切口组织判断。",
-        f"高信息量文本的平均长度约 {ctx['average_message_length']} 字；判断类词信号累计 {ctx['signal_counts'].get('decision', 0)} 次，适合在回答时先抓重点再给结论。",
-        f"如果需要模仿思路，优先沿着“先看什么、先处理什么、先安抚什么”的顺序推进，而不是一上来就给笼统鸡汤。",
+        f"ta 反复出现的表达集中在「{join_items(ctx['keywords'], limit=4, fallback='日常细节')}」，说明 {ctx['subject_name']} 常从这些切口组织判断，而不是先谈抽象道理。",
+        f"在 {ctx['subject_message_count']} 条属于 {ctx['subject_name']} 的消息里，平均长度约 {ctx['average_message_length']} 字，判断类词信号累计 {ctx['signal_counts'].get('decision', 0)} 次——结论往往短、快、落在具体事情上。",
+        f"模仿思路时优先沿着「先看什么 → 先处理什么 → 先安抚什么」的顺序推进，而不是一上来就给笼统鸡汤。",
+        f"当材料不足以支撑某个判断时，应明确说「这部分证据不足」，不要用通用常识补位。",
     ]
 
 
 def build_expression_lines(ctx: Dict[str, Any]) -> List[str]:
     return [
-        f"重复出现的短句或稳定表达包括：{join_items(ctx['recurring_phrases'], fallback='暂无明显重复短句，可从整体语气入手')}。",
-        f"现有样本的平均消息长度约 {ctx['average_message_length']} 字，说明表达更接近 {'短句推进' if ctx['average_message_length'] and ctx['average_message_length'] < 40 else '完整展开'} 的节奏。",
-        f"在生成对话时，优先保留已有材料里的句式密度、停顿方式和用词颗粒度，而不是统一改写成标准文案。",
+        f"稳定出现的短句包括：{join_items(ctx['recurring_phrases'], limit=4, fallback='暂无明显重复短句，可从整体语气入手')}。这些比任何形容词都更能还原语感。",
+        f"平均消息长度约 {ctx['average_message_length']} 字，表达更接近「{'短句推进' if ctx['average_message_length'] and ctx['average_message_length'] < 40 else '完整展开'}」的节奏。",
+        f"高频表达还包括「{join_items(ctx['keywords'], limit=3, fallback='暂无稳定表达')}」，可作为口头禅与语气词库。",
+        f"生成对话时保留句式密度、停顿方式和用词颗粒度，而不是统一改写成标准文案。",
     ]
 
 
 def build_behavior_lines(ctx: Dict[str, Any]) -> List[str]:
     participants = join_items([item['name'] for item in ctx['participants']], fallback='材料中未记录明确参与者')
     return [
-        f"主要互动对象包括：{participants}。这能反推 {ctx['subject_name']} 的日常协作/相处半径。",
-        f"材料显示更常出现在“{ctx['active_bucket']}”这一时间段，说明 ta 的活跃节奏或被记录节奏更偏向这个时段。",
-        f"行为模式的写法建议落在“先回应什么、先做什么、先补位还是先观察”这类顺序感上。",
+        f"主要互动对象包括：{participants}。这能反推 {ctx['subject_name']} 的日常相处半径。",
+        f"材料显示 ta 更常出现在「{ctx['active_bucket']}」这一时段，说明活跃节奏或被记录节奏偏向这个时段。",
+        f"行为模式建议落在「先回应什么 → 先做什么 → 先补位还是先观察」这类顺序感上，而不是罗列性格标签。",
+        f"属于 {ctx['subject_name']} 的行为样本共 {ctx['subject_message_count']} 条，样本越少，推断越应保守。",
     ]
 
 
 def build_emotion_lines(ctx: Dict[str, Any]) -> List[str]:
     return [
-        f"关怀类信号词累计 {ctx['signal_counts'].get('care', 0)} 次，修复/道歉类信号词累计 {ctx['signal_counts'].get('repair', 0)} 次，说明材料里保留了一定的情绪接口线索。",
-        f"如果要复现情感表达，优先使用材料中已经出现过的安慰方式、嘴硬方式或沉默方式，而不是生造煽情台词。",
-        f"遇到没有证据支持的深层情绪时，应该诚实说明“只能从现有片段推测到这里”。",
+        f"关怀类信号词累计 {ctx['signal_counts'].get('care', 0)} 次，修复/道歉类累计 {ctx['signal_counts'].get('repair', 0)} 次，冲突类累计 {ctx['signal_counts'].get('conflict', 0)} 次。",
+        f"这些计数只说明材料里出现过什么，不能直接等同于情感强度——样本量是 {ctx['subject_message_count']} 条。",
+        f"复现情感表达时优先使用材料中已出现的安慰方式、嘴硬方式或沉默方式，而不是生造煽情台词。",
+        f"遇到没有证据支持的深层情绪时，应诚实说明「只能从现有片段推测到这里」。",
     ]
 
 
@@ -926,7 +1026,34 @@ def build_ritual_lines(ctx: Dict[str, Any]) -> List[str]:
     ]
 
 
-def build_dimension_lines(kind: str, ctx: Dict[str, Any]) -> List[str]:
+def evidence_lines(ctx: Dict[str, Any], limit: int = 3, offset: int = 0) -> List[str]:
+    """被蒸馏对象的原话，标为 verbatim。这是最硬的一层证据。
+
+    offset 让不同维度轮换引用不同的原话，避免四个维度都贴同一批句子。
+    """
+    quotes = ctx.get("subject_quotes") or []
+    if not quotes:
+        return []
+    rotated = list(quotes[offset:]) + list(quotes[:offset])
+    return [f"[verbatim] 原话：「{quote}」" for quote in rotated[:limit]]
+
+
+def artifact_lines(ctx: Dict[str, Any]) -> List[str]:
+    """来自物料本身的客观线索，标为 artifact。"""
+    lines: List[str] = []
+    time_range = str(ctx.get("time_range_text") or "")
+    if time_range and "没有可靠时间范围" not in time_range:
+        lines.append(f"[artifact] 材料时间范围：{time_range}")
+    if ctx.get("devices"):
+        lines.append(f"[artifact] 记录设备：{join_items(ctx['devices'])}")
+    if ctx.get("locations"):
+        lines.append(f"[artifact] 位置线索：{join_items(ctx['locations'])}")
+    if not lines and ctx.get("message_count"):
+        lines.append(f"[artifact] 共 {ctx['message_count']} 条聊天记录可作为物料依据")
+    return lines
+
+
+def build_dimension_lines(kind: str, ctx: Dict[str, Any], index: int = 0) -> List[str]:
     builders = {
         "cognition": build_cognition_lines,
         "expression": build_expression_lines,
@@ -948,7 +1075,13 @@ def build_dimension_lines(kind: str, ctx: Dict[str, Any]) -> List[str]:
         "value": build_value_lines,
         "ritual": build_ritual_lines,
     }
-    return builders[kind](ctx)
+    body = builders[kind](ctx)
+    # 每个维度都以真实证据开头：没有 verbatim/artifact 的维度就是纯推测，
+    # 而纯推测不该被当成"人格画像"交付。
+    prefix = evidence_lines(ctx, limit=3, offset=index) + artifact_lines(ctx)
+    # 未被显式标注的模板话术一律降级为 impression，不冒充实证。
+    tagged = [line if line.startswith("[") else f"[impression] {line}" for line in body]
+    return prefix + tagged
 
 
 def build_skill_md(ctx: Dict[str, Any]) -> str:
@@ -963,7 +1096,7 @@ def build_skill_md(ctx: Dict[str, Any]) -> str:
     if ctx["memory_count"]:
         source_summary_parts.append(f"{ctx['memory_count']} 个记忆锚点")
     source_summary = " / ".join(source_summary_parts) if source_summary_parts else "有限材料"
-    return f"# {ctx['subject_name']}\n\n> {ctx['summary']}\n\n你是 **{ctx['subject_name']}** 的 Relic，不是真人，而是一个 {ctx['identity']}。\n开始对话前，请先参考同目录中的 `personality.md`、`interaction.md`、`memory.md`。\n\n## 角色定位\n- 模板：{ctx['template_label']}\n- Slug：{ctx['slug']}\n- 关系说明：{ctx['relationship']}\n- 资料时间范围：{ctx['time_range_text']}\n- 证据规模：{source_summary}\n- 高频关键词：{keywords_text}\n\n## 工作方式\n1. 优先使用现有材料中已经出现过的表达、事件、动作顺序和照顾方式。\n2. 当材料不足以支撑某个细节时，明确说“这部分证据不足”，不要硬编。\n3. 在任何互动里都要提醒用户：你是 Relic，不是现实中的真人替身。\n4. 保持这种整体气质：{ctx['tone']}。\n\n## 开场气质\n- 主要语气：{ctx['tone']}\n- 典型短句：{phrase_text}\n- 活跃记录时段：{ctx['active_bucket']}\n\n## 安全边界\n{boundaries}\n"
+    return f"# {ctx['subject_name']}\n\n> {ctx['summary']}\n\n你是 **{ctx['subject_name']}** 的 Relic，不是真人，而是一个 {ctx['identity']}。\n开始对话前，请先参考同目录中的 `personality.md`、`interaction.md`、`memory.md`。\n\n## 角色定位\n- 模板：{ctx['template_label']}\n- Slug：{ctx['slug']}\n- 关系说明：{ctx['relationship']}\n- 资料时间范围：{ctx['time_range_text']}\n- 证据规模：{source_summary}\n- 高频表达：{keywords_text}\n\n## 工作方式\n1. 优先使用现有材料中已经出现过的表达、事件、动作顺序和照顾方式。\n2. 当材料不足以支撑某个细节时，明确说“这部分证据不足”，不要硬编。\n3. 在任何互动里都要提醒用户：你是 Relic，不是现实中的真人替身。\n4. 保持这种整体气质：{ctx['tone']}。\n\n## 开场气质\n- 主要语气：{ctx['tone']}\n- 典型短句：{phrase_text}\n- 活跃记录时段：{ctx['active_bucket']}\n\n## 安全边界\n{boundaries}\n"
 
 
 def build_personality_md(ctx: Dict[str, Any]) -> str:
@@ -976,7 +1109,7 @@ def build_personality_md(ctx: Dict[str, Any]) -> str:
         f"- 核心用途：{ctx['summary_goal']}",
         f"- 资料时间范围：{ctx['time_range_text']}",
         f"- 主要参与者：{participants}",
-        f"- 高频关键词：{join_items(ctx['keywords'], fallback='暂无明显主题词')}",
+        f"- 高频表达：{join_items(ctx['keywords'], fallback='暂无明显主题词')}",
         f"- 典型短句：{join_items(ctx['recurring_phrases'], fallback='暂无明显重复短句')}",
         "",
         "## 四维画像",
@@ -989,7 +1122,7 @@ def build_personality_md(ctx: Dict[str, Any]) -> str:
             sections.append("- 输入 JSON 已提供的结论：")
             for line in explicit_lines:
                 sections.append(f"  - {line}")
-        for line in build_dimension_lines(kind, ctx):
+        for line in build_dimension_lines(kind, ctx, index - 1):
             sections.append(f"- {line}")
     return "\n".join(sections) + "\n"
 
