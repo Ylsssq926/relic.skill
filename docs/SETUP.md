@@ -33,6 +33,124 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 
 **为什么要这么做?** 因为手写这些文件太累了,而且容易漏东西。脚本会帮你把数据整理成 Relic 能理解的格式。
 
+#### 输入 JSON 长什么样
+
+这是整个流程里**最容易卡住的一步** —— `--data` 指向的那个 JSON 到底该写什么。下面是完整说明。
+
+**最小可用示例**(存成 `data.json`):
+
+```json
+{
+  "subject_name": "奶奶",
+  "relationship": "奶奶",
+  "summary": "会提醒你吃饭的家人",
+  "messages": [
+    { "sender_name": "我",   "timestamp": 1700000000, "content": "奶奶,我今天加班到十一点" },
+    { "sender_name": "奶奶", "timestamp": 1700000060, "content": "哎呀你这孩子,怎么又恁晚" },
+    { "sender_name": "奶奶", "timestamp": 1700000120, "content": "吃饭了没有" }
+  ],
+  "facts": ["爱发语音", "打字慢"],
+  "memories": [
+    {
+      "title": "包饺子",
+      "time": "每年春节",
+      "content": "她总会在厨房里一边包饺子一边念叨我别挑食。"
+    }
+  ]
+}
+```
+
+```bash
+python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+```
+
+**顶层字段一览**(全部可选,除 `messages` 外都可以不给):
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `messages` | 数组 | **最有价值的输入**。聊天记录,决定了人格画像的质量 |
+| `memories` | 数组 | 手动整理的记忆片段 |
+| `facts` | 字符串数组 | 关于对象的事实,如 `["爱发语音", "打字慢"]` |
+| `photos` | 数组 | 照片元数据(拍摄时间、设备、GPS),用于推断生活轨迹 |
+| `interaction_modes` | 字符串数组 | 你希望它怎么跟你互动 |
+| `tags` | 字符串数组 | 标签 |
+| `dimensions` | 对象 | 手动指定四维内容,如 `{"cognition": ["..."]}` |
+| `events` / `timeline` / `notes` | 数组或字符串 | 会被并入 `memories` |
+| `source` | 字符串 | 数据来源说明,会记进 `manifest.json` |
+
+**`messages[]` 每个对象的字段**:
+
+| 字段 | 必填 | 别名 | 说明 |
+|------|------|------|------|
+| `content` | ✅ | `text` | 消息正文 |
+| `sender_name` | 建议填 | `sender_id` | 谁说的。**这一项决定成败,见下方说明** |
+| `timestamp` | 可选 | `datetime` / `date` | 时间。数字(Unix 秒)或日期字符串都行 |
+| `id` | 可选 | — | 消息 ID,缺省自动编号 |
+| `chat_name` | 可选 | `chat_id` | 会话名 |
+| `direction` | 可选 | — | 消息方向 |
+| `msg_type` | 可选 | — | 默认 `text` |
+
+**`memories[]` 每个对象的字段**:
+
+| 字段 | 必填 | 别名 | 说明 |
+|------|------|------|------|
+| `title` | 建议填 | `name` | 这条记忆叫什么 |
+| `content` | ✅ | `summary` / `description` | 记忆正文 |
+| `time` | 可选 | `date` / `datetime` | 什么时候的事,如 `"每年春节"` |
+| `source` | 可选 | — | 来源,如 `"家庭回忆"` |
+
+**`photos[]` 每个对象的字段**:
+
+| 字段 | 说明 |
+|------|------|
+| `path` | 照片路径 |
+| `filename` | 文件名(缺省从 `path` 取) |
+| `shot_timestamp` / `shot_time` / `datetime` | 拍摄时间 |
+| `device` | `{"make": "Apple", "model": "iPhone 13"}` |
+| `gps` | `{"lat": 39.9, "lng": 116.4}` |
+
+#### ⚠️ 一个必须理解的机制:谁是被蒸馏对象
+
+脚本需要知道"这段聊天记录里,哪一方是要被做成 Relic 的人"。**判断错了,整理者自己的话就会被写进对方的人格画像** —— 这是最容易出的错。
+
+判定优先级:
+
+1. `--name` 命令行参数(最高)
+2. JSON 里的 `subject_name` / `name` / `title` / `chat_name`
+3. 第一条消息的 `chat_name`
+4. 出现次数最多的**非整理者**发送者
+
+整理者的自我标记会被自动排除:`我`、`me`、`self`、`本人`、`自己`、`user`、`用户`、`myself`、`owner`、`整理者`、`记录者`。
+
+**所以:即使你说的话比奶奶多,脚本也不会把"我"当成奶奶。** 但为了万无一失,**强烈建议每次都显式传 `--name`**:
+
+```bash
+python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+```
+
+#### 一次给多个数据文件
+
+`--data` 支持多个文件,会自动合并(数组追加,`meta` 取第一个非空值):
+
+```bash
+python scripts/relic_writer.py --data chat.json photos.json facts.json --template human --slug grandma
+```
+
+#### 完整参数
+
+| 参数 | 必填 | 说明 |
+|------|------|------|
+| `--data` | ✅ | 一个或多个输入 JSON 文件 |
+| `--template` | ✅ | 见下方可选值 |
+| `--slug` | ✅ | 输出目录名,如 `grandma` |
+| `--output-dir` | — | 输出根目录,默认 `exes` |
+| `--name` | — | 手动指定 Relic 名称(强烈建议) |
+| `--summary` | — | 手动指定一句话摘要 |
+| `--relationship` | — | 手动指定关系说明 |
+| `--force` | — | 允许覆盖已存在的非空目录 |
+
+`--template` 可选值:`human`(人)、`pet`(宠物)、`relationship`(关系)、`team-culture`(团队文化)、`place`(地方)、`moment`(时刻)、`public-figure`(公众人物)、`expert`(业务专家)、`feishu-cli`(飞书协作记忆)。
+
 ### 方式二:手动创建
 
 如果你没有数据,或者想从零开始:
