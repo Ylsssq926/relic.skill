@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -358,9 +358,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 同意プロトコル
 │   └── ethics.md               # 倫理のレッドライン
 │
-├── templates/                  # 📋 万物永生テンプレート x9（選択ガイド付き）
+├── templates/                  # 📋 万物永生テンプレート x10（選択ガイド付き）
 ├── examples/                   # 🎯 サンプル Relics x3（体験ガイド付き）
-├── scripts/                    # 🔧 Python ユーティリティスクリプト x9（飛書全チェーン鍛造含む）
+├── scripts/                    # 🔧 Python ユーティリティスクリプト x17（飛書全チェーン鍛造含む）
 ├── assets/                     # 🎨 ビジュアル素材
 ├── docs/                       # 📚 詳細ドキュメント（tools guide を含む）
 └── ROADMAP.md                  # 🗺️ プロダクトロードマップ
@@ -417,6 +417,18 @@ relic.skill は巨人の肩の上に立っています。これらのプロジ�
   <em>本当の死は心臓が止まることではない。最後にあなたを覚えていた人まで、あなたを忘れてしまうことだ。</em>
 </p>
 
+## License
+
+relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+
+- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
+- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
+- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+
+> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+
+---
+
 <p align="center">
-  MIT License · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
+  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
 </p>

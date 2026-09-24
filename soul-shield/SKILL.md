@@ -3,8 +3,8 @@ name: relic-shield
 description: >
   灵魂护盾 — 保护 Relic 不被未授权复制、篡改或滥用。
   提供灵魂指纹、授权协议和伦理框架。可直接调用 /relic-shield。
-version: 1.1.2
-license: MIT
+version: 1.5.2
+license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "描述你想保护或检查的 Relic，比如：检查我奶奶的授权和指纹"
 ---
@@ -28,6 +28,8 @@ argument-hint: "描述你想保护或检查的 Relic，比如：检查我奶奶�
 3. 只有通过授权后，才读取 `fingerprint.md` 生成与嵌入指纹
 4. 最后用 `ethics.md` 做一次红线检查
 5. 任一步骤触发红线，立即停止 Relic 生成或对外发布
+
+> **与 relic_writer 的衔接**：灵魂指纹与授权结论应写入 Relic 的 `manifest.json`（schema v1.5.1），可由 `relic_writer.py` 在生成文件夹时一并落档，保证指纹、授权、版本号一致。
 
 ## 输出要求
 

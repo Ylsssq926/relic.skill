@@ -13,7 +13,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -58,6 +58,7 @@
 - [伦理声明](#伦理声明)
 - [社区](#社区)
 - [相关项目](#相关项目)
+- [授权](#授权)
 
 ---
 
@@ -484,9 +485,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 授权协议
 │   └── ethics.md               # 伦理红线
 │
-├── templates/                  # 📋 万物永生模板 x9（附选择指南）
+├── templates/                  # 📋 万物永生模板 x10（附选择指南）
 ├── examples/                   # 🎯 示例 Relics x3（附体验指南）
-├── scripts/                    # 🔧 Python 工具脚本 x9（含飞书全链路唤醒）
+├── scripts/                    # 🔧 Python 工具脚本 x17（含飞书全链路唤醒）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）
 └── ROADMAP.md                  # 🗺️ 产品路线图
@@ -547,6 +548,18 @@ relic.skill 站在巨人的肩膀上。感谢这些项目的启发：
   <em>真正的死亡不是心跳停止，而是最后一个记得你的人也忘了你。</em>
 </p>
 
+## 授权
+
+relic.skill 采用 **PolyForm Noncommercial License 1.0.0**。
+
+- ✅ **个人使用免费** — 学习、研究、自己给自己做 Relic、业余项目，都不需要付费
+- 💼 **商业使用需授权** — 公司内部使用、为客户交付、集成进商业产品，需购买商用授权
+- 📄 详见 [LICENSE](LICENSE) 与 [商用授权说明](COMMERCIAL-LICENSE.md)
+
+> v1.5.2 及之前为 MIT 许可；已发布的 MIT 副本不受本次变更影响。
+
+---
+
 <p align="center">
-  MIT License · Made with ❤️ by <strong>掠蓝</strong>
+  PolyForm Noncommercial 1.0.0 · 商用需授权 · Made with ❤️ by <strong>掠蓝</strong>
 </p>

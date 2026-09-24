@@ -86,3 +86,16 @@ demo-image-plans/
 # ===== 文档草稿 =====
 demo-site-copy.md
 article-woshipm.md
+
+# ===== 构建产物 / 临时调试脚本（禁止提交）=====
+# 2026-09-24 清理：以下文件曾被误提交进仓库（合计约 2.25MB），已移除
+build-log.txt
+build-output.txt
+check-html*.ps1
+relic-demo-*.tar.gz
+
+# ===== AI 助手工作记忆（含内部分析与商业策略，禁止提交）=====
+.workbuddy-ai/
+
+# ===== 部署配置（含服务器地址，禁止提交）=====
+.env.deploy

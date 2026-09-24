@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -358,9 +358,9 @@ relic.skill/
 │   ├── consent-protocol.md     # 동의 프로토콜
 │   └── ethics.md               # 윤리 레드라인
 │
-├── templates/                  # 📋 만물영생 템플릿 x9 (선택 가이드 포함)
+├── templates/                  # 📋 만물영생 템플릿 x10 (선택 가이드 포함)
 ├── examples/                   # 🎯 예시 Relics x3 (체험 가이드 포함)
-├── scripts/                    # 🔧 Python 유틸리티 스크립트 x9 (페이슈 전체 체인 단조 포함)
+├── scripts/                    # 🔧 Python 유틸리티 스크립트 x17 (페이슈 전체 체인 단조 포함)
 ├── assets/                     # 🎨 시각 자료
 ├── docs/                       # 📚 심화 문서 (tools guide 포함)
 └── ROADMAP.md                  # 🗺️ 제품 로드맵
@@ -417,6 +417,18 @@ relic.skill은 거인의 어깨 위에 서 있습니다. 다음 프로젝트들�
   <em>진짜 죽음은 심장이 멈추는 것이 아니라, 마지막으로 당신을 기억하던 사람마저 당신을 잊는 것이다.</em>
 </p>
 
+## License
+
+relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+
+- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
+- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
+- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+
+> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+
+---
+
 <p align="center">
-  MIT License · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
+  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
 </p>

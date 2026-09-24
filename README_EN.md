@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -385,9 +385,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Consent protocol
 │   └── ethics.md               # Ethical red lines
 │
-├── templates/                  # 📋 Templates for everything x9 (with a selection guide)
+├── templates/                  # 📋 Templates for everything x10 (with a selection guide)
 ├── examples/                   # 🎯 Example Relics x3 (with a quick walkthrough)
-├── scripts/                    # 🔧 Python utility scripts x9 (including Feishu full-chain forging)
+├── scripts/                    # 🔧 Python utility scripts x17 (including Feishu full-chain forging)
 ├── assets/                     # 🎨 Visual assets
 ├── docs/                       # 📚 In-depth docs (including the tools guide)
 └── ROADMAP.md                  # 🗺️ Product roadmap
@@ -446,6 +446,18 @@ relic.skill stands on the shoulders of giants. Thanks to these projects for the 
   <em>True death isn't when your heart stops. It's when the last person who remembers you forgets.</em>
 </p>
 
+## License
+
+relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+
+- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
+- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
+- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+
+> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+
+---
+
 <p align="center">
-  MIT License · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
+  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
 </p>

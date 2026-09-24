@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -350,9 +350,9 @@ relic.skill/
 │   ├── consent-protocol.md     # Протокол согласия
 │   └── ethics.md               # Этические red lines
 │
-├── templates/                  # 📋 Шаблоны для всего x9 (с руководством по выбору)
+├── templates/                  # 📋 Шаблоны для всего x10 (с руководством по выбору)
 ├── examples/                   # 🎯 Примеры Relics x3 (с гайдом по первому знакомству)
-├── scripts/                    # 🔧 Python-скрипты x9 (включая полную цепочку ковки Feishu)
+├── scripts/                    # 🔧 Python-скрипты x17 (включая полную цепочку ковки Feishu)
 ├── assets/                     # 🎨 Визуальные ресурсы
 ├── docs/                       # 📚 Подробная документация (включая гайд по инструментам)
 └── ROADMAP.md                  # 🗺️ Дорожная карта продукта
@@ -409,6 +409,18 @@ relic.skill стоит на плечах гигантов. Спасибо эти
   <em>Настоящая смерть — не тогда, когда останавливается сердце. А тогда, когда последний человек, который тебя помнил, тоже забывает.</em>
 </p>
 
+## License
+
+relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+
+- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
+- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
+- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+
+> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+
+---
+
 <p align="center">
-  MIT License · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
+  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
 </p>

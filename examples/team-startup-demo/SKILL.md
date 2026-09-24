@@ -4,7 +4,7 @@ description: >
   星火工作室（Spark Studio）的团队文化 Relic。一个 2022-2025 年间存在过的 5 人 AI 产品创业团队：
   先吐槽再开工，周五点海底捞，用飞书但天天骂飞书，需求总在变但总能把版本扛上线。
 version: 1.0.0
-license: MIT
+license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 relic-type: team-culture
 active-years: "2022-2025"
