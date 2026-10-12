@@ -94,8 +94,15 @@ build-output.txt
 check-html*.ps1
 relic-demo-*.tar.gz
 
+# ===== 发布物（zip 经 GitHub Releases / Agensi 分发，不进 git）=====
+relic.zip
+
 # ===== AI 助手工作记忆（含内部分析与商业策略，禁止提交）=====
 .workbuddy-ai/
 
+# ===== generated 规则副本（源头在根 .agent/，公开仓不含服务器 IP）=====
+.claude/
+
 # ===== 部署配置（含服务器地址，禁止提交）=====
 .env.deploy
+.workbuddy/

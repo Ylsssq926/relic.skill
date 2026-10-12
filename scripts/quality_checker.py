@@ -140,27 +140,27 @@ def count_chinese_words(text: str) -> int:
 
 
 def count_evidence(text: str) -> tuple[int, int, int]:
-    """统计 verbatim / artifact / impression 出现次数。"""
-    v = len(re.findall(r"verbatim", text, re.IGNORECASE))
-    a = len(re.findall(r"artifact", text, re.IGNORECASE))
-    i = len(re.findall(r"impression", text, re.IGNORECASE))
+    """统计 verbatim / artifact / impression 出现次数，支持中英文标记。"""
+    v = len(re.findall(r"(?:verbatim|原话|台词|口头禅|名言)", text, re.IGNORECASE))
+    a = len(re.findall(r"(?:artifact|物证|照片|截图|录音|文档|会议纪要|来源[：:])", text, re.IGNORECASE))
+    i = len(re.findall(r"(?:impression|印象|口述|回忆|访谈)", text, re.IGNORECASE))
 
     # 兼容 relic_writer.py 生成的 markdown：用“来源：”作为轻量证据信号。
     if v + a + i == 0:
-        artifact_like = len(re.findall(r"^\-\s*来源：", text, re.MULTILINE))
+        artifact_like = len(re.findall(r"^\-\s*来源[：:]", text, re.MULTILINE))
         a += artifact_like
     return v, a, i
 
 
 def has_specifics(text: str) -> bool:
-    """检查是否有具体的场景描述（时间、地点、对话等）。"""
+    """检查是否有具体的场景描述（时间、地点、对话、高辨识度细节等）。"""
     indicators = [
         r"\d{4}[-/]",             # 年份
-        r'["\'].+["\']',          # 引用的话
-        r"比如",                   # 举例
-        r"有一次",                 # 具体事件
-        r"那天",                   # 具体时间
-        r"记得",                   # 回忆
+        r'["\'“”‘’].+["\'“”‘’]',  # 引用的话（含中文引号）
+        r"比如|例如",             # 举例
+        r"有一次|那天|记得|当时",   # 具体时点
+        r"每次|经常|总会|一旦",     # 稳定习惯细节
+        r"清晨|白天|傍晚|夜间|凌晨|平时|通常", # 时段与作息细节
     ]
     for pattern in indicators:
         if re.search(pattern, text):
@@ -212,10 +212,10 @@ def analyze_personality(relic_dir: Path) -> list[DimensionScore]:
 
     dimension_names = ["认知", "表达", "行为", "情感"]
     alt_names = {
-        "认知": ["cognition", "习性", "决策", "认知框架"],
-        "表达": ["expression", "互动", "沟通", "表达风格"],
-        "行为": ["behavior", "生活", "节奏", "行为习惯", "生活节奏"],
-        "情感": ["emotion", "情绪", "感受", "情感特征"],
+        "认知": ["cognition", "习性", "决策", "认知框架", "感官", "发言", "起承转合", "习性模式", "决策风格"],
+        "表达": ["expression", "互动", "沟通", "表达风格", "空间", "行动", "感官锚点", "互动风格", "沟通习惯"],
+        "行为": ["behavior", "生活", "节奏", "行为习惯", "生活节奏", "价值", "价值观", "轨迹", "争议", "行为模式"],
+        "情感": ["emotion", "情绪", "感受", "情感特征", "梗", "仪式", "内部梗", "内部梗和仪式", "亲密", "氛围", "心理", "情绪表达", "情感接口"],
     }
 
     results: list[DimensionScore] = []

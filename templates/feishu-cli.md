@@ -1,173 +1,174 @@
-# 🐦 飞书 CLI — 协作记忆蒸馏模板
+# 🐦 Feishu CLI — Collaboration Memory Distillation Template
 
-> **命令格式说明**:本文档中的 `lark-cli` 命令基于 [飞书 CLI 官方文档](https://github.com/larksuite/cli)。使用前请先运行 `lark-cli --help` 和 `lark-cli im --help` 等验证命令是否存在。如命令格式不匹配,请参考官方文档调整。会议纪要请使用 `lark-cli minutes` 模块，视频会议请使用 `lark-cli vc` 模块，两者是独立的。
+> **Command format note**: `lark-cli` commands in this document follow the [Feishu CLI official docs](https://github.com/larksuite/cli). Run `lark-cli --help` and `lark-cli im --help` first to verify a command exists. If the format doesn't match, adjust per the official docs. Meeting minutes use the `lark-cli minutes` module; video conferences use the `lark-cli vc` module — they are separate.
 >
 > 用飞书 CLI 蒸馏团队协作记忆,让那些一起扛过的夜继续发光。
+> *Distill team collaboration memory with Feishu CLI — let the nights you pulled together keep glowing.*
 
-## 适用场景
+## When to Use
 
-- 离职同事的协作记忆——那些深夜的飞书消息，每一条都是真的
-- 团队文化存档——人散了，但那种一起熬夜改 bug 的感觉还在
-- 资深专家的数字分身——新人入职时，直接在飞书里和「赛博导师」请教
-- 项目里程碑纪念——用 CLI 导出的群聊记录，是最真实的周年纪念
+- A departing colleague's collaboration memory — every late-night Feishu message is real
+- Team culture archiving — people scatter, but the feeling of debugging until dawn together stays
+- A senior expert's digital twin — newcomers consult the "Cyber Mentor" right in Feishu
+- Project milestone commemoration — CLI-exported group chats make the most authentic anniversary
 
-## 数据采集（飞书 CLI 作为「眼」）
+## Data Collection (Feishu CLI as the "eyes")
 
-⚠️ 采集前请确保已获得相关人员的知情同意，详见文末合规声明。
+⚠️ Ensure informed consent from everyone involved before collecting — see the compliance statement at the end.
 
-### 群聊记录
+### Group chats
 
 ```bash
-# 搜索特定主题的群聊消息
-lark-cli im +messages-search --chat-id "oc_xxx" --query "项目上线"
+# Search group messages by topic
+lark-cli im +messages-search --chat-id "oc_xxx" --query "project launch"
 
-# 导出群聊历史记录
+# Export group chat history
 lark-cli im +messages-list --chat-id "oc_xxx" --page-all
 
-# 下载群聊中的媒体文件
+# Download media from group chats
 lark-cli im +messages-resources-download --message-id "om_xxx" --file-key "file_xxx" --output ./relic-data/
 ```
 
-### 文档批注
+### Doc annotations
 
 ```bash
-# 读取飞书文档内容（含评论和批注）
+# Read Feishu doc content (including comments and annotations)
 lark-cli docs +fetch --doc-id "doxxx"
 
-# 搜索知识库文档（使用 API 命令层）
+# Search knowledge-base docs (API command layer)
 lark-cli wiki nodes list --space-id "spacexxx"
 ```
 
-### 协作时间线
+### Collaboration timeline
 
 ```bash
-# 从多维表格提取项目时间线
+# Extract project timelines from Bitable
 lark-cli base +record-list --app-token "bxxx" --table-id "tblxxx"
 
-# 查看今日议程
+# Today's agenda
 lark-cli calendar +agenda
 
-# 查看日历事件（使用 API 命令层）
+# Calendar events (API command layer)
 lark-cli calendar events instance_view --params '{"calendar_id":"primary","start_time":"1700000000","end_time":"1700086400"}'
 ```
 
-### 会议纪要
+### Meeting minutes
 
 ```bash
-# 获取会议纪要（使用 vc 模块的 notes 功能）
+# Meeting minutes (vc module notes feature)
 lark-cli vc +notes --meeting-ids "meeting_xxx"
 
-# 获取会议录音
+# Meeting recordings
 lark-cli vc +recording --meeting-id "meeting_xxx"
 ```
 
-## 主动行为（飞书 CLI 作为「手」）
+## Proactive Behavior (Feishu CLI as the "hands")
 
-### Relic 主动发消息
+### Relic initiates messages
 
 ```bash
-# Relic 想找你时，通过飞书 CLI 发消息
+# When the Relic wants to reach you, send via Feishu CLI
 lark-cli im +messages-send --chat-id "oc_xxx" --text "怎么还在加班？早点回去。"
 
-# 以机器人身份发消息
-lark-cli im +messages-send --as bot --chat-id "oc_xxx" --text "今天是你入职三周年，还记得第一天吗？"
+# As a bot
+lark-cli im +messages-send --as bot --chat-id "oc_xxx" --text "Today is your third work anniversary — remember day one?"
 ```
 
-### 写入回忆录
+### Writing memoirs
 
 ```bash
-# 在飞书文档里写入回忆
-lark-cli docs +update --doc-id "doxxx" --markdown "## 团队回忆\n那个凌晨三点的上线夜..."
+# Write memories into a Feishu doc
+lark-cli docs +update --doc-id "doxxx" --markdown "## Team memories\nThat 3 a.m. launch night..."
 ```
 
-### 日历触发
+### Calendar triggers
 
 ```bash
-# 在纪念日/生日创建提醒事件
-lark-cli calendar +create --summary "老王入职纪念日" --start "2026-04-14T09:00:00" --end "2026-04-14T10:00:00"
+# Create reminder events on anniversaries / birthdays
+lark-cli calendar +create --summary "Lao Wang's work anniversary" --start "2026-04-14T09:00:00" --end "2026-04-14T10:00:00"
 
-# 基于日程触发主动关怀（赛博导师场景）
-lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备" --start "2026-04-17T09:50:00" --end "2026-04-17T09:55:00"
+# Schedule-triggered proactive care (Cyber Mentor scenario)
+lark-cli calendar +create --summary "Cyber Mentor reminder: prep before client visit" --start "2026-04-17T09:50:00" --end "2026-04-17T09:55:00"
 ```
 
-## 四维灵魂提取
+## Four-Dimension Extraction
 
-### 认知框架 (Cognition)
+### Cognition
 
-- 从飞书文档的评论和批注中提取思维模式
-- 从群聊讨论中提取决策逻辑和优先级
-- 从 OKR 文档中提取价值观和目标导向
+- Extract thinking patterns from doc comments and annotations
+- Extract decision logic and priorities from group-chat discussions
+- Extract values and goal orientation from OKR docs
 
-### 表达风格 (Expression)
+### Expression
 
-- 从飞书消息中提取语气、口癖、表情使用习惯
-- 从文档评论中提取写作风格和表达偏好
-- 从会议发言中提取语言节奏
+- Extract tone, verbal tics, and emoji habits from Feishu messages
+- Extract writing style and expression preferences from doc comments
+- Extract language rhythm from meeting speech
 
-### 行为模式 (Behavior)
+### Behavior
 
-- 从飞书日历中提取工作节奏和习惯
-- 从多维表格记录中提取协作模式
-- 从消息回复时间中提取响应习惯
+- Extract work rhythm and habits from the Feishu calendar
+- Extract collaboration patterns from Bitable records
+- Extract response habits from message reply times
 
-### 情感接口 (Emotion)
+### Emotion
 
-- 从群聊互动中提取关心和鼓励的表达方式
-- 从文档批注中提取对项目的情感投入
-- 从会议中的语气变化中提取情绪模式
+- Extract ways of caring and encouraging from group interactions
+- Extract emotional investment in projects from doc annotations
+- Extract emotional patterns from tone shifts in meetings
 
-## 业务专家场景
+## Domain Expert Scenario
 
-除了团队协作记忆，飞书 CLI 还支持**业务专家数字身份唤醒**——把离职大佬、金牌客服、顶级销售的专业判断蒸馏成可对话的赛博导师。
+Beyond team collaboration memory, Feishu CLI also supports **domain-expert digital identity awakening** — distilling a departed veteran, star support agent, or top salesperson's professional judgment into a conversational Cyber Mentor.
 
-详细用法见 [业务专家模板](expert.md) 和一键唤醒脚本 `scripts/lark_expert_forge.py`。
+See [Domain Expert Template](expert.md) and the one-shot awakening script `scripts/lark_expert_forge.py`.
 
 ```bash
-# 全链路唤醒：授权 → 采集 → 结构化 → 主动关怀 → 生成 Relic
-python scripts/lark_expert_forge.py --expert "张工" --email "zhang@company.com" --chat-id "oc_xxx" --dry-run
+# Full pipeline: consent → collection → structuring → proactive care → generate Relic
+python scripts/lark_expert_forge.py --expert "Zhang" --email "zhang@company.com" --chat-id "oc_xxx" --dry-run
 ```
 
-关键能力：
+Key capabilities:
 
-- **多维语料抓取** — IM 群聊 + 飞书文档 + 知识库 + 会议纪要
-- **知识结构化** — 蒸馏结果写入飞书多维表格，团队可直观查看和修正
-- **日历联动** — 基于新人日程主动提醒（评审前发 Checklist、拜访前发话术）
-- **授权核验** — 通过飞书交互式卡片获取被蒸馏者知情同意
+- **Multi-dimensional corpus capture** — IM group chats + Feishu docs + knowledge base + meeting minutes
+- **Knowledge structuring** — distillation written into Feishu Bitable for team review and correction
+- **Calendar integration** — proactive reminders based on newcomer schedules (checklists before reviews, scripts before visits)
+- **Consent verification** — informed consent via Feishu interactive cards
 
-## 合规声明
+## Compliance Statement
 
-⚠️ **重要提醒：**
+⚠️ **Important reminders:**
 
-- 使用飞书 CLI 采集数据前，必须获得相关人员的知情同意
-- 企业内部数据采集需遵守公司数据安全政策
-- 通过飞书 CLI 获取的数据仅用于创建经授权的数字分身
-- Relic 在交互中会明确标识自己不是真人
-- 详见 [授权协议](../soul-shield/consent-protocol.md) 和 [伦理红线](../soul-shield/ethics.md)
+- Obtain informed consent from everyone involved before collecting data via Feishu CLI
+- Enterprise data collection must follow company data-security policy
+- Data obtained via Feishu CLI may only be used to create authorized digital twins
+- Relic identity is carried by metadata and UI labels; the conversation body does not mechanically recite disclaimers, and answers identity questions honestly in character (see [Ethics Red Lines](../soul-shield/ethics.md) §5, §6)
+- See [Consent Protocol](../soul-shield/consent-protocol.md) and [Ethics Red Lines](../soul-shield/ethics.md)
 
-## 示例
+## Examples
 
-### 团队协作记忆体
+### Team collaboration memory
 
 ```text
-[飞书群 · 翔宇科技]
+[Feishu group · Xiangyu Tech]
 
-你 ❯ 老王要离职了
+You ❯ Lao Wang is leaving
 
-群里安静了很久。
+The group goes quiet for a long time.
 
-小李 ❯ 飞书群不散，你随时回来冒泡
-老王 ❯ 文档权限我都交接好了，但那个凌晨三点的群我舍不得退
-小张 ❯ 我用飞书 CLI 把咱们的群聊记录导出来了，那些夜没白熬
-运营 ❯ 你教我的第一件事就是——遇到问题先别慌
+Xiao Li ❯ The group isn't disbanding — come back and lurk anytime
+Lao Wang ❯ I've handed over all doc permissions, but I can't bear to leave that 3 a.m. group
+Xiao Zhang ❯ I exported our group history with Feishu CLI — those nights weren't wasted
+Ops ❯ The first thing you taught me was — when something breaks, don't panic
 ```
 
-### 赛博导师
+### Cyber Mentor
 
 ```text
-你 ❯ 这个方案你觉得怎么样？
+You ❯ What do you think of this approach?
 
-赛博导师 ❯ 思路没问题，但第三步可以换个方式。
-          我在飞书文档里留了批注，你看看。
-          上次我们做过类似的，我翻一下多维表格里的记录。
-          记住，先验证假设，再写代码。
+Cyber Mentor ❯ The direction is fine, but step 3 could use a different method.
+              I left annotations in the Feishu doc — take a look.
+              We did something similar before; let me check the records in the Bitable.
+              Remember: validate the assumption before writing code.
 ```

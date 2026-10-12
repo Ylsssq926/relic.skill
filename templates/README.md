@@ -1,29 +1,29 @@
-# 模板选择指南
+# Template Selection Guide
 
-> 不确定该用哪个模板？看这张表。
+> Not sure which template? This table decides.
 
-## 快速选择
+## Quick Selection
 
-| 你想留住的是… | 用这个模板 | 核心特点 |
+| What you want to keep… | Use This Template | Core Traits |
 |-------------|-----------|---------|
-| 一个具体的人 | [human.md](human.md) | 完整四维提取，适合有聊天记录的场景 |
-| 一只猫、一条狗 | [pet.md](pet.md) | 四维重定义为习性/互动/情绪/节奏，猫不说人话 |
-| 两个人之间的默契 | [relationship.md](relationship.md) | 蒸馏的不是某个人，是你们之间的互动模式 |
-| 一个团队的感觉 | [team-culture.md](team-culture.md) | 决策风格、群聊画风、内部梗、协作节奏 |
-| 资深专家的专业判断 | [expert.md](expert.md) | 飞书 CLI 深度联动，知识结构化到多维表格，日历触发主动关怀 |
-| 一个地方的记忆 | [place.md](place.md) | 感官优先：声音、气味、光线、温度 |
-| 一个重要瞬间 | [moment.md](moment.md) | 聚焦单一时间窗口，场景细节 + 情感峰值 |
-| 一个你佩服的公众人物 | [public-figure.md](public-figure.md) | 仅限公开资料，提取认知框架当私人参谋 |
-| 飞书里的协作记忆 | [feishu-cli.md](feishu-cli.md) | IM / Docs / Base / Calendar / Wiki / VC 全链路 |
+| A specific person | [human.md](human.md) | Full four-dimension extraction; best with chat logs |
+| A cat, a dog | [pet.md](pet.md) | Four dimensions redefined as habits / interaction / emotion / rhythm — cats don't speak human |
+| The understanding between two people | [relationship.md](relationship.md) | Distills not a person, but the interaction pattern between you |
+| The feel of a team | [team-culture.md](team-culture.md) | Decision style, group-chat texture, inside jokes, collaboration rhythm |
+| A senior expert's professional judgment | [expert.md](expert.md) | Deep Feishu CLI integration; knowledge structured into Bitable; calendar-triggered proactive care (regional enhancement · Mainland China) |
+| The memory of a place | [place.md](place.md) | Sensory first: sound, smell, light, temperature |
+| One important moment | [moment.md](moment.md) | Single time window; scene details + emotional peak |
+| A public figure you admire | [public-figure.md](public-figure.md) | Public sources only; extract the cognitive framework as a private advisor |
+| Collaboration memory in Feishu | [feishu-cli.md](feishu-cli.md) | IM / Docs / Base / Calendar / Wiki / VC full pipeline (regional enhancement · Mainland China) |
 
-## 不确定？
+## Not sure?
 
-直接对 AI 说"帮我唤醒一个 Relic"，描述你想留住的东西，AI 会帮你选模板。
+Just tell the AI "帮我唤醒一个 Relic" / "awaken a relic" and describe what you want to keep — the AI will pick the template with you.
 
-## 素材越多越好，但少也能做
+## More material is better, but less still works
 
-- **素材丰富**（200+ 条聊天、多段语音、照片）→ 蒸馏出来的 Relic 细节饱满，四维完整
-- **素材一般**（几十条聊天、一些照片）→ 能做，但某些维度会标注"证据稀薄"
-- **几乎没有素材**（只有你的记忆）→ 用 live-collector 实时对话采集模式，AI 问你答，边聊边蒸馏
+- **Rich material** (200+ chats, several voice clips, photos) → a Relic with full detail and complete four dimensions
+- **Moderate material** (dozens of chats, some photos) → workable, but some dimensions get labeled "thin evidence"
+- **Almost no material** (only your memory) → use the live-collector real-time interview mode: the AI asks, you answer, distilling as you chat
 
-没有"素材不够就不能做"这回事。有多少用多少，诚实标注就好。
+There is no such thing as "not enough material, can't do it." Use what you have, label honestly, done.

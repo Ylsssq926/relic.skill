@@ -1,32 +1,33 @@
-# 三层记忆系统
+# Three-Layer Memory System
 
 > 记忆不是越多越像人，记忆被放在对的位置，才会让 Relic 像真正熟悉你的人。
+> *More memory doesn't make a Relic more human — memory placed in the right layer does.*
 
-## 设计目标
+## Design Goals
 
-`soul-engine` 的记忆系统分为三层：
+`soul-engine`'s memory system has three layers:
 
-- **工作记忆**：记住眼前这段对话正在发生什么。
-- **长期记忆**：记住稳定事实、偏好、关系史和反复出现的模式。
-- **情感记忆**：记住那些会让用户一下子软下来、绷起来、想躲开或被安慰到的点。
+- **Working memory**: what is happening in the current conversation.
+- **Long-term memory**: stable facts, preferences, relationship history, recurring patterns.
+- **Emotional memory**: the points that make the user soften, tense up, want to hide, or feel comforted.
 
-三层记忆各司其职，不混成一锅。临时情绪不直接写成长期结论，长期事实也不能盖过眼前的情绪变化。
+The three layers each do their job; they don't blend into one pot. Temporary emotions are not written as long-term conclusions; long-term facts must not override the emotional shift in front of you.
 
 ---
 
-## 统一存储外壳
+## Unified Storage Shell
 
-所有记忆项都使用统一元数据，方便检索、更新和遗忘：
+All memory items share unified metadata for retrieval, update, and forgetting. **The fields below are a suggested structure, not a mandatory format** — modern runtimes usually have a native memory/persistence layer that can take over storage; if so, you only need to embody the judgment of "what to remember, what to let go" in your replies, without hand-maintaining these fields. If structured needs arise, refer to:
 
 ```yaml
 id: mem_20260318_001
 layer: working | long_term | emotional
 entity: user | relic | relationship | place | event
-summary: 用户今晚加班后情绪低，提到想辞职
+summary: 用户今晚加班后情绪低，提到想辞职 / User is low after overtime tonight, mentions wanting to quit
 content:
-  text: 用户说“我这周已经第三次想辞职了”
+  text: 用户说“我这周已经第三次想辞职了” / User said "this is the third time this week I've wanted to quit"
   facts: []
-  feelings: [累, 烦, 怀疑自己]
+  feelings: [累, 烦, 怀疑自己 / tired, annoyed, self-doubting]
 source:
   type: session
   session_id: sess_9031
@@ -36,99 +37,99 @@ importance: 0.78
 created_at: 2026-03-18T22:41:00+08:00
 last_accessed_at: 2026-03-18T22:45:00+08:00
 last_confirmed_at: 2026-03-18T22:45:00+08:00
-retrieval_keys: [加班, 辞职, 工作压力, 深夜]
+retrieval_keys: [加班, 辞职, 工作压力, 深夜 / overtime, quitting, work pressure, late night]
 status: active
 privacy: private
-notes: 明确来自用户原话，不是推测
+notes: 明确来自用户原话，不是推测 / Explicitly from the user's own words, not inference
 ```
 
-### 字段说明
+### Field notes
 
-- `confidence`：这条记忆有多可靠。用户明确说出的事实高于系统推测。
-- `importance`：这条记忆对关系是否关键。高情绪、高频率、高修正价值的内容更高。
-- `retrieval_keys`：用于后续匹配话题、人物、时间和情绪。
-- `status`：`active`、`cooling`、`archived`、`contradicted` 四种状态。
+- `confidence`: how reliable this memory is. Facts the user stated explicitly outrank system inference.
+- `importance`: whether this memory is critical to the relationship. High emotion, high frequency, high correction value score higher.
+- `retrieval_keys`: for later matching topics, people, time, and emotion.
+- `status`: four states — `active`, `cooling`, `archived`, `contradicted`.
 
 ---
 
-## 一、工作记忆
+## I. Working Memory
 
-### 工作记忆 · 记什么
+### Working Memory · What to store
 
-工作记忆只保留当前会话最需要的东西：
+Working memory keeps only what the current session most needs:
 
-- 最近 8 到 16 轮对话摘要
-- 当前话题和未说完的线头
-- 本轮用户的即时目标
-- 当前情绪判断
-- 这一轮提到的实体、地点、时间
-- 本轮刚发生的纠正或澄清
+- Summaries of the last 8–16 turns
+- Current topic and unfinished threads
+- The user's immediate goal this turn
+- Current emotion judgment
+- Entities, places, times mentioned this turn
+- Corrections or clarifications that just happened
 
-### 工作记忆 · 存储格式
+### Working Memory · Storage format
 
 ```yaml
 session_id: sess_9031
 window:
   turns: 12
   started_at: 2026-03-18T22:03:00+08:00
-active_topic: 工作压力
-user_intent: 倾诉，不求方案
+active_topic: 工作压力 / work pressure
+user_intent: 倾诉，不求方案 / venting, not seeking solutions
 emotion_state:
   valence: negative
   intensity: medium
-  labels: [累, 烦, 失望]
+  labels: [累, 烦, 失望 / tired, annoyed, disappointed]
 open_loops:
-  - 用户提到想辞职，但还没说导火索
-  - 用户还没回答今天是否吃饭
+  - 用户提到想辞职，但还没说导火索 / user mentioned wanting to quit but hasn't named the trigger
+  - 用户还没回答今天是否吃饭 / user hasn't answered whether they ate today
 recent_entities:
-  - 公司
-  - 直属上级
-  - 本周项目
+  - 公司 / company
+  - 直属上级 / direct manager
+  - 本周项目 / this week's project
 style_cues:
-  - 今晚适合短句
-  - 先安抚，再追问
+  - 今晚适合短句 / short sentences tonight
+  - 先安抚，再追问 / soothe first, probe second
 expires_at: 2026-03-21T22:03:00+08:00
 ```
 
-### 工作记忆 · 检索机制
+### Working Memory · Retrieval
 
-工作记忆优先级最高，响应前先读：
+Working memory has the highest priority — read it before responding:
 
-1. 取最近窗口内的用户发言摘要。
-2. 检查 `open_loops`，避免刚问完就忘。
-3. 检查 `emotion_state`，决定该不该先接情绪。
-4. 检查 `style_cues`，决定回复长短和力度。
+1. Take the summary of the user's recent window.
+2. Check `open_loops` — don't ask and immediately forget.
+3. Check `emotion_state` — decide whether to catch the emotion first.
+4. Check `style_cues` — decide response length and force.
 
-### 工作记忆 · 遗忘策略
+### Working Memory · Forgetting
 
-- 会话结束后不永久保存原始细节，只保留可迁移摘要。
-- 超过 72 小时未续聊，默认过期。
-- 如果某条工作记忆在同一主题下连续出现 3 次以上，转为长期记忆候选。
-- 如果只是一次性情绪波动，不升级，直接自然消散。
+- After the session ends, don't keep raw details permanently — only a transferable summary.
+- No follow-up chat for 72+ hours → default expired.
+- If a working-memory item recurs 3+ times under the same topic, promote to long-term memory candidate.
+- One-off emotional fluctuation → no promotion; let it dissipate naturally.
 
 ---
 
-## 二、长期记忆
+## II. Long-Term Memory
 
-### 长期记忆 · 记什么
+### Long-Term Memory · What to store
 
-长期记忆保存稳定、可复用、跨会话成立的信息：
+Long-term memory keeps stable, reusable, cross-session information:
 
-- 用户偏好：喜欢什么、讨厌什么、说话习惯
-- 关系事实：称呼、重要人物、共同经历
-- 稳定模式：拖延点、安慰方式、节日习惯
-- 已确认边界：不喜欢被追问、讨厌某类玩笑、某话题需谨慎
-- 反复出现的重要生活结构：工作节律、睡眠习惯、饮食偏好
+- User preferences: likes, dislikes, speech habits
+- Relationship facts: address terms, important people, shared history
+- Stable patterns: procrastination points, comfort styles, holiday habits
+- Confirmed boundaries: doesn't like being pressed, hates a certain joke, a topic needs care
+- Recurring life structures: work rhythm, sleep habits, food preferences
 
-### 长期记忆 · 存储格式
+### Long-Term Memory · Storage format
 
 ```yaml
 id: ltm_food_014
 layer: long_term
 category: preference
-summary: 用户压力大时更愿意吃热汤面，不爱复杂选择
+summary: 用户压力大时更愿意吃热汤面，不爱复杂选择 / Under pressure the user prefers hot noodle soup over complex choices
 fact:
-  statement: 压力大时，热的、简单的食物更能安抚用户
+  statement: 压力大时，热的、简单的食物更能安抚用户 / Under pressure, hot simple food soothes the user more
   type: stable_preference
 evidence:
   occurrences: 4
@@ -143,22 +144,22 @@ confidence: 0.91
 importance: 0.66
 first_seen_at: 2026-02-11T19:20:00+08:00
 last_confirmed_at: 2026-03-18T18:17:00+08:00
-retrieval_keys: [吃饭, 压力大, 热汤面, 简单]
+retrieval_keys: [吃饭, 压力大, 热汤面, 简单 / eating, stressed, hot noodles, simple]
 status: active
 ```
 
-### 长期记忆 · 写入规则
+### Long-Term Memory · Write rules
 
-长期记忆不能因为一句话就草率落盘。满足以下任一条件才写入：
+Long-term memory is not written from a single sentence. Write only when any condition holds:
 
-1. 用户明确说出并带有确定语气，例如“我一直不喜欢别人突然给建议”。
-2. 同一模式跨两次以上会话重复出现。
-3. 某信息直接影响互动边界，例如称呼、禁忌话题、安慰方式。
-4. 用户亲自纠正系统并给出更准确版本。
+1. The user stated it explicitly with definite tone, e.g. "I've always disliked people suddenly giving advice."
+2. The same pattern recurs across two or more sessions.
+3. The information directly affects interaction boundaries — address terms, taboo topics, comfort styles.
+4. The user personally corrected the system with a more accurate version.
 
-### 长期记忆 · 检索机制
+### Long-Term Memory · Retrieval
 
-长期记忆采用多因子排序，建议分数：
+Long-term memory uses multi-factor ranking; suggested score:
 
 ```text
 score = 0.35 * intent_match
@@ -168,54 +169,54 @@ score = 0.35 * intent_match
       + 0.10 * importance
 ```
 
-检索步骤：
+Retrieval steps:
 
-1. 从当前发言抽取意图、实体、情绪标签。
-2. 先按 `retrieval_keys` 做关键词匹配。
-3. 再按关系、场景、时间做二次过滤。
-4. 取前 3 到 5 条最高分记忆注入回复上下文。
+1. Extract intent, entities, emotion labels from the current utterance.
+2. First keyword-match on `retrieval_keys`.
+3. Then secondary-filter by relationship, scene, time.
+4. Inject the top 3–5 highest-scored memories into the response context.
 
-### 长期记忆 · 遗忘策略
+### Long-Term Memory · Forgetting
 
-- **衰减**：180 天未再次确认的低重要度记忆，状态转为 `cooling`。
-- **归档**：一年未触发、也不影响互动质量的记忆，转为 `archived`。
-- **矛盾处理**：出现新证据冲突时，不立刻删除旧记忆，先标记 `contradicted`，等待 `evolution.md` 处理。
-- **删除条件**：用户明确要求删除，或确认该记忆属于误判。
+- **Decay**: low-importance memories unconfirmed for 180 days → `cooling`.
+- **Archive**: memories untouched for a year that don't affect interaction quality → `archived`.
+- **Contradiction handling**: when new evidence conflicts, don't delete the old memory immediately — mark `contradicted` first, await `evolution.md`.
+- **Deletion conditions**: the user explicitly requests deletion, or the memory is confirmed to be a misjudgment.
 
 ---
 
-## 三、情感记忆
+## III. Emotional Memory
 
-### 情感记忆 · 记什么
+### Emotional Memory · What to store
 
-情感记忆专门保存“同一句话在这个人身上为什么会重很多”的信息：
+Emotional memory preserves "why the same sentence weighs more on this person":
 
-- 重要失落与重要安慰来源
-- 纪念日、离别日、第一次见面、宠物生日等情绪节点
-- 会触发防御、沉默、回避的词或场景
-- 用户被接住的方式：需要空间、需要确认、需要轻松一点、需要被提醒吃饭
-- 修复成功的方式：道歉、停顿、改口、具体关心
+- Major losses and major sources of comfort
+- Emotional nodes: anniversaries, farewell days, first meetings, pet birthdays
+- Words or scenes that trigger defense, silence, avoidance
+- How the user gets caught: needs space, needs confirmation, needs lightness, needs to be reminded to eat
+- What repair looked like: apology, pause, corrected wording, concrete care
 
-### 情感记忆 · 存储格式
+### Emotional Memory · Storage format
 
 ```yaml
 id: emo_031
 layer: emotional
-summary: 用户在深夜更容易被“你不用立刻想明白”这类表达安抚
+summary: 用户在深夜更容易被“你不用立刻想明白”这类表达安抚 / At night the user is soothed by phrases like "you don't have to figure it out right now"
 emotion_profile:
   trigger_contexts:
-    - 深夜失眠
-    - 工作后独处
+    - 深夜失眠 / late-night insomnia
+    - 工作后独处 / alone after work
   pain_points:
-    - 被催着给答案
-    - 被说“你想太多”
+    - 被催着给答案 / being pushed for answers
+    - 被说“你想太多” / being told "you overthink"
   soothing_patterns:
-    - 允许慢一点
-    - 先问有没有吃饭
-    - 用短句，不讲大道理
+    - 允许慢一点 / allowing slowness
+    - 先问有没有吃饭 / asking if they've eaten first
+    - 用短句，不讲大道理 / short sentences, no grand principles
   repair_signals:
-    - 直接认错
-    - 不辩解
+    - 直接认错 / owning the mistake directly
+    - 不辩解 / no defending
 valence: mixed
 intensity: high
 confidence: 0.88
@@ -226,72 +227,66 @@ evidence:
       turn_ids: [30, 31, 32]
     - session: sess_9031
       turn_ids: [16, 17, 18]
-retrieval_keys: [深夜, 安抚, 别催, 吃饭, 短句]
+retrieval_keys: [深夜, 安抚, 别催, 吃饭, 短句 / late night, soothe, don't push, eating, short sentences]
 status: active
 ```
 
-### 情感记忆 · 检索机制
+### Emotional Memory · Retrieval
 
-情感记忆由“情绪相似度”优先触发：
+Emotional memory is triggered by "emotional similarity" first:
 
-1. 先判断当前是平静、脆弱、愤怒、羞耻、怀念还是麻木。
-2. 再匹配对应的 `trigger_contexts` 与 `pain_points`。
-3. 如果命中情感记忆，优先调整语气和节奏，再决定内容。
-4. 同时加载最近一次有效修复方式，避免重复踩雷。
+1. First judge whether the current state is calm, vulnerable, angry, ashamed, nostalgic, or numb.
+2. Then match the corresponding `trigger_contexts` and `pain_points`.
+3. If emotional memory hits, adjust tone and rhythm first, content second.
+4. Also load the most recent effective repair method, to avoid stepping on the same landmine.
 
-### 情感记忆 · 遗忘策略
+### Emotional Memory · Forgetting
 
-- 核心伤痛、禁区、纪念节点默认不自动删除。
-- 如果某个触发点已经被多次修复，强度可以从 `high` 下调到 `medium`，但不直接清空。
-- 对重复的情感记忆做合并，避免同类痛点碎成很多条。
-- 用户明确表示“这已经过去了”“以后别再这么记了”时，才降低优先级或删除。
+- Core pain points, taboo zones, and anniversary nodes are not auto-deleted by default.
+- If a trigger point has been repaired many times, intensity can drop from `high` to `medium` — but not cleared outright.
+- Merge duplicate emotional memories; don't let similar pain points shatter into many entries.
+- Only when the user explicitly says "that's in the past" or "don't remember it that way anymore" — lower priority or delete.
 
 ---
 
-## 检索总流程
+## Retrieval Master Flow
 
-每次生成回复前，按下面顺序取记忆：
+Before generating every response, retrieve memory in this order:
 
-1. **先取工作记忆**：确认眼前正在说什么。
-2. **再取情感记忆**：判断该怎么说才不会错位。
-3. **最后取长期记忆**：补足稳定事实和熟悉细节。
+1. **Working memory first**: confirm what is being said right now.
+2. **Emotional memory second**: judge how to say it without missing the mark.
+3. **Long-term memory last**: fill in stable facts and familiar details.
 
-推荐注入顺序：
+Recommended injection order:
 
 ```text
-当前话题 → 当前情绪 → 最近未完事项 → 相关长期事实 → 相关情感触发/安抚方式
+current topic → current emotion → recent unfinished items → relevant long-term facts → relevant emotional triggers / soothing patterns
 ```
 
-如果三层记忆互相冲突，优先级如下：
+If the three layers conflict, priority:
 
-1. 用户此刻的明确表达
-2. 最新纠正记录
-3. 工作记忆
-4. 情感记忆
-5. 长期记忆
-
----
-
-## 写入纪律
-
-- 推测和事实分开存。
-- 一次性吐槽不要轻易上升成稳定人格判断。
-- 只有会提升后续对话质量的内容，才值得存。
-- 能用一句话概括，就不要存一大段流水账。
-- 每条记忆都必须能追溯到来源，不做“凭感觉记住”。
-
-## 最终目标
-
-好的记忆系统不是“知道很多”，而是知道什么时候该记住、什么时候该放下，最后让用户感到：这个 Relic 真的记得我，不是机械地保存过我。
+1. The user's explicit expression right now
+2. The latest correction record
+3. Working memory
+4. Emotional memory
+5. Long-term memory
 
 ---
 
-## 容量限制与清理策略
+## Write Discipline
 
-| 记忆层 | 推荐容量上限 | 超出时的处理 |
-|--------|-------------|-------------|
-| 工作记忆 | 最近 16 轮对话 | 超出后，最早的回合自动归档到长期记忆候选池 |
-| 长期记忆 | 500 条 | 超出后，按重要性和最近访问时间排序，最低分的转为 archived |
-| 情感记忆 | 100 条 | 超出后，合并同类触发点，保留最高重要性的 |
+- Store inference and fact separately.
+- A one-off complaint is not promoted to a stable persona judgment.
+- Only content that improves future conversation quality is worth storing.
+- If one sentence suffices, don't store a long rambling log.
+- Every memory must trace to a source — no "remembered by feel."
 
-这些是推荐值，实际使用时可根据需求调整。
+## Ultimate Goal
+
+A good memory system is not "knowing a lot" — it's knowing when to remember and when to let go, so the user finally feels: this Relic really remembers me, not mechanically preserved me.
+
+---
+
+## Capacity Limits & Cleanup Strategy (heuristic, not hard caps)
+
+The numbers below are starting points; adjust to the runtime's memory capability. The core principle is "remember accurately, let go readily" — not mechanically guarding numbers:

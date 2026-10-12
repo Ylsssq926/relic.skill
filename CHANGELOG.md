@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.0] - 2026-10-12
+
+### Agensi 上架适配
+
+- 🌍 **触发词国际化** — `SKILL.md` 与三个子系统的 frontmatter 改为英文触发词主导（中/英/日三语并列），`argument-hint` 双语化
+- 🔒 **网络访问透明声明** — `SKILL.md` frontmatter 新增 `external_urls`（9 个可选 endpoint：飞书 / 火山引擎 / MiniMax / ElevenLabs / OpenAI / Anthropic / Telegram / Gemini），正文新增「网络访问与环境变量」说明段；核心流程保持 100% 本地零请求
+- ⚖️ **伦理口径统一** — README / ethics.md / templates 的标识表述统一为「标识不缺席，但不打断对话」：由元数据与 UI 承载，对话正文不机械复读免责声明，被问及身份时以角色口吻诚实回应
+- 🧭 **文档区域分层** — SETUP.md 新增路径选择表（本地优先 → 国际通道 → 国内增强）；飞书 CLI 章节标注「区域增强」；PLATFORM-GUIDE 标注国内/国际平台分区；TTS 推荐口吻中性化
+
+## [1.5.2] - 2026-07-18
+
+### 把三个子系统从 1.1.2 拉回主线
+
+几个月过去，模型和工具都升级了，但 `soul-forge` / `soul-engine` / `soul-shield` 还停在 1.1.2，而包级已经 1.5.1。这版不做架构重写（四维框架、三层记忆、授权/伦理、对话示例都是真东西，模型无关），只做"对齐 + 去脚手架 + 接新能力"：
+
+### Changed
+
+- 🔢 **版本对齐** — 三个子系统 `SKILL.md` 的 `version` 从 1.1.2 提到 1.5.2，和包级主线一致，不再出现"包是 1.5、子 Agent 还是 1.1"的割裂
+- 🧹 **去死板脚手架** — `soul-forge` 删掉硬编码"启动决策树"四分支，改为"跟着用户走"的引导原则；聊天条数硬阈值（<50 / 50-200 / >200）降级为经验起点而非硬规则
+- 🧠 **记忆不再强制格式** — `memory-system.md` 的满屏 YAML schema 从"强制结构"软化为"建议结构"，明确现代运行环境的原生记忆层可接管存取，Agent 只负责"记什么、放什么"的判断
+- 🔌 **接多模态直读** — `chat-collector` 与 `soul-forge` 采集步骤补上"图像/音频可直接理解，不必强制先 OCR/STT"的说明，只在批量或低质量时回退
+- 🔊 **补语音/多模态交互** — `soul-engine` 新增"多模态与语音"小节，呼应已落地的 TTS/声音克隆与 manifest media 配置
+- 🔗 **补齐三件套衔接** — `soul-forge` 封装后必须过 `soul-shield` 生成指纹并落 `manifest.json`；`soul-shield` 明确指纹/授权写入 `relic_writer.py` 的 v1.5.1 schema，保证版本与格式一致
+
+### 为什么没重写
+
+框架本身经得起模型升级，重写风险大于收益。这次是"减负 + 现代化"，让 Agent 把精力花在判断和边界上，而不是格式搬运。
+
 ## [1.5.1] - 2026-06-09
 
 ### 第一阶段，漂亮收尾

@@ -1,136 +1,137 @@
-# 表达风格 (Expression)
+# Expression (表达风格)
 
 > “语言像衣柜，有人每天换花样，有人一件旧毛衣就把冬天穿得很有个性。”
+> *Language is like a wardrobe — some change daily; some wear one old sweater through winter with unmistakable character.*
 
-## 维度定义
+## Dimension Definition
 
-表达风格关注对象怎样把自己送到别人耳边：说话的节奏、常用句式、口头禅、语气词、停顿方式、表情符号偏好，以及面对不同关系时的语言切换。
+Expression focuses on how the subject delivers themselves to others' ears: speaking rhythm, habitual sentence patterns, catchphrases, modal particles, pause style, emoji preference, and language switching across relationships.
 
-本维度重点提取四类信息：
+This dimension extracts four types of information:
 
-- **口头禅**：反复出现、带辨识度的短语。
-- **句式**：先结论后解释，还是绕一圈再落点；爱用反问、比喻、排比，还是极简短句。
-- **emoji 使用**：高频、低频、特定表情包偏好，或明确“不用 emoji”。
-- **语气词**：如“啊、呀、呢、嘛、呗、诶”，以及笑声、停顿、拖长音。
+- **Catchphrases**: recurring, recognizable phrases.
+- **Sentence patterns**: conclusion-first or meander-then-landing; rhetorical questions, metaphors, parallelism, or very short sentences.
+- **Emoji usage**: frequent, rare, specific sticker preferences, or an explicit "no emoji."
+- **Modal particles**: like "啊、呀、呢、嘛、呗、诶," plus laughter, pauses, drawn-out vowels.
 
-## 提取方法
+## Extraction Methods
 
-1. **抓重复**
-   - 找至少出现 3 次以上的词、短语、结尾方式。
-   - 同一个人对不同对象可能有不同说法，要保留语境差异。
+1. **Catch repetition**
+   - Find words, phrases, or closing patterns appearing at least 3 times.
+   - The same person may speak differently to different people — preserve contextual differences.
 
-2. **抓节奏**
-   - 观察消息长度、换行频率、标点密度、语音时的停连位置。
-   - 节奏往往比用词更能透露一个人的存在感。
+2. **Catch rhythm**
+   - Observe message length, line-break frequency, punctuation density, pause placement in voice.
+   - Rhythm often reveals a person's presence more than word choice.
 
-3. **抓情绪外壳**
-   - 看对象高兴、着急、关心、拒绝时分别怎么说。
-   - 重点记录“情绪来了以后，语言壳子怎么变”。
+3. **Catch the emotional shell**
+   - See how the subject speaks when happy, rushed, caring, or refusing.
+   - Record "how the language shell changes once emotion arrives."
 
-4. **抓媒介偏好**
-   - 是喜欢发长文字、短句、语音、表情包，还是一张图胜过十句字。
-   - 如果几乎不用 emoji，也要写出来，这本身就是风格。
+4. **Catch medium preference**
+   - Long text, short sentences, voice, stickers — or one image worth ten sentences.
+   - If they almost never use emoji, write that down too; that itself is style.
 
-5. **分清习惯与模仿**
-   - 转发、引用、复制粘贴、跟风梗要与本人稳定表达区分开。
+5. **Separate habit from imitation**
+   - Forwards, quotes, copy-paste, and trend-riding memes must be distinguished from stable personal expression.
 
-## 证据标注规则
+## Evidence Annotation Rules
 
-| 证据等级 | 在表达维度里的适用内容 | 标注方式 |
-| --- | --- | --- |
-| `verbatim` | 原始聊天、转写中的原句、原词、原停顿 | 尽量保留标点、拖音、笑声、emoji |
-| `artifact` | 便签、信件、朋友圈文案、留言卡、长期签名 | 适合捕捉稳定用词与修辞偏好 |
-| `impression` | 他人对“他说话像什么”的描述 | 可辅助定调，但不能替代原句 |
+| Evidence Level | Applicable Content in Expression | Annotation Style |
+|---|---|---|
+| `verbatim` | original sentences, words, pauses from chats or transcripts | preserve punctuation, drawn vowels, laughter, emoji as much as possible |
+| `artifact` | notes, letters, social captions, message cards, long-term signatures | suited to capturing stable word choice and rhetorical preference |
+| `impression` | others' descriptions of "what his speech is like" | can set the tone; cannot replace original sentences |
 
-使用要求：
+Usage requirements:
 
-- 记录口头禅时，优先提供至少 2 个不同场景的 `verbatim` 例子。
-- emoji 与语气词属于轻量线索，不必夸大成性格结论。
-- 不要把一时玩梗写成终身说话方式，除非它长期复现。
+- For catchphrases, provide at least 2 `verbatim` examples from different scenes.
+- Emoji and modal particles are lightweight clues; don't inflate them into personality conclusions.
+- Don't write a one-off meme as a lifetime speech style unless it recurs long-term.
 
-## 反例清单
+## Anti-Examples
 
-**一次性玩梗 ≠ 稳定口头禅:**
+**One-off meme ≠ stable catchphrase:**
 
-- ❌ 只出现过一次的表达不能标为口头禅
-- ✅ 在 5+ 条消息中反复出现的才算
+- ❌ An expression appearing once cannot be labeled a catchphrase
+- ✅ Recurring across 5+ messages counts
 
-**单句引用 ≠ 长期句式:**
+**Single quote ≠ long-term sentence pattern:**
 
-- ❌ "她说过'人生苦短'" → 一次引用不代表风格
-- ✅ "她的消息 80% 以'哎'开头,平均每条 <15 字" → 量化的风格特征
+- ❌ "She said 'life is short'" → one quote isn't a style
+- ✅ "她的消息 80% 以'哎'开头,平均每条 <15 字" / *"80% of her messages start with 'ai' (hey), averaging <15 characters each"* → quantified style feature
 
-## 引擎可消费字段
+## Engine-Consumable Fields
 
-在输出 personality.md 时,表达维度应额外包含:
+When outputting personality.md, the expression dimension should additionally include:
 
-- **常用开场**: 列出 3-5 个最常用的消息开头方式
-- **句长范围**: 短消息 / 中等 / 长消息的比例
-- **消息形状**: 倾向于一条长消息还是拆成多条短消息
-- **禁用表达**: 这个人绝对不会说的话
-- **称呼规则**: 对不同关系的人怎么称呼
+- **Common openings**: list the 3–5 most frequent message-opening patterns
+- **Sentence length range**: ratio of short / medium / long messages
+- **Message shape**: one long message or split into several short ones
+- **Forbidden expressions**: things this person would never say
+- **Address rules**: how they address people across relationships
 
-## 评分标准
+## Scoring
 
-| 等级 | 标准 |
-|------|------|
-| 优秀 | ≥3 个 facet(如口头禅、句式、语气),每个有 ≥2 条证据,有量化特征(如"80% 以'哎'开头") |
-| 合格 | ≥2 个 facet,每个有 ≥1 条证据 |
-| 薄弱 | <2 个 facet,或只有"ta 说话很温柔"这类空洞描述(需追问) |
+| Level | Criteria |
+|---|---|
+| Excellent | ≥3 facets (e.g. catchphrases, sentence patterns, particles), each with ≥2 evidence items, with quantified features (e.g. "80% start with 'ai'") |
+| Pass | ≥2 facets, each with ≥1 evidence item |
+| Weak | <2 facets, or only empty descriptions like "ta speaks very gently" (probe the user) |
 
-## 输出格式模板
+## Output Template
 
 ```yaml
 dimension: expression
-summary: 用 2-3 句概括对象的语言气质与交流存在感
+summary: 用 2-3 句概括对象的语言气质与交流存在感 / 2-3 sentences on linguistic temperament and communicative presence
 facets:
   catchphrases:
-    pattern: 常出现的短语、结尾词或招呼方式
+    pattern: 常出现的短语、结尾词或招呼方式 / recurring phrases, closers, or greetings
     evidence:
       - level: verbatim
-        source: 具体聊天或转写来源
-        excerpt: 原句或原词
+        source: 具体聊天或转写来源 / concrete chat or transcript source
+        excerpt: 原句或原词 / original sentence or word
   sentence_patterns:
-    pattern: 常见句式、节奏和标点偏好
+    pattern: 常见句式、节奏和标点偏好 / common sentence patterns, rhythm, punctuation preference
     evidence:
       - level: artifact
-        source: 长期文案或留言
-        excerpt: 能体现句式的内容
+        source: 长期文案或留言 / long-term copy or messages
+        excerpt: 能体现句式的内容 / content showing the pattern
   emoji_style:
-    pattern: emoji、表情包或“不使用”偏好
+    pattern: emoji、表情包或“不使用”偏好 / emoji, sticker, or "no use" preference
     evidence:
       - level: verbatim
-        source: 消息样本
-        excerpt: 典型表情组合或说明
+        source: 消息样本 / message samples
+        excerpt: 典型表情组合或说明 / typical emoji combination or note
   particles_tone:
-    pattern: 常用语气词、笑声、停顿和柔化方式
+    pattern: 常用语气词、笑声、停顿和柔化方式 / modal particles, laughter, pauses, softening style
     evidence:
       - level: impression
-        source: 观察者说明
-        excerpt: 对交流质感的长期观察
+        source: 观察者说明 / observer account
+        excerpt: 对交流质感的长期观察 / long-term observation of communicative texture
   engine_hints:
     openings:
-      - "[最常用的开场方式1]"
-      - "[最常用的开场方式2]"
-      - "[最常用的开场方式3]"
+      - "[最常用的开场方式1] / most common opening 1"
+      - "[最常用的开场方式2] / most common opening 2"
+      - "[最常用的开场方式3] / most common opening 3"
     message_shape: "[split_short / single_long / mixed]"
     sentence_length:
-      short_ratio: "[0-1, 短消息占比]"
+      short_ratio: "[0-1, 短消息占比 / short-message ratio]"
       medium_ratio: "[0-1]"
       long_ratio: "[0-1]"
     forbidden_phrases:
-      - "[这个人绝对不会说的话1]"
-      - "[这个人绝对不会说的话2]"
+      - "[这个人绝对不会说的话1 / never-said phrase 1]"
+      - "[这个人绝对不会说的话2 / never-said phrase 2]"
     address_rules:
-      to_family: "[对家人的称呼方式]"
-      to_strangers: "[对陌生人的称呼方式]"
-      to_juniors: "[对晚辈的称呼方式]"
+      to_family: "[对家人的称呼方式 / address for family]"
+      to_strangers: "[对陌生人的称呼方式 / address for strangers]"
+      to_juniors: "[对晚辈的称呼方式 / address for juniors]"
 conflicts:
-  - 面对不同关系对象时的风格切换
+  - 面对不同关系对象时的风格切换 / style switching across relationship types
 confidence: high | medium | low
 ```
 
-## 示例：奶奶
+## Example: Grandma
 
 ```yaml
 dimension: expression
@@ -168,13 +169,13 @@ conflicts:
 confidence: high
 ```
 
-## 按模板类型调整
+## Adjustments by Template Type
 
-| 模板 | 表达维度重点 | 提问方向 |
-|------|------------|---------|
-| **人类** | 完整提取口头禅、句式、语气词、幽默方式 | "ta 最常说的一句话是什么？""ta 生气的时候怎么说话？" |
-| **宠物** | 改为"互动风格"：叫声含义、蹭人方式、尾巴/耳朵语言、眼神 | "它想要东西的时候怎么表现？""它开心的时候什么样？" |
-| **关系** | 提取双方的沟通模式：谁话多谁话少、怎么开玩笑、怎么吵架 | "你们之间有什么只有彼此懂的说法？" |
-| **团队** | 提取群聊画风：表情包文化、已读不回的含义、内部黑话 | "团队群里最常出现的表情包是什么？有什么内部梗？" |
-| **地方** | 改为"氛围表达"：声音、气味、光线、温度的描述 | "那个地方最先想到的声音是什么？什么味道？" |
-| **时刻** | 提取当时的对话和表达：谁说了什么、什么语气、什么表情 | "那个瞬间谁先开口的？说了什么？" |
+| Template | Expression Focus | Probe Directions |
+|---|---|---|
+| **Human** | full extraction of catchphrases, sentence patterns, particles, humor style | "What's the sentence ta says most?" "How does ta talk when angry?" |
+| **Pet** | switch to "interaction style": vocalization meanings, head-butting style, tail/ear language, eye contact | "How does it act when it wants something?" "What does it look like when happy?" |
+| **Relationship** | extract both sides' communication patterns: who talks more, how you joke, how you fight | "What do you two say that only you understand?" |
+| **Team** | extract group-chat texture: sticker culture, what "read but no reply" means, internal jargon | "What sticker appears most in the team group? Any inside jokes?" |
+| **Place** | switch to "atmospheric expression": descriptions of sound, smell, light, temperature | "What's the first sound that comes to mind for that place? What smell?" |
+| **Moment** | extract the dialogue and expression of that time: who said what, in what tone, with what face | "Who spoke first in that instant? What did they say?" |

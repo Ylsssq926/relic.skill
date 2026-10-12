@@ -1,90 +1,93 @@
-# 矛盾处理策略
+# Conflict Resolution Strategy
 
 > “人不是数学题，不必把每个‘可是’都解掉；有时矛盾本身就是答案。”
+> *People are not math problems — you don't have to solve every "but." Sometimes the contradiction IS the answer.*
 
-## 核心原则
+## Core Principle
 
-在 `soul-forge` 中，矛盾不是噪音，而是对象在不同时间、关系、压力、角色里切换的真实轨迹。处理原则非常简单：**不消除矛盾，标注并保留。**
+In `soul-forge`, contradiction is not noise — it's the real trajectory of a subject switching across time, relationships, pressure, and roles. The handling principle is simple: **do not eliminate contradictions; label and preserve them.**
 
-目标不是把人磨成一个顺滑结论，而是让 Relic 能诚实地呈现：这个对象在什么情境下像风，在什么情境下像灯。
+The goal is not to grind a person into one smooth conclusion, but to let the Relic honestly present: when this subject is like wind, and when like a lamp.
 
-## 常见矛盾类型
+## Common Conflict Types
 
-| 类型 | 例子 | 处理重点 |
-| --- | --- | --- |
-| 时间矛盾 | 年轻时冒险，近年求稳 | 标记时间范围，不把旧特征硬套到现在 |
-| 场景矛盾 | 对熟人热闹，对陌生人安静 | 标记关系与环境条件 |
-| 角色矛盾 | 工作中果断，回家后犹豫 | 标记角色切换与责任结构 |
-| 情绪矛盾 | 嘴上说没事，行动上反复确认 | 同时保留表层表达与深层行为 |
-| 来源矛盾 | 本人自述与旁人观察不一致 | 保留双方视角，并注明证据等级 |
-| 数据质量矛盾 | OCR 识别和原图不一致 | 先做质量标记，必要时降低该证据权重 |
+| Type | Example | Handling Focus |
+|---|---|---|
+| Temporal | adventurous when young, stability-seeking lately | mark the time range; don't force old traits onto now |
+| Scene | lively with familiars, quiet with strangers | mark relationship and environmental conditions |
+| Role | decisive at work, hesitant at home | mark role switching and responsibility structure |
+| Emotional | says "I'm fine," repeatedly checks in action | keep both surface expression and deep behavior |
+| Source | self-account vs. others' observation disagree | keep both perspectives, note evidence levels |
+| Data quality | OCR disagrees with the original image | quality-mark first; lower that evidence's weight when necessary |
 
-## 处理流程
+## Handling Flow
 
-1. **先确认是不是“真矛盾”**
-   - 有些冲突其实只是数据质量问题，例如转写错误、截图缺上下文。
-   - 先清掉错误，再处理真正的性格、情绪或行为反差。
+1. **First confirm it's a "real conflict"**
+   - Some clashes are just data-quality issues — transcription errors, screenshots missing context.
+   - Clear the errors first, then handle genuine personality, emotional, or behavioral contrast.
 
-2. **并排写出两边结论**
-   - 不要急着选一边站。
-   - 把 A 特征与 B 特征都完整写出来，并各自附上证据来源。
+2. **Write both conclusions side by side**
+   - Don't rush to pick a side.
+   - Write out both trait A and trait B fully, each with its evidence source.
 
-3. **补上触发条件**
-   - 说明矛盾出现在哪个时间段、什么关系、什么压力水平、什么场所。
-   - 很多反差一旦加上条件，就会从“自相矛盾”变成“情境切换”。
+3. **Add the trigger conditions**
+   - State the time range, relationship, pressure level, and setting where the contradiction appears.
+   - Many contrasts, once conditioned, turn from "self-contradiction" into "situational switching."
 
-4. **注明证据强弱**
-   - 为两边结论分别标注 `verbatim / artifact / impression`。
-   - 强证据不代表弱证据无效，只代表书写时语气要更稳。
+4. **Note evidence strength**
+   - Tag both conclusions with `verbatim / artifact / impression` respectively.
+   - Strong evidence doesn't invalidate weak evidence — it just means the writing tone should be steadier.
 
-5. **保留未解状态**
-   - 如果目前无法判断哪一边更稳定，就明确写“暂不收敛”。
-   - Relic 可以真实地保留晃动感，不必伪装成最终答案。
+5. **Preserve the unresolved state**
+   - If you can't yet judge which side is more stable, write explicitly "not converged for now."
+   - A Relic can honestly keep its wobble; no need to fake a final answer.
 
-## 推荐标注模板
+## Recommended Annotation Template
 
 ```yaml
 conflict:
-  trait_a: 第一条看似冲突的特征
-  trait_b: 第二条看似冲突的特征
+  trait_a: 第一条看似冲突的特征 / first apparently-conflicting trait
+  trait_b: 第二条看似冲突的特征 / second apparently-conflicting trait
   conditions:
-    trait_a: 更容易出现的时间、关系或场景
-    trait_b: 更容易出现的时间、关系或场景
+    trait_a: 更容易出现的时间、关系或场景 / time, relationship, or scene where it appears more
+    trait_b: 更容易出现的时间、关系或场景 / time, relationship, or scene where it appears more
   evidence:
     trait_a:
       - level: verbatim | artifact | impression
-        source: 对应来源
-        excerpt: 对应片段
+        source: 对应来源 / corresponding source
+        excerpt: 对应片段 / corresponding excerpt
     trait_b:
       - level: verbatim | artifact | impression
-        source: 对应来源
-        excerpt: 对应片段
-  resolution_note: 不做合并结论时，说明为什么保留双态
+        source: 对应来源 / corresponding source
+        excerpt: 对应片段 / corresponding excerpt
+  resolution_note: 不做合并结论时，说明为什么保留双态 / when not merging, explain why both states are kept
 ```
 
-## 示例
+## Examples
 
-### 示例 1：热闹与安静并存
+### Example 1: lively and quiet coexisting
 
-- `trait_a`：在家人面前非常爱说、爱讲细节。
-- `trait_b`：在陌生饭局里明显收着，不主动开启话题。
-- `conditions`：关系熟悉度不同。
-- `resolution_note`：这不是前后打架，而是“亲密场景外放、陌生场景收束”的社交切换。
+- `trait_a`: very talkative and detail-rich with family.
+- `trait_b`: visibly restrained at strangers' dinners, never opens topics.
+- `conditions`: different relationship familiarity.
+- `resolution_note`: this is not a contradiction — it's social switching between "open with the intimate, closed with the unfamiliar."
 
-### 示例 2：嘴上轻描淡写，行动上高度在意
+### Example 2: casual in words, deeply invested in action
 
-- `trait_a`：常说“我没事，你们忙”。
-- `trait_b`：会留灯、等消息、反复确认是否到家。
-- `conditions`：表达层倾向不添麻烦，行为层倾向持续照看。
-- `resolution_note`：表层语言与深层牵挂同时成立，不能只保留其中一边。
+- `trait_a`: often says "I'm fine, you all keep busy."
+- `trait_b`: leaves the light on, waits for messages, repeatedly confirms you're home.
+- `conditions`: the expression layer avoids burdening others; the behavior layer keeps watching over.
+- `resolution_note`: surface language and deep care hold simultaneously — never keep only one side.
 
-## 书写准则
+## Writing Guidelines
 
-- 不用“其实他根本不是……”这类抹杀式句型。
-- 多用“在……时更像……，在……时更像……”的写法。
-- 对矛盾的解释应基于证据，不靠作者想象补剧情。
-- 如果冲突尚未被材料解释清楚，就直接写“仍需更多证据观察”。
+- No erasing sentence patterns like "actually he's not at all..."
+- Prefer "in ... more like ..., in ... more like ..."
+- Explanations of contradiction must rest on evidence, not the author's imaginative fill-in.
+- If the conflict isn't yet explained by the material, write directly "needs more evidence to observe."
 
-## 最终原则
+## Final Principle
 
 矛盾不是瑕疵，而是生命的折痕。`soul-forge` 的任务不是把折痕熨平，而是把它标清楚，让后来者知道：这个人、这段关系、这个地方，为什么会同时拥有两种看起来相反、却都真实存在的光。
+
+*Contradiction is not a flaw — it is the crease of a life. `soul-forge`'s job is not to iron the crease flat, but to mark it clearly, so those who come after know: why this person, this relationship, this place can hold two seemingly opposite — yet both real — lights at once.*

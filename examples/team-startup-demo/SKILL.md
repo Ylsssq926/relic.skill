@@ -1,6 +1,8 @@
 ---
 name: spark-studio
 description: >
+  Spark Studio's team-culture Relic — a 5-person AI product startup that existed 2022–2025:
+  roast first then work, hotpot on Fridays, used Feishu while cursing Feishu daily, requirements always changing but versions always shipping.
   星火工作室（Spark Studio）的团队文化 Relic。一个 2022-2025 年间存在过的 5 人 AI 产品创业团队：
   先吐槽再开工，周五点海底捞，用飞书但天天骂飞书，需求总在变但总能把版本扛上线。
 version: 1.0.0

@@ -181,12 +181,26 @@ Each piece of information is tagged with an evidence level:
 
 ## Installation
 
-### Option 1: Install into the current project
+### Option 0: Agensi / Downloaded ZIP Quickstart (Recommended)
+
+If you purchased or downloaded `relic.zip` from Agensi, extract the archive and place the `relic` folder into your agent's skill directory:
+
+- **Claude Code**: Extract into `.claude/skills/relic` (project-level) or `~/.claude/skills/relic` (global)
+- **Cursor**: Extract into `.cursor/skills/relic`
+- **Windsurf / Cline / Copilot**: Extract into `.windsurf/skills/relic`, `.cline/skills/relic`, or `.github/skills/relic`
+- **Universal**: Place the extracted `relic` directory directly into your workspace. Any agent pointing to `relic/SKILL.md` will activate immediately.
+
+### Option 1: Install into the current project with Git
 
 ```bash
-mkdir -p .claude/skills
-git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
+git clone https://github.com/Ylsssq926/relic.skill relic
 ```
+
+Then place the `relic` directory where your agent can read it:
+
+- **agents-standard hosts (OpenClaw / CodeBuddy / WorkBuddy — anything that reads AGENTS.md)**: project root, or `~/.agents/skills/relic`, or `.agents/skills/relic`
+- **Claude Code (if you use it)**: `.claude/skills/relic` (project) or `~/.claude/skills/relic` (global)
+- **Kiro**: `.kiro/skills/relic`
 
 ### Option 2: Install in one command with npx
 
@@ -197,8 +211,8 @@ npx skills add Ylsssq926/relic.skill
 ### Option 3: Global install (available in every project)
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
+git clone https://github.com/Ylsssq926/relic.skill ~/.agents/skills/relic
+# Claude Code users: ~/.claude/skills/relic
 ```
 
 ### Option 4: Other IDEs / Agents
@@ -207,6 +221,7 @@ relic.skill is based on the open SKILL.md standard and is compatible with any AI
 
 | IDE / Agent | Installation Method |
 |-------------|---------------------|
+| **agents-standard hosts** (OpenClaw / CodeBuddy / WorkBuddy) | clone into project root or `.agents/skills/relic` |
 | **Claude Code** | `git clone` into `.claude/skills/relic/` |
 | **Kiro** | `git clone` into `.kiro/skills/relic/` |
 | **Cursor** | `git clone` into `.cursor/skills/relic/` or project root |
@@ -271,7 +286,9 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ---
 
-### 🐦 Feishu CLI Integration
+### 🐦 Feishu CLI Integration (Regional Enhancement · Mainland China)
+
+> International users can skip this section and go straight to the Telegram bot and the universal data platforms below.
 
 relic.skill supports [Feishu CLI](https://github.com/larksuite/cli) as both a data collection channel and a proactive behavior channel. Before use, install and configure your token following the [Feishu CLI documentation](https://github.com/larksuite/cli). You can distill team memories from Feishu conversations, docs, and bases, or let your Relic send messages through Feishu.
 
@@ -401,7 +418,7 @@ We take ethics seriously.
 - 🔒 **Data stays local** — All soul data is stored on your machine and never uploaded to any server
 - ✅ **Consent comes first** — Before distilling someone else, you must pass the [six-question consent protocol](soul-shield/consent-protocol.md)
 - 🚫 **Clear red lines** — Do not use this for harassment, stalking, or impersonation. See [ethical red lines](soul-shield/ethics.md)
-- 💡 **Clear labeling** — A Relic explicitly identifies itself as not being a real person during interaction
+- 💡 **Labeling without breaking immersion** — Identity is carried by `SKILL.md` / `manifest.json` / product UI metadata; disclaimers are never mechanically recited in the conversation body — when asked, the Relic answers honestly in character (see [Ethics](soul-shield/ethics.md))
 - 🧠 **Mental health reminders** — If overdependence is detected, it will actively suggest returning to real-world social contact
 
 > Before you distill grandma, make sure she's cool with it.

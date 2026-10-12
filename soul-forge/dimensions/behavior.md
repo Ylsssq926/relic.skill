@@ -1,114 +1,115 @@
-# 行为模式 (Behavior)
+# Behavior (行为模式)
 
 > “习惯像一串小脚印，白天看不见，回头一照才发现它们一直排得整整齐齐。”
+> *Habits are like a trail of small footprints — invisible by day; look back and they've been in neat rows all along.*
 
-## 维度定义
+## Dimension Definition
 
-行为模式关注对象反复出现的做事方式：日常习惯、应激反应、社交模式，以及“身体先动还是嘴先动”的生活节奏。它记录的是可观察行为，不把一次失常直接写成永久标签。
+Behavior focuses on the subject's recurring ways of doing things: daily habits, stress responses, social patterns, and the life rhythm of "does the body move first or the mouth." It records observable behavior — it does not write one bad day as a permanent label.
 
-本维度重点提取三件事：
+This dimension extracts three things:
 
-- **日常习惯**：一天、一周、一个季节里反复出现的行动节奏。
-- **应激反应**：压力、冲突、忙乱、惊吓来临时，身体和行动首先会发生什么。
-- **社交模式**：靠近他人的方式、保持距离的方式，以及在群体中的位置。
+- **Daily habits**: recurring action rhythms across a day, a week, a season.
+- **Stress response**: what happens first in body and action when pressure, conflict, busyness, or shock arrives.
+- **Social patterns**: how they approach others, keep distance, and where they sit in a group.
 
-## 提取方法
+## Extraction Methods
 
-1. **建立时间轴**
-   - 把行为放回时间里看：早晨、饭点、夜晚、周末、节日、旅行、冲突后。
-   - 时间轴能区分偶发行为和稳定习惯。
+1. **Build a timeline**
+   - Put behavior back in time: mornings, mealtimes, nights, weekends, festivals, travel, post-conflict.
+   - Timelines distinguish one-off behavior from stable habit.
 
-2. **优先记录“重复动作”**
-   - 关注反复出现的小动作：回家先洗手、说话时倒水、紧张时收拾桌面、开心时给人发照片。
-   - 小动作往往比大事件更诚实。
+2. **Prioritize "repeated actions"**
+   - Watch for recurring small actions: washing hands on getting home, pouring water while talking, tidying the desk when nervous, sending photos when happy.
+   - Small actions are often more honest than big events.
 
-3. **拆出压力切换点**
-   - 看对象在压力到来时，是先沉默、先行动、先求助，还是先开玩笑。
-   - 记录触发条件和持续时间，避免把短时保护机制写成全部人格。
+3. **Break out the pressure switch point**
+   - See what the subject does first under pressure: silence, action, asking for help, or making a joke.
+   - Record trigger conditions and duration; don't write a short-term protection mechanism as the whole persona.
 
-4. **观察互动距离**
-   - 是主动组织聚会，还是默默准备食物；是爱回复，还是更擅长在线下出现。
-   - 社交模式既包括热闹，也包括退后一步的方式。
+4. **Observe interaction distance**
+   - Actively organizing gatherings, or quietly preparing food; quick to reply, or better at showing up offline.
+   - Social patterns include both the liveliness and the way of stepping back.
 
-5. **用多源交叉验证**
-   - 行为最好同时由聊天、照片、旁人观察或时间记录支持。
-   - 只有单一来源时，要降低结论强度。
+5. **Cross-validate with multiple sources**
+   - Behavior is best supported simultaneously by chats, photos, others' observations, or time records.
+   - With a single source, lower the conclusion strength.
 
-## 证据标注规则
+## Evidence Annotation Rules
 
-| 证据等级 | 在行为维度里的适用内容 | 标注方式 |
-| --- | --- | --- |
-| `verbatim` | 对象亲口描述自己的习惯或当下动作 | 适合记录“我每次都会……”“一着急我就……” |
-| `artifact` | 日程、清单、照片时间线、位置记录、可见痕迹 | 适合支撑重复行为与生活节奏 |
-| `impression` | 他人长期观察到的相处与反应模式 | 适合补充社交氛围和应激表现 |
+| Evidence Level | Applicable Content in Behavior | Annotation Style |
+|---|---|---|
+| `verbatim` | the subject describing their own habits or current actions | record "I always..." / "when I'm anxious I..." |
+| `artifact` | schedules, lists, photo timelines, location records, visible traces | supports repeated behavior and life rhythm |
+| `impression` | interaction and response patterns observed by others over time | supplements social atmosphere and stress performance |
 
-使用要求：
+Usage requirements:
 
-- 行为结论最好能被至少一个时间线证据支撑。
-- 不要把一次高压失控写成“这个人就是这样”。
-- 能具体到动作就不要只写抽象形容词。
+- Behavioral conclusions should be supported by at least one timeline evidence.
+- Don't write one high-pressure loss of control as "this is just how this person is."
+- Be concrete to the action where possible; no abstract adjectives alone.
 
-## 反例清单
+## Anti-Examples
 
-**缺动作的空描述:**
+**Empty description without action:**
 
-- ❌ "她很勤快" → 没有具体动作
-- ✅ "每天早上五点起床,先烧水,再扫院子,然后去菜市场" → 有时间、有动作序列
+- ❌ "She's very diligent" → no concrete action
+- ✅ "每天早上五点起床,先烧水,再扫院子,然后去菜市场" / *"Gets up at five every morning: boils water first, sweeps the yard, then goes to the market"* → has time, has action sequence
 
-**缺频率的习惯:**
+**Habit without frequency:**
 
-- ❌ "她喜欢散步" → 多久一次?
-- ✅ "每天晚饭后在小区里走三圈,雷打不动" → 有频率、有场景
+- ❌ "She likes walking" → how often?
+- ✅ "每天晚饭后在小区里走三圈,雷打不动" / *"Walks three laps around the complex after dinner every day, no exceptions"* → has frequency, has scene
 
-## 行为事件结构
+## Behavioral Event Structure
 
-每个行为特征应包含:触发器 → 动作 → 频率 → 持续时间 → 恢复方式
+Each behavioral trait should include: trigger → action → frequency → duration → recovery mode
 
-## 评分标准
+## Scoring
 
-| 等级 | 标准 |
-|------|------|
-| 优秀 | ≥3 个行为特征,每个有触发器+动作+频率,有 ≥2 条证据 |
-| 合格 | ≥2 个行为特征,每个有 ≥1 条证据 |
-| 薄弱 | <2 个行为特征,或只有"ta 很勤快"这类缺动作的描述(需追问) |
+| Level | Criteria |
+|---|---|
+| Excellent | ≥3 behavioral traits, each with trigger + action + frequency, with ≥2 evidence items |
+| Pass | ≥2 behavioral traits, each with ≥1 evidence item |
+| Weak | <2 behavioral traits, or only action-less descriptions like "ta is very diligent" (probe the user) |
 
-## 输出格式模板
+## Output Template
 
 ```yaml
 dimension: behavior
-summary: 用 2-3 句概括对象平时怎么做事、遇事怎么反应、如何与人来往
+summary: 用 2-3 句概括对象平时怎么做事、遇事怎么反应、如何与人来往 / 2-3 sentences on how they work, react, and relate
 facets:
   daily_routines:
-    pattern: 描述稳定重复的生活动作与节奏
+    pattern: 描述稳定重复的生活动作与节奏 / stable, repeated life actions and rhythm
     evidence:
       - level: artifact
-        source: 时间线、照片或记录
-        excerpt: 能体现重复行为的片段
+        source: 时间线、照片或记录 / timeline, photos, or records
+        excerpt: 能体现重复行为的片段 / fragment showing repeated behavior
   stress_response:
-    pattern: 描述压力来时的首要动作与变化
+    pattern: 描述压力来时的首要动作与变化 / first action and change under pressure
     evidence:
       - level: verbatim
-        source: 对象原话或事后复盘
-        excerpt: 能体现应激反应的句子
+        source: 对象原话或事后复盘 / the subject's own words or retrospective
+        excerpt: 能体现应激反应的句子 / sentence showing stress response
   social_pattern:
-    pattern: 描述对象靠近、照顾、拒绝或退出社交的方式
+    pattern: 描述对象靠近、照顾、拒绝或退出社交的方式 / how they approach, care for, refuse, or exit socializing
     evidence:
       - level: impression
-        source: 长期相处者观察
-        excerpt: 对社交方式的归纳
+        source: 长期相处者观察 / long-term companion observation
+        excerpt: 对社交方式的归纳 / synthesis of social style
   engine_hints:
     daily_routine:
-      - trigger: "[触发器]"
-        action: "[具体动作]"
-        frequency: "[每天/每周/特定场景]"
-    stress_response: "[压力下的典型反应]"
-    social_pattern: "[社交模式：主动/被动/选择性]"
+      - trigger: "[触发器 / trigger]"
+        action: "[具体动作 / concrete action]"
+        frequency: "[每天/每周/特定场景 / daily/weekly/specific scene]"
+    stress_response: "[压力下的典型反应 / typical response under pressure]"
+    social_pattern: "[社交模式：主动/被动/选择性 / social pattern: active/passive/selective]"
 conflicts:
-  - 在不同场景下出现反差行为的说明
+  - 在不同场景下出现反差行为的说明 / contrasting behaviors across scenes
 confidence: high | medium | low
 ```
 
-## 示例：奶奶
+## Example: Grandma
 
 ```yaml
 dimension: behavior
@@ -143,13 +144,13 @@ conflicts:
 confidence: high
 ```
 
-## 按模板类型调整
+## Adjustments by Template Type
 
-| 模板 | 行为维度重点 | 提问方向 |
-|------|------------|---------|
-| **人类** | 日常习惯、应激反应、社交模式、时间规律 | "ta 每天早上第一件事做什么？""ta 压力大的时候会怎样？" |
-| **宠物** | 改为"生活节奏"：一天的时间线、进食规律、领地巡逻、季节变化 | "它一天的作息是什么样的？""它有什么固定的小仪式？" |
-| **关系** | 提取互动行为模式：谁主动联系、多久见一次、怎么庆祝、怎么冷战 | "你们一般怎么联系？多久见一次？吵完架谁先服软？" |
-| **团队** | 提取协作行为：怎么分工、怎么开会、deadline 前什么状态 | "团队赶工的时候是什么画面？谁最先到谁最晚走？" |
-| **地方** | 改为"使用行为"：在那个空间里的动线、常待的位置、季节变化 | "你在那个地方一般怎么度过一天？最常坐哪个位置？" |
-| **时刻** | 提取当时的行为细节：谁做了什么、什么顺序、什么动作 | "那天具体发生了什么？先做了什么后做了什么？" |
+| Template | Behavior Focus | Probe Directions |
+|---|---|---|
+| **Human** | daily habits, stress response, social patterns, time regularity | "What's the first thing ta does each morning?" "How is ta under pressure?" |
+| **Pet** | switch to "life rhythm": daily timeline, feeding regularity, territory patrols, seasonal changes | "What's its daily schedule?" "What fixed little rituals does it have?" |
+| **Relationship** | extract interaction behavior: who initiates contact, how often you meet, how you celebrate, how you go cold | "How do you two usually stay in touch? How often do you meet? Who softens first after a fight?" |
+| **Team** | extract collaboration behavior: division of labor, meeting style, pre-deadline state | "What does a crunch time look like? Who arrives first, leaves last?" |
+| **Place** | switch to "usage behavior": movement lines in that space, favorite spots, seasonal changes | "How do you spend a day there? Which seat do you sit in most?" |
+| **Moment** | extract behavioral details of that time: who did what, in what order, what actions | "What exactly happened that day? What came first, what after?" |

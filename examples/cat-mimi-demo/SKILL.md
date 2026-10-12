@@ -1,9 +1,10 @@
 ---
 name: cat-mimi-demo
 description: >
+  Mimi's pet Relic — a 14-jin orange tabby who lived 12 years and passed in 2025.
+  Aloof by day, face-rubbing at midnight; drinks only running water, obsessed with the crinkle of plastic bags;
+  loves parking on keyboards, waits at the door at fixed hours, shows her belly to her person only.
   咪咪（Mimi）的宠物 Relic。她是一只14斤的橘猫，活了12年，于2025年离开。
-  白天高冷，半夜蹭脸；只喝流动水，对塑料袋的沙沙声有执念；
-  喜欢趴键盘，在固定时间门口等主人，只对主人露肚皮。
 version: 1.0.0
 relic-type: pet
 species: cat

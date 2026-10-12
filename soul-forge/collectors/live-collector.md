@@ -1,87 +1,88 @@
-# 实时对话采集器
+# Live Conversation Collector
 
 > “有些画像不是从旧盒子里翻出来的，而是在一句‘其实我刚刚有点难过’里当场长出来的。”
+> *Some profiles aren't dug out of old boxes — they grow on the spot, inside a single sentence like "actually, I was a little sad just now."*
 
-## 支持的数据格式
+## Supported Inputs
 
-活体唤醒模式用于在与 AI 的实时对话中边聊边采集，支持以下输入：
+Live-awakening mode collects in real time during conversation with the AI. Supported inputs:
 
-- 文本对话回合
-- 实时语音转写后的文本片段
-- 用户在对话中临时补充的照片、聊天摘录、语音说明
-- 用户对 AI 总结的修正、否定、追加说明
-- 会话级元信息：对象是谁、关系是什么、希望保留到什么程度
+- Text dialogue turns
+- Transcribed real-time voice fragments
+- Photos, chat excerpts, and voice notes the user supplies mid-conversation
+- The user's corrections, negations, and additions to AI summaries
+- Session-level metadata: who the subject is, what the relationship is, how much to preserve
 
-## 采集流程
+## Collection Flow
 
-1. **确认对象与边界**
-   - 开始时明确本次唤醒对象、时间范围、数据边界。
-   - 询问是否允许把当次对话内容作为 Relic 证据。
+1. **Confirm subject and boundaries**
+   - At the start, clarify this awakening's subject, time range, and data boundaries.
+   - Ask whether the current conversation may be used as Relic evidence.
 
-2. **开启活体记录**
-   - 为会话建立时间戳，按回合记录用户原话与关键上下文。
-   - 将对象原话、叙述者评论、AI 复述严格分层。
+2. **Open live recording**
+   - Timestamp the session; record user quotes and key context turn by turn.
+   - Strictly layer: the subject's own words, the narrator's commentary, AI paraphrase.
 
-3. **实时抽取线索**
-   - 在每个回合后标记可能进入四维的线索，例如口头禅、冲突、长期习惯、情绪触发点。
-   - 只把用户直接提供或明确认可的内容升格为强证据。
+3. **Extract clues in real time**
+   - After each turn, mark clues that may enter the four dimensions — catchphrases, conflicts, long-term habits, emotional triggers.
+   - Only content the user directly provided or explicitly approved is promoted to strong evidence.
 
-4. **小步回显与校正**
-   - AI 可以给出短摘要供用户确认，例如“我先记下：她担心时会先做饭，对吗？”
-   - 用户确认、修正或否定后，立即更新证据状态。
+4. **Small-step echo and correction**
+   - The AI may offer a short summary for confirmation, e.g. "我先记下：她担心时会先做饭，对吗？" / *"Let me note this down: when she's worried, she cooks first — right?"*
+   - After the user confirms, corrects, or negates, update evidence status immediately.
 
-5. **保留变化过程**
-   - 若用户先说“他很冷”，后面又补充“其实只是对陌生人冷”，两条都要记下，并标注修正关系。
-   - 实时模式尤其要保留“从模糊到清晰”的认识过程。
+5. **Preserve the change process**
+   - If the user first says "he's very cold" and later adds "actually only cold to strangers," record both, labeled with the correction relation.
+   - Live mode especially preserves the recognition process "from blurry to clear."
 
-6. **封存会话结果**
-   - 会话结束时输出本次新增证据、已确认结论、仍需保留的矛盾与不确定项。
-   - 可直接送入四维提取，也可先作为临时快照保存。
+6. **Seal the session result**
+   - At session end, output: new evidence added, confirmed conclusions, contradictions and uncertainties still to preserve.
+   - Can go straight into four-dimension extraction, or be saved as a temporary snapshot first.
 
-## 数据清洗规则
+## Cleaning Rules
 
-- 用户原话与 AI 转述不得混写；AI 复述不是 `verbatim` 证据。
-- 同一回合中若用户作出修正，以“最新明确表达”为主，但保留 earlier 说法作为过程记录。
-- 实时情绪很强的句子要保留上下文，避免断章取义。
-- 如果用户说“这句别记”，该回合内容不进入最终证据池。
-- 对话中的假设性问题、玩笑、角色扮演，要标记为非事实层内容。
-- 外部附件如果只是被提及但未提供，不直接写入 artifact。
+- User quotes and AI paraphrase must never be blended; AI restatement is not `verbatim` evidence.
+- If the user corrects within the same turn, the "latest explicit expression" governs — but keep the earlier statement as process record.
+- Emotionally intense real-time sentences keep their context; avoid quoting out of context.
+- If the user says "don't record this," that turn's content does not enter the final evidence pool.
+- Hypotheticals, jokes, and role-play in conversation are marked as non-fact-layer content.
+- External attachments merely mentioned but not provided are not written as `artifact`.
 
-## 隐私保护
+## Privacy Protection
 
-- 开始前说明：本模式默认只记录与本次唤醒相关的内容。
-- 支持“暂停采集”“删除上一回合”“本次不留存”三种会话级控制。
-- 对第三方身份信息做最小化记录，用关系称谓代替真实姓名。
-- 高敏内容如健康、财务、家庭纠纷，需要用户明确希望保留后才进入最终结果。
-- 若用户要求只做当场陪伴式整理，可在会话结束后只保留最终摘要，不保留逐回合日志。
+- State up front: this mode records only content relevant to the current awakening by default.
+- Three session-level controls supported: "pause collection," "delete last turn," "keep nothing this session."
+- Minimize recording of third-party identity info; use relationship terms instead of real names.
+- Highly sensitive content — health, finances, family disputes — enters the final result only when the user explicitly wants it kept.
+- If the user requests companion-style organization only, keep just the final summary after the session, not the turn-by-turn log.
 
-## 输出格式
+## Output Format
 
 ```yaml
 collector: live
-mode: 活体唤醒
+mode: 活体唤醒 / live awakening
 session:
-  target: 本次唤醒对象
-  started_at: 会话开始时间
-  consent: 用户是否允许将当次对话作为证据
+  target: 本次唤醒对象 / this session's subject
+  started_at: 会话开始时间 / session start
+  consent: 用户是否允许将当次对话作为证据 / whether the user allows this conversation as evidence
 turns:
-  - turn_id: 回合编号
-    speaker: 用户 | AI
-    content: 该回合文本
+  - turn_id: 回合编号 / turn number
+    speaker: 用户 | AI / user | AI
+    content: 该回合文本 / turn text
     evidence_status: raw | confirmed | corrected | excluded
     notes:
-      - 是否涉及情绪高峰、修正或外部附件
+      - 是否涉及情绪高峰、修正或外部附件 / whether it involves emotional peaks, corrections, or external attachments
 extracted_clues:
   - dimension: cognition | expression | behavior | emotion
-    clue: 实时抽取到的线索描述
+    clue: 实时抽取到的线索描述 / extracted clue description
     source_turns:
-      - 对应回合编号
+      - 对应回合编号 / corresponding turn numbers
     evidence_level: verbatim | artifact | impression
-    confirmation: 用户已确认 | 用户已修正 | 待保留观察
+    confirmation: 用户已确认 | 用户已修正 | 待保留观察 / user-confirmed | user-corrected | pending observation
 conflicts:
-  - 在实时对话中暴露出的反差与适用场景
+  - 在实时对话中暴露出的反差与适用场景 / contrasts exposed in live conversation, with applicable scenes
 privacy:
-  retained_scope: 最终保留哪些内容
+  retained_scope: 最终保留哪些内容 / what is ultimately retained
   redactions:
-    - 已做的脱敏说明
+    - 已做的脱敏说明 / sanitization notes
 ```

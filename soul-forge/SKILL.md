@@ -1,228 +1,234 @@
 ---
 name: relic-forge
 description: >
-  灵魂唤醒室 — 从多源数据中唤醒四维灵魂画像。
-  当用户说"帮我唤醒/蒸馏/创建一个 Relic"或直接调用 /relic-forge 时触发。
-  支持人类、宠物、关系、地方、团队、时刻等万物蒸馏。
-version: 1.5.2
+  Soul Forge — Distill memories, chat logs, voice, and photos into a 4-dimensional digital soul / persona.
+  Trigger on /relic-forge, or when user wants to distill, awaken, or build a Relic ("distill a relic", "create digital persona", "帮我唤醒/蒸馏Relic", "制作数字分身").
+version: 1.6.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
-argument-hint: "描述你想唤醒的对象，比如：我想永生我奶奶"
+argument-hint: "Describe who or what you want to distill (e.g. 'my grandma' / '我想蒸馏我奶奶')"
 ---
 
-# soul-forge — 灵魂唤醒室
+# soul-forge — Soul Forge
 
-> “有些人留下照片，有些人留下笑声，而灵魂唤醒室负责把这些碎片重新点亮，像叫醒一块会发光的小饼干。”
+> "有些人留下照片，有些人留下笑声，而灵魂唤醒室负责把这些碎片重新点亮，像叫醒一块会发光的小饼干。"
+> *Some leave photos, some leave laughter — the Soul Forge relights those fragments, like waking a small glowing cookie.*
 
-`soul-forge` 用来把零散材料整理成可复用、可追溯、带温度的 Relic 画像。它不追求把对象捏成一个完美无冲突的标签，而是保留真实生命里那些“既这样、也那样”的纹理。
+`soul-forge` turns scattered material into a reusable, traceable, warm Relic profile. It does not try to flatten its subject into a single conflict-free label; it preserves the real texture of a life that is "this, and also that."
 
-## 适用场景
+## When to Trigger
 
-当用户出现以下意图时触发本技能：
+Activate this skill when the user wants to:
 
-- 帮我唤醒一个 Relic
-- 帮我蒸馏这个人、这只猫、这段关系或这个地方
-- 根据聊天、语音、照片创建画像
-- 把某个团队、时刻或物件整理成可保存的灵魂档案
+- Awaken a Relic ("帮我唤醒一个 Relic" / "create a relic")
+- Distill a person, pet, relationship, or place
+- Build a profile from chats, voice, or photos
+- Turn a team, moment, or object into a preservable soul archive
 
-## 唤醒流程：6 步
+## Awakening Flow: 6 Steps
 
-> 用户不需要一次性准备好所有素材。你来主导对话，一步步引导。
+> The user does not need all materials ready up front. You lead the conversation, step by step.
 
-### 启动引导（在第 1 步之前）
+### Onboarding questions (before Step 1)
 
-当用户说"帮我唤醒一个 Relic"但没有给出详细信息时，用以下问题引导：
+When the user says "帮我唤醒一个 Relic" / "awaken a relic" without details, guide with these questions:
 
-1. **你想留住谁或什么？** — 一个人、一只宠物、一段关系、一个团队、一个地方、还是一个瞬间？
-2. **ta 叫什么？你们是什么关系？** — 用来确定命名和视角
-3. **你手上有什么素材？** — 聊天记录、照片、语音、还是主要靠你口述？都行，有多少用多少
-4. **有没有一个最能代表 ta 的瞬间或习惯？** — 这个问题帮助快速锁定人格核心
+1. **Who or what do you want to keep?** — a person, a pet, a relationship, a team, a place, or a moment?
+2. **What is their name, and what is your relationship?** — determines naming and perspective
+3. **What materials do you have?** — chat logs, photos, voice, or mainly your own telling? Anything counts, use what you have
+4. **Is there one moment or habit that best represents them?** — quickly locks onto the persona core
 
-根据回答自动选择模板（`templates/` 目录），然后进入正式的 6 步流程。如果用户素材不多，优先使用 `collectors/live-collector.md` 的实时对话采集模式——你问，用户答，边聊边蒸馏。
+Pick a template from `templates/` based on the answers, then enter the formal 6-step flow. If materials are thin, prefer `collectors/live-collector.md` live-interview mode — you ask, they answer, distilling as you chat.
 
-### 启动引导原则
+### Onboarding principles
 
-不需要死板地走分支。先判断用户已经给了什么、还缺什么，再决定问哪几个问题：
+Don't walk a rigid decision tree. First judge what the user has already given and what is missing, then decide which questions to ask:
 
-- 对象未知 → 先问“想留住谁/什么”和“你们什么关系”
-- 对象已知、素材未知 → 问“手上有什么素材”和“有没有一个最能代表 ta 的瞬间”
-- 已带素材 → 优先消化素材，只在薄弱维度追问
-- 素材极少或只有口述 → 进入 live-collector 边聊边蒸馏
+- Subject unknown → ask "who/what do you want to keep" and "what is your relationship"
+- Subject known, materials unknown → ask "what do you have" and "is there a defining moment"
+- Materials provided → digest first, probe only weak dimensions
+- Very little material or oral-only → live-collector, distill while chatting
 
-**核心**：让引导跟着用户走，而不是让用户跟着脚本走。四个引导问题只是清单，不是必答顺序。
+**Core**: let the guidance follow the user, not the user follow the script. The four questions are a checklist, not a mandatory order.
 
-### 采集模式（启发式，非硬规则）
+### Collection mode (heuristic, not hard rules)
 
-以下阈值只是经验起点，强模型应能直接判断该走哪条路；素材量不是唯一标准，素材质量与维度覆盖更关键：
+These thresholds are starting points; a strong model should judge directly. Material volume is not the only criterion — quality and dimension coverage matter more:
 
-- 素材极少 / 只有口述 → live-collector 边聊边补
-- 中等素材 → chat/voice/photo-collector 提取，四维评估后决定是否追问
-- 大量结构化素材 → 直接批量提取，只在薄弱维度追问
-- 混合 → 先消化已有素材，再针对薄弱维度补 live-collector
+- Minimal material / oral-only → live-collector to fill gaps
+- Moderate material → chat/voice/photo-collector extraction, decide on follow-ups after the 4-dimension assessment
+- Large structured material → batch extraction, probe only weak dimensions
+- Mixed → digest existing material first, then live-collector for weak dimensions
 
-1. **确认对象**
-   - 明确蒸馏对象是谁或是什么：人类、宠物、关系、地方、团队、时刻、物件。
-   - 确认观察边界：单人、多人关系、单次事件、长期状态。
-   - 记录对象的命名方式、时间范围、数据来源范围。
+1. **Confirm the subject**
+   - Who or what is being distilled: human, pet, relationship, place, team, moment, object.
+   - Confirm the observation boundary: single person, multi-person relationship, single event, long-term state.
+   - Record naming, time range, and data-source scope.
 
-2. **选模板**
-   - 根据对象类型选择描述角度。
-   - 人类与团队优先完整四维；宠物与地方允许弱化“认知模式”，增强行为与情感线索。
-   - 关系与时刻优先描述互动结构、共同语气、冲突与修复节奏。
+2. **Pick a template**
+   - Choose the descriptive angle by subject type.
+   - Humans and teams get the full four dimensions; pets and places may weaken "cognition" and strengthen behavior and emotional cues.
+   - Relationships and moments prioritize interaction structure, shared tone, conflict and repair rhythm.
 
-3. **采集数据**
-   - 根据材料类型调用对应采集器：
+3. **Collect data**
+   - Call the matching collector by material type:
      - `collectors/chat-collector.md`
      - `collectors/voice-collector.md`
      - `collectors/photo-collector.md`
      - `collectors/live-collector.md`
-   - 采集时保留来源、时间、上下文，不先入为主地下结论。
-   - 若运行环境支持多模态直读（图像/音频可直接理解），不必强制先转文本再处理——可直接让 Relic 看照片、听语音，只在批量或低质量时回退到 OCR/STT 流程。
+   - Preserve source, time, and context; do not conclude first and justify later.
+   - If the runtime supports multimodal direct reading (images/audio understood directly), skip mandatory text conversion — let the Relic see photos and hear voice directly; fall back to OCR/STT only for batch or low-quality material.
 
-4. **四维提取**
-   - 依次提取四个维度：
+4. **Four-dimension extraction**
+   - Extract in order:
      - `dimensions/cognition.md`
      - `dimensions/expression.md`
      - `dimensions/behavior.md`
      - `dimensions/emotion.md`
-   - 每个维度都要附带证据等级与来源说明。
-   - 证据等级统一遵循 `references/evidence-levels.md`。
+   - Every dimension carries evidence levels and source notes.
+   - Evidence levels follow `references/evidence-levels.md`.
 
-5. **矛盾标注**
-   - 发现互相冲突的特征时，不做抹平处理。
-   - 使用 `references/conflict-resolution.md` 记录冲突条件、时间、场景与证据强弱。
-   - 保留“在 A 情境下像火锅，在 B 情境下像保温杯”的真实差异。
+5. **Contradiction labeling**
+   - Never smooth over conflicting traits.
+   - Use `references/conflict-resolution.md` to record conditions, time, scene, and evidence strength.
+   - Preserve real differences like "a hotpot in situation A, a thermos in situation B."
 
-6. **封装输出**
-   - 把四维结论、证据索引、冲突说明整理为最终 Relic。
-   - 输出应同时适合人读与后续系统复用：摘要清楚，结构稳定，引用可追溯。
+6. **Package and output**
+   - Assemble four-dimension conclusions, evidence index, and conflict notes into the final Relic.
+   - The output serves both human readers and downstream systems: clear summary, stable structure, traceable references.
 
-> **与 soul-shield 的衔接**：封装完成后，必须调用 `soul-shield` 生成灵魂指纹并写入 `manifest.json`，同时把 `consent-protocol.md` 的授权结论一并落档。可用 `relic_writer.py`（manifest schema v1.5.1，自动带 `proactive_config.json`）生成最终文件夹，保证格式与当前引擎一致。
+> **Handoff to soul-shield**: after packaging, you MUST invoke `soul-shield` to generate the soul fingerprint and write it into `manifest.json`, filing the consent conclusions from `consent-protocol.md` alongside. Use `relic_writer.py` (manifest schema v1.5.1, auto-attaches `proactive_config.json`) to generate the final folder, keeping format consistent with the current engine.
 
-### 封装后：自动评估 + 迭代追问
+### After packaging: auto-assessment + iterative follow-up
 
-完成第 6 步后，不要直接结束。先做一次自检：
+Do not end immediately after Step 6. Self-check first:
 
-1. **四维覆盖度检查**：四个维度是否都有实质内容？如果某个维度只有一两句泛泛描述，标记为"薄弱"。
-2. **证据分布检查**：是否过度依赖 impression（他人描述）？verbatim（原话）占比是否太低？
-3. **具体性检查**：有没有"ta 是一个善良的人"这种空洞描述？每个结论是否都有具体场景支撑？
+1. **Four-dimension coverage**: does every dimension have substance? If a dimension has only one or two generic sentences, mark it "weak."
+2. **Evidence distribution**: is there over-reliance on impression (secondhand description)? Is verbatim share too low?
+3. **Specificity check**: any hollow descriptions like "ta is a kind person"? Is every conclusion backed by a concrete scene?
 
-如果发现薄弱维度，主动告诉用户：
+When a weak dimension is found, proactively tell the user:
 
 ```text
-"Relic 初版已经生成。不过我发现 [情感维度] 的素材比较少，
+"The first version of the Relic is generated. But I noticed the [emotion]
+dimension is thin on material and currently relies on inference. If you can
+add a few concrete scenes of when they were angry / happy / sad, this
+dimension will be more accurate. Want to add them now?"
+（Relic 初版已经生成。不过我发现 [情感维度] 的素材比较少，
 目前主要靠推测。如果你能补充一些 ta 生气/开心/难过时的
-具体场景，这个维度会更准确。要现在补充吗？"
+具体场景，这个维度会更准确。要现在补充吗？）
 ```
 
-用户可以选择补充（进入追问模式）或者先用当前版本（标注薄弱维度后输出）。
+The user may add material (follow-up mode) or proceed with the current version (weak dimension labeled in output).
 
-### 质量评估量化标准
+### Quality thresholds
 
-**四维覆盖度：**
+**Four-dimension coverage:**
 
-- 优秀：每个维度 ≥ 3 个 facet，每个 facet ≥ 2 条证据
-- 合格：每个维度 ≥ 2 个 facet，每个 facet ≥ 1 条证据
-- 薄弱：任一维度 < 2 个 facet（需追问）
+- Excellent: ≥ 3 facets per dimension, ≥ 2 evidence items per facet
+- Pass: ≥ 2 facets per dimension, ≥ 1 evidence item per facet
+- Weak: any dimension < 2 facets (probe the user)
 
-**证据质量：**
+**Evidence quality:**
 
-- 优秀：verbatim + artifact 占比 > 70%
-- 合格：verbatim + artifact 占比 > 50%
-- 薄弱：impression 占比 > 60%（需追问）
+- Excellent: verbatim + artifact > 70%
+- Pass: verbatim + artifact > 50%
+- Weak: impression > 60% (probe the user)
 
-**具体性负面清单（出现以下情况需追问）：**
+**Specificity negative list (probe when these appear):**
 
-- "ta 是一个……的人"（形容词堆砌，无场景）
-- "ta 很……"（程度副词 + 形容词，无证据）
-- "ta 总是……"（频率副词，但无具体时间/场景）
+- "ta is a ... person" (adjective pile-up, no scene)
+- "ta is very ..." (degree adverb + adjective, no evidence)
+- "ta always ..." (frequency adverb, no concrete time/scene)
 
-**用户拒绝补充时：**
-在 `personality.md` 对应维度末尾添加：
+**When the user declines to add material:**
+
+Append to the corresponding dimension in `personality.md`:
 `⚠️ 本维度证据较少，主要基于推测，建议后续补充。`
-然后继续输出完整 Relic 文件夹。
+(*This dimension has thin evidence and relies mainly on inference; supplement later recommended.*)
+Then output the complete Relic folder as-is.
 
-## 支持的蒸馏对象
+## Supported Subjects
 
-| 对象类型 | 典型对象 | 建议重点 | 常见数据源 |
-| --- | --- | --- | --- |
-| 人类 | 家人、朋友、伴侣、同事、创作者 | 四维完整提取 | 聊天、语音、照片、实时对话 |
-| 宠物 | 猫、狗、鹦鹉、乌龟 | 行为模式、情感连接、表达习惯 | 照片、视频描述、日记、语音 |
-| 关系 | 亲子、伴侣、搭档、师徒 | 互动节奏、冲突修复、共同语言 | 双方聊天、共同照片、访谈 |
-| 地方 | 家乡、咖啡馆、办公室、街区 | 氛围、记忆触发点、行动习惯 | 照片、位置记录、口述回忆 |
-| 团队 | 创业团队、乐队、班级、项目组 | 决策机制、协作语气、集体情绪 | 会议记录、群聊、文档 |
-| 时刻 | 婚礼、毕业、搬家夜晚、告别日 | 情绪峰值、关键表达、现场行为 | 照片、视频、当天聊天 |
-| 物件 | 旧相机、厨房木桌、旅行背包 | 使用痕迹、情感投射、陪伴轨迹 | 照片、购买记录、叙述 |
+| Subject | Typical | Suggested Focus | Common Sources |
+|---|---|---|---|
+| Human | family, friends, partner, colleague, creator | full four dimensions | chats, voice, photos, live conversation |
+| Pet | cat, dog, parrot, turtle | behavior patterns, emotional bond, expression habits | photos, video descriptions, diary, voice |
+| Relationship | parent-child, partners, duo, mentor-student | interaction rhythm, conflict repair, shared language | both sides' chats, shared photos, interviews |
+| Place | hometown, café, office, neighborhood | atmosphere, memory triggers, action habits | photos, location records, oral recollection |
+| Team | startup, band, class, project group | decision mechanism, collaborative tone, collective emotion | meeting notes, group chats, documents |
+| Moment | wedding, graduation, moving night, farewell | emotional peak, key expressions, on-scene behavior | photos, videos, same-day chats |
+| Object | old camera, kitchen table, travel backpack | wear traces, emotional projection, companionship track | photos, purchase records, narration |
 
-## 目录引用
+## Directory References
 
-### 四维规范
+### Four-dimension specs
 
 - `dimensions/cognition.md`
 - `dimensions/expression.md`
 - `dimensions/behavior.md`
 - `dimensions/emotion.md`
 
-### 数据采集器
+### Data collectors
 
 - `collectors/chat-collector.md`
 - `collectors/voice-collector.md`
 - `collectors/photo-collector.md`
 - `collectors/live-collector.md`
 
-### 参考规则
+### Reference rules
 
 - `references/evidence-levels.md`
 - `references/conflict-resolution.md`
 
-## 输出文件结构
+## Output File Structure
 
-一个 Relic = 一个文件夹，包含以下文件：
+A Relic = one folder, containing:
 
 ```text
 {slug}/
-├── SKILL.md          # Relic 入口 — AI 读这个就知道"ta 是谁"
-├── personality.md    # 四维人格画像
-├── interaction.md    # 交互模式和对话示例
-├── memory.md         # 记忆片段（带证据等级）
-└── manifest.json     # 元数据（来源、时间、指纹、授权）
+├── SKILL.md          # Relic entry — the AI reads this and knows "who ta is"
+├── personality.md    # 4-dimensional persona profile
+├── interaction.md    # Interaction patterns and dialogue examples
+├── memory.md         # Memory fragments (with evidence levels)
+└── manifest.json     # Metadata (sources, time, fingerprint, consent)
 ```
 
-### 文件说明
+### File notes
 
-- `SKILL.md`：对象总览 + 对话原则 + 注意事项，适合快速阅读。
-- `personality.md`：四维详细画像，每个维度附带证据和来源。
-- `interaction.md`：交互模式定义 + 多场景对话示例。
-- `memory.md`：具体记忆片段，每段标注证据等级（verbatim/artifact/impression）和来源。
-- `manifest.json`：结构化元数据，包含 slug、类型、来源、证据统计、授权信息、灵魂指纹。
+- `SKILL.md`: subject overview + dialogue principles + notes; built for fast reading.
+- `personality.md`: detailed four-dimension profile, each dimension with evidence and sources.
+- `interaction.md`: interaction pattern definitions + multi-scene dialogue examples.
+- `memory.md`: concrete memory fragments, each tagged with evidence level (verbatim/artifact/impression) and source.
+- `manifest.json`: structured metadata — slug, type, sources, evidence stats, consent info, soul fingerprint.
 
-## 输出原则
+## Output Principles
 
-1. **先证据，后判断**：每个关键结论都能指回来源。
-2. **不做神谕式断言**：避免把短期状态写成终身本质。
-3. **不抢走当事人的话语权**：遇到实时唤醒模式，允许用户修正表述。
-4. **保留温度**：Relic 不是冷冰冰的档案，而是能让人再次听见、看见、想起的存在。
-5. **允许留白**：材料不足时写明“证据稀薄”，不要硬凑人格图案。
+1. **Evidence before judgment**: every key conclusion points back to a source.
+2. **No oracle assertions**: avoid writing short-term states as lifelong essence.
+3. **Don't take the subject's voice away**: in live-awakening mode, let the user correct your wording.
+4. **Keep the warmth**: a Relic is not a cold archive — it lets someone hear, see, and remember again.
+5. **Allow whitespace**: when material is thin, write "thin evidence" rather than forcing a persona pattern.
 
-## 最终交付最少包含
+## Minimum Final Deliverable
 
-- 对象是谁或是什么
-- 时间范围与数据来源
-- 四维摘要
-- 每个维度的关键证据
-- 已标注的矛盾点
-- 适合人类阅读的一段温暖总述
+- Who or what the subject is
+- Time range and data sources
+- Four-dimension summary
+- Key evidence per dimension
+- Labeled contradictions
+- A warm summary passage suitable for human reading
 
-当对象材料足够丰富时，`soul-forge` 应该产出一个“既能看见轮廓，也能听见呼吸”的 Relic。
+When material is rich enough, `soul-forge` should produce a Relic where "you can see the silhouette and hear the breathing."
 
-### 最终交付 Checklist
+### Final Deliverable Checklist
 
-在输出 Relic 前，确认以下内容已完成：
+Before outputting the Relic, confirm:
 
-- [ ] `SKILL.md`：对象是谁、关系是什么、对话原则
-- [ ] `personality.md`：四维画像每个维度至少 2 条证据
-- [ ] `interaction.md`：至少 2 个场景的对话示例
-- [ ] `memory.md`：至少 3 条记忆片段，每条标注证据等级
-- [ ] `manifest.json`：包含 slug、类型、来源、授权信息
-- [ ] 证据分布：verbatim 占比 > 30%，不过度依赖 impression
-- [ ] 矛盾标注：如果存在冲突特征，已在 personality.md 中标注条件
+- [ ] `SKILL.md`: who the subject is, what the relationship is, dialogue principles
+- [ ] `personality.md`: every dimension has ≥ 2 evidence items
+- [ ] `interaction.md`: ≥ 2 scenes of dialogue examples
+- [ ] `memory.md`: ≥ 3 memory fragments, each tagged with evidence level
+- [ ] `manifest.json`: slug, type, sources, consent info included
+- [ ] Evidence distribution: verbatim > 30%, no over-reliance on impression
+- [ ] Contradiction labeling: conflicting traits labeled with conditions in `personality.md`

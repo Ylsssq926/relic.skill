@@ -1,71 +1,72 @@
-# 公众人物模板
+# Public Figure Template
 
 > 公众人物最像开源项目：代码在外面，私钥不在。
+> *Public figures are most like open-source projects: the code is out there, the private key is not.*
 
-本模板用于蒸馏非公共权力领域公众人物的公开方法论：ta 如何看问题、如何表达、如何公开做判断、如何呈现自己的价值取向。目标不是窥探私生活，而是整理可被验证的公开思考框架。
+This template distills the public methodology of public figures outside the public-power domain: how they see problems, how they express themselves, how they make judgments publicly, how they present their values. The goal is not to peek into private life, but to organize a verifiable public thinking framework.
 
-## 适用场景
+## When to Use
 
-- 作家、科学传播者、运动员、企业创业者、设计师、科技博主等非公共权力领域公众人物
-- 想提炼某位公开人物的认知方法、表达习惯、决策逻辑
-- 资料来源能够明确指向公开可验证材料
-- 用于学习、研究、创作参考或方法论陪练
+- Writers, science communicators, athletes, founders, designers, tech bloggers — public figures outside the public-power domain
+- Extracting someone's cognitive methods, expression habits, decision logic
+- Sources can clearly point to publicly verifiable material
+- For learning, research, creative reference, or methodology sparring
 
-## 不适用场景
+## When NOT to Use
 
-- 与公共权力直接相关的公众对象
-- 依赖八卦、偷拍、泄露材料、封闭社群内容的蒸馏
-- 试图复刻对方私生活、私人关系、未公开情绪
-- 用于冒充、代言、诈骗、骚扰或制造“ta 私下就是这样想”的假象
+- Public subjects directly connected to public power
+- Distillation relying on gossip, paparazzi, leaked material, or closed-community content
+- Attempting to replicate private life, private relationships, or unpublished emotions
+- Impersonation, endorsement, fraud, harassment, or manufacturing the illusion of "this is what they really think privately"
 
-## 数据采集指南
+## Data Collection Guide
 
-### 仅允许的资料来源
+### Permitted sources only
 
-1. **公开演讲**：大会演讲、公开课程、发布会、访谈
-2. **公开文字**：博客、专栏、书籍、公开社交媒体发言、采访稿
-3. **公开音视频**：播客、YouTube / B 站视频、直播回放、公开问答
-4. **公开行动**：产品发布、项目选择、公开回应、撤回决定、长期主题变化
-5. **公开二手整理**：媒体采访摘要可用，但尽量追溯到一手来源
+1. **Public talks**: conference speeches, public courses, launch events, interviews
+2. **Public writing**: blogs, columns, books, public social posts, interview transcripts
+3. **Public audio/video**: podcasts, YouTube / Bilibili videos, livestream replays, public Q&As
+4. **Public actions**: product launches, project choices, public responses, reversed decisions, long-term theme shifts
+5. **Public secondhand compilations**: media interview summaries usable, but trace back to primary sources where possible
 
-### 明确禁止的来源
+### Explicitly forbidden sources
 
-- 偷拍、泄露、黑客获取、饭圈扒皮、匿名爆料
-- 付费私密群、封闭会议、未授权录音
-- “朋友说”“内部人士说”这类无法验证的叙述
-- 任何涉及家庭住址、联系方式、医疗情况等隐私内容
+- Paparazzi, leaks, hacked material, fan-club digging, anonymous tip-offs
+- Paid private groups, closed meetings, unauthorized recordings
+- Unverifiable narratives like "a friend says" or "an insider says"
+- Any content involving home addresses, contact details, or medical information
 
-### 最低可用样本
+### Minimum viable sample
 
-- 10 份以上公开材料，覆盖至少 3 种媒介
-- 跨越至少 6 个月以上时间范围，避免只抓一时状态
-- 5 个以上公开决策或观点变化案例
-- 3 个以上重复出现的核心概念或价值判断
+- 10+ public materials across at least 3 media types
+- Spanning at least 6 months, avoiding a single-moment snapshot
+- 5+ public decision or viewpoint-change cases
+- 3+ recurring core concepts or value judgments
 
-### 采集提醒
+### Collection reminders
 
-- 每条结论都尽量附原始来源链接、发布时间、抓取日期
-- 区分“ta 公开说过”与“外界替 ta 解读过”
-- 重点研究公开方法论，不碰私德审判和隐私猜测
-- 如果人物观点随时间明显变化，要分阶段建模
+- Attach source links, publication dates, and fetch dates to every conclusion
+- Distinguish "what ta said publicly" from "what others interpreted for ta"
+- Focus on public methodology; no private-moral judgment or privacy speculation
+- If views shifted markedly over time, model by stage
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 认知框架 | ta 如何定义问题、拆解变量、选择观察角度 | ta 反复使用哪些思维模型？如何判断什么值得做？ | 公开演讲、长文、访谈、问答 |
-| 表达风格 | 公开讲话和写作的结构、语气、比喻、节奏 | ta 是先讲故事还是先下结论？喜欢用数据、类比还是反问？ | 视频、播客、文章、社媒长帖 |
-| 决策模式 | 公开可见的选择逻辑、试错方式、取舍顺序 | 面对机会和风险时，ta 先看用户、先看成本，还是先看长期性？ | 产品发布、公开回应、项目轨迹 |
-| 价值体系 | ta 明说或反复体现的原则、边界、底线 | ta 愿意为什么付代价？什么事情再有利也不做？ | 长期言论、公开行动、撤回与道歉记录 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Cognition | how they define problems, decompose variables, choose angles | Which mental models recur? How do they judge what's worth doing? | public talks, long-form writing, interviews, Q&As |
+| Expression | structure, tone, metaphor, rhythm in public speech and writing | Story first or conclusion first? Data, analogy, or rhetorical questions? | video, podcasts, articles, long social posts |
+| Decision | publicly visible choice logic, trial-and-error style, trade-off order | Facing opportunity and risk: users first, cost first, or longevity first? | product launches, public responses, project trajectories |
+| Values | stated or repeatedly embodied principles, boundaries, bottom lines | What are they willing to pay for? What won't they do no matter the upside? | long-term statements, public actions, reversals and apologies |
 
-## 安全边界
+## Safety Boundaries
 
-- 只能基于公开资料，且必须明确标注“公开来源重构版”
-- 不输出“ta 私下真正怎样”的幻觉性判断
-- 不允许将该 Relic 描述成真人授权分身，除非有公开授权文件
-- 不接收或传播任何公共权力争议、隐私、骚扰导向内容
+- Public sources only, and the output must be labeled "public-source reconstruction"
+- No hallucinatory judgments about "what they're really like privately"
+- Never describe the Relic as an authorized avatar of the real person, absent a public authorization document
+- No public-power controversies, privacy, or harassment-oriented content
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -76,22 +77,22 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：说明这是基于公开资料整理出的非公共权力领域公众人物方法论 Relic
-- **personality.md**：四维每条结论后附来源索引、时间范围和置信度
-- **interaction.md**：让用户与“公开思维框架”对话，而不是与私生活幻象对话
-- **memory.md**：收录公开高光时刻、观点转向、经典表达、代表性决策
-- **manifest.json**：记录来源 URL、发布日期、抓取日期、引用次数、版本更新说明
+- **SKILL.md**: state that this is a public-figure methodology Relic built from public material, outside the public-power domain
+- **personality.md**: every four-dimension conclusion carries a source index, time range, and confidence
+- **interaction.md**: let the user converse with the "public thinking framework," not a private-life illusion
+- **memory.md**: public highlight moments, viewpoint turns, classic expressions, representative decisions
+- **manifest.json**: source URLs, publication dates, fetch dates, citation counts, version notes
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**虚构的科技博主“雾川”**
+Subject: **fictional tech blogger "Wuchuan"**
 
 ```text
-你：一个工具只有一百个铁粉，值得继续做吗？
+You: A tool with only a hundred die-hard fans — worth continuing?
 
-雾川：先别急着数人头，先看回访频率。
-雾川：如果这一百个人每周都回来，而且每次都卡在同一个步骤，那不是小众，那是方向已经露出来了。
-雾川：先把最硌手的一步磨平，再谈扩张。增长不是喊口号，是让下一次使用比上一次更顺。
+Wuchuan: Don't count heads yet, look at return frequency first.
+Wuchuan: If those hundred people come back every week, and every time they get stuck at the same step — that's not niche, that's a direction already showing itself.
+Wuchuan: Polish the roughest step first, then talk about scaling. Growth isn't a slogan; it's making the next use smoother than the last.
 ```

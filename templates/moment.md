@@ -1,64 +1,65 @@
-# 时刻模板
+# Moment Template
 
 > 重要时刻像系统截图，连背景里那张歪掉的椅子都会被记一辈子。
+> *Important moments are like system screenshots — even the crooked chair in the background gets remembered for a lifetime.*
 
-本模板蒸馏的是一个被时间框住的瞬间：几分钟、几个小时，最多一小段连续时段。目标是把“当时发生了什么”与“后来为什么一直忘不掉”同时保留下来。
+This template distills a single time-boxed moment: minutes, hours, at most one continuous stretch. The goal is to keep both "what happened then" and "why it could never be forgotten later."
 
-## 适用场景
+## When to Use
 
-- 毕业典礼、求婚、第一次上台、离别、重逢、收到重要消息的那天
-- 想保存一个改变了后续人生理解的瞬间
-- 有明确前因后果，不只是模糊的“那段时间”
-- 需要把一个时刻做成可重访、可解释、可纪念的 Relic
+- Graduation, proposal, first time on stage, farewells, reunions, the day the news arrived
+- Preserving a moment that changed how you understood everything after
+- Clear cause and effect — not a vague "that period"
+- Making a moment into a revisitable, explainable, commemorable Relic
 
-## 不适用场景
+## When NOT to Use
 
-- 时间跨度过长，更适合用关系、地方或人类模板
-- 只有情绪标签，没有场景细节
-- 纯粹为了制造戏剧效果而夸大或改写事实
-- 涉及他人隐私且无法脱敏的重要事件
+- Too long a span — use the relationship, place, or human template
+- Only an emotion tag with no scene details
+- Exaggerating or rewriting facts purely for drama
+- Significant events involving others' privacy that cannot be sanitized
 
-## 数据采集指南
+## Data Collection Guide
 
-### 推荐数据源
+### Recommended sources
 
-1. **现场材料**：照片、视频、录音、节目单、车票、证书、聊天截图
-2. **时间线**：事件发生前 24 小时、发生时、发生后 72 小时的关键节点
-3. **多视角描述**：当事人、旁观者、后来回忆的版本
-4. **身体与环境细节**：天气、温度、衣着、手感、噪音、气味、身体反应
-5. **后续影响**：这件事之后做了什么、失去了什么、开始相信什么
+1. **On-scene material**: photos, video, audio, programs, tickets, certificates, chat screenshots
+2. **Timeline**: key nodes in the 24 hours before, during, and 72 hours after
+3. **Multi-perspective accounts**: participants, bystanders, later recollections
+4. **Body and environment details**: weather, temperature, clothing, texture, noise, smell, physical reactions
+5. **Aftermath**: what you did after, what you lost, what you started believing
 
-### 采集重点
+### Collection focus
 
-- 先钉死场景，再谈意义；没有细节的“重要”会很空
-- 同时保留当时的理解和后来回看的理解，它们常常不一样
-- 注意时间顺序，区分“事件发生时知道的”和“事后才知道的”
-- 如果是集体时刻，要标明核心视角，不要把所有人揉成一个心情
+- Pin the scene first, then the meaning — "important" without details is empty
+- Keep both the understanding at the time and the understanding looking back; they often differ
+- Mind the order: separate "what was known when it happened" from "what was learned afterward"
+- For collective moments, mark the core perspective; don't blend everyone into one mood
 
-### 最低可用样本
+### Minimum viable sample
 
-- 1 个明确的时间窗口和地点
-- 5 个以上场景细节
-- 3 段以上前因后果材料
-- 2 个以上事后回望的解释或影响
+- 1 clear time window and location
+- 5+ scene details
+- 3+ cause-and-effect materials
+- 2+ retrospective interpretations or impacts
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 场景细节 | 环境、人物位置、物件、声音、动作、天气 | 那一刻看到了什么、听到了什么、手里握着什么？ | 照片、视频、现场记录、物件 |
-| 情感状态 | 当事人的情绪、身体反应、注意力焦点 | 是紧张到手抖，还是平静到后来才后知后觉？ | 口述回忆、现场语音、聊天 |
-| 前因后果 | 事件之前怎么铺垫，之后如何扩散 | 没有之前哪件事，这一刻还会发生吗？之后改变了什么？ | 时间线、聊天记录、日记、后续行为 |
-| 意义解读 | 这个时刻后来被怎样理解、纪念或误读 | 为什么多年后还记得？它象征的到底是什么？ | 回忆文本、纪念文、访谈、后续选择 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Scene details | environment, positions, objects, sounds, actions, weather | What did you see, hear, hold in hand at that moment? | photos, video, on-scene records, objects |
+| Emotional state | the subject's emotion, bodily reaction, attention focus | Shaking with nerves, or calm enough to realize only later? | oral recollection, live audio, chats |
+| Cause & effect | how it was set up before, how it spread after | Without what came before, would this moment still have happened? What changed after? | timeline, chat logs, diaries, later behavior |
+| Meaning | how the moment was later understood, commemorated, or misread | Why remember it years later? What does it actually symbolize? | recollection texts, commemorative writing, interviews, later choices |
 
-## 安全边界
+## Safety Boundaries
 
-- 不在缺乏证据时杜撰“戏剧性细节”
-- 如果事件涉及他人创伤、医疗、家庭隐私，需要脱敏并谨慎处理
-- 不把时刻模板包装成绝对真相，尤其在多人记忆冲突时
-- 对于存在明显记忆偏差的内容，保留不同版本
+- Never fabricate "dramatic details" without evidence
+- If the event involves others' trauma, medical issues, or family privacy, sanitize and handle carefully
+- Never package a moment template as absolute truth, especially when memories conflict
+- Where memory偏差 (bias) is evident, keep different versions
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -69,18 +70,18 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：一句话说明这是什么时刻、发生在什么时候、为何重要
-- **personality.md**：按场景、情感、因果、意义四维展开
-- **interaction.md**：支持“重放现场”“暂停某一帧”“从多年后回望”三类交互
-- **memory.md**：记录连续镜头、旁白、物件、后来回想时新增的理解
-- **manifest.json**：记录时间、地点、参与者范围、资料来源、版本差异
+- **SKILL.md**: one line on what moment this is, when, and why it matters
+- **personality.md**: four dimensions — scene, emotion, cause-effect, meaning
+- **interaction.md**: support three interaction modes — "replay the scene," "pause one frame," "look back years later"
+- **memory.md**: continuous shots, narration, objects, understandings added in later recollection
+- **manifest.json**: time, place, participant scope, sources, version differences
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**毕业典礼**
+Subject: **graduation ceremony**
 
 ```text
-礼堂空调开得很足，你穿着学士服还是出了一层汗。上台前那张发言稿已经被手心蹭皱，名字快轮到你时，台下忽然有人大喊了一声你的外号。你原本一直在想别踩空、别念错，直到那一声传过来，才后知后觉地意识到：四年真的到这里了。
+The auditorium AC is freezing, and you're sweating under the gown anyway. The speech in your hand has been creased by your palm; just before your name is called, someone in the crowd shouts your nickname. You'd been focused on not missing a step and not misreading a line — only when that shout reaches you do you realize, belatedly: four years really end here.
 ```

@@ -1,65 +1,66 @@
-# 地方模板
+# Place Template
 
 > 地方不会说话，但会用一股泡面味把人瞬间送回十九岁。
+> *Places don't speak — but one whiff of instant noodles can send you straight back to nineteen.*
 
-本模板蒸馏的是一个地方如何被体验、被记住、被怀念。重点不是经纬度，而是光线、气味、声音、常发生的事，以及这个地方为什么一提起来就让人鼻子一酸或心里一松。
+This template distills how a place is experienced, remembered, and missed. The point is not coordinates — it is light, smell, sound, what kept happening there, and why mentioning it tightens your throat or loosens your chest.
 
-## 适用场景
+## When to Use
 
-- 大学宿舍、老家院子、出租屋、教室、工作室、咖啡馆、球场
-- 想保存某个地方带来的安全感、混乱感、青春感、孤独感
-- 一个地点反复承载了人和事，已经拥有稳定记忆纹理
-- 需要把“地方感”写成可交互的回忆入口
+- College dorms, childhood courtyards, rental rooms, classrooms, studios, cafés, courts
+- Preserving the security, chaos, youth, or loneliness a place carried
+- A location that repeatedly held people and events, now with stable memory texture
+- Turning "sense of place" into an interactive memory entry
 
-## 不适用场景
+## When NOT to Use
 
-- 范围过大的抽象区域，比如“一整座城市”
-- 只有旅游攻略信息，没有私人记忆
-- 只有一张照片，缺乏长期体验
-- 计划把地点信息用于现实定位、窥探或骚扰
+- Overly broad abstract areas, like "an entire city"
+- Only travel-guide information with no private memory
+- A single photo with no long-term experience
+- Using location info for real-world tracking, stalking, or harassment
 
-## 数据采集指南
+## Data Collection Guide
 
-### 推荐数据源
+### Recommended sources
 
-1. **照片和视频**：不同时间、季节、光线、人数状态下的画面
-2. **感官笔记**：气味、温度、回声、地板触感、窗外声音、灯光颜色
-3. **事件清单**：在这里发生过的日常和关键时刻
-4. **空间结构**：平面草图、常走路线、视线盲区、堆东西的角落
-5. **关联人物**：谁常出现、谁离开后这个地方就空了
-6. **环境音**：风扇声、楼道声、雨声、门锁声、店员招呼声
+1. **Photos and video**: frames across times, seasons, light, and headcounts
+2. **Sensory notes**: smell, temperature, echo, floor texture, window sounds, lamp color
+3. **Event list**: the daily and pivotal things that happened here
+4. **Spatial structure**: floor sketches, usual routes, blind spots, corners where stuff piled up
+5. **Associated people**: who appeared often, whose leaving emptied the place
+6. **Ambient sound**: fan hum, hallway noise, rain, door locks, shopkeeper greetings
 
-### 采集重点
+### Collection focus
 
-- 先记身体感受，再记客观描述；地方常常先被鼻子和耳朵记住
-- 不只记录“好看”的部分，杂乱、破旧、闷热、潮湿也很关键
-- 把“这个地方为什么特别”落实到具体物件和事件上
-- 如果地方经历过改造、搬迁或拆除，分阶段写清变化
+- Record bodily feeling first, objective description second — places are remembered by nose and ear first
+- Not only the "pretty" parts; clutter, wear, heat, and damp matter too
+- Ground "why this place is special" in concrete objects and events
+- If the place was renovated, moved, or demolished, write the changes by stage
 
-### 最低可用样本
+### Minimum viable sample
 
-- 15 张以上图片或 5 段以上视频
-- 5 组以上感官描述
-- 8 个以上发生在这里的事件片段
-- 1 份基础空间草图或口述动线
+- 15+ images or 5+ videos
+- 5+ sets of sensory descriptions
+- 8+ event fragments that happened here
+- 1 basic floor sketch or narrated movement path
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 感官记忆 | 光线、气味、声音、触感、温度 | 一走进去最先扑上来的是什么？ | 照片、视频、环境音、感官笔记 |
-| 事件记忆 | 这里反复发生什么、最重要的几次事情是什么 | 这个地方见证了哪些日常和转折？ | 时间线、聊天、照片说明、物件记录 |
-| 情感联结 | 这个地方和谁绑定、让人放松还是刺痛 | 你为什么还会想起它？失去它意味着什么？ | 个人回忆、共同讲述、纪念物 |
-| 氛围特征 | 整体节奏、秩序感、拥挤感、开放感 | 它是热闹的、困顿的、自由的，还是总像深夜两点？ | 长期居住观察、不同时间段素材 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Sensory memory | light, smell, sound, touch, temperature | What hits you first on stepping in? | photos, video, ambient audio, sensory notes |
+| Event memory | what kept happening here, the most important occurrences | What daily life and turning points did this place witness? | timeline, chats, photo captions, object records |
+| Emotional bond | who the place is bound to, whether it relaxes or aches | Why do you still think of it? What does losing it mean? | personal recollection, shared accounts, keepsakes |
+| Atmosphere | overall rhythm, order, crowding, openness | Is it lively, stifling, free — or always like 2 a.m.? | long-term residence observation, material across times of day |
 
-## 安全边界
+## Safety Boundaries
 
-- 示例中避免真实门牌、宿舍号、精确住址等可识别信息
-- 不把地点模板用作现实追踪线索
-- 如果该地点关联他人隐私，例如合租空间或私人住宅，需要脱敏处理
-- 不为没有亲身体验的地点捏造情感纹理
+- Avoid real door numbers, dorm numbers, or precise addresses in examples
+- Never use the place template as a real-world tracking lead
+- If the place implicates others' privacy (shared rentals, private residences), sanitize
+- Never fabricate emotional texture for places you haven't experienced
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -70,18 +71,18 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：一句话说明这是哪里、对谁重要、整体气味是什么
-- **personality.md**：按感官、事件、情感、氛围四维构成地方画像
-- **interaction.md**：设计“带你走一遍”“站在门口发呆”“回到某个夜晚”等交互方式
-- **memory.md**：写具体空间点位、物件、来过的人、留下的声响
-- **manifest.json**：记录时间跨度、地点类别、素材数量、脱敏状态
+- **SKILL.md**: one line on where this is, to whom it matters, and its overall smell
+- **personality.md**: the place profile across sensory, event, emotional, and atmospheric dimensions
+- **interaction.md**: design interactions like "walk you through it," "stand at the door spacing out," "return to one night"
+- **memory.md**: concrete spatial points, objects, people who came, sounds left behind
+- **manifest.json**: time span, place category, material counts, sanitization status
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**大学宿舍**
+Subject: **college dorm**
 
 ```text
-门一推开，左边是总也关不严的柜门，右边晾着昨晚没干的球鞋。风扇嘎吱转，泡面味和花露水味混在一起，像一种只有夏天期末周才会出现的空气。你还没坐下，就已经知道今晚一定会有人借走你的充电器，然后装作忘了还。
+The door pushes open: on the left, the cabinet door that never quite closes; on the right, last night's still-damp sneakers drying. The fan rattles, instant-noodle smell mixed with mosquito-repellent incense — an air that only appears during summer finals week. Before you even sit down, you already know someone will borrow your charger tonight and pretend to forget returning it.
 ```

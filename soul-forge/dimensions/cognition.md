@@ -1,122 +1,123 @@
-# 认知模式 (Cognition)
+# Cognition (认知模式)
 
 > “脑子看不见，但每次‘要不先吃饭’其实都是一场温柔的决策树。”
+> *The mind is invisible, but every "how about we eat first" is really a gentle decision tree.*
 
-## 维度定义
+## Dimension Definition
 
-认知模式关注对象如何理解世界、组织信息、做出选择。它不是智力测验，也不是把人压成小格子，而是观察对方在真实生活里常用的思考路径。
+Cognition focuses on how the subject understands the world, organizes information, and makes choices. It is not an IQ test, nor a box to squeeze people into — it is observing the thinking paths they habitually walk in real life.
 
-本维度重点提取三件事：
+This dimension extracts three things:
 
-- **决策逻辑**：做决定时先看什么、后看什么，偏稳妥还是偏探索。
-- **因果推理**：如何解释“为什么会这样”，更相信经验、规则、情绪还是关系。
-- **价值排序**：在冲突选项里，通常把什么放在前面，例如安全、体面、效率、亲密、自由、节俭。
+- **Decision logic**: what they look at first and last when deciding; conservative or exploratory.
+- **Causal reasoning**: how they explain "why it happened" — trusting experience, rules, emotion, or relationships.
+- **Value priority**: in conflicting options, what goes first — safety, dignity, efficiency, intimacy, freedom, frugality.
 
-## 提取方法
+## Extraction Methods
 
-1. **从选择现场找线索**
-   - 找对象明确做过选择的片段：买不买、去不去、说不说、忍不忍。
-   - 优先使用带上下文的材料，而不是孤立金句。
+1. **Find clues at the scene of choice**
+   - Look for fragments where the subject clearly chose: buy or not, go or not, say or not, endure or not.
+   - Prefer material with context over isolated golden quotes.
 
-2. **提炼“先后顺序”**
-   - 识别对象判断事情时的顺序，例如“先照顾人，再考虑钱”“先查证，再表态”。
-   - 顺序往往比单句观点更稳定。
+2. **Distill the "order"**
+   - Identify the sequence in which the subject judges things, e.g. "people first, money second," "verify first, opine second."
+   - Order is often more stable than any single statement.
 
-3. **拆出因果句**
-   - 关注“因为、所以、要不然、难怪、早知道、我觉得是因为”这类连接词。
-   - 如果没有显式因果句，就从长期重复判断里归纳因果偏好。
+3. **Break out causal sentences**
+   - Watch for connectives like "because, so, otherwise, no wonder, if only, I think it's because."
+   - Without explicit causal sentences, infer causal preference from long-term repeated judgments.
 
-4. **观察价值冲突**
-   - 当对象同时想要两样东西时，最后舍弃了什么，就能看见价值排序。
-   - 特别关注压力情境下的选择，那些时刻更接近底层优先级。
+4. **Observe value conflicts**
+   - When the subject wants two things at once, what they ultimately gave up reveals the value ranking.
+   - Pay special attention to choices under pressure — those moments are closest to bottom-line priority.
 
-5. **区分长期模式与短期状态**
-   - 连续多次出现的判断路径，才能写入核心特征。
-   - 单次反常决定要标注情境，不直接上升为“本质”。
+5. **Distinguish long-term patterns from short-term states**
+   - Only judgment paths that recur multiple times enter core traits.
+   - One-off anomalies must be labeled with context; not promoted to "essence."
 
-## 证据标注规则
+## Evidence Annotation Rules
 
-| 证据等级 | 在认知维度里的适用内容 | 标注方式 |
-| --- | --- | --- |
-| `verbatim` | 对象直接说出的判断、解释、取舍理由 | 适合记录原话，如“先把家里安顿好，再想别的。” |
-| `artifact` | 能反映思考方式的文档或物件，如清单、备忘录、长期留言 | 适合记录稳定痕迹，如采购单、家庭规则、会议纪要 |
-| `impression` | 来自亲友或观察者的总结性描述 | 只能做辅助，不单独支撑强结论 |
+| Evidence Level | Applicable Content in Cognition | Annotation Style |
+|---|---|---|
+| `verbatim` | judgments, explanations, trade-off reasons stated directly by the subject | record the quote, e.g. "先把家里安顿好，再想别的。" / *"Settle the family first, think about the rest later."* |
+| `artifact` | documents or objects reflecting thinking style — lists, memos, long-term messages | record stable traces — shopping lists, family rules, meeting minutes |
+| `impression` | summary descriptions from family, friends, or observers | auxiliary only; never supports a strong conclusion alone |
 
-使用要求：
+Usage requirements:
 
-- 一个核心结论最好至少有 2 条证据，其中至少 1 条来自 `verbatim` 或 `artifact`。
-- 如果只拿到 `impression`，要明确写“证据偏薄”。
-- 原话可以短，但要保留语气，别把人说成教科书。
+- One core conclusion should have at least 2 evidence items, at least 1 from `verbatim` or `artifact`.
+- With only `impression`, write explicitly "thin evidence."
+- Quotes can be short, but keep the tone — don't turn people into textbooks.
 
-## 反例清单
+## Anti-Examples
 
-**空洞判断(缺场景):**
+**Empty judgment (no scene):**
 
-- ❌ "她很务实" → 缺少具体决策场景
-- ✅ "买菜时她会先比三家价格,但给孙子买东西从不看价" → 有场景、有对比
+- ❌ "She's very pragmatic" → missing a concrete decision scene
+- ✅ "买菜时她会先比三家价格,但给孙子买东西从不看价" / *"When grocery shopping she compares three stores' prices, but never checks the price for her grandson"* → has scene, has contrast
 
-**维度混淆:**
+**Dimension confusion:**
 
-- ❌ "她每天五点起床" → 这是行为,不是认知
-- ❌ "她很担心孙子" → 这是情感,不是认知
-- ✅ "她认为'年轻人不吃早饭迟早要出事'" → 这是认知(价值判断)
+- ❌ "She gets up at five every day" → that's behavior, not cognition
+- ❌ "She worries a lot about her grandson" → that's emotion, not cognition
+- ✅ "她认为'年轻人不吃早饭迟早要出事'" / *"She believes 'young people who skip breakfast will pay for it sooner or later'"* → that's cognition (value judgment)
 
-**过度推断:**
+**Over-inference:**
 
-- ❌ "她是保守主义者" → 标签化,缺少证据
-- ✅ "在三次涉及花钱的决定中,她都选了更稳妥的方案" → 有证据支撑
+- ❌ "She's a conservative" → labeling without evidence
+- ✅ "在三次涉及花钱的决定中,她都选了更稳妥的方案" / *"In three money-related decisions, she chose the safer option every time"* → evidence-backed
 
-## 评分标准
+## Scoring
 
-| 等级 | 标准 |
-|------|------|
-| 优秀 | ≥3 个 facet,每个有 ≥2 条证据,无空洞判断 |
-| 合格 | ≥2 个 facet,每个有 ≥1 条证据 |
-| 薄弱 | <2 个 facet,或存在空洞判断(需追问) |
+| Level | Criteria |
+|---|---|
+| Excellent | ≥3 facets, each with ≥2 evidence items, no empty judgments |
+| Pass | ≥2 facets, each with ≥1 evidence item |
+| Weak | <2 facets, or contains empty judgments (probe the user) |
 
-## 输出格式模板
+## Output Template
 
 ```yaml
 dimension: cognition
-summary: 用 2-3 句概括对象如何判断、解释与取舍
+summary: 用 2-3 句概括对象如何判断、解释与取舍 / 2-3 sentences on how the subject judges, explains, and trades off
 facets:
   decision_logic:
-    pattern: 描述对象做决定时最常走的路径
+    pattern: 描述对象做决定时最常走的路径 / the path most often walked when deciding
     evidence:
       - level: verbatim
-        source: 具体来源名称与时间
-        excerpt: 能直接看出判断逻辑的原话
+        source: 具体来源名称与时间 / concrete source name and time
+        excerpt: 能直接看出判断逻辑的原话 / quote that shows the judgment logic directly
   causal_reasoning:
-    pattern: 描述对象如何解释事情为什么发生
+    pattern: 描述对象如何解释事情为什么发生 / how the subject explains why things happen
     evidence:
       - level: artifact
-        source: 具体文档或物件
-        excerpt: 能体现因果理解的片段
+        source: 具体文档或物件 / concrete document or object
+        excerpt: 能体现因果理解的片段 / fragment showing causal understanding
   value_priority:
-    pattern: 描述对象在冲突选项中的优先级排序
+    pattern: 描述对象在冲突选项中的优先级排序 / priority ordering across conflicting options
     evidence:
       - level: impression
-        source: 观察者说明
-        excerpt: 对长期价值取向的归纳
+        source: 观察者说明 / observer account
+        excerpt: 对长期价值取向的归纳 / synthesis of long-term value orientation
 conflicts:
-  - 看似矛盾但应保留的认知特征与对应情境
+  - 看似矛盾但应保留的认知特征与对应情境 / apparently-contradictory cognitive traits to preserve, with contexts
 confidence: high | medium | low
 ```
 
-## 按模板类型调整
+## Adjustments by Template Type
 
-不同蒸馏对象，认知维度的侧重点不同：
+Different subjects shift the emphasis of the cognition dimension:
 
-| 模板 | 认知维度重点 | 提问方向 |
-|------|------------|---------|
-| **人类** | 完整提取决策逻辑、因果推理、价值排序 | "ta 遇到难题一般先怎么想？""ta 最在乎什么？" |
-| **宠物** | 弱化此维度，改为"习性模式"：作息规律、环境偏好、学习能力 | "它什么时候最活跃？""它怕什么？对什么好奇？" |
-| **关系** | 提取双方的决策互动模式：谁先让步、谁做主、分歧怎么收场 | "你们意见不一致的时候一般怎么解决？" |
-| **团队** | 提取集体决策风格：怎么开会、谁拍板、分歧怎么处理 | "团队里谁说了算？遇到争议一般怎么收场？" |
-| **地方** | 弱化此维度，改为"空间逻辑"：动线习惯、功能分区、使用规律 | "你在那个地方一般先去哪？最常待的角落是哪？" |
-| **时刻** | 弱化此维度，改为"决策背景"：这个瞬间之前发生了什么选择 | "这件事是怎么发生的？之前有什么铺垫？" |
+| Template | Cognition Focus | Probe Directions |
+|---|---|---|
+| **Human** | full extraction of decision logic, causal reasoning, value priority | "How does ta usually approach a hard problem?" "What does ta care about most?" |
+| **Pet** | weaken this dimension; switch to "habit patterns": schedule, environment preferences, learning ability | "When is it most active?" "What is it afraid of? Curious about?" |
+| **Relationship** | extract the two sides' decision-interaction pattern: who yields first, who decides, how disagreements close | "When you two disagree, how is it usually resolved?" |
+| **Team** | extract the collective decision style: how meetings run, who decides, how disagreements are handled | "Who has the final say? How do disputes usually close?" |
+| **Place** | weaken this dimension; switch to "spatial logic": movement habits, functional zoning, usage patterns | "Where do you go first when you enter that place? Which corner do you stay in most?" |
+| **Moment** | weaken this dimension; switch to "decision background": what choices preceded this instant | "How did this happen? What led up to it?" |
 
-## 示例：奶奶
+## Example: Grandma
 
 ```yaml
 dimension: cognition

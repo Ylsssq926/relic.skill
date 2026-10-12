@@ -1,23 +1,24 @@
-# 灵魂指纹系统
+# Soul Fingerprint System
 
 > 一枚 Relic 可以模仿风格，但不能没有指纹。
+> *A Relic can imitate style, but it cannot be fingerprintless.*
 
-## 目标
+## Goals
 
-灵魂指纹系统负责四件事：
+The soul fingerprint system does four things:
 
-- 为每个 Relic 生成唯一指纹
-- 把同一枚指纹嵌入所有输出文件
-- 在加载、分享、归档时验证真实性
-- 在内容被偷偷改动时触发防篡改检测
+- Generates a unique fingerprint for every Relic
+- Embeds the same fingerprint into all output files
+- Verifies authenticity on load, share, and archive
+- Triggers tamper detection when content is altered secretly
 
-## 指纹生成规则
+## Fingerprint Generation Rules
 
-每个 Relic 的指纹都基于核心内容的规范化哈希生成。
+Every Relic's fingerprint is a normalized hash of its core content.
 
-### 1. 收集核心文件
+### 1. Collect core files
 
-推荐纳入以下文件：
+Recommended inclusion:
 
 - `SKILL.md`
 - `personality.md`
@@ -25,30 +26,30 @@
 - `memory.md`
 - `manifest.json`
 
-如果某个 Relic 没有其中某个文件，就跳过该文件；但一旦后续新增该文件，必须重签指纹。
+If a Relic lacks one of these files, skip it; but once the file is added later, the fingerprint must be re-signed.
 
-### 2. 规范化内容
+### 2. Normalize content
 
-计算前先做统一处理：
+Uniform processing before hashing:
 
-- 编码统一为 `UTF-8`
-- 换行统一为 `LF`
-- 去掉每行末尾多余空格
-- 按文件路径字典序排序
-- 忽略文件中已有的指纹字段，避免“把自己的签名再签一遍”
+- Encoding normalized to `UTF-8`
+- Line endings normalized to `LF`
+- Trailing whitespace stripped per line
+- Files sorted by path lexicographically
+- Ignore any fingerprint fields already in the files, to avoid "signing your own signature again"
 
-计算时应排除以下元数据字段：
+Exclude these metadata fields from the computation:
 
-- Markdown front matter 中的 `relic-fingerprint`
-- Markdown front matter 中的 `relic-authenticity`
-- JSON 中的 `fingerprint`
-- JSON 中的 `previous_fingerprint`
-- JSON 中的 `issued_at`
-- JSON 中的 `fingerprint_version`
+- `relic-fingerprint` in Markdown front matter
+- `relic-authenticity` in Markdown front matter
+- `fingerprint` in JSON
+- `previous_fingerprint` in JSON
+- `issued_at` in JSON
+- `fingerprint_version` in JSON
 
-### 3. 先算单文件哈希，再算总指纹
+### 3. Per-file hashes first, then the master fingerprint
 
-先为每个核心文件计算 `SHA-256`，再按下面格式拼接：
+Compute `SHA-256` per core file, then concatenate in this format:
 
 ```text
 SKILL.md:<sha256>
@@ -58,21 +59,21 @@ memory.md:<sha256>
 personality.md:<sha256>
 ```
 
-然后对拼接结果再次计算 `SHA-256`，得到最终灵魂指纹。
+Then compute `SHA-256` over the concatenated result — that is the final soul fingerprint.
 
-推荐格式：
+Recommended format:
 
 ```text
-relic:sha256:<64位十六进制哈希>
+relic:sha256:<64-char hex hash>
 ```
 
-## 嵌入规则
+## Embedding Rules
 
-所有输出文件都应携带同一个灵魂指纹。
+All output files carry the same soul fingerprint.
 
-### Markdown 文件
+### Markdown files
 
-在文件头部写入：
+Write at the top of the file:
 
 ```yaml
 ---
@@ -81,9 +82,9 @@ relic-authenticity: verified
 ---
 ```
 
-### JSON 文件
+### JSON files
 
-在根对象中写入：
+Write in the root object:
 
 ```json
 {
@@ -92,41 +93,41 @@ relic-authenticity: verified
 }
 ```
 
-### 图片、音频、视频等衍生资源
+### Derived assets (images, audio, video)
 
-不强行改写原文件内容，而是在 `manifest.json` 中登记：
+Do not rewrite the original files; register in `manifest.json` instead:
 
-- 文件名
-- 资源哈希
-- 所属 Relic 指纹
-- 生成时间
+- File name
+- Resource hash
+- Owning Relic fingerprint
+- Generation time
 
-## 验证规则
+## Verification Rules
 
-每次加载或发布前都重新计算核心文件哈希，并与嵌入指纹比对：
+Before every load or publication, recompute the core file hashes and compare with the embedded fingerprint:
 
-- 指纹一致：判定为“真实”
-- 指纹缺失：判定为“来源不完整”
-- 指纹不一致：判定为“可能被篡改”
-- 核心文件集变化但未重签：判定为“版本漂移”
+- Fingerprint matches: "authentic"
+- Fingerprint missing: "incomplete provenance"
+- Fingerprint mismatch: "possibly tampered"
+- Core file set changed without re-signing: "version drift"
 
-## 防篡改检测结果
+## Tamper-Detection Results
 
-| 状态 | 含义 | 处理方式 |
+| Status | Meaning | Handling |
 |---|---|---|
-| 通过 | 指纹一致，文件完整 | 正常加载 |
-| 缺章 | 文件存在但未嵌入指纹 | 补写指纹后再发布 |
-| 漂移 | 内容有更新但未重签 | 重新生成指纹并更新 manifest |
-| 警报 | 指纹与内容不一致 | 停止加载，标记为疑似篡改 |
+| Pass | Fingerprint matches, files complete | Load normally |
+| Missing seal | File exists but fingerprint not embedded | Embed fingerprint before publishing |
+| Drift | Content updated but not re-signed | Regenerate fingerprint and update manifest |
+| Alarm | Fingerprint and content disagree | Stop loading, flag as suspected tampering |
 
-## 更新原则
+## Update Principles
 
-- 任何核心内容被修改，都必须生成新指纹
-- 新版本应在 `manifest.json` 中记录：`fingerprint`、`previous_fingerprint`、`issued_at`、`fingerprint_version`
-- 灵魂指纹用于验证真实性，不用于替代授权协议
-- 有指纹不等于有授权；指纹与授权同时成立，Relic 才能上线
+- Any change to core content requires a new fingerprint
+- New versions must record in `manifest.json`: `fingerprint`, `previous_fingerprint`, `issued_at`, `fingerprint_version`
+- The soul fingerprint verifies authenticity; it does not replace the consent protocol
+- Having a fingerprint does not mean having authorization — fingerprint AND consent must both hold for a Relic to go live
 
-## 最小示例
+## Minimal Example
 
 ```json
 {

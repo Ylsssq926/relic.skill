@@ -1,93 +1,93 @@
 # FAQ
 
-## 1. relic.skill 到底是什么？
+## 1. What exactly is relic.skill?
 
-它不是许愿池，也不是换个头像的聊天机器人。更准确地说，它是一套把记忆、关系和人格线索整理成可交互 Relic 的开源协议：你给它聊天、语音、照片、邮件、共同经历，它把这些碎片收拢成一个能被 AI 读取、也能被人检查的对象。
+It is not a wishing well, nor a chatbot with a new face. More precisely, it is an open protocol that organizes memory, relationships, and persona clues into an interactive Relic: you give it chats, voice, photos, emails, and shared experiences; it gathers those fragments into an object an AI can read — and a human can audit.
 
-## 2. 它和 ChatGPT 有什么区别？
+## 2. How is it different from ChatGPT?
 
-ChatGPT 是通用大模型，什么都能聊一点；relic.skill 是把“某个人、某只宠物、某段关系、某个地方、某个时刻”做成专门的数字对象。前者像通才，后者像带证据、带边界、带记忆结构的专属档案。你当然可以用 ChatGPT 来运行一个 Relic，但 Relic 本身不是 ChatGPT。
+ChatGPT is a general-purpose model — it can talk about anything a little; relic.skill turns "a certain person, a certain pet, a certain relationship, a certain place, a certain moment" into a dedicated digital object. The former is a generalist; the latter is a specialized archive with evidence, boundaries, and memory structure. You can certainly run a Relic on top of ChatGPT, but the Relic itself is not ChatGPT.
 
-## 3. 所以它是在“复活”别人吗？
+## 3. So is it "reviving" people?
 
-不是，我们不这么说。relic.skill 做的是保存痕迹、组织记忆、重建互动线索，而不是宣布“这个文件夹里住着某个人的灵魂”。你可以把它理解成一座会说话的纪念馆，而不是一场技术版招魂。
+No — we don't put it that way. relic.skill preserves traces, organizes memory, and reconstructs interaction cues; it does not declare "someone's soul lives in this folder." Think of it as a talking memorial hall, not a technological séance.
 
-## 4. 听起来很玄，它的技术基础其实是什么？
+## 4. It sounds mystical — what's the actual technical basis?
 
-不玄，骨架很朴素：多源数据采集、结构化清洗、四维人格提取、记忆分层、检索增强、风格约束、伦理闸门。说人话就是：先把材料理顺，再把人写清楚，再让模型按这个人说话，而不是让模型现场自由发挥。
+Not mystical at all; the skeleton is plain: multi-source data collection, structured cleaning, four-dimension persona extraction, memory layering, retrieval augmentation, style constraints, and ethics gates. In plain words: get the material straight first, write the person clearly second, then make the model speak as this person — instead of letting the model freestyle on the spot.
 
-## 5. 为什么叫“万物皆可 Relic”？
+## 5. Why "everything can be a Relic"?
 
-因为值得留下来的不只有人。宠物的动作习惯、团队的说话味道、某个地方的气氛、某段关系的默契、某个时刻的光线和情绪，都会塑造我们的生命。Relic 关心的是“什么留下了痕迹”，不只是谁有身份证。
+Because what deserves keeping isn't only people. A pet's movement habits, a team's way of talking, the atmosphere of a place, the默契 (unspoken understanding) of a relationship, the light and emotion of a moment — all of these shape our lives. Relic cares about "what left traces," not just who has an ID card.
 
-## 6. 可以蒸馏活人吗？
+## 6. Can I distill a living person?
 
-可以，但前提很硬：先同意，再开始。对在世对象，授权不是礼貌用语，而是总开关。没有明确知情同意，这件事就不该往下做。
+Yes — but the precondition is hard: consent first, always. For living subjects, authorization is not a polite phrase; it's the master switch. Without explicit informed consent, this shouldn't proceed.
 
-## 7. 可以蒸馏已经离开的人吗？
+## 7. Can I distill someone who has passed away?
 
-可以，但最好由亲近家属、合法保管者或明确被授权的人来发起。资料越完整，Relic 越不会只剩一个模糊的“ta 人很好”。如果材料很少，也可以做纪念版，但要诚实地标出证据薄弱的地方。
+Yes — but it should ideally be initiated by close family, a legal custodian, or someone clearly authorized. The more complete the material, the less the Relic is reduced to a vague "ta was nice." If material is scarce, a commemorative version is possible — but honestly mark where evidence is thin.
 
-## 8. 可以蒸馏宠物吗？
+## 8. Can I distill a pet?
 
-当然可以，而且这正是 relic.skill 最迷人的部分之一。宠物 Relic 不追求把猫狗写成会长篇演讲的人类，而是保留它们真正独特的东西：走路方式、撒娇动作、领地习惯、迎接人的仪式、夜里突然冲刺的理由。
+Of course — and it's one of the most fascinating parts of relic.skill. Pet Relics don't try to write cats and dogs as humans giving long speeches; they preserve what's genuinely unique: the way they walk, how they act cute, territory habits, greeting rituals, the reason for midnight sprints.
 
-## 9. 会不会蒸馏出一个“假人”？
+## 9. Will it distill a "fake person"?
 
-如果做法粗糙，会。所以 relic.skill 才会强调证据等级、矛盾保留和身份标识。好的 Relic 会像某个人，但不会假装自己就是那个人，更不会把所有空白都硬填满。
+If done crudely, yes. That's why relic.skill emphasizes evidence levels, contradiction preservation, and identity labeling. A good Relic resembles someone — but doesn't pretend to be that person, and doesn't force-fill every blank.
 
-## 10. 它能像真人到什么程度？
+## 10. How close to a real person can it get?
 
-最像的通常不是知识点，而是节奏：怎么说话、怎么停顿、怎么安慰人、怎么吐槽、在什么事情上会突然认真。它可以很像，但“像”不等于“等于”。真正值得追求的，不是骗过谁，而是让熟悉的人一看就知道：嗯，这味儿对了。
+What's most similar is usually not knowledge, but rhythm: how they talk, how they pause, how they comfort, how they snark, and what suddenly makes them serious. It can be very similar — but "similar" ≠ "equal." What's worth pursuing isn't fooling anyone; it's making people who knew them recognize at a glance: yes, this is the flavor.
 
-## 11. 会不会瞎编？
+## 11. Will it make things up?
 
-只要用了生成模型，就有可能。区别在于，relic.skill 会尽量把“哪些是原话、哪些是物证、哪些只是印象”分开写，减少模型把猜测说成事实的机会。它不能保证零幻觉，但它能把幻觉压到更可控的范围。
+As long as a generative model is involved, possibly. The difference: relic.skill tries to write "which are verbatim, which are artifacts, which are only impressions" separately, reducing the model's chances of stating guesses as fact. It can't guarantee zero hallucination — but it can compress it into a more controllable range.
 
-## 12. 数据安全吗？
+## 12. Is the data safe?
 
-设计思路是本地优先。Relic 本质上是文件夹，不要求你把记忆上传到一个陌生平台才能存在。你当然要自己管好硬盘、备份和访问权限，但至少数据主权不先天交出去。
+The design principle is local-first. A Relic is essentially a folder; it doesn't require uploading your memory to a strange platform to exist. You of course manage your own drive, backups, and access permissions — but at least data sovereignty isn't handed over from the start.
 
-## 13. 支持哪些平台？
+## 13. Which platforms are supported?
 
-目前文档里覆盖了 12 个高频来源：微信、QQ、Telegram、Discord、Slack、飞书、钉钉、iMessage、WhatsApp、Twitter / X、Instagram、Gmail。除此之外，任何能整理成 TXT、JSON、CSV、Markdown 的材料，也都能接进来。
+The docs currently cover 12 high-frequency sources: WeChat, QQ, Telegram, Discord, Slack, Feishu, DingTalk, iMessage, WhatsApp, Twitter/X, Instagram, Gmail. Beyond that, anything organizable into TXT, JSON, CSV, or Markdown can also be plugged in.
 
-## 14. 没有聊天记录，还能做吗？
+## 14. No chat logs — can I still do it?
 
-能，但风格会不同。聊天最适合还原表达习惯；没有聊天时，可以用语音、照片、日记、邮件、共同回忆、便签、清单去补。只是材料越少，Relic 越应该保持克制，别装得什么都知道。
+Yes, but the style differs. Chats are best for restoring expression habits; without them, you can supplement with voice, photos, diaries, emails, shared memories, notes, and lists. Just: the less material, the more restrained the Relic should be — don't pretend to know everything.
 
-## 15. 需要多少素材才像？
+## 15. How much material before it feels real?
 
-没有绝对门槛，但有个经验值：如果你连 ta 常说的 10 句话都凑不齐，就别指望系统突然懂 ta。对人类对象，200 条以上有效聊天、几段连续语音、若干关键事件，通常就能开始有轮廓；对宠物和地方，视频和日常观察往往比长文本更重要。
+No absolute threshold, but there's a rule of thumb: if you can't even gather 10 sentences ta often says, don't expect the system to suddenly understand ta. For human subjects, 200+ valid chats, several continuous voice clips, and a few key events usually give you a silhouette; for pets and places, video and daily observation often matter more than long text.
 
-## 16. 免费吗？
+## 16. Is it free?
 
-仓库本身是开源的，协议、模板和文档可以直接用。真正可能产生费用的是你接入的模型、语音服务或云存储；如果全程本地整理、自己控制运行方式，成本也可以压得很低。
+The repo itself is open source — the protocol, templates, and docs are free to use. What may cost money is the model, voice service, or cloud storage you connect; if you organize everything locally and control your own runtime, costs can also be kept very low.
 
-## 17. 我会不会对 Relic 上头？
+## 17. Will I get addicted to the Relic?
 
-有可能，所以项目才把伦理放得很前。Relic 可以陪伴，可以整理情绪，但它不该被当成现实关系的替身，也不该替代专业支持。它最好的位置，是一座桥，不是一个把人关进去的房间。
+Possibly — which is why the project puts ethics up front. A Relic can accompany and help organize emotion, but it shouldn't be treated as a substitute for real relationships, nor replace professional support. Its best position is a bridge, not a room that locks people in.
 
-## 18. 它适合拿来“复盘一段关系”吗？
+## 18. Is it good for "reviewing a relationship"?
 
-很适合，前提是你愿意面对真实，而不是只想给自己写一篇胜利宣言。关系 Relic 最有价值的地方，常常不是甜，而是那些反复出现的沟通节奏、误解模式、和好方式，以及你们到底如何一步步走到今天。
+Very — provided you're willing to face reality rather than write yourself a victory declaration. The most valuable part of a relationship Relic is often not the sweetness, but the recurring communication rhythms, misunderstanding patterns, ways of making up, and how you actually got to today.
 
-## 19. 和普通相册、纪念册有什么不同？
+## 19. How is it different from a normal photo album or memorial book?
 
-相册会把瞬间留下来，Relic 试图把“这个瞬间为什么像你”也留下来。相册擅长保存画面，Relic 更擅长保存语气、习惯、关系结构和互动方式。前者像静帧，后者像能被重新点亮的场景。
+An album keeps the moment; a Relic tries to keep "why this moment is so you." Albums excel at preserving images; Relics excel at preserving tone, habits, relational structure, and interaction patterns. The former is a still frame; the latter is a scene that can be relit.
 
-## 20. 跟 immortal-skill 的区别是什么？
+## 20. What's the difference from immortal-skill?
 
-方向相近，都是数字人格与记忆整理的开源探索；但 relic.skill 的边界更宽，不只关心“人”，还明确覆盖宠物、关系、团队、地方、时刻等对象。它也把 `soul-forge`、`soul-engine`、`soul-shield` 拆成三层，把证据分级、矛盾保留、授权协议和灵魂指纹写成了独立规则，所以更像一套可审计的 Relic 协议，而不只是人物蒸馏流程。
+Similar direction — both are open-source explorations of digital persona and memory organization. But relic.skill has wider boundaries: it explicitly covers pets, relationships, teams, places, and moments, not just "people." It also splits `soul-forge`, `soul-engine`, and `soul-shield` into three layers, writing evidence grading, contradiction preservation, the consent protocol, and the soul fingerprint into independent rules — so it's more like an auditable Relic protocol than just a persona-distillation pipeline.
 
-## 21. 我能为项目做什么贡献？
+## 21. What can I contribute?
 
-能做的很多：补平台导出指南、写新的模板、完善解析脚本、补示例 Relic、改进伦理文档、修正语言细节、翻译文档。最朴素的贡献方式其实是两件事：提一个说得清楚的问题，或者补一段真的有用的内容。
+Plenty: platform export guides, new templates, better parsing scripts, more demo Relics, improved ethics docs, language fixes, translations. The plainest contribution is actually two things: ask a clearly-stated question, or add a genuinely useful piece of content.
 
-## 22. 如果我只想先试试，最小路径是什么？
+## 22. If I just want to try it, what's the minimal path?
 
-挑一个对象，收集一小组干净材料：几段聊天、几条语音、几张照片、几个关键记忆点。先做一个很小的 Relic，确认你想留下的到底是什么，再决定要不要继续扩充。别一上来就想把整个人生打包，那通常只会把自己累坏。
+Pick a subject, gather a small clean set of material: a few chats, a few voice clips, a few photos, a few key memory points. Make a very small Relic first, confirm what you actually want to keep, then decide whether to expand. Don't try to package an entire life on day one — that usually just burns you out.
 
-## 23. 为什么项目一直在强调“这不是真人”？
+## 23. Why does the project keep emphasizing "this is not a real person"?
 
-因为这句话不是扫兴，而是尊重。只有承认 Relic 不是本人，我们才不会把怀念误当成占有，把陪伴误当成替代，把技术误当成神迹。边界说清楚了，温柔才不会变味。
+Because that sentence isn't a buzzkill — it's respect. Only by admitting a Relic is not the person can we avoid mistaking longing for possession, companionship for replacement, and technology for miracle. With the boundary clear, the gentleness doesn't spoil.

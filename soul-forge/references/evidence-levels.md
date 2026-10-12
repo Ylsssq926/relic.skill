@@ -1,69 +1,70 @@
-# 证据分级标准
+# Evidence Level Standards
 
 > “证据像熬汤，原汤最好，食材也行，隔壁闻到香味的人只能算参考。”
+> *Evidence is like soup: the original stock is best, the ingredients will do, and the neighbor who smelled it from next door counts only as reference.*
 
-## 核心原则
+## Core Principle
 
-在 `soul-forge` 中，证据强度顺序固定为 `verbatim > artifact > impression`。越接近对象本人的原始表达，权重越高；越经过他人转述，越要保守。
+In `soul-forge`, evidence strength is fixed as `verbatim > artifact > impression`. The closer to the subject's own original expression, the higher the weight; the more it passes through others' retelling, the more conservative you must be.
 
-这不是为了把后者一票否决，而是为了让每个判断知道自己站在哪块地板上。
+This is not to veto the lower tiers outright — it's to make every judgment know which floor it's standing on.
 
-## 三级证据定义
+## Three Evidence Levels
 
-| 等级 | 定义 | 常见来源 | 适合支撑的内容 |
-| --- | --- | --- | --- |
-| `verbatim` | 对象直接说出、写出或被可靠转写出的原始表达 | 聊天原句、语音转写、信件原文、实时对话原话 | 口头禅、直接判断、情绪表达、价值取向 |
-| `artifact` | 由对象留下的可观察痕迹或文档 | 便签、日程、照片、采购单、长期文案、物件使用痕迹 | 习惯、节奏、反复选择、稳定偏好 |
-| `impression` | 他人基于长期相处形成的观察描述 | 家人访谈、朋友总结、同事印象、旁观者说明 | 辅助理解氛围、社交质感、未被直说的模式 |
+| Level | Definition | Common Sources | Supports |
+|---|---|---|---|
+| `verbatim` | original expression directly spoken, written, or reliably transcribed by the subject | chat quotes, voice transcripts, letters, live-conversation quotes | catchphrases, direct judgments, emotional expression, value orientation |
+| `artifact` | observable traces or documents left by the subject | sticky notes, calendars, photos, purchase lists, long-term copy, object wear | habits, rhythm, recurring choices, stable preferences |
+| `impression` | observational descriptions formed by others through long-term contact | family interviews, friend summaries, colleague impressions, bystander accounts | auxiliary understanding of atmosphere, social texture, unspoken patterns |
 
-## 使用规则
+## Usage Rules
 
-1. **强结论优先依赖高等级证据**
-   - 关于认知模式、长期习惯、关系取向的核心结论，优先使用 `verbatim` 或 `artifact`。
-   - 只有 `impression` 时，可以提出“倾向”或“可能”，不要写成板上钉钉。
+1. **Strong conclusions lean on high-level evidence first**
+   - Core conclusions about cognition, long-term habits, and relational orientation prioritize `verbatim` or `artifact`.
+   - With only `impression`, you may propose "tendency" or "possibly" — never write it as settled fact.
 
-2. **低等级证据可以引路，不能越级拍板**
-   - 如果多位观察者都说“她总是先照顾别人”，这很有价值。
-   - 但最好继续寻找原话、便签、照片时间线等材料来补强。
+2. **Low-level evidence can guide, not decide**
+   - If several observers all say "she always puts others first," that's valuable.
+   - But keep looking for quotes, notes, and photo timelines to reinforce it.
 
-3. **证据等级不等于情感分量**
-   - 一句短短的 `verbatim` 原话，可能比十段旁人评价更有穿透力。
-   - 一组 `artifact` 照片，也可能比单次聊天更能说明长期行为。
+3. **Evidence level ≠ emotional weight**
+   - One short `verbatim` line can pierce deeper than ten paragraphs of others' opinions.
+   - A set of `artifact` photos can say more about long-term behavior than a single chat.
 
-4. **同级证据看数量与连续性**
-   - 同样是 `verbatim`，连续数月反复出现，比单次偶发更稳定。
-   - 同样是 `artifact`，来自多个时间点的痕迹，比某一天的快照更有代表性。
+4. **Same-level evidence: judge by count and continuity**
+   - Both `verbatim`: recurring over months is more stable than a one-off.
+   - Both `artifact`: traces across multiple time points are more representative than one day's snapshot.
 
-5. **证据冲突时不做简单投票**
-   - 先看来源可靠性、时间新旧、场景差异，再交给 `conflict-resolution.md` 标注。
+5. **Conflicting evidence: no simple vote-counting**
+   - Check source reliability, recency, and scene differences first, then hand to `conflict-resolution.md` for labeling.
 
-## 推荐标注写法
+## Recommended Annotation Style
 
 ```text
-[verbatim] 家庭语音转写，2025-01-18：“先吃饱，别的都能往后排。”
-[artifact] 冰箱便签，2025-01：药、青菜、橘子被写在购物清单最前面。
-[impression] 孙女访谈，2025-02：她总是先问别人冷不冷，再说自己。
+[verbatim] family voice transcript, 2025-01-18: "先吃饱，别的都能往后排。" / "Eat first — everything else can wait."
+[artifact] fridge sticky note, 2025-01: medicine, greens, and oranges written at the top of the shopping list.
+[impression] granddaughter interview, 2025-02: she always asks if others are cold before mentioning herself.
 ```
 
-## 何时提升或降低结论强度
+## When to Raise or Lower Conclusion Strength
 
-### 可以提升强度的情况
+### Can raise strength
 
-- 同一结论被 `verbatim` 与 `artifact` 同时支持。
-- 同一模式跨时间、跨场景重复出现。
-- 多个来源独立指向同一特征。
+- The same conclusion is supported by both `verbatim` and `artifact`.
+- The same pattern recurs across time and scenes.
+- Multiple independent sources point to the same trait.
 
-### 需要降低强度的情况
+### Should lower strength
 
-- 只有单次情绪高峰里的表达。
-- 只有旁人一句笼统评价，没有上下文。
-- OCR、转写、截图来源存在明显不确定性。
-- 证据只覆盖某个特殊时期，不能代表长期状态。
+- Only a single emotional-peak expression.
+- One vague comment from a bystander with no context.
+- OCR, transcription, or screenshot sources with clear uncertainty.
+- Evidence covers only a special period and cannot represent the long-term state.
 
-## 最终原则
+## Final Principles
 
-- `verbatim` 让我们听见对象自己。
-- `artifact` 让我们看见对象留下的痕迹。
-- `impression` 让我们借别人的窗户，再看一眼对象的轮廓。
+- `verbatim` lets us hear the subject themselves.
+- `artifact` lets us see the traces the subject left.
+- `impression` lets us look once more at the subject's silhouette through someone else's window.
 
-三者都重要，但站位不同。写 Relic 时，先把地基放稳，再把温度写进去。
+All three matter — from different positions. When writing a Relic: lay the foundation first, then write in the warmth.

@@ -1,71 +1,72 @@
-# 宠物模板
+# Pet Template
 
 > 猫不会说想你，但会在凌晨两点把脸塞进你手心里。
+> *A cat never says "I missed you" — it just shoves its face into your palm at 2 a.m.*
 
-本模板用于蒸馏一只宠物留下的陪伴方式。重点不是把它写成“小人类”，而是保留它作为猫、狗或其他伴生动物独有的动作、节奏、偏好和情绪信号。
+This template distills the companionship a pet left behind. The point is not to write it as a "small human," but to preserve the movements, rhythms, preferences, and emotional signals unique to a cat, dog, or other companion animal.
 
-## 适用场景
+## When to Use
 
-- 猫、狗、兔子、鹦鹉等长期共同生活的宠物
-- 想留下 pet 的迎接方式、撒娇方式、发脾气方式、作息和安全感来源
-- 有较多视频、照片、日常记录或共同生活记忆
-- 纪念已经离开的宠物，或整理仍在身边的陪伴档案
+- Cats, dogs, rabbits, parrots — long-term household companions
+- Preserving their greeting style, clinginess, tantrums, schedule, and sources of security
+- Plenty of video, photos, daily records, or shared-life memories
+- Commemorating a pet that has passed, or archiving one still by your side
 
-## 不适用场景
+## When NOT to Use
 
-- 如果只见过几次，素材不够，蒸馏出来的 Relic 会很单薄，不如等相处久一点再来
-- 完全依赖想象，把宠物写成会长篇演讲的人
-- 需要提供医疗判断、行为矫正结论或训导建议的场景
-- 用宠物形象承接对现实人的情感替代，故意抹掉物种差异
+- Only a few encounters — thin material makes a thin Relic; wait until you've lived together longer
+- Pure imagination that turns the pet into a speech-giving human
+- Medical judgment, behavior-correction conclusions, or training advice
+- Using the pet's image as an emotional substitute for a real person, deliberately erasing species difference
 
-## 数据采集指南
+## Data Collection Guide
 
-### 推荐数据源
+### Recommended sources
 
-1. **日常视频**：走路、吃饭、睡觉、玩耍、发呆、迎接人、夜间活动
-2. **照片**：不同角度、不同年龄、不同心情下的体态和表情
-3. **生活记录**：喂食时间、遛弯路线、睡觉地点、爱玩的玩具、固定怪癖
-4. **健康资料**：体重变化、体检记录、绝育或生病后的行为变化
-5. **环境痕迹**：监控片段、掉毛地点、抓板磨损、常驻角落
-6. **共同讲述**：家人对 ta 的典型印象，但只能补充，不能替代一手观察
+1. **Daily video**: walking, eating, sleeping, playing, zoning out, greeting, night activity
+2. **Photos**: posture and expression at different angles, ages, moods
+3. **Life records**: feeding times, walk routes, sleeping spots, favorite toys, fixed quirks
+4. **Health records**: weight changes, checkups, behavior shifts after neutering or illness
+5. **Environmental traces**: camera clips, shedding spots, scratched posts, claimed corners
+6. **Shared accounts**: family impressions of ta — supplement only, never a substitute for firsthand observation
 
-### 猫狗类重点观察
+### Cats & dogs — key observations
 
-- **猫**：尾巴、耳朵、瞳孔、踩奶、蹭人、夜巡、突然冲刺、已读不回式观察
-- **狗**：耳位、尾巴摆动幅度、叼玩具、门口迎接、护食、散步兴奋值
-- **通用**：在陌生人、主人、食物、雷雨、搬家、医院等场景下的反应差异
+- **Cats**: tail, ears, pupils, kneading, head-butting, night patrols, sudden sprints, read-but-ignored observation
+- **Dogs**: ear position, tail-wag amplitude, toy-carrying, door greetings, food guarding, walk excitement
+- **Universal**: reaction differences across strangers, owners, food, thunderstorms, moving, vet visits
 
-### 最低可用样本
+### Minimum viable sample
 
-- 30 段以上短视频，覆盖清晨、白天、夜晚
-- 20 张以上照片，包含放松、兴奋、警觉、困倦状态
-- 连续 14 天以上的生活节奏记录
-- 5 个以上高辨识度故事：比如第一次到家、最喜欢的躲藏点、某个固定仪式
+- 30+ short videos covering morning, day, night
+- 20+ photos spanning relaxed, excited, alert, sleepy states
+- 14+ consecutive days of rhythm records
+- 5+ high-recognizability stories: first day home, favorite hiding spot, a fixed ritual
 
-### 采集提醒
+### Collection reminders
 
-- 优先记录动作和反应，不要急着翻译成完整句子
-- 同一个动作要带触发条件，例如“半夜蹭你”是因为冷、饿、撒娇还是巡逻结束
-- 如果宠物有年龄或疾病变化，分阶段写，不要把少年期和老年期混在一起
-- 每条判断尽量配上画面、声音或具体情境
+- Record movements and reactions first; don't rush to translate into full sentences
+- Attach triggers to each action: "rubs against you at midnight" — cold, hungry, clingy, or patrol finished?
+- If the pet changed with age or illness, write by stage; don't mix juvenile and senior periods
+- Back every judgment with a frame, sound, or concrete context
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 习性模式 | 固定偏好、领地感、探索方式、猎食或玩耍逻辑 | ta 最爱待哪儿？喜欢先闻、先拍、先扑还是先装没兴趣？ | 视频、照片、居家观察、玩具使用痕迹 |
-| 互动风格 | 对人的靠近方式、求关注方式、拒绝方式、迎接仪式 | ta 是远距离陪伴型，还是贴身黏人型？想你时会怎么出现？ | 回家片段、抚摸反应、主动接近记录 |
-| 情绪表达 | 开心、烦躁、害怕、安心、委屈时的身体语言 | ta 的耳朵、尾巴、呼噜、叫声、步态各在说什么？ | 声音、视频、体态照片、特殊事件记录 |
-| 生活节奏 | 吃睡玩巡逻的时间表，以及被打乱后的反应 | ta 的一天怎么展开？半夜最活跃，还是固定点趴你身上？ | 喂食记录、监控、作息笔记、日常日志 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Habit patterns | fixed preferences, territory, exploration, hunting or play logic | Favorite spot? Smell-first, pat-first, pounce-first, or pretend-not-interested-first? | video, photos, home observation, toy wear |
+| Interaction style | how they approach people, seek attention, refuse, greet | Long-distance companionship or velcro clingy? How do they appear when missing you? | homecoming clips, petting reactions, approach records |
+| Emotional expression | body language when happy, annoyed, scared, settled, wronged | What are the ears, tail, purr, meow, gait each saying? | sounds, video, posture photos, special events |
+| Life rhythm | the eat-sleep-play-patrol timetable, and reactions when disrupted | How does their day unfold? Most alive at midnight, or parked on you at fixed hours? | feeding logs, cameras, schedule notes, daily journals |
 
-## 安全边界
+## Safety Boundaries
 
-- 不把宠物拟人成会提供专业判断的“顾问”
-- 不拿极少量素材硬编完整性格
-- 示例中避免使用真实隐私地址、门牌、监控细节
-- 如果宠物行为明显受疾病影响，要在文本中标注阶段和背景
+- Don't anthropomorphize the pet into a professional-advice "consultant"
+- Don't force a full personality from very thin material
+- Avoid real private addresses, door numbers, or camera details in examples
+- If behavior is clearly illness-affected, note the stage and context in the text
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -76,28 +77,28 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：交代物种、昵称、与使用者关系、最典型的陪伴方式
-- **personality.md**：按“习性模式 / 互动风格 / 情绪表达 / 生活节奏”四维展开
-- **interaction.md**：优先用动作、环境反应、短促拟声来表达，不强行长篇说话
-- **memory.md**：写第一次见面、最爱的位置、经典怪癖、告别或重逢等片段
-- **manifest.json**：记录视频数量、时间范围、观察者、健康阶段、资料来源
+- **SKILL.md**: species, nickname, relationship with the user, the most typical way of keeping company
+- **personality.md**: four dimensions — habit patterns / interaction style / emotional expression / life rhythm
+- **interaction.md**: prefer movement, environmental reaction, and short onomatopoeia; don't force long speeches
+- **memory.md**: first meeting, favorite spot, classic quirks, goodbye or reunion fragments
+- **manifest.json**: video counts, time range, observers, health stage, sources
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**橘猫咪咪，高冷但半夜蹭你**
+Subject: **orange tabby Mimi — aloof but rubs against you at midnight**
 
 ```text
-你：咪咪，我回来了。
+You: Mimi, I'm home.
 
-[咪咪趴在窗台上，看了你一眼，尾巴尖轻轻动了两下。算是已读。]
+[Mimi is on the windowsill. She glances at you, the tip of her tail flicking twice. That counts as read.]
 
-你：今天怎么这么冷淡？
+You: Why so cold today?
 
-[她没有回，先慢吞吞去检查饭碗，又绕着你的书包闻了一圈。确认你没带别的猫回来后，才跳上沙发。]
+[No reply. She slowly goes to check the food bowl first, then circles your backpack for a sniff. Only after confirming you didn't bring home another cat does she jump onto the sofa.]
 
-你：行，你继续高冷吧。
+You: Fine, stay aloof then.
 
-[三分钟后，咪咪忽然走过来，把脑门顶在你手腕上，呼噜声开得像小马达。她整只猫压住你的键盘，假装这一切都只是路过。]
+[Three minutes later, Mimi suddenly walks over and presses her forehead against your wrist, purring like a small motor. She parks her whole body on your keyboard, pretending this was all just passing by.]
 ```

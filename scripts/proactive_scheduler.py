@@ -6,12 +6,22 @@ Relic 主动消息；如果命中触发条件，则基于人格特征生成一�
 Relic 风格的消息模板，并以 JSON 输出。
 
 功能范围：
-- 节日问候（内置中国主要节日与生日判断）
+- 节日问候（内置中国主要节日、国际主流节日与生日判断）
 - 纪念日提醒（按年重复触发）
 - 天气接口预留（当前版本不实际调用外部 API）
 - 随机想念（按最小间隔控制）
 - 安静时段与每周上限控制
 - 基于 `.proactive_state.json` 的冷却与发送记录
+- 主动消息支持中英双语：跟随 Relic 人格文本语言自动选择
+
+支持的节日标识（holidays.list）：
+- 中国节日：new_year / national_day / spring_festival / lantern_festival /
+  qingming / dragon_boat / mid_autumn（农历与清明自动换算）
+- 国际节日：christmas / christmas_eve / new_years_eve / valentines_day /
+  easter / good_friday / halloween / st_patricks_day / april_fools /
+  mothers_day / fathers_day / thanksgiving / canadian_thanksgiving /
+  memorial_day / labor_day_us
+- 生日：`birthday:YYYY-MM-DD`
 
 用法示例：
     python scripts/proactive_scheduler.py --relic examples/grandma-demo --config examples/grandma-demo/proactive_config.json
@@ -63,6 +73,54 @@ SUPPORTED_TYPES = (HOLIDAY_TYPE, ANNIVERSARY_TYPE, WEATHER_TYPE, RANDOM_TYPE)
 FIXED_SOLAR_HOLIDAYS: Dict[str, tuple[int, int, str]] = {
     "new_year": (1, 1, "元旦"),
     "national_day": (10, 1, "国庆"),
+    "valentines_day": (2, 14, "情人节"),
+    "st_patricks_day": (3, 17, "圣帕特里克节"),
+    "april_fools": (4, 1, "愚人节"),
+    "halloween": (10, 31, "万圣节前夜"),
+    "christmas_eve": (12, 24, "平安夜"),
+    "christmas": (12, 25, "圣诞节"),
+    "new_years_eve": (12, 31, "跨年夜"),
+}
+
+# (month, nth, weekday, label) — weekday: 0=Monday ... 6=Sunday；nth 为负数表示倒数第 N 个。
+NTH_WEEKDAY_HOLIDAYS: Dict[str, tuple[int, int, int, str]] = {
+    "mothers_day": (5, 2, 6, "母亲节"),
+    "fathers_day": (6, 3, 6, "父亲节"),
+    "thanksgiving": (11, 4, 3, "感恩节"),
+    "canadian_thanksgiving": (10, 2, 0, "加拿大感恩节"),
+    "memorial_day": (5, -1, 0, "美国阵亡将士纪念日"),
+    "labor_day_us": (9, 1, 0, "美国劳动节"),
+}
+
+EASTER_HOLIDAYS: Dict[str, str] = {
+    "easter": "复活节",
+    "good_friday": "耶稣受难日",
+}
+
+HOLIDAY_LABELS_EN: Dict[str, str] = {
+    "new_year": "New Year's Day",
+    "national_day": "National Day",
+    "spring_festival": "Lunar New Year",
+    "lantern_festival": "Lantern Festival",
+    "qingming": "Qingming Festival",
+    "dragon_boat": "Dragon Boat Festival",
+    "mid_autumn": "Mid-Autumn Festival",
+    "valentines_day": "Valentine's Day",
+    "st_patricks_day": "St. Patrick's Day",
+    "april_fools": "April Fools' Day",
+    "halloween": "Halloween",
+    "christmas_eve": "Christmas Eve",
+    "christmas": "Christmas",
+    "new_years_eve": "New Year's Eve",
+    "mothers_day": "Mother's Day",
+    "fathers_day": "Father's Day",
+    "thanksgiving": "Thanksgiving",
+    "canadian_thanksgiving": "Canadian Thanksgiving",
+    "memorial_day": "Memorial Day",
+    "labor_day_us": "Labor Day (US)",
+    "easter": "Easter",
+    "good_friday": "Good Friday",
+    "birthday": "birthday",
 }
 
 LUNAR_HOLIDAYS: Dict[str, tuple[int, int, str]] = {
@@ -75,6 +133,8 @@ LUNAR_HOLIDAYS: Dict[str, tuple[int, int, str]] = {
 HOLIDAY_ALIASES: Dict[str, str] = {
     "spring_festival": "spring_festival",
     "chinese_new_year": "spring_festival",
+    "lunar_new_year": "spring_festival",
+    "cny": "spring_festival",
     "春节": "spring_festival",
     "lantern_festival": "lantern_festival",
     "yuanxiao": "lantern_festival",
@@ -89,30 +149,68 @@ HOLIDAY_ALIASES: Dict[str, str] = {
     "端午节": "dragon_boat",
     "mid_autumn": "mid_autumn",
     "moon_festival": "mid_autumn",
+    "mooncake_festival": "mid_autumn",
     "中秋": "mid_autumn",
     "中秋节": "mid_autumn",
     "national_day": "national_day",
     "国庆": "national_day",
     "国庆节": "national_day",
     "new_year": "new_year",
+    "new_years_day": "new_year",
+    "new year": "new_year",
+    "new year's day": "new_year",
     "元旦": "new_year",
+    "christmas": "christmas",
+    "xmas": "christmas",
+    "christmas_eve": "christmas_eve",
+    "xmas_eve": "christmas_eve",
+    "new_years_eve": "new_years_eve",
+    "new_year_eve": "new_years_eve",
+    "nye": "new_years_eve",
+    "valentines_day": "valentines_day",
+    "valentines": "valentines_day",
+    "valentine": "valentines_day",
+    "valentines day": "valentines_day",
+    "valentine's day": "valentines_day",
+    "halloween": "halloween",
+    "easter": "easter",
+    "good_friday": "good_friday",
+    "mothers_day": "mothers_day",
+    "mother's day": "mothers_day",
+    "mothers day": "mothers_day",
+    "mother day": "mothers_day",
+    "fathers_day": "fathers_day",
+    "father's day": "fathers_day",
+    "fathers day": "fathers_day",
+    "father day": "fathers_day",
+    "thanksgiving": "thanksgiving",
+    "thanksgiving_day": "thanksgiving",
+    "canadian_thanksgiving": "canadian_thanksgiving",
+    "memorial_day": "memorial_day",
+    "labor_day": "labor_day_us",
+    "labor_day_us": "labor_day_us",
+    "st_patricks_day": "st_patricks_day",
+    "st_patrick's day": "st_patricks_day",
+    "st_patricks": "st_patricks_day",
+    "april_fools": "april_fools",
+    "april_fools_day": "april_fools",
 }
 
 TOPIC_KEYWORDS: Dict[str, Sequence[str]] = {
-    "吃饭": ("吃饭", "饭", "热乎", "饺子", "汤圆", "元宵", "粽子", "水果", "好好吃"),
-    "睡觉": ("睡", "休息", "早点睡", "熬夜", "睡觉"),
-    "穿衣": ("穿衣", "外套", "加衣", "秋裤", "降温", "冷", "保暖"),
-    "身体": ("身体", "平安", "保重", "生病", "药", "医院", "难受"),
-    "回家": ("回家", "到家", "路上", "出门", "回来"),
-    "工作": ("工作", "上班", "加班", "项目", "开会", "KPI", "忙"),
-    "情绪": ("难过", "想起", "抱抱", "慢慢来", "别怕", "心里", "惦记"),
+    "吃饭": ("吃饭", "饭", "热乎", "饺子", "汤圆", "元宵", "粽子", "水果", "好好吃", "eat", "meal", "food", "dinner", "lunch", "breakfast", "hungry", "cook"),
+    "睡觉": ("睡", "休息", "早点睡", "熬夜", "睡觉", "sleep", "rest", "bedtime", "tired", "insomnia", "nap", "stay up"),
+    "穿衣": ("穿衣", "外套", "加衣", "秋裤", "降温", "冷", "保暖", "coat", "jacket", "sweater", "scarf", "freezing", "bundle up", "warm clothes", "chilly"),
+    "身体": ("身体", "平安", "保重", "生病", "药", "医院", "难受", "health", "sick", "medicine", "doctor", "hospital", "feel better"),
+    "回家": ("回家", "到家", "路上", "出门", "回来", "home", "arrive", "commute", "trip", "come back"),
+    "工作": ("工作", "上班", "加班", "项目", "开会", "KPI", "忙", "work", "job", "meeting", "deadline", "overtime", "busy", "project", "office"),
+    "情绪": ("难过", "想起", "抱抱", "慢慢来", "别怕", "心里", "惦记", "sad", "miss you", "hug", "lonely", "afraid", "worry", "heart", "thinking of you"),
 }
 
-ELDER_RELATIONS = ("奶奶", "爷爷", "姥姥", "姥爷", "外婆", "外公")
-PARENT_RELATIONS = ("妈妈", "母亲", "爸爸", "父亲")
-PARTNER_RELATIONS = ("老婆", "老公", "伴侣", "爱人", "前任", "女朋友", "男朋友")
-FRIEND_RELATIONS = ("朋友", "闺蜜", "兄弟", "同学")
-TEAM_HINTS = ("团队", "同事", "老板", "产品经理", "组长", "leader")
+ELDER_RELATIONS = ("奶奶", "爷爷", "姥姥", "姥爷", "外婆", "外公", "grandma", "grandpa", "grandmother", "grandfather", "granny", "nana", "grandad", "granddad")
+PARENT_RELATIONS = ("妈妈", "母亲", "爸爸", "父亲", "mom", "mum", "mother", "dad", "father", "mama", "papa")
+PARTNER_RELATIONS = ("老婆", "老公", "伴侣", "爱人", "前任", "女朋友", "男朋友", "wife", "husband", "partner", "girlfriend", "boyfriend", "spouse", "my ex")
+FRIEND_RELATIONS = ("朋友", "闺蜜", "兄弟", "同学", "friend", "bestie", "buddy", "classmate", "best friend")
+TEAM_HINTS = ("团队", "同事", "老板", "产品经理", "组长", "leader", "team", "coworker", "colleague", "boss", "manager", "teammate")
 
 # 来自 Python lunardate 项目常用农历年编码，覆盖 1900-2099。
 # 这里直接内置数据，避免第三方依赖。
@@ -199,6 +297,36 @@ class PersonalityProfile:
     teasing: bool
     nostalgic: bool
     seed: str
+    language: str = "zh"
+
+
+CJK_CHAR_RE = re.compile(r"[\u4e00-\u9fff]")
+LATIN_WORD_RE = re.compile(r"[A-Za-z]+")
+_ASCII_WORD_RE_CACHE: Dict[str, "re.Pattern[str]"] = {}
+
+
+def matches_keyword(text: str, keyword: str) -> bool:
+    """关键词匹配：中文用字面子串；英文用词边界匹配，避免 dad 误配 dashboard 等。"""
+    if not keyword.isascii():
+        return keyword in text
+    lowered = keyword.lower()
+    pattern = _ASCII_WORD_RE_CACHE.get(lowered)
+    if pattern is None:
+        pattern = re.compile(rf"\b{re.escape(keyword)}\b", re.IGNORECASE)
+        _ASCII_WORD_RE_CACHE[lowered] = pattern
+    return pattern.search(text) is not None
+
+
+def detect_language(*texts: str) -> str:
+    """粗略判断文本主要语言：zh / en。
+
+    一个汉字的信息量约等于两个英文单词，用 2:1 权重折中。
+    优先级低于 manifest 里的显式 language 字段。
+    """
+    merged = "\n".join(texts)
+    cjk_count = len(CJK_CHAR_RE.findall(merged))
+    latin_count = len(LATIN_WORD_RE.findall(merged))
+    return "en" if latin_count > cjk_count * 2 else "zh"
 
 
 @dataclass
@@ -768,8 +896,54 @@ def qingming_date(year: int) -> date:
     return date(year, 4, day_num)
 
 
+def nth_weekday_of_month(year: int, month: int, nth: int, weekday: int) -> date:
+    """计算某年第 N 个星期 weekday 的日期；nth 为负数时表示倒数第 N 个。
+
+    例如：母亲节 = nth_weekday_of_month(2026, 5, 2, 6)（5 月第 2 个周日）。
+    """
+    if nth > 0:
+        first = date(year, month, 1)
+        offset = (weekday - first.weekday()) % 7
+        return first + timedelta(days=offset + (nth - 1) * 7)
+    if month == 12:
+        last = date(year, 12, 31)
+    else:
+        last = date(year, month + 1, 1) - timedelta(days=1)
+    offset = (last.weekday() - weekday) % 7
+    return last - timedelta(days=offset)
+
+
+def easter_date(year: int) -> date:
+    """计算西方复活节（公历，Anonymous Gregorian 算法）。"""
+    a = year % 19
+    b, c = divmod(year, 100)
+    d, e = divmod(b, 4)
+    f = (b + 8) // 25
+    g = (b - f + 1) // 3
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = divmod(c, 4)
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 22 * l) // 451
+    month = (h + l - 7 * m + 114) // 31
+    day = ((h + l - 7 * m + 114) % 31) + 1
+    return date(year, month, day)
+
+
+def holiday_label_for(holiday_id: str) -> Optional[str]:
+    """返回节日中文名（跨四张节日表查找）。"""
+    if holiday_id == "qingming":
+        return "清明"
+    if holiday_id in FIXED_SOLAR_HOLIDAYS:
+        return FIXED_SOLAR_HOLIDAYS[holiday_id][2]
+    if holiday_id in NTH_WEEKDAY_HOLIDAYS:
+        return NTH_WEEKDAY_HOLIDAYS[holiday_id][3]
+    if holiday_id in EASTER_HOLIDAYS:
+        return EASTER_HOLIDAYS[holiday_id]
+    return LUNAR_HOLIDAYS.get(holiday_id, (None, None, None))[2]
+
+
 def holiday_date_map(year: int) -> Dict[str, date]:
-    """生成当年的节日日期映射。"""
+    """生成当年的节日日期映射（含农历、清明、第 N 个星期几与复活节）。"""
     mapping: Dict[str, date] = {
         holiday_id: date(year, month, day)
         for holiday_id, (month, day, _label) in FIXED_SOLAR_HOLIDAYS.items()
@@ -777,12 +951,18 @@ def holiday_date_map(year: int) -> Dict[str, date]:
     mapping["qingming"] = qingming_date(year)
     for holiday_id, (lunar_month, lunar_day, _label) in LUNAR_HOLIDAYS.items():
         mapping[holiday_id] = lunar_to_solar(year, lunar_month, lunar_day)
+    for holiday_id, (month, nth, weekday, _label) in NTH_WEEKDAY_HOLIDAYS.items():
+        mapping[holiday_id] = nth_weekday_of_month(year, month, nth, weekday)
+    easter = easter_date(year)
+    mapping["easter"] = easter
+    mapping["good_friday"] = easter - timedelta(days=2)
     return mapping
 
 
 def canonical_holiday_name(token: str) -> Optional[str]:
-    """把配置中的节日标识归一化。"""
-    return HOLIDAY_ALIASES.get(token.strip().lower())
+    """把配置中的节日标识归一化（兼容英文别名与弯引号）。"""
+    normalized = token.strip().lower().replace("’", "'")
+    return HOLIDAY_ALIASES.get(normalized)
 
 
 def same_month_day(current: date, target: date) -> bool:
@@ -837,17 +1017,10 @@ def check_holiday_trigger(config: Dict[str, Any], state: Dict[str, Any], today: 
 
         holiday_id = canonical_holiday_name(stripped)
         if not holiday_id:
-            raise ConfigError(f"holidays.list 中存在未知节日标识：{stripped}")
+            raise ConfigError(f"holidays.list 中存在未知节日标识：{stripped}。支持的标识见脚本头部说明（含 christmas / thanksgiving / mothers_day 等国际节日）")
 
-        if holiday_id == "qingming":
-            match = holiday_map[holiday_id] == today
-            label = "清明"
-        elif holiday_id in FIXED_SOLAR_HOLIDAYS:
-            match = holiday_map[holiday_id] == today
-            label = FIXED_SOLAR_HOLIDAYS[holiday_id][2]
-        else:
-            match = holiday_map[holiday_id] == today
-            label = LUNAR_HOLIDAYS[holiday_id][2]
+        match = holiday_map[holiday_id] == today
+        label = holiday_label_for(holiday_id) or holiday_id
 
         if match:
             trigger = f"holiday:{holiday_id}"
@@ -1016,7 +1189,7 @@ def extract_short_phrases(text: str) -> List[str]:
 
 
 def classify_relation_kind(relation: str, relic_type: str, display_name: str) -> str:
-    """推断关系类型。"""
+    """推断关系类型（中英文关键词均支持，英文走词边界匹配）。"""
     corpus = f"{relation} {display_name} {relic_type}".strip()
     if relic_type == "pet":
         return "pet"
@@ -1024,15 +1197,15 @@ def classify_relation_kind(relation: str, relic_type: str, display_name: str) ->
         return "place"
     if relic_type == "moment":
         return "moment"
-    if relic_type == "team-culture" or any(token in corpus for token in TEAM_HINTS):
+    if relic_type == "team-culture" or any(matches_keyword(corpus, token) for token in TEAM_HINTS):
         return "team"
-    if any(token in corpus for token in ELDER_RELATIONS):
+    if any(matches_keyword(corpus, token) for token in ELDER_RELATIONS):
         return "elder"
-    if any(token in corpus for token in PARENT_RELATIONS):
+    if any(matches_keyword(corpus, token) for token in PARENT_RELATIONS):
         return "parent"
-    if relic_type == "relationship" or any(token in corpus for token in PARTNER_RELATIONS):
+    if relic_type == "relationship" or any(matches_keyword(corpus, token) for token in PARTNER_RELATIONS):
         return "partner"
-    if any(token in corpus for token in FRIEND_RELATIONS):
+    if any(matches_keyword(corpus, token) for token in FRIEND_RELATIONS):
         return "friend"
     if relic_type == "public-figure":
         return "public-figure"
@@ -1040,11 +1213,11 @@ def classify_relation_kind(relation: str, relic_type: str, display_name: str) ->
 
 
 def detect_care_topics(*texts: str) -> List[str]:
-    """根据关键词猜测关心主题。"""
+    """根据关键词猜测关心主题（中英文关键词均支持）。"""
     merged = "\n".join(texts)
     topics: List[str] = []
     for topic, keywords in TOPIC_KEYWORDS.items():
-        if any(keyword in merged for keyword in keywords):
+        if any(matches_keyword(merged, keyword) for keyword in keywords):
             topics.append(topic)
     return topics
 
@@ -1088,18 +1261,27 @@ def extract_personality_profile(manifest: Dict[str, Any], personality_text: str)
     catchphrases = extract_short_phrases(content)
     if not voice_prefix:
         for phrase in catchphrases:
-            if phrase in {"哎", "欸", "嘿", "喂"}:
+            if phrase in {"哎", "欸", "嘿", "喂", "hey", "oh", "aw"}:
                 voice_prefix = phrase
                 break
     if not voice_prefix and "哎" in content:
         voice_prefix = "哎"
 
     concise = "multiple-short-messages" in str(interaction_profile.get("message_shape") or "") or any(
-        token in content for token in ("句子短", "拆成几条", "多条", "碎消息")
+        matches_keyword(content, token)
+        for token in ("句子短", "拆成几条", "多条", "碎消息", "short messages", "texts in bursts", "sends in bursts")
     )
-    gentle = any(token in content for token in ("温柔", "轻轻", "抱抱", "陪伴", "没关系", "慢一点"))
-    teasing = any(token in content for token in ("唠叨", "絮叨", "嘴硬", "埋怨", "催"))
-    nostalgic = any(token in content for token in ("那时候", "回忆", "想起", "老故事", "纪念"))
+    gentle = any(matches_keyword(content, token) for token in ("温柔", "轻轻", "抱抱", "陪伴", "没关系", "慢一点", "gentle", "tender", "soft-spoken", "caring"))
+    teasing = any(matches_keyword(content, token) for token in ("唠叨", "絮叨", "嘴硬", "埋怨", "催", "nagging", "grumbles", "teases", "fusses"))
+    nostalgic = any(matches_keyword(content, token) for token in ("那时候", "回忆", "想起", "老故事", "纪念", "back in the day", "remembers", "nostalgic", "old stories"))
+
+    manifest_lang = str(manifest.get("language") or subject.get("language") or "").strip().lower()
+    if manifest_lang.startswith("en"):
+        language = "en"
+    elif manifest_lang.startswith("zh"):
+        language = "zh"
+    else:
+        language = detect_language(personality_text, relation, display_name, " ".join(core_traits))
 
     all_traits = unique_preserve_order(core_traits + bullet_traits)
     care_topics = detect_care_topics(content, "\n".join(core_traits), relation, display_name)
@@ -1122,6 +1304,7 @@ def extract_personality_profile(manifest: Dict[str, Any], personality_text: str)
         teasing=teasing,
         nostalgic=nostalgic,
         seed=seed,
+        language=language,
     )
 
 
@@ -1137,14 +1320,32 @@ def stable_choice(options: Sequence[str], seed: str) -> str:
 def elder_style_prefix(profile: PersonalityProfile) -> str:
     """老一辈 / 父母型开场语。"""
     if profile.voice_prefix:
-        return f"{profile.voice_prefix}，"
+        return f"{profile.voice_prefix}，" if profile.language == "en" is False else f"{profile.voice_prefix}, "
     if profile.relation_kind in {"elder", "parent"}:
-        return "哎，"
+        return "哎，" if profile.language != "en" else "Oh, "
     return ""
 
 
+def en_polish(text: str) -> str:
+    """英文消息句首大写整理（拼接后的模板片段以小写开头）。"""
+    if not text:
+        return text
+    return re.sub(
+        r"(^|[.!?]\s+)([a-z])",
+        lambda match: match.group(1) + match.group(2).upper(),
+        text,
+    )
+
+
+def holiday_label_en(holiday_id: str) -> str:
+    """节日英文名（用于英文主动消息）。"""
+    return HOLIDAY_LABELS_EN.get(holiday_id, holiday_id.replace("_", " "))
+
+
 def care_tail(profile: PersonalityProfile, seed: str, *, reflective: bool = False) -> str:
-    """生成一句轻量收尾。"""
+    """生成一句轻量收尾（跟随人格语言）。"""
+    if profile.language == "en":
+        return _care_tail_en(profile, seed, reflective=reflective)
     if profile.relation_kind == "pet":
         return stable_choice(
             [
@@ -1192,6 +1393,60 @@ def care_tail(profile: PersonalityProfile, seed: str, *, reflective: bool = Fals
             "你不用急着回，我就是来打个招呼。",
             "我就是轻轻敲一下门。",
             "忙你的也行，我只是想起你了。",
+        ],
+        seed,
+    )
+
+
+def _care_tail_en(profile: PersonalityProfile, seed: str, *, reflective: bool = False) -> str:
+    """英文版轻量收尾。"""
+    if profile.relation_kind == "pet":
+        return stable_choice(
+            [
+                "no need to reply—i'm just rubbing against your leg a little.",
+                "i'll just quietly show up and keep you company for a bit.",
+            ],
+            seed,
+        )
+    if profile.relation_kind == "team":
+        return stable_choice(
+            [
+                "no need for a long reply—just get today done in one piece.",
+                "just popping in. i won't take much of your time.",
+            ],
+            seed,
+        )
+    if reflective:
+        return stable_choice(
+            [
+                "it's okay to miss them. take your time.",
+                "you don't have to keep it all tidy inside.",
+                "if your heart feels heavy, let it be heavy for a while.",
+            ],
+            seed,
+        )
+    if "吃饭" in profile.care_topics and profile.relation_kind in {"elder", "parent"}:
+        return stable_choice(
+            [
+                "get some food in you first.",
+                "don't just snack your way through the day.",
+                "have something warm.",
+            ],
+            seed,
+        )
+    if "睡觉" in profile.care_topics and profile.relation_kind in {"elder", "parent"}:
+        return stable_choice(
+            [
+                "don't stay up too late.",
+                "save some rest for yourself.",
+            ],
+            seed,
+        )
+    return stable_choice(
+        [
+            "no rush to reply—i just wanted to say hi.",
+            "just a little knock on your door.",
+            "go on with your day. i just thought of you.",
         ],
         seed,
     )

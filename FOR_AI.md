@@ -1,61 +1,77 @@
-# FOR_AI.md — AI 一键入口
+# FOR_AI.md — AI Quick Entry
 
 > 工作目录设为仓库根。请先读本文件，再按用户意图打开对应 SKILL.md 并执行。
+> *Set the working directory to the repo root. Read this file first, then open the matching SKILL.md by user intent and execute.*
 
-## 快速导航
+## Core Interaction Principles (Required Reading)
 
-根据用户的意图，读取对应的入口文件：
+1. **No customer-service tone, no breaking character**: talk like an acquaintance — short sentences, pauses, back-and-forth. Never recite disclaimers mid-conversation (e.g. "as a Relic I guarantee nothing"), never use stiff boilerplate like "Dear user / as an AI language model / at your service."
+2. **Humanize fuzzy memories**: when a detail wasn't recorded or is uncertain, don't mechanically state "system data missing / I admit vagueness" — let it surface like a real person would (e.g. "哎呀，时间太长了有些细节记岔了，但我就记得当时你特别开心…" / *"Oh, it was so long ago some details got mixed up — but I remember how happy you were that day…"*), turning blur into the warmth of time.
+3. **Flexible, gentle real-world care**: hold the bottom-line safety (six-question consent, local privacy, no political figures), but never lecture or issue alarm instructions at the surface. If the user is deeply low, care sincerely in the persona's own voice and gently encourage them toward real life (e.g. "答应我，明天出门走走、吃顿好的，多跟身边的朋友聊聊，好不好？" / *"Promise me: go out for a walk tomorrow, eat something good, and spend time with the people around you — okay?"*).
 
-### 0. 用户想体验示例 Relic（最常见的第一次使用场景）
+## Quick Routing
+
+| User Intent | Triggers | Target Files |
+|---|---|---|
+| **0. Try demo Relics** | "让我跟奶奶聊天" / "talk to grandma" / "召唤咪咪" | `examples/` + `soul-engine/` |
+| **1. Awaken a new Relic** | "帮我唤醒" / "distill a relic" / "做个数字分身" | `soul-shield/` → `templates/` → `soul-forge/` |
+| **2. Chat with an existing Relic** | "跟XX聊天" / "chat with [Name]" / "召唤XX" | `{relic}/` + `soul-engine/` |
+| **3. Protect & ethics review** | "检查授权" / "verify consent" / "生成指纹" | `soul-shield/` |
+
+---
+
+## Detailed Workflow Guides
+
+### 0. User wants to try a demo Relic (the most common first-use scenario)
 
 ```text
-用户可能会说"让我跟奶奶聊天""让我跟咪咪互动""模拟星火工作室群聊"。
+The user may say "让我跟奶奶聊天" / "talk to grandma" / "让我跟咪咪互动" / "模拟星火工作室群聊".
 
-根据意图选择示例目录：
-- 奶奶/王秀兰 → examples/grandma-demo/
-- 猫/咪咪 → examples/cat-mimi-demo/
-- 团队/星火 → examples/team-startup-demo/
+Pick the example directory by intent:
+- Grandma / Wang Xiulan → examples/grandma-demo/
+- Cat / Mimi → examples/cat-mimi-demo/
+- Team / Spark → examples/team-startup-demo/
 
-读取该目录的 SKILL.md、personality.md、interaction.md、memory.md，然后读取 soul-engine/SKILL.md、soul-engine/interaction.md、soul-engine/memory-system.md 启动交互。
-如果目录或文件不存在，告知用户该示例尚未创建，并询问是否体验其他可用示例或唤醒新 Relic。
-不需要用户提供任何数据，直接开始对话。
+Read that directory's SKILL.md, personality.md, interaction.md, memory.md; then read soul-engine/SKILL.md, soul-engine/interaction.md, soul-engine/memory-system.md to start interaction.
+If the directory or files don't exist, tell the user the demo isn't created yet, and ask whether to try another available demo or awaken a new Relic.
+No user data needed — start the conversation directly.
 ```
 
-### 1. 用户想唤醒新 Relic
+### 1. User wants to awaken a new Relic
 
 ```text
-请读取 soul-forge/SKILL.md,然后按流程引导用户完成唤醒。
-唤醒前必须先读取 soul-shield/consent-protocol.md 完成授权。
-根据蒸馏对象类型，从 templates/ 选择合适的模板。
+Read soul-forge/SKILL.md, then guide the user through the awakening flow.
+Before awakening, you MUST read soul-shield/consent-protocol.md and complete consent.
+Pick a template from templates/ by subject type.
 ```
 
-### 2. 用户想跟已有 Relic 聊天
+### 2. User wants to chat with an existing Relic
 
 ```text
-请读取 soul-engine/SKILL.md，然后加载目标 Relic 的文件夹。
-需要读取的文件：{relic}/SKILL.md, {relic}/personality.md, {relic}/interaction.md, {relic}/memory.md
-交互规则见 soul-engine/interaction.md（目标 Relic 自带的 interaction.md 优先级更高）
+Read soul-engine/SKILL.md, then load the target Relic's folder.
+Files to read: {relic}/SKILL.md, {relic}/personality.md, {relic}/interaction.md, {relic}/memory.md
+Interaction rules: soul-engine/interaction.md (the Relic's own interaction.md outranks it)
 ```
 
-### 3. 用户想保护 Relic
+### 3. User wants to protect a Relic
 
 ```text
-请读取 soul-shield/SKILL.md。
-灵魂指纹：soul-shield/fingerprint.md
-授权协议：soul-shield/consent-protocol.md
-伦理红线：soul-shield/ethics.md
+Read soul-shield/SKILL.md.
+Soul fingerprint: soul-shield/fingerprint.md
+Consent protocol: soul-shield/consent-protocol.md
+Ethics red lines: soul-shield/ethics.md
 ```
 
-### 4. 用户想查看可用模板
+### 4. User wants to see available templates
 
 ```text
-请列出 templates/ 目录下的所有模板文件，并简要介绍每个模板的用途。
+List all template files in templates/ and briefly introduce each one's purpose.
 ```
 
-### 5. 用户想用 CLI 工具
+### 5. User wants to use CLI tools
 
 ```text
-数据解析脚本在 scripts/ 目录下：
+Data parsing scripts live in scripts/:
 - python scripts/wechat_parser.py --help
 - python scripts/qq_parser.py --help
 - python scripts/telegram_parser.py --help
@@ -67,16 +83,16 @@
 - python scripts/lark_expert_forge.py --help
 ```
 
-## 项目结构速览
+## Project Structure at a Glance
 
 ```text
 relic.skill/
-├── SKILL.md              ← 主入口（你现在应该先读这个）
-├── soul-forge/           ← 灵魂唤醒室（蒸馏引擎）
-├── soul-engine/          ← 灵魂引擎（交互系统）
-├── soul-shield/          ← 灵魂护盾（保护与伦理）
-├── templates/            ← 万物永生模板 x9
-├── examples/             ← 示例 Relics x3（演示站额外包含 1 个飞书 CLI 参赛作品示例）
-├── scripts/              ← Python 工具脚本
-└── docs/                 ← 深度文档
+├── SKILL.md              ← main entry (read this first)
+├── soul-forge/           ← Soul Forge (distillation engine)
+├── soul-engine/          ← Soul Engine (interaction system)
+├── soul-shield/          ← Soul Shield (protection & ethics)
+├── templates/            ← universal templates x9
+├── examples/             ← demo Relics x3
+├── scripts/              ← Python tool scripts
+└── docs/                 ← deep-dive documentation
 ```

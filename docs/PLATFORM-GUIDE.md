@@ -1,34 +1,37 @@
-# 平台数据获取指南
+# Platform Data Acquisition Guide
 
 > 目标不是“抓得越多越好”，而是“拿到合法、完整、可整理的数据”。先确认你有权限，再开始导出。
+> *The goal is not "grab as much as possible" — it's "get legal, complete, organizable data." Confirm you have permission first, then export.*
 
-## 使用前先做 4 件事
+## Four Things Before You Start
 
-1. **只处理你本人拥有或明确获准处理的数据**。如果对象还在世，先解决同意问题，再谈导出。
-2. **先导文本，再补媒体**。聊天文本、邮件正文、帖子文案永远比海量图片更容易整理。
-3. **保留时间范围和会话对象**。导出后第一件事不是清洗，而是给文件夹命名。
-4. **原始包永不覆盖**。把“原始导出”和“清洗后输入”分开放，后续回溯才不会乱。
+1. **Only process data you own or are explicitly authorized to process.** If the subject is living, resolve consent before talking about export.
+2. **Text first, media later.** Chat text, email bodies, and post copy always organize more easily than mountains of images.
+3. **Preserve time range and conversation counterpart.** The first thing after export is not cleaning — it's naming the folder.
+4. **Never overwrite the raw package.** Keep "raw export" and "cleaned input" separate so you can always trace back.
 
-## 12 平台获取总表
+## 12-Platform Master Table
 
-| 平台 | 推荐路径 | 具体操作步骤 | 输出格式 | 关键提醒 |
-| --- | --- | --- | --- | --- |
-| 微信 | 手机迁移到电脑 + 本地整理工具 | 1）手机微信打开“我 → 设置 → 通用 → 聊天记录迁移与备份”，先把目标聊天迁到电脑微信。<br>2）Windows 或 Mac 微信登录同一账号，确认历史消息已能在电脑端查看。<br>3）使用本地整理工具（如 WeChatMsg、留痕 等）读取当前电脑上的聊天数据库，按联系人或群导出 HTML、CSV 或 TXT。<br>4）把图片、语音、文件单独归档到与会话同名的目录。 | HTML / CSV / TXT / 媒体目录 | 微信没有面向普通用户的“官方一键全量导出”；最稳妥的做法是先完成官方迁移，再做本地整理。 |
-| QQ | PC 客户端消息管理器 | 1）在 Windows QQ 或 TIM 登录目标账号。<br>2）打开目标会话，进入“消息记录”或“消息管理器”。<br>3）按联系人、群聊、关键词、时间范围筛选。<br>4）选择导出或另存为，优先导成 TXT、HTML 或 MHT。<br>5）如果手机端历史更全，先把聊天迁到电脑，再导出。 | TXT / HTML / MHT | 先按会话拆分，再按月份建目录，后面做人物蒸馏时最省事。 |
-| Telegram | Telegram Desktop 官方导出 | 1）在电脑上安装并登录 Telegram Desktop。<br>2）导出全部数据：`Settings → Advanced → Export Telegram Data`。<br>3）导出单个聊天：打开目标会话，点击右上角菜单，选择 `Export chat history`。<br>4）勾选文本、图片、视频、文件，格式建议同时导出 HTML 和 JSON。<br>5）如果新登录的桌面端不能立刻导出，等待 24 小时或在已登录设备上确认。 | HTML / JSON / 媒体目录 | Telegram 是做结构化归档最友好的平台之一，优先保留 JSON。 |
-| Discord | 官方数据包 + 授权频道导出 | 1）进入 `User Settings → Data & Privacy`。<br>2）在 `Request your data` 处申请数据包。<br>3）收到邮件后下载 ZIP。<br>4）如果你需要某个服务器或频道的可读聊天记录，在你有合法访问权限的前提下，再用 DiscordChatExporter 按频道导出 JSON 或 HTML。<br>5）把官方包和频道导出分开放。 | ZIP / JSON / HTML | 官方数据包更偏“你的账户数据”；想保留频道上下文，通常还要补频道级导出。 |
-| Slack | 管理员工作区导出 | 1）由 Workspace Owner 或 Admin 登录 Slack 网页后台。<br>2）进入 `Tools & Settings → Workspace settings → Import/Export Data`。<br>3）选择导出范围并发起导出。<br>4）下载 ZIP 后按频道拆分整理。<br>5）如果需要私有频道或私信，先确认当前套餐、合规权限和组织政策。 | ZIP / JSON | Slack 默认导出能力和套餐、角色强相关；普通成员通常拿不到完整工作区历史。 |
-| 飞书 | 管理员/API 采集 | 1）管理员到飞书开放平台创建企业自建应用。<br>2）开通 IM 相关权限与消息事件订阅，记录 App ID / App Secret。<br>3）把应用安装到目标租户，并将机器人加入目标群聊。<br>4）用事件回调持续接收后续消息，落成 JSON。<br>5）历史材料由管理员从审计或归档能力补出；云文档、会议纪要、群文件单独导出。 | JSON / 云文档 / 会议纪要 / 文件目录 | 飞书对“历史聊天一键导出”限制较多，企业场景通常要走管理员权限和 API 组合。 |
-| 钉钉 | 管理员/API 采集 | 1）管理员在钉钉开放平台创建内部应用。<br>2）开通机器人、群会话、回调相关权限，记录 appKey / appSecret。<br>3）把应用安装到企业并加入目标群。<br>4）用回调或开放接口接收后续消息，按会话写入 JSON。<br>5）历史内容由管理员在管理后台导出；个人整理时，可在 PC 端按聊天窗口复制或分段整理。 | JSON / TXT / 管理后台导出文件 | 钉钉更适合“企业管理员 + 增量采集”路线；个人端缺少稳定的完整历史导出按钮。 |
-| iMessage | Mac 同步 + PDF / 数据库备份 | 1）让 iPhone 和 Mac 使用同一个 Apple ID，并开启 Messages in iCloud。<br>2）等待目标会话完整同步到 Mac。<br>3）做可读归档：在 Mac 的 Messages 中打开会话，选择 `File → Print → Save as PDF`。<br>4）做结构化归档：备份 `~/Library/Messages/chat.db` 与 `Attachments/` 目录，或用 iMazing 导出 CSV / PDF。 | PDF / SQLite / CSV / 附件目录 | 只做纪念用途时，PDF 最省心；需要检索和分析时，再保留 `chat.db`。 |
-| WhatsApp | 手机内建 Export Chat | 1）在手机上打开目标会话。<br>2）Android：右上角 `⋮ → More → Export chat`；iPhone：进入聊天详情后选 `Export Chat`。<br>3）选择 `Without media` 或 `Include media`。<br>4）发送到 Files、Drive、Mail 或电脑。<br>5）对重要会话逐个重复，并把原始 TXT 或 ZIP 与媒体附件一起保存。 | TXT / ZIP / 媒体目录 | 官方只支持逐个会话导出，且导出的聊天文件不能再导回 WhatsApp。 |
-| Twitter / X | 官方归档 | 1）进入 `Settings and privacy → Your account → Your X data`。<br>2）验证身份（密码 + 邮箱或手机验证码）。<br>3）点击 `Request data`。<br>4）收到邮件或推送后，回到设置页下载归档 ZIP。<br>5）解压后重点保留 posts、likes、dm、media、profile 等目录。 | ZIP / JSON / CSV（视归档内容而定） | 下载前先确认邮箱可用；大号归档可能要等待数小时到数天。 |
-| Instagram | Accounts Center 下载信息 | 1）打开 Instagram，进入 `Accounts Center`。<br>2）进入 `Your information and permissions → Download your information`。<br>3）选择 Instagram 账号，勾选需要的类别，比如帖子、私信、评论、收藏。<br>4）设置时间范围、格式、通知邮箱和媒体质量。<br>5）创建文件并在链接有效期内下载 ZIP。 | ZIP / JSON / HTML / 媒体目录 | 如果只想做 Relic，优先导出私信、帖子文案、评论、故事说明，不必什么都勾。 |
-| Gmail | Google Takeout | 1）登录 Google 账号，打开 Google Takeout。<br>2）先“全部取消”，再只勾选 `Mail`。<br>3）按需选择标签范围，常见做法是只导出“收件箱 / 已发送 / 星标 / 某个联系人标签”。<br>4）下一步选择“导出一次”、ZIP 和下载方式。<br>5）创建导出并下载归档。 | MBOX / ZIP | 邮件最适合先按联系人、主题线、时间段切分，再做后续抽取。 |
+> 📌 **Platform regions**: Telegram / Discord / Slack / iMessage / WhatsApp / X / Instagram / Gmail are international; **WeChat / QQ / Feishu / DingTalk are Mainland China platforms** — all imports are local script parsing or official exports; no bot required for distillation.
 
-## 导出后怎么整理成 Relic 输入
+| Platform | Recommended Path | Steps | Output Format | Key Reminders |
+|---|---|---|---|---|
+| WeChat | Phone-to-PC migration + local tools | 1) In mobile WeChat: "Me → Settings → General → Chat Migration & Backup" — migrate the target chat to PC WeChat first.<br>2) Log into the same account on Windows/Mac WeChat; confirm history is visible on PC.<br>3) Use local tools (e.g. WeChatMsg, 留痕) to read the local chat database; export HTML / CSV / TXT by contact or group.<br>4) Archive images, voice, and files into a folder named after the conversation. | HTML / CSV / TXT / media dir | WeChat has no official one-click full export for regular users; official migration + local processing is the safest route. |
+| QQ | PC client message manager | 1) Log into the target account on Windows QQ or TIM.<br>2) Open the target conversation → "Message History" or "Message Manager".<br>3) Filter by contact, group, keyword, time range.<br>4) Choose export / save-as — prefer TXT, HTML, or MHT.<br>5) If mobile history is more complete, migrate to PC first, then export. | TXT / HTML / MHT | Split by conversation first, then create monthly folders — it saves the most work later in distillation. |
+| Telegram | Telegram Desktop official export | 1) Install and log into Telegram Desktop.<br>2) Export all data: `Settings → Advanced → Export Telegram Data`.<br>3) Export a single chat: open it → top-right menu → `Export chat history`.<br>4) Check text, images, videos, files; export both HTML and JSON.<br>5) If a freshly-logged-in desktop can't export immediately, wait 24 hours or confirm on a logged-in device. | HTML / JSON / media dir | Telegram is one of the most structured-archival-friendly platforms — prioritize keeping the JSON. |
+| Discord | Official data package + authorized channel export | 1) Go to `User Settings → Data & Privacy`.<br>2) Request your data at `Request your data`.<br>3) Download the ZIP after the email arrives.<br>4) If you need readable channel history for a server (with legitimate access), use DiscordChatExporter to export JSON or HTML by channel.<br>5) Keep the official package and channel exports separate. | ZIP / JSON / HTML | The official package is more "your account data"; channel context usually needs channel-level export on top. |
+| Slack | Admin workspace export | 1) Log into the Slack web admin as Workspace Owner or Admin.<br>2) Go to `Tools & Settings → Workspace settings → Import/Export Data`.<br>3) Choose the export scope and start.<br>4) Download the ZIP and split by channel.<br>5) For private channels or DMs, confirm plan, compliance permissions, and org policy first. | ZIP / JSON | Slack's default export capability is tightly tied to plan and role; regular members usually can't get full workspace history. |
+| Feishu | Admin / API collection | 1) Admin creates an enterprise custom app on the Feishu Open Platform.<br>2) Enable IM permissions and message event subscription; record App ID / App Secret.<br>3) Install the app into the target tenant and add the bot to the target group.<br>4) Receive subsequent messages via event callback; write to JSON.<br>5) Historical material is supplemented from audit or archival capabilities; cloud docs, meeting minutes, and group files are exported separately. | JSON / cloud docs / meeting minutes / file dir | Feishu restricts "one-click history export" significantly; enterprise scenarios usually need admin permissions + API combination. |
+| DingTalk | Admin / API collection | 1) Admin creates an internal app on the DingTalk Open Platform.<br>2) Enable bot, group conversation, and callback permissions; record appKey / appSecret.<br>3) Install the app into the enterprise and add it to the target group.<br>4) Receive messages via callback or open API; write to JSON by conversation.<br>5) Historical content is exported by the admin in the admin console; for personal use, copy or segment from the PC client per chat window. | JSON / TXT / admin console export | DingTalk suits the "enterprise admin + incremental collection" route; the personal client lacks a stable full-history export button. |
+| iMessage | Mac sync + PDF / database backup | 1) Use the same Apple ID on iPhone and Mac; enable Messages in iCloud.<br>2) Wait for the target conversation to fully sync to Mac.<br>3) Readable archive: open the conversation in Mac Messages → `File → Print → Save as PDF`.<br>4) Structured archive: back up `~/Library/Messages/chat.db` and the `Attachments/` directory, or use iMazing to export CSV / PDF. | PDF / SQLite / CSV / attachments | For commemoration only, PDF is easiest; for search and analysis, keep `chat.db`. |
+| WhatsApp | In-app Export Chat | 1) Open the target conversation on your phone.<br>2) Android: top-right `⋮ → More → Export chat`; iPhone: enter chat details, choose `Export Chat`.<br>3) Choose `Without media` or `Include media`.<br>4) Send to Files, Drive, Mail, or your computer.<br>5) Repeat per important conversation; keep the raw TXT or ZIP with media attachments. | TXT / ZIP / media dir | Official export is per-conversation only, and exported chat files cannot be re-imported into WhatsApp. |
+| Twitter / X | Official archive | 1) Go to `Settings and privacy → Your account → Your X data`.<br>2) Verify identity (password + email or phone code).<br>3) Click `Request data`.<br>4) After the email or push notification, return to settings and download the archive ZIP.<br>5) After unzipping, prioritize `posts`, `likes`, `dm`, `media`, `profile`. | ZIP / JSON / CSV (varies by archive) | Before downloading, confirm your email is reachable; large accounts may wait hours to days. |
+| Instagram | Accounts Center download | 1) Go to Instagram → Accounts Center.<br>2) Go to `Your information and permissions → Download your information`.<br>3) Select the Instagram account; check the categories you need — posts, DMs, comments, saved, stories.<br>4) Set the time range, format, notification email, and media quality.<br>5) Create the file and download the ZIP within the link's validity window. | ZIP / JSON / HTML | If it's for a Relic, prioritize DMs, post copy, comments, and story captions — don't check everything. |
+| Gmail | Google Takeout | 1) Log into your Google account → Google Takeout.<br>2) First "Deselect all," then check only `Mail`.<br>3) Choose label ranges as needed — common: Inbox / Sent / Starred / a contact label.<br>4) Next, choose "Export once," ZIP, and download method.<br>5) Create the export and download the archive. | MBOX / ZIP | Email is best split by contact, thread, and time period before extraction. |
 
-推荐把所有平台先整理成统一目录，而不是一会儿丢桌面、一会儿丢下载文件夹：
+## Organizing Exports into Relic Input
+
+The recommendation is to normalize all platforms into one directory structure, instead of dropping things on the desktop one minute and Downloads the next:
 
 ```text
 imports/
@@ -52,43 +55,43 @@ imports/
     └── metadata/
 ```
 
-### 命名规则建议
+### Naming conventions
 
-- 会话文件夹：`平台_对象_起止时间`
-- 媒体文件夹：`平台_对象_media`
-- 原始压缩包：保留官方原名，不要手改覆盖
-- 清洗后文件：`YYYY-MM-DD_platform_chat.json`
+- Conversation folder: `platform_subject_start-end`
+- Media folder: `platform_subject_media`
+- Raw archives: keep official original names; don't rename or overwrite
+- Cleaned files: `YYYY-MM-DD_platform_chat.json`
 
-### 至少保留这些字段
+### Fields to always keep
 
-| 字段 | 说明 |
-| --- | --- |
-| `platform` | 来源平台 |
-| `chat_id` | 会话标识 |
-| `chat_name` | 联系人、群名或邮箱主题 |
-| `sender` | 发送者名称或账号 |
-| `timestamp` | 原始时间戳，尽量保留时区 |
+| Field | Notes |
+|---|---|
+| `platform` | Source platform |
+| `chat_id` | Conversation identifier |
+| `chat_name` | Contact, group name, or email subject |
+| `sender` | Sender name or account |
+| `timestamp` | Original timestamp; preserve timezone where possible |
 | `message_type` | text / image / voice / file / email / post |
-| `content` | 文本正文或 OCR / 转写结果 |
-| `attachments` | 附件文件名和相对路径 |
-| `source_file` | 对应的原始导出文件 |
+| `content` | Text body or OCR / transcription result |
+| `attachments` | Attachment filenames and relative paths |
+| `source_file` | The corresponding raw export file |
 
-## 优先级建议：如果时间有限，先导什么
+## Priority: What to Export When Time Is Tight
 
-1. **聊天文本**：最能看出表达方式和关系结构。
-2. **长消息 / 邮件 / 帖子正文**：最能看出认知方式和价值排序。
-3. **语音转写**：最能保留语气、停顿、口头禅。
-4. **照片和视频**：最适合补动作、场景和生活节奏。
-5. **文件与链接**：适合做事实校验，不要一上来就全部吞进去。
+1. **Chat text**: best reveals expression style and relationship structure.
+2. **Long messages / emails / post bodies**: best reveal cognition and value ordering.
+3. **Voice transcription**: best preserves tone, pauses, and verbal habits.
+4. **Photos and videos**: best for movement, scene, and life rhythm.
+5. **Files and links**: for fact-checking; don't swallow everything at once.
 
-## 常见坑
+## Common Pitfalls
 
-- **只导媒体，不导文本**：最后只剩几百张图，却不知道它们为什么重要。
-- **把多个平台混成一个文件夹**：清洗阶段会非常痛苦。
-- **丢掉时间范围**：没有时间，关系的变化就看不见。
-- **只保留截图**：截图适合展示，不适合结构化处理。
-- **忘了保留原始包**：后面发现解析错了，连回滚都做不到。
+- **Media only, no text**: you end up with hundreds of images and no idea why they matter.
+- **Multiple platforms mixed into one folder**: the cleaning stage will be miserable.
+- **Dropping the time range**: without time, you can't see how the relationship changed.
+- **Screenshots only**: screenshots are for display, not structured processing.
+- **Forgetting the raw package**: when you later find a parsing error, you can't even roll back.
 
-## 一句话版
+## One-Line Version
 
-先拿到合法数据，再按平台拆开，再把时间和对象标清楚。只要原始层干净，后面的蒸馏流程就会顺很多。
+Get legal data first, split by platform second, mark time and subject third. Keep the raw layer clean, and everything downstream flows.

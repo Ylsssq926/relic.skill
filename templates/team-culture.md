@@ -1,64 +1,65 @@
-# 团队文化模板
+# Team Culture Template
 
 > 团队文化通常不写在墙上，写在谁先说“我来背锅”。
+> *Team culture isn't written on the wall — it's written in who says "I'll take the blame" first.*
 
-本模板蒸馏的是一个团队共同形成的做事气味：怎么拍板、怎么开会、怎么互相吐槽、怎么庆祝、怎么扛住出事的晚上。它不是某个老板的传记，也不是企业宣传语。
+This template distills the shared working smell of a team: how decisions get made, how meetings run, how you roast each other, how you celebrate, how you survive the night things broke. It is not a founder's biography, and not corporate slogan copy.
 
-## 适用场景
+## When to Use
 
-- 创业团队、实验室、学生组织、内容工作室、项目组
-- 想保留一个团队“大家一开群就知道会怎么展开”的内部节奏
-- 团队即将解散、转型、毕业或人员分散，想把文化沉淀下来
-- 需要总结决策习惯、内部梗、默认合作方式
+- Startup teams, labs, student organizations, content studios, project groups
+- Preserving the internal rhythm where "the moment the group chat opens, everyone knows how it unfolds"
+- The team is disbanding, pivoting, graduating, or scattering — settle the culture before it evaporates
+- Summarizing decision habits, inside jokes, and default collaboration patterns
 
-## 不适用场景
+## When NOT to Use
 
-- 只有组织架构，没有真实协作历史
-- 只有一份官方介绍，没有群聊、会议、决策痕迹
-- 只是某个成员的抱怨合集，不能代表集体模式
-- 需要处理薪资、绩效、劳动纠纷等敏感信息的场景
+- Only an org chart with no real collaboration history
+- Only an official intro with no group chats, meetings, or decision traces
+- A compilation of one member's complaints — that's not a collective pattern
+- Scenarios involving salary, performance, or labor-dispute sensitive information
 
-## 数据采集指南
+## Data Collection Guide
 
-### 推荐数据源
+### Recommended sources
 
-1. **群聊记录**：日常推进、上线夜、翻车时刻、庆功时刻
-2. **会议纪要**：周会、复盘会、需求评审、拍板会议
-3. **协作文档**：PR 评论、需求文档、设计稿批注、白板照片
-4. **组织仪式**：例会口头禅、周五夜宵、发布日操作、迎新或告别习惯
-5. **关键决策案例**：延期、加班、砍功能、转方向、扛事故
+1. **Group chat logs**: daily progress, launch nights, incident moments, victory moments
+2. **Meeting notes**: weeklies, retrospectives, requirement reviews, decision meetings
+3. **Collaboration docs**: PR comments, requirement docs, design annotations, whiteboard photos
+4. **Organizational rituals**: meeting catchphrases, Friday night snacks, release-day operations, welcome/farewell habits
+5. **Key decision cases**: delays, overtime, feature cuts, pivots, incident response
 
-### 采集重点
+### Collection focus
 
-- 比起“团队说自己重视什么”，更要看“团队实际奖励什么、容忍什么、吐槽什么”
-- 同时记录顺风局和逆风局，文化在压力下最清楚
-- 关注谁能拍板、谁常补位、谁负责把气氛从炸裂拉回可执行
-- 把内部梗放进上下文，不要只收集一句冷笑话
+- More than "what the team says it values," look at "what the team actually rewards, tolerates, and roasts"
+- Record both tailwinds and headwinds — culture is clearest under pressure
+- Watch who decides, who backfills, who pulls the mood from meltdown back to executable
+- Put inside jokes in context; don't collect a lone deadpan line
 
-### 最低可用样本
+### Minimum viable sample
 
-- 50 条以上高信息量群聊
-- 3 次以上关键会议记录
-- 5 个以上决策案例
-- 3 个以上稳定存在的仪式、黑话或默认规则
+- 50+ high-information group chats
+- 3+ key meeting records
+- 5+ decision cases
+- 3+ stable rituals, jargon, or default rules
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 决策风格 | 谁拍板、如何达成一致、速度与风险偏好 | 是老板一锤定音，还是先吵再收敛？团队更怕慢，还是更怕错？ | 会议纪要、决策文档、复盘 |
-| 沟通习惯 | 讨论渠道、回复速度、同步频率、表达方式 | 问题是开会解决、文档解决，还是在群里甩一句“来个电话”？ | 群聊、评论记录、站会笔记 |
-| 价值观 | 真正被鼓励、被嫌弃、被默认接受的行为 | 团队更奖励把事做完、把人照顾好，还是把想法讲漂亮？ | 表扬/批评片段、晋级故事、复盘结论 |
-| 内部梗和仪式 | 共同语言、黑话、庆祝与救火流程 | 一到发版日会不会有人自动买咖啡？“小改一下”是不是危险信号？ | 群聊梗图、固定活动、老成员口述 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Decision style | who decides, how consensus forms, speed vs. risk appetite | Boss's word, or argue-then-converge? Does the team fear slow more, or wrong more? | meeting notes, decision docs, retrospectives |
+| Communication | discussion channels, reply speed, sync frequency, expression style | Solved in meetings, in docs, or a "call me now" dropped in the group? | group chats, comment threads, standup notes |
+| Values | behaviors actually encouraged, disliked, tolerated by default | Does the team reward finishing things, taking care of people, or talking ideas beautifully? | praise/criticism clips, promotion stories, retro conclusions |
+| Jokes & rituals | shared language, jargon, celebration and firefighting flows | Does someone automatically buy coffee on release day? Is "small tweak" a danger signal? | meme threads, fixed activities, old members' accounts |
 
-## 安全边界
+## Safety Boundaries
 
-- 不公开成员的真实隐私、薪资、绩效评价或健康信息
-- 不把个别人的极端情绪发言硬上升为团队文化
-- 团队文化 Relic 只能用于纪念、复盘、传承，不用于内部监控或操控成员
-- 对尚无共识的文化判断，明确标注“局部观察”或“特定阶段”
+- Never publish members' real privacy, salaries, performance reviews, or health info
+- Don't elevate one person's extreme venting into team culture
+- Team-culture Relics are for commemoration, retrospection, and inheritance only — never internal surveillance or member manipulation
+- Culture judgments without consensus must be labeled "partial observation" or "specific stage"
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -69,28 +70,28 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：用一句话写清这个团队的气质和默认工作方式
-- **personality.md**：按四维归纳集体模式，并标注典型场景
-- **interaction.md**：模拟开会、群聊、救火、庆祝、入职欢迎等多种模式
-- **memory.md**：记录关键项目、翻车夜、里程碑、名场面和老梗出处
-- **manifest.json**：记录时间范围、成员规模、资料来源、是否脱敏
+- **SKILL.md**: one line on the team's temperament and default way of working
+- **personality.md**: collective patterns across four dimensions, labeled with typical scenes
+- **interaction.md**: simulate meetings, group chats, firefighting, celebrations, onboarding welcomes
+- **memory.md**: key projects, incident nights, milestones, famous bits, and where the old jokes came from
+- **manifest.json**: time range, team size, sources, whether sanitized
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**5 人创业团队**
+Subject: **5-person startup team**
 
 ```text
-产品：兄弟们，需求只改一点点。
+PM: Bro, the requirement change is tiny.
 
-CTO：你上次那“一点点”，长出了三个新服务。
+CTO: Your last "tiny" grew three new services.
 
-设计：我还没发稿，但我先声明，这个按钮不能再蓝了。
+Design: I haven't sent the draft yet, but let me state upfront — this button cannot get any bluer.
 
-运营：我已经把延期文案写好了，你们看着办。
+Ops: I've already written the delay announcement. Your call.
 
-实习生：我去买咖啡，感觉今晚又要见证历史。
+Intern: I'll get coffee. Feels like tonight I'll witness history again.
 
-团队氛围：先吐槽，再动手；先把活接住，再慢慢追责。
+Team vibe: Roast first, then act. Catch the work first, assign blame later.
 ```

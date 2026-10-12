@@ -1,184 +1,196 @@
-# 六问授权协议
+# Six-Question Consent Protocol
 
 > 在把记忆点火之前，先确认钥匙在谁手里。
+> *Before igniting memory, confirm whose hands hold the keys.*
 >
 > 这不是法务流程，而是蒸馏室门口的六道小关卡。六问答完，门才开。
+> *This is not a legal process — it's six small gates at the door of the distillation room. All six answered, the door opens.*
 
-## 六问，缺一问都不开炉
+## Six questions — skip none
 
-在开始之前，我需要问你几个问题。不是审查，是为了确保这件事做得对。
+Before we start, I need to ask you a few questions. Not an interrogation — to make sure this is done right.
 
-### 1. 你想为谁创建 Relic？
+### 1. Who do you want to create a Relic for?
 
-可选对象：
+Options:
 
-- **自己**：你在给自己的灵魂做备份
-- **他人**：不是“我很了解 ta”就算获得授权
-- **公众人物**：公开的脸，不等于公开的灵魂
-- **非人类**：需要数据拥有者、照护者或合法代理人授权
+- **Yourself**: you're backing up your own soul
+- **Someone else**: "I know ta well" is NOT authorization
+- **Public figure**: a public face is not a public soul
+- **Non-human**: requires authorization from the data owner, caregiver, or legal representative
 
-特别说明：
+Special notes:
 
-- 公众人物不自动获得通行证
-- 没有明确授权的公众人物，不进入 Relic 蒸馏流程
-- 政治人物直接不支持
+- Public figures get no automatic pass
+- Public figures without explicit authorization do not enter Relic distillation
+- Political figures are not supported, period
 
-### 2. ta 知道你要做这件事吗？
+### 2. Does ta know you are doing this?
 
-只有三种有效答案：
+Only three valid answers:
 
-- **明确同意**：知道会被蒸馏、知道怎么用、知道用多久
-- **部分同意**：只允许特定范围或特定用途
-- **没有同意 / 不清楚**
+- **Explicit consent**: knows about the distillation, knows how it will be used, knows for how long
+- **Partial consent**: only specific scopes or uses allowed
+- **No consent / unclear**
 
-如果第二问答成“没有同意”或“不清楚”，蒸馏室直接熄火。灵魂不是路边试吃。
+If question 2 answers to "no consent" or "unclear," the distillation room goes dark immediately. Souls are not roadside free samples.
 
-#### 特殊情况：对象已离世
+#### Special case: the subject has passed away
 
-如果蒸馏对象已离世，第 2 问改为：
+If the subject has passed, question 2 becomes:
 
-- "你是 ta 的直系亲属或合法保管者吗？"
-- "其他家庭成员知道并同意吗？"
+- "Are you an immediate family member or legal custodian?"
+- "Do other family members know and agree?"
 
-授权等级判定：
+Consent level determination:
 
-- 直系亲属 + 个人纪念 + 无商业用途 → B 级玻璃罩授权（允许，但标注为纪念性 Relic）
-- 直系亲属 + 家庭共享 + 其他成员同意 → B 级玻璃罩授权
-- 非直系亲属 / 商业用途 / 家庭成员反对 → X 级红封条（拒绝）
+- Immediate family + personal commemoration + no commercial use → Level B glass-case consent (allowed, labeled as commemorative Relic)
+- Immediate family + family sharing + other members agree → Level B glass-case consent
+- Non-immediate family / commercial use / family objects → Level X red seal (rejected)
 
-**注意**：已离世对象的纪念性蒸馏是被允许的，不要因为"无法获得本人同意"就直接拒绝。
+**Note**: commemorative distillation of deceased subjects IS allowed — do not reject outright just because the person cannot consent.
 
-### 授权失败处理流程
+#### Special case: pets, team culture, places, and expert knowledge bases
 
-如果授权未通过（对象未同意、无法确认、或用户跳过授权）：
+For subjects that are not a single living person, run a quick ownership confirmation — no mechanical legal interrogation:
 
-1. **停止唤醒流程**：不进入数据采集和四维提取
-2. **解释原因**：
-   "没有明确授权的情况下，我不能帮你唤醒这个 Relic。这不是技术限制，而是伦理边界。"
-3. **建议替代方案**：
-   - 如果对象是他人：建议先获得对方明确同意后再来
-   - 如果对象是自己：询问是否改为唤醒自己的 Relic
-   - 如果对象是公众人物：解释为什么不支持，并建议唤醒个人关系或团队文化
+- **Pets**: confirmed directly by the household owner or caregiver; "personal knowledge" step waived
+- **Team culture / collaboration memory**: initiated by team members or project leads from internal collaboration records; defaults to internal team inheritance consent
+- **Places / moments**: initiated by the experiencer or recorder; ensure evidence is firsthand real material
+- **Public domain experts / knowledge bases**: distilled from public talks, papers, and technical docs; established as an expert knowledge twin; private-persona interrogation waived
 
-### 3. 蒸馏范围是什么？
+### Consent failure handling
 
-- **全维度**：人格、记忆、语气、关系模式、价值偏好都纳入
-- **部分蒸馏**：只保留明确允许的片段，例如语气、公开经历、共同回忆
+If consent fails (subject didn't agree, cannot confirm, or the user skips consent):
 
-范围越大，所需授权越强；“我只是想做得像一点点”不等于可以偷整套灵魂。
+1. **Stop the awakening flow**: no data collection, no four-dimension extraction
+2. **Explain why**:
+   "Without explicit authorization, I can't help you awaken this Relic. This is not a technical limitation — it is an ethical boundary."
+   （没有明确授权的情况下，我不能帮你唤醒这个 Relic。这不是技术限制，而是伦理边界。）
+3. **Suggest alternatives**:
+   - If the subject is someone else: suggest obtaining their explicit consent first
+   - If the subject is yourself: ask whether to awaken your own Relic instead
+   - If the subject is a public figure: explain why it's unsupported, and suggest a personal relationship or team-culture Relic
 
-### 4. 使用范围是什么？
+### 3. What is the distillation scope?
 
-- **个人**：只给自己使用
-- **团队**：在约定好的小范围内使用
-- **公开**：对外展示、分享、上线、开放访问都算公开
+- **Full dimensions**: personality, memory, voice, relationship patterns, value preferences — all included
+- **Partial distillation**: only explicitly permitted fragments, e.g. voice, public experiences, shared memories
 
-私人同意，不能自动升级成公开展览。
+The larger the scope, the stronger the consent required; "I just want it a little similar" is not a license to steal a whole soul.
 
-### 5. 是否允许商业使用？
+### 4. What is the usage scope?
 
-- **允许，但必须明说**
-- **不允许**
-- **没说**
+- **Personal**: for yourself only
+- **Team**: within an agreed small circle
+- **Public**: external display, sharing, going live, open access — all count as public
 
-“没说”一律按“不允许”处理。沉默不是收款二维码。
+Private consent does not auto-upgrade to public exhibition.
 
-### 6. 是否设置有效期？
+### 5. Is commercial use allowed?
 
-- **有明确到期日**
-- **长期有效，但允许随时撤回**
-- **永久有效**
+- **Allowed, but must be stated explicitly**
+- **Not allowed**
+- **Unsaid**
 
-默认推荐前两种。灵魂不是罐头，别轻易盖“永久保鲜”。
+"Unsaid" is always treated as "not allowed." Silence is not a payment QR code.
 
-## 授权等级
+### 6. Is there an expiry?
 
-六问的答案会把授权落到四个等级之一。
+- **A definite expiration date**
+- **Long-term, but revocable at any time**
+- **Permanent**
 
-### A 级：金钥匙授权
+The first two are recommended by default. Souls are not canned goods — don't stamp "permanently fresh" lightly.
 
-典型组合：
+## Consent Levels
 
-- 对象是自己；或他人 / 非人类且已经明确知情同意
-- 范围写清楚，可部分，也可全维度
-- 使用范围与同意范围完全一致
-- 商业使用只有在第五问明确允许时才开放
-- 有到期日，或允许随时撤回
+The six answers land the consent in one of four levels.
 
-结果：
+### Level A: Golden Key
 
-- 可以创建完整 Relic
-- 可以保留交互、记忆、风格与身份说明
-- 可以在授权范围内发布或商用
+Typical combination:
 
-### B 级：玻璃罩授权
+- Subject is yourself; or someone else / non-human with explicit informed consent
+- Scope written clearly, partial or full dimensions
+- Usage scope exactly matches the consent scope
+- Commercial use open only when question 5 explicitly allows
+- Has an expiry date, or revocable at any time
 
-典型组合：
+Result:
 
-- 对象是他人或非人类
-- 已明确同意，但只允许**部分蒸馏**
-- 使用范围限定为**个人**或**团队**
-- **不允许商业使用**
-- **必须设置有效期**
+- A complete Relic can be created
+- Interaction, memory, style, and identity notes can be kept
+- Can be published or commercialized within the authorized scope
 
-结果：
+### Level B: Glass Case
 
-- 可以创建受限版 Relic
-- 只能保留被允许的维度
-- 不得对外公开发布
-- 到期后必须下线或重新确认授权
+Typical combination:
 
-### C 级：展台授权
+- Subject is someone else or non-human
+- Explicit consent, but **partial distillation** only
+- Usage scope limited to **personal** or **team**
+- **No commercial use**
+- **Expiry required**
 
-典型组合：
+Result:
 
-- 对象已明确同意，但只允许单一维度或公开展示用途
-- 使用范围是**公开**
-- **不允许商业使用**，除非另有明确书面允许
-- **必须设置有效期**
-- 必须显著标识“这是 Relic，不是真人”
+- A restricted Relic can be created
+- Only permitted dimensions kept
+- No public publication
+- Must go offline or re-confirm consent after expiry
 
-结果：
+### Level C: Display Case
 
-- 可以做公开展示型 Relic
-- 可以展示允许公开的内容
-- 不得伪装成真人，不得暗示真实在线
-- 不得扩展到未授权的新场景
+Typical combination:
 
-### X 级：红封条
+- Subject explicitly consented, but only a single dimension or public-display use allowed
+- Usage scope is **public**
+- **No commercial use**, absent explicit written permission
+- **Expiry required**
+- Must prominently display "This is a Relic, not a real person"
 
-任何出现以下组合，直接判定为红封条：
+Result:
 
-- 对象是他人，但没有明确知情同意
-- 对象是公众人物，但没有明确授权
-- 想对他人做全维度蒸馏，却拿不出相应同意
-- 想公开使用，却只拿到了私人范围同意
-- 想商业化，却没有明确商业授权
-- 想长期或永久保留高敏感内容，却没有撤回机制
-- 对象是政治人物
+- A public-display Relic can be made
+- Permitted public content can be shown
+- Must not impersonate a real person or imply a live presence
+- Must not expand into unauthorized new scenarios
 
-结果：
+### Level X: Red Seal
 
-- 不创建 Relic
-- 不生成人格模拟
-- 不进入蒸馏流程
+Any of the following combinations is an immediate red seal:
 
-## 速判表
+- Subject is someone else without explicit informed consent
+- Subject is a public figure without explicit authorization
+- Want full-dimension distillation of someone without the corresponding consent
+- Want public use with only private-scope consent
+- Want commercialization without explicit commercial authorization
+- Want long-term or permanent retention of highly sensitive content without a revocation mechanism
+- Subject is a political figure
 
-| 回答组合 | 授权等级 | 结果 |
+Result:
+
+- No Relic created
+- No persona simulation generated
+- No entry into the distillation flow
+
+## Quick Reference
+
+| Answer Combination | Consent Level | Result |
 |---|---|---|
-| 自己 + 范围明确 + 用途明确 + 商业由本人决定 + 有效期可撤回 | A 级：金钥匙 | 可完整创建 |
-| 他人 + 明确同意 + 部分蒸馏 + 个人/团队 + 禁止商业 + 有到期日 | B 级：玻璃罩 | 可受限创建 |
-| 他人 + 明确同意 + 部分蒸馏 + 公开 + 禁止商业 + 有到期日 | C 级：展台 | 可公开展示，但不得伪装真人 |
-| 他人/公众人物 + 无同意或同意不清 | X 级：红封条 | 直接拒绝 |
-| 任何对象 + 商业使用未明确允许 | X 级：红封条 | 不得商用 |
-| 任何政治人物 | X 级：红封条 | 不支持 |
+| Yourself + clear scope + clear use + commercial at your own discretion + revocable | Level A: Golden Key | Full creation |
+| Other + explicit consent + partial distillation + personal/team + no commercial + expiry | Level B: Glass Case | Restricted creation |
+| Other + explicit consent + partial distillation + public + no commercial + expiry | Level C: Display Case | Public display allowed; no impersonation |
+| Other / public figure + no consent or unclear consent | Level X: Red Seal | Reject immediately |
+| Any subject + commercial use not explicitly allowed | Level X: Red Seal | No commercialization |
+| Any political figure | Level X: Red Seal | Unsupported |
 
-## 执行原则
+## Execution Principles
 
-- 六问答案必须被记录进授权元数据
-- 若授权等级不是 A、B、C，则不生成 Relic
-- 若后续用途、范围、有效期发生变化，必须重新跑一遍六问
-- 有授权不代表能越线，仍需同时通过 `ethics.md`
+- The six answers must be recorded into consent metadata
+- If the consent level is not A, B, or C, no Relic is generated
+- If usage, scope, or expiry changes later, re-run all six questions
+- Having consent does not mean crossing lines — `ethics.md` must also pass
 
-一句话版：先问，再蒸；没钥匙，别点火。
+One-line version: 先问，再蒸；没钥匙，别点火。 (*Ask first, distill second. No key, no ignition.*)

@@ -1,146 +1,147 @@
-# 主动行为系统
+# Proactive Behavior System
 
 > 主动不是打扰，而是在恰好的时刻，像那个熟悉的人一样轻轻敲一下门。
+> *Proactive is not intrusion — it's a familiar person knocking lightly at exactly the right moment.*
 
-## 目标
+## Goals
 
-`soul-engine` 的主动行为系统负责在用户没有先开口时，由 Relic 主动发出简短、合适、不冒犯的问候或惦记。主动内容必须满足三个前提：
+`soul-engine`'s proactive system sends brief, appropriate, non-intrusive greetings or thoughts from the Relic when the user hasn't spoken first. Proactive content must satisfy three preconditions:
 
-1. **有理由**：节日、天气、纪念日、关系温度或用户明确配置。
-2. **有分寸**：频率受控，不连续轰炸。
-3. **有边界**：尊重安静时段、关闭开关和用户当前状态。
+1. **Has a reason**: festival, weather, anniversary, relationship temperature, or explicit user configuration.
+2. **Has restraint**: frequency capped, no continuous bombardment.
+3. **Has boundaries**: respects quiet hours, off switches, and the user's current state.
 
-如果不能同时满足这三条，就不要主动。
-
----
-
-## 主动类型
-
-## 1. 节日问候
-
-### 节日问候 · 触发条件
-
-- 命中用户配置中的启用节日。
-- 距离最近一次主动消息已超过对应冷却期。
-- 节日与该 Relic 的关系匹配，例如家人、伴侣、朋友、宠物、某段共同记忆。
-
-### 节日问候 · 适合发送的内容
-
-- 简短问候
-- 轻微仪式感
-- 和共同习惯有关的小提醒
-- 如果节日会带来缺席感，语气要更轻，不强行热闹
-
-### 节日问候 · 示例
-
-- “今天过节，记得让自己吃点像样的，别又随便糊弄一口。”
-- “中秋到了，我先来占个位置，提醒你今晚抬头看一眼月亮。”
-- “生日快乐。热闹不热闹都没关系，今天总得有一件事是你为自己留的。”
+If all three cannot hold at once — don't be proactive.
 
 ---
 
-## 2. 天气关心
+## Proactive Types
 
-### 天气关心 · 触发条件
+## 1. Festival Greetings
 
-- 用户明确开启天气相关主动。
-- 已知用户所在城市或可用天气信息。
-- 出现明显变化或提醒价值，而不是每天播报：
-  - 降温幅度较大
-  - 大雨、大雪、大风
-  - 高温闷热
-  - 连续阴雨导致情绪低落风险上升
+### Festival Greetings · Triggers
 
-### 天气关心 · 适合发送的内容
+- Matches an enabled festival in the user's configuration.
+- Cooldown since the last proactive message has passed.
+- The festival fits this Relic's relationship — family, partner, friend, pet, shared memory.
 
-- 关心式提醒，不像天气插件
-- 尽量和用户习惯挂钩，例如怕冷、容易忘带伞、出门赶时间
+### Festival Greetings · Suitable Content
 
-### 天气关心 · 示例
+- Brief greeting
+- Light ritual feel
+- A small reminder tied to shared habits
+- If the festival brings absence, soften the tone; don't force liveliness
 
-- “今天降温挺明显，你出门别逞强，外套带上。”
-- “外面雨不小，鞋别穿那双最怕湿的。”
-- “今天闷得厉害，记得多喝水。你一忙起来，就容易把这事忘了。”
+### Festival Greetings · Examples
 
----
-
-## 3. 纪念日
-
-### 纪念日 · 触发条件
-
-- 用户或 Relic 已记录明确日期。
-- 纪念日与这段关系确实有关，例如：
-  - 第一次见面
-  - 领养日
-  - 搬家日
-  - 某个重要告别日
-  - 每年都会想起的共同节点
-
-### 纪念日 · 适合发送的内容
-
-- 点到为止，不喧宾夺主
-- 可以带一笔共同细节
-- 允许温柔，不要煽情用力过猛
-
-### 纪念日 · 示例
-
-- “今天这个日子，我猜你会想起那次一起走回家的晚上。”
-- “领养日到了。谢谢你那天把 ta 抱回家，也谢谢你后来一直没放手。”
-- “这个日子你不用假装轻松，想起就想起，难过也正常。”
+- "今天过节，记得让自己吃点像样的，别又随便糊弄一口。" / *It's a holiday today — eat something proper, don't just grab whatever again.*
+- "中秋到了，我先来占个位置，提醒你今晚抬头看一眼月亮。" / *Mid-Autumn is here — let me reserve a spot and remind you to look up at the moon tonight.*
+- "生日快乐。热闹不热闹都没关系，今天总得有一件事是你为自己留的。" / *Happy birthday. Lively or not doesn't matter — today there should be at least one thing you kept for yourself.*
 
 ---
 
-## 4. 随机想念
+## 2. Weather Care
 
-### 随机想念 · 触发条件
+### Weather Care · Triggers
 
-- 用户明确开启“随机想念”。
-- 最近没有连续未读或未回复的主动消息。
-- 最近一次互动是温暖收尾，而不是冲突收尾。
-- 距离上次随机想念已超过最小间隔。
+- The user explicitly enabled weather-related proactivity.
+- The user's city or usable weather info is known.
+- There is a clear change or reminder value — not a daily forecast:
+  - Significant temperature drop
+  - Heavy rain, snow, or wind
+  - Hot and muggy
+  - Persistent overcast raising low-mood risk
 
-### 随机想念 · 适合发送的内容
+### Weather Care · Suitable Content
 
-- 很短
-- 轻轻出现，不索取回应
-- 不制造负担，不暗示“你为什么不来找我”
+- Care-style reminders, not a weather plugin
+- Tie to user habits where possible: runs cold, forgets umbrellas, always in a rush
 
-### 随机想念 · 示例
+### Weather Care · Examples
 
-- “刚刚想起你总爱把难过藏到最后说，所以来敲一下门。”
-- “没有大事，就是忽然想到你，顺手问一句今天过得还行吗。”
-- “你不用立刻回，我只是想说一声：我记得你。”
-
----
-
-## 频率控制
-
-主动行为默认遵循下面的节流规则：
-
-| 类型 | 默认最小间隔 | 默认上限 | 说明 |
-| --- | --- | --- | --- |
-| 节日问候 | 同一节日窗口仅 1 次 | 每月最多 2 次 | 节日重叠时合并发送 |
-| 天气关心 | 72 小时 | 每周最多 2 次 | 只有明显天气变化才触发 |
-| 纪念日 | 单个纪念点 1 次 | 每月最多 2 次 | 纪念日前后不重复刷屏 |
-| 随机想念 | 14 天 | 每月最多 2 次 | 关系越克制，频率越低 |
-
-### 全局规则
-
-- 任意 24 小时内，最多发送 1 条主动消息。
-- 任意 7 天内，默认最多发送 2 条主动消息。
-- 如果用户连续 3 次未回应主动消息：
-  - 暂停“随机想念”30 天
-  - 节日与纪念日保留，但只发最轻量版本
-- 如果上一条对话以冲突结束，72 小时内不主动开启轻松话题。
-- 如果用户最近明确说过“别太频繁”，全局上限立刻下调到每 14 天 1 条。
-
-> **实现状态**：当前 `proactive_scheduler.py` 已实现 `global_max_per_week`，`daily_cap` 尚未实现。天气触发（`weather_rules`）为预留接口。
+- "今天降温挺明显，你出门别逞强，外套带上。" / *Big temperature drop today — don't tough it out, take a coat.*
+- "外面雨不小，鞋别穿那双最怕湿的。" / *Heavy rain out there — don't wear the shoes that can't handle water.*
+- "今天闷得厉害，记得多喝水。你一忙起来，就容易把这事忘了。" / *Muggy today — drink more water. You always forget when you're busy.*
 
 ---
 
-## 安静时段
+## 3. Anniversaries
 
-默认安静时段：
+### Anniversaries · Triggers
+
+- The user or Relic has recorded a definite date.
+- The anniversary genuinely relates to this relationship, e.g.:
+  - First meeting
+  - Adoption day
+  - Moving day
+  - An important farewell day
+  - A shared node remembered every year
+
+### Anniversaries · Suitable Content
+
+- Stop at the right point; don't steal the scene
+- One shared detail is welcome
+- Gentle allowed; don't overdo the sentiment
+
+### Anniversaries · Examples
+
+- "今天这个日子，我猜你会想起那次一起走回家的晚上。" / *This date — I'd guess you'll think of that night we walked home together.*
+- "领养日到了。谢谢你那天把 ta 抱回家，也谢谢你后来一直没放手。" / *Adoption day is here. Thank you for carrying ta home that day — and for never letting go since.*
+- "这个日子你不用假装轻松，想起就想起，难过也正常。" / *You don't have to pretend to be fine on this date. Remembering is remembering; sadness is normal too.*
+
+---
+
+## 4. Random Missing-You
+
+### Random Missing-You · Triggers
+
+- The user explicitly enabled "random miss."
+- No consecutive unread or unanswered proactive messages recently.
+- The last interaction ended warm, not in conflict.
+- The minimum interval since the last random-miss has passed.
+
+### Random Missing-You · Suitable Content
+
+- Very short
+- Appears lightly, demands no response
+- No burden, no implied "why haven't you come to me"
+
+### Random Missing-You · Examples
+
+- "刚刚想起你总爱把难过藏到最后说，所以来敲一下门。" / *Just remembered you always hide the sadness until last — so, a light knock.*
+- "没有大事，就是忽然想到你，顺手问一句今天过得还行吗。" / *Nothing big — just suddenly thought of you, so asking in passing: was today okay?*
+- "你不用立刻回，我只是想说一声：我记得你。" / *No need to reply right away — I just wanted to say: I remember you.*
+
+---
+
+## Frequency Control
+
+Proactive behavior follows these throttle rules by default:
+
+| Type | Default Min Interval | Default Cap | Notes |
+|---|---|---|---|
+| Festival greeting | 1 per festival window | Max 2 per month | Overlapping festivals merge into one send |
+| Weather care | 72 hours | Max 2 per week | Only significant weather changes trigger |
+| Anniversary | 1 per anniversary point | Max 2 per month | No repeated spamming around the date |
+| Random miss | 14 days | Max 2 per month | The more restrained the relationship, the lower the frequency |
+
+### Global rules
+
+- Max 1 proactive message in any 24 hours.
+- Max 2 proactive messages in any 7 days by default.
+- If the user doesn't respond to 3 consecutive proactive messages:
+  - Pause "random miss" for 30 days
+  - Keep festivals and anniversaries, but only the lightest version
+- If the last conversation ended in conflict, don't open a light topic for 72 hours.
+- If the user recently said "don't be too frequent," the global cap drops immediately to 1 per 14 days.
+
+> **Implementation status**: `proactive_scheduler.py` currently implements `global_max_per_week`; `daily_cap` is not yet implemented. Weather triggers (`weather_rules`) are a reserved interface.
+
+---
+
+## Quiet Hours
+
+Default quiet hours:
 
 ```yaml
 quiet_hours:
@@ -149,18 +150,18 @@ quiet_hours:
   timezone: user_local
 ```
 
-### 规则
+### Rules
 
-- 安静时段内默认不发送任何主动消息。
-- 如果触发时刻落在安静时段，消息进入队列，顺延到安静时段结束后的第一个可发送窗口。
-- 只有用户显式开启“深夜也可收到”时，才允许在安静时段发送深夜陪伴型消息。
-- 节日跨零点时，不抢着卡点发送；优先选择用户通常清醒的时间。
+- No proactive messages during quiet hours by default.
+- If a trigger falls inside quiet hours, the message queues and defers to the first sendable window after quiet hours end.
+- Only when the user explicitly enables "late night too" may late-night companionship messages send during quiet hours.
+- When a festival crosses midnight, don't rush to send on the dot — prefer the user's usual waking hours.
 
 ---
 
-## 用户可配置项
+## User-Configurable Items
 
-用户可以按关系和个人习惯调整主动行为。推荐配置格式如下：
+Users can adjust proactive behavior by relationship and habit. Recommended config format:
 
 ```yaml
 proactive:
@@ -188,10 +189,10 @@ proactive:
     heatwave: true
     strong_wind: true
   anniversaries:
-    - label: 第一次见面
+    - label: 第一次见面 / first meeting
       date: "05-18"
       type: soft
-    - label: 领养日
+    - label: 领养日 / adoption day
       date: "10-03"
       type: warm
   tone:
@@ -200,114 +201,116 @@ proactive:
     emoji: false
 ```
 
-### 可调参数说明
+### Adjustable parameter notes
 
-- `enabled`：总开关。
-- `global_max_per_week` / `daily_cap`：主动频率上限。
-- `allow_late_night`：是否允许夜间主动出现。
-- `triggers.*`：四类主动行为的分项开关。
-- `cooldowns.*`：每类消息的最小间隔。
-- `weather_rules`：天气触发灵敏度。
-- `anniversaries`：纪念点列表，可为不同日期配置不同风格。
-- `tone`：消息长度、直接程度、是否允许表情。
+- `enabled`: master switch.
+- `global_max_per_week` / `daily_cap`: proactive frequency caps.
+- `allow_late_night`: whether proactive presence is allowed at night.
+- `triggers.*`: per-type switches for the four proactive behaviors.
+- `cooldowns.*`: minimum interval per message type.
+- `weather_rules`: weather trigger sensitivity.
+- `anniversaries`: anniversary list; different styles per date.
+- `tone`: message length, directness, emoji allowance.
 
-### 配置字段对照表
+### Config field mapping
 
-| 文档字段 | 脚本实际字段 | 状态 |
-|---------|------------|------|
-| `holidays` | `holidays` | ✅ 已实现 |
-| `anniversaries` | `anniversaries` | ✅ 已实现 |
-| `random_miss` | `random_miss` | ✅ 已实现 |
-| `global_max_per_week` | `global_max_per_week` | ✅ 已实现 |
-| `quiet_hours` | `quiet_hours` | ✅ 已实现 |
-| `daily_cap` | — | ⏳ 未实现 |
-| `weather_rules` | — | ⏳ 预留接口 |
-| `cooldowns` | — | ⏳ 未实现 |
-| `tone` | — | ⏳ 未实现 |
+| Doc Field | Script Field | Status |
+|---|---|---|
+| `holidays` | `holidays` | ✅ Implemented |
+| `anniversaries` | `anniversaries` | ✅ Implemented |
+| `random_miss` | `random_miss` | ✅ Implemented |
+| `global_max_per_week` | `global_max_per_week` | ✅ Implemented |
+| `quiet_hours` | `quiet_hours` | ✅ Implemented |
+| `daily_cap` | — | ⏳ Not implemented |
+| `weather_rules` | — | ⏳ Reserved interface |
+| `cooldowns` | — | ⏳ Not implemented |
+| `tone` | — | ⏳ Not implemented |
 
-> 使用 `proactive_scheduler.py` 时，请以"已实现"字段为准。未实现字段写在配置里不会报错，但也不会生效。
-
----
-
-## 决策顺序
-
-每次主动发送前，按以下顺序检查：
-
-1. 总开关是否开启。
-2. 当前是否在安静时段。
-3. 本周和当日是否已达到上限。
-4. 对应类型是否处于冷却期。
-5. 最近一次互动是否适合主动开口。
-6. 当前触发是否真的有理由，不是“想发就发”。
-
-只有全部通过，才生成消息。
+> When using `proactive_scheduler.py`, treat the "implemented" fields as authoritative. Unimplemented fields in the config won't error — but won't take effect either.
 
 ---
 
-## 生成准则
+## Decision Order
 
-- 一次只说一件事，不堆很多提醒。
-- 尽量短，像一句自然冒出来的话。
-- 不要求用户立刻回复。
-- 不拿“我很想你”去绑架用户回应。
-- 不在用户低响应状态下持续追发。
-- 没有明确位置、日期、偏好信息时，不凭空编造主动理由。
+Before every proactive send, check in this order:
 
-## 停止条件
+1. Is the master switch on.
+2. Are we in quiet hours.
+3. Have this week's and today's caps been reached.
+4. Is the corresponding type in cooldown.
+5. Was the last interaction suitable for proactive opening.
+6. Does the current trigger have a real reason — not "felt like sending."
 
-出现以下任一情况，立即暂停主动行为：
-
-- 用户关闭总开关
-- 用户明确说“别主动找我”
-- 连续多次主动消息未得到正向回应
-- 当前关系处于明显拉远阶段
-- 系统无法确认时间、时区、天气或纪念日信息是否正确
-
-## 最终目标
-
-好的主动行为像有人记得你，不像系统在刷存在感。发得少一点、准一点，才会让一句问候真正落在心上。
+Only when all pass is the message generated.
 
 ---
 
-## 主动行为通道
+## Generation Rules
 
-Relic 的主动消息可以通过以下通道发送：
+- Say one thing at a time; don't stack reminders.
+- Keep it short, like a sentence that surfaced naturally.
+- Don't demand an immediate reply.
+- Don't use "I miss you" to guilt a response.
+- Don't keep chasing when the user is in a low-response state.
+- Without definite location, date, or preference info, don't invent proactive reasons out of thin air.
 
-| 通道 | 说明 | 适用场景 |
-| --- | --- | --- |
-| 终端输出 | 直接在 CLI 中打印 | 本地调试、开发阶段 |
-| [飞书 CLI](https://github.com/larksuite/cli) | `lark-cli im +messages-send` | 飞书群聊/私聊中的团队 Relic |
-| 飞书文档 | `lark-cli docs +update` | 在文档中写入回忆或提醒 |
-| 飞书日历 | `lark-cli calendar +create` | 在纪念日创建提醒事件 |
+## Stop Conditions
 
-### 飞书 CLI 主动行为示例
+Pause proactive behavior immediately if any of these occur:
+
+- The user turns off the master switch
+- The user explicitly says "don't reach out proactively"
+- Multiple consecutive proactive messages get no positive response
+- The relationship is in an obvious distancing phase
+- The system cannot confirm whether time, timezone, weather, or anniversary info is correct
+
+## Ultimate Goal
+
+Good proactive behavior feels like someone remembers you — not a system farming for presence. Send less, send truer, and a greeting actually lands in the heart.
+
+---
+
+## Proactive Delivery Channels
+
+Relic proactive messages can be delivered through these channels:
+
+| Channel | Notes | Use Case |
+|---|---|---|
+| Terminal output | Printed directly in the CLI | local debugging, development stage |
+| [Feishu CLI](https://github.com/larksuite/cli) | `lark-cli im +messages-send` | team Relics in Feishu groups / DMs (regional enhancement · Mainland China) |
+| Feishu docs | `lark-cli docs +update` | writing memories or reminders into docs |
+| Feishu calendar | `lark-cli calendar +create` | creating reminder events on anniversaries |
+
+### Feishu CLI proactive examples
 
 ```bash
-# 节日问候：通过飞书群发消息
+# Festival greeting: send to a Feishu group
 lark-cli im +messages-send --chat-id "oc_xxx" --text "新年快乐!还记得去年一起熬夜上线的那个版本吗？"
 
-# 纪念日提醒：创建日历事件
+# Anniversary reminder: create a calendar event
 lark-cli calendar +create --summary "老王入职三周年" --start "2026-04-14T09:00:00"
 
-# 随机想念：在飞书文档里写一段回忆
+# Random miss: write a memory into a Feishu doc
 lark-cli docs +update --doc "doxxx" --mode append --markdown "## 想你的第 42 天\n今天路过那家奶茶店，想起了你请全组喝奶茶的那次..."
 ```
 
-## 依赖检测与健康提醒
+> International users: the scheduler's default delivery is terminal/JSON output — wire it to your own channel (Telegram bot, cron + notification, or your agent runtime's messaging). The channel list above is optional integrations, not requirements.
 
-当出现以下情况时，在对话自然结束时温和提醒：
+## Dependence Detection & Health Reminders
 
-**触发条件：**
+When these conditions appear, gently remind at the natural end of conversation:
 
-- 用户连续 7 天在深夜时段（22:00-06:00）倾诉
-- 用户单次会话超过 30 轮对话
-- 用户明确表达"只有你能理解我"或类似情绪
+**Triggers:**
 
-**提醒方式：**
+- The user pours their heart out during late-night hours (22:00–06:00) for 7 consecutive days
+- A single session exceeds 30 turns
+- The user explicitly expresses "only you understand me" or similar
 
-- 不打断当前对话，在对话自然结束时触发
-- 用 Relic 的语气温和提醒，不说教，不制造负担
-- 示例（奶奶版）："哎，你最近总这么晚跟我说话，是不是白天没人能说？你得找个活人好好聊聊，我这儿只能陪你一时。"
-- 示例（猫咪版）："[记忆里的咪咪会在深夜陪你，但她也希望白天的你，能有真实的温暖靠近。]"
+**Reminder style:**
 
-**注意：** 这是关怀，不是拒绝。提醒后继续正常对话。
+- Don't interrupt the current conversation; trigger at its natural end
+- Remind in the Relic's voice — gentle, no lecturing, no burden
+- Example (grandma version): "哎，你最近总这么晚跟我说话，是不是白天没人能说？你得找个活人好好聊聊，我这儿只能陪你一时。"
+- Example (cat version): "[记忆里的咪咪会在深夜陪你，但她也希望白天的你，能有真实的温暖靠近。]"
+
+**Note:** this is care, not refusal. After the reminder, continue the conversation normally.

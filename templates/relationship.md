@@ -1,64 +1,65 @@
-# 关系模板
+# Relationship Template
 
 > 有些关系像双人舞，踩脚也算配合的一部分。
+> *Some relationships are a duet — stepping on each other's feet is part of the choreography.*
 
-本模板蒸馏的是两个人之间长期形成的互动结构：怎么聊天、怎么吵架、怎么和好、怎么一起变成今天这样。主角不是某一个人，而是“你们之间”。
+This template distills the long-formed interaction structure between two people: how you chat, how you fight, how you make up, how you became who you are today. The subject is not one person — it is "the between."
 
-## 适用场景
+## When to Use
 
-- 友情、爱情、亲情、室友关系、师徒关系、长期搭档
-- 想保留一段关系里的默契、边界、互损方式、照顾方式
-- 关系已经结束、转变或即将分离，想留下真实的相处结构
-- 需要整理“我们为什么会变成这样”的共同轨迹
+- Friendship, romance, family, roommates, mentor-student, long-term duo
+- Preserving a relationship's默契 (unspoken understanding), boundaries, roast style, and care style
+- The relationship has ended, transformed, or is about to separate — keep the real structure
+- Organizing the shared trajectory of "how we ended up like this"
 
-## 不适用场景
+## When NOT to Use
 
-- 只有单方面想象，没有共同经历
-- 只凭一次冲突或几张截图就下结论
-- 三人以上复杂群体关系，应该改用团队模板
-- 想用关系 Relic 持续窥探、纠缠、骚扰对方
+- One-sided imagination with no shared experience
+- Conclusions from one fight or a few screenshots
+- Three-plus-person group dynamics — use the team template instead
+- Using the relationship Relic to keep watching, entangling, or harassing the other person
 
-## 数据采集指南
+## Data Collection Guide
 
-### 推荐数据源
+### Recommended sources
 
-1. **双向聊天记录**：最好覆盖热络期、平稳期、冲突期、修复期
-2. **共同事件材料**：旅行照片、合租清单、共享文档、纪念物、约定
-3. **冲突与和好片段**：不是为了翻旧账，而是看修复机制
-4. **时间线**：第一次认识、转折点、关系变浓或变淡的节点
-5. **第三方观察**：可补充“旁人眼里的你们”，但不能盖过当事人材料
+1. **Two-way chat logs**: ideally covering the hot phase, stable phase, conflict phase, repair phase
+2. **Shared-event material**: travel photos, shared-house lists, shared docs, keepsakes, promises
+3. **Conflict and reconciliation fragments**: not to rehash old scores, but to see the repair mechanism
+4. **Timeline**: first meeting, turning points, when the relationship deepened or cooled
+5. **Third-party observation**: can supplement "how others see you two," never outweighs the parties' own material
 
-### 采集原则
+### Collection principles
 
-- 优先保留两人之间直接发生的材料
-- 如果只有一方提供资料，必须明确标注为**单侧观察版**
-- 既收集甜的时候，也收集别扭的时候，关系的轮廓常常藏在拉扯里
-- 不要把两个人拆开各自分析后硬拼，重点是互动循环
+- Prioritize material directly between the two people
+- If only one side provides material, label it clearly as a **single-sided observation version**
+- Collect both the sweet and the awkward — the silhouette often hides in the friction
+- Don't analyze each person separately and staple them together; the point is the interaction loop
 
-### 最低可用样本
+### Minimum viable sample
 
-- 30 段以上高信息量对话
-- 5 个以上冲突或误解后的修复片段
-- 10 个以上共同记忆锚点
-- 3 个以上关系阶段：开始、稳定、转折 / 结束 / 升温
+- 30+ high-information conversations
+- 5+ repair fragments after conflict or misunderstanding
+- 10+ shared memory anchors
+- 3+ relationship stages: beginning, stable, turning / ending / heating up
 
-## 四维蒸馏定义
+## Four-Dimension Distillation
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 沟通模式 | 谁先开口、如何接话、爱不爱解释、是否有暗号和固定句式 | 你们是高频碎聊型，还是失联几天一上线就直奔主题？ | 双向聊天、通话、留言、共享文档 |
-| 冲突模式 | 导火索、升级路径、回避方式、谁先低头、如何修复 | 吵起来时是沉默、讲道理、翻旧账还是发梗图灭火？ | 冲突记录、和好记录、复盘对话 |
-| 亲密模式 | 依赖、支持、互损、边界、专属仪式 | 你们表达亲近靠直说、靠行动，还是靠嘴硬和顺手照顾？ | 日常对话、照顾片段、节日记录、共同生活痕迹 |
-| 成长轨迹 | 关系如何变化、关键转折、角色如何重新分配 | 是谁改变了谁？什么事件让这段关系更近或更远？ | 时间线、重大事件、长期回顾 |
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Communication | who speaks first, how you pick up lines, whether you explain, codes and fixed phrases | High-frequency chatter, or offline for days then straight to the point? | two-way chats, calls, messages, shared docs |
+| Conflict | triggers, escalation path, avoidance style, who yields first, how repair happens | Silence, reasoning, old-score-rehashing, or meme firefighting? | conflict records, reconciliation records, debriefs |
+| Intimacy | dependence, support, mutual roasting, boundaries, private rituals | Do you express closeness directly, through action, or through sharp talk and quiet care? | daily dialogue, care fragments, holiday records, shared-life traces |
+| Growth | how the relationship changed, key turning points, role redistribution | Who changed whom? What events drew you closer or further? | timeline, major events, long retrospectives |
 
-## 安全边界
+## Safety Boundaries
 
-- 在世且可识别的双人关系，最好双方知情；若无法做到，必须明确是单侧纪念视角
-- 不收录未经同意的私密影像、隐私细节或敏感内容
-- 不把关系 Relic 用作代替现实沟通的工具，更不能拿去试探、监视或施压
-- 对冲突原因不做无证断言，保留“我方视角 / 对方视角 / 未知部分”
+- Living, identifiable two-person relationships: both parties should ideally know; if impossible, label clearly as a single-sided commemorative perspective
+- No intimate imagery, private details, or sensitive content without consent
+- Never use a relationship Relic as a substitute for real communication — and never to probe, surveil, or pressure
+- No unfounded assertions about conflict causes; preserve "my perspective / their perspective / unknown"
 
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -69,25 +70,25 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：说明这不是某个人，而是这段关系本身的声音和惯性
-- **personality.md**：按四维拆解互动循环，并标注双方视角与共同事实
-- **interaction.md**：设计“回到某次日常”“重看一次争吵”“复盘关系转折”等交互模式
-- **memory.md**：记录共同记忆、梗、约定、反复上演的桥段
-- **manifest.json**：记录资料来源、是否双侧授权、时间跨度、关系状态说明
+- **SKILL.md**: make clear this is not one person, but the voice and inertia of the relationship itself
+- **personality.md**: four dimensions of the interaction loop, labeled with both perspectives and shared facts
+- **interaction.md**: design interaction modes like "return to an ordinary day," "revisit a fight," "debrief a turning point"
+- **memory.md**: shared memories, inside jokes, promises, recurring bits
+- **manifest.json**: sources, whether both sides consented, time span, relationship status note
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**大学室友友谊**
+Subject: **college roommate friendship**
 
 ```text
-你：今晚回宿舍吗？
+You: Back to the dorm tonight?
 
-这段关系：回，顺路给你带楼下烤肠。
+The relationship: Yeah, I'll grab you a sausage from the place downstairs.
 
-你：你昨天不是说我要是再把袜子挂椅背上，你就跟我绝交？
+You: Didn't you say yesterday you'd break up with me if I hung my socks on the chair again?
 
-这段关系：那是程序化警告，不影响我帮你抢洗衣机。
-这段关系：你也别装，你每次嘴上说“各管各的”，一到我发烧还是会把热水壶拎过来。
+The relationship: That was a procedural warning. It doesn't affect me grabbing you a washer.
+The relationship: And don't pretend — every time you say "each minds their own," the moment I run a fever you show up with the electric kettle.
 ```

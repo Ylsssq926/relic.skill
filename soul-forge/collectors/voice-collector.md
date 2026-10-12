@@ -1,97 +1,98 @@
-# 语音采集器
+# Voice Collector
 
 > “声音是会冒热气的证据，咳一声、笑一下、停半拍，纸面上都写不出同样的温度。”
+> *Voice is steaming-hot evidence — a cough, a laugh, a half-beat pause; paper can't write down that same warmth.*
 
-## 支持的数据格式
+## Supported Formats
 
-| 来源类型 | 支持形式 | 常见文件 | 说明 |
-| --- | --- | --- | --- |
-| 录音 | 手机录音、会议录音、访谈录音 | `.mp3` `.wav` `.m4a` `.aac` | 适合长时段语气与节奏分析 |
-| 语音消息 | 微信、QQ、Telegram、iMessage 语音 | 平台导出文件或转码文件 | 适合捕捉口头禅、停顿与情绪变化 |
-| 播客 | 单人节目、访谈节目、直播回放音频 | `.mp3` `.wav` | 适合分析公开表达风格与长段叙述 |
-| 视频抽音 | 视频中的音轨 | `.mp4` `.mov` 抽取后的音频 | 要保留视频来源说明 |
+| Source Type | Supported Forms | Common Files | Notes |
+|---|---|---|---|
+| Recordings | phone recordings, meeting recordings, interview recordings | `.mp3` `.wav` `.m4a` `.aac` | suited to long-span tone and rhythm analysis |
+| Voice messages | WeChat, QQ, Telegram, iMessage voice | platform export files or transcoded files | captures catchphrases, pauses, and emotional shifts |
+| Podcasts | solo shows, interview shows, livestream audio replays | `.mp3` `.wav` | suited to public expression style and long-form narration |
+| Video audio extraction | audio tracks inside videos | audio extracted from `.mp4` `.mov` | keep the video source note |
 
-额外支持：
+Additional support:
 
-- 多说话人音频，但要尽量区分主讲人。
-- 带环境音的录音，需标记噪音等级与是否影响转写。
-- 短语音片段与长时段访谈可混合采集，但结果中要分开标注。
+- Multi-speaker audio — but distinguish the main speaker as much as possible.
+- Recordings with ambient noise — mark noise level and whether it affects transcription.
+- Short clips and long interviews may be collected together, but labeled separately in results.
 
-## 采集流程
+## Collection Flow
 
-1. **登记来源**
-   - 记录音频文件名、录制时间、录制场景、是否经过剪辑。
-   - 区分私密语音、公开内容、被转发内容。
+1. **Register the source**
+   - Record filename, recording time, recording scene, whether edited.
+   - Distinguish private voice, public content, and forwarded content.
 
-2. **转写文本**
-   - 将语音转成逐段文本，保留时间戳。
-   - 关键语气词、笑声、叹气、停顿、哭腔、拖长音要同步记录。
+2. **Transcribe to text**
+   - Convert voice to segmented text with timestamps.
+   - Record key fillers, laughter, sighs, pauses, tearful tones, and drawn-out vowels alongside.
 
-3. **说话人识别**
-   - 单人音频直接标记为目标对象。
-   - 多人音频需做说话人切分，至少区分“目标对象 / 其他人 / 无法确认”。
+3. **Speaker identification**
+   - Single-speaker audio: mark directly as the target subject.
+   - Multi-speaker audio: do speaker diarization — at minimum "target / others / unconfirmed."
 
-4. **提取声音特征**
-   - 记录语速快慢、音量变化、语调起伏、重复词、迟疑词。
-   - 将“说了什么”与“怎么说的”分开写，方便后续进入表达和情感维度。
+4. **Extract voice features**
+   - Record pace, volume shifts, intonation contours, repeated words, hesitation markers.
+   - Write "what was said" and "how it was said" separately, for easy entry into expression and emotion dimensions.
 
-5. **切片归档**
-   - 按主题、情绪波动、关键事件切片。
-   - 长音频不要只给总摘要，至少保留若干关键片段。
+5. **Slice and archive**
+   - Slice by topic, emotional swings, key events.
+   - Long audio must not get only a global summary — keep several key fragments at minimum.
 
-6. **输出结构化结果**
-   - 生成可追溯的转写片段、声学描述、质量说明与隐私记录。
-   - 准备交给四维提取模块使用。
+6. **Output structured results**
+   - Produce traceable transcript fragments, acoustic descriptions, quality notes, and privacy records.
+   - Ready to hand to the four-dimension extraction module.
 
-## 数据清洗规则
+## Cleaning Rules
 
-- 自动转写错误要纠正，但不把口语改写成书面八股文。
-- “嗯、啊、诶、就是、那个”等填充词如果构成表达风格，应保留。
-- 明显无意义的长静音、设备摩擦噪音可压缩描述，不必逐秒展开。
-- 笑声、叹气、吸鼻子、深呼吸等非词语声音要转成简短标注。
-- 无法确认的字词要写明“不确定”，不要硬猜。
-- 剪辑过的音频需标记拼接痕迹，避免把不同时间的状态误写成连续表达。
-- 背景音乐、电视声、他人插话如影响判断，要在质量说明里注明。
+- Correct automatic transcription errors — but don't rewrite colloquial speech into written boilerplate.
+- Fillers like "嗯、啊、诶、就是、那个" (um, uh, er, like, that) stay if they form part of the expression style.
+- Meaningless long silences and device-friction noise may be compressed in description; no need to expand second by second.
+- Laughter, sighs, sniffs, and deep breaths convert to brief labels.
+- Unconfirmed words are marked "uncertain" — don't force a guess.
+- Edited audio must mark splice traces — avoid misreading states from different times as continuous expression.
+- Background music, TV sound, and others' interjections, if they affect judgment, must be noted in quality notes.
 
-## 隐私保护
+## Privacy Protection
 
-- 采集前确认音频是否包含第三方可识别信息。
-- 对无关第三方姓名、电话、地址、公司细节做脱敏或省略。
-- 不把声纹当作身份凭证写入画像，只描述听得见的表达特征。
-- 对儿童、医疗、财务、家庭冲突等高敏场景，优先缩小引用范围。
-- 若音频只用于当次唤醒，可在输出后删除原始转写缓存。
+- Before collecting, confirm whether the audio contains third-party identifiable info.
+- Sanitize or omit unrelated third-party names, phone numbers, addresses, company details.
+- Voiceprints are not written into the profile as identity credentials — only audible expression traits are described.
+- For high-sensitivity scenes (children, medical, finances, family conflict), narrow the quote range first.
+- If audio is for one-time awakening only, raw transcription caches may be deleted after output.
 
-## 输出格式
+## Output Format
 
 ```yaml
 collector: voice
 source_type:
-  - 录音
-  - 语音消息
+  - 录音 / recordings
+  - 语音消息 / voice messages
 metadata:
-  target: 目标对象名称
-  recorded_at: 录制时间或时间范围
-  setting: 录音场景说明
-  edited: 是否经过剪辑
+  target: 目标对象名称 / target subject name
+  recorded_at: 录制时间或时间范围 / recording time or range
+  setting: 录音场景说明 / recording scene
+  edited: 是否经过剪辑 / whether edited
 segments:
   - start: 00:00:12
     end: 00:00:26
-    speaker: 目标对象 | 其他人 | 无法确认
-    transcript: 逐段转写文本
+    speaker: 目标对象 | 其他人 | 无法确认 / target | others | unconfirmed
+    transcript: 逐段转写文本 / segmented transcript
     vocal_features:
-      speed: 偏慢 | 适中 | 偏快
-      volume: 轻 | 中 | 高
-      tone: 平稳 | 上扬 | 下沉 | 发紧 | 带笑
+      speed: 偏慢 | 适中 | 偏快 / slow | moderate | fast
+      volume: 轻 | 中 | 高 / soft | medium | loud
+      tone: 平稳 | 上扬 | 下沉 | 发紧 | 带笑 / steady | rising | falling | tight | laughing
       notable_signals:
-        - 停顿
-        - 叹气
-        - 笑声
-    context: 该片段出现的主题与上下文
+        - 停顿 / pause
+        - 叹气 / sigh
+        - 笑声 / laughter
+    context: 该片段出现的主题与上下文 / topic and context of the fragment
     privacy:
       redactions:
-        - 已隐藏的敏感信息说明
+        - 已隐藏的敏感信息说明 / redacted-info notes
 quality_notes:
-  - 噪音、串音、转写不确定度说明
+  - 噪音、串音、转写不确定度说明 / noise, crosstalk, transcription uncertainty
 handoff:
   likely_dimensions:
     - expression

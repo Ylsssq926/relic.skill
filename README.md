@@ -194,12 +194,26 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 
 ## 安装
 
-### 方式一：安装到当前项目
+### 方式零：Agensi / 本地压缩包一键导入（推荐）
+
+如果你从 Agensi 或发布包下载了 `relic.zip`，直接解压并将解压出的 `relic` 目录放入目标路径即可：
+
+- **Claude Code**: 解压至当前项目 `.claude/skills/relic` 或用户主目录 `~/.claude/skills/relic`
+- **Cursor**: 解压至当前项目 `.cursor/skills/relic`
+- **Windsurf / Cline / Copilot**: 解压至项目对应的 `.windsurf/skills/relic`、`.cline/skills/relic` 或 `.github/skills/relic`
+- **通用方式**: 直接把 `relic/` 文件夹放到项目根目录下，AI 助手读取 `relic/SKILL.md` 即可立即可用。
+
+### 方式一：通过 Git 安装到当前项目
 
 ```bash
-mkdir -p .claude/skills
-git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
+git clone https://github.com/Ylsssq926/relic.skill relic
 ```
+
+解压或 clone 后，把 `relic` 目录放到你的 agent 能读到的位置：
+
+- **agents 标准宿主（OpenClaw / CodeBuddy / WorkBuddy 等读 AGENTS.md 的 agent）**：放到项目根目录，或 `~/.agents/skills/relic`、项目 `.agents/skills/relic`
+- **Claude Code（如使用）**：`.claude/skills/relic`（项目级）或 `~/.claude/skills/relic`（全局）
+- **Kiro**：`.kiro/skills/relic`
 
 ### 方式二：npx 一键安装
 
@@ -210,8 +224,8 @@ npx -y skills add Ylsssq926/relic.skill
 ### 方式三：全局安装（所有项目可用）
 
 ```bash
-mkdir -p ~/.claude/skills
-git clone https://github.com/Ylsssq926/relic.skill ~/.claude/skills/relic
+git clone https://github.com/Ylsssq926/relic.skill ~/.agents/skills/relic
+# Claude Code 用户：~/.claude/skills/relic
 ```
 
 ### 方式四：其他 IDE / Agent
@@ -220,6 +234,7 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 
 | IDE / Agent | 安装方式 |
 |-------------|---------|
+| **agents 标准宿主**（OpenClaw / CodeBuddy / WorkBuddy） | clone 到项目根目录或 `.agents/skills/relic` |
 | **Claude Code** | `git clone` 到 `.claude/skills/relic/` |
 | **Kiro** | `git clone` 到 `.kiro/skills/relic/` |
 | **Cursor** | `git clone` 到 `.cursor/skills/relic/` 或项目根目录 |
@@ -371,7 +386,9 @@ python scripts/tts_service.py --relic exes/grandma --text "过年了，吃饺子
 python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
 ```
 
-### 🐦 飞书 CLI 深度集成
+### 🐦 飞书 CLI 深度集成（区域增强 · 中国大陆）
+
+> 海外用户可跳过本节，直接看下面的 Telegram 机器人和通用数据平台。
 
 relic.skill 原生支持 [飞书 CLI](https://github.com/larksuite/cli) 作为数据采集和主动行为的通道。使用前请参考 [飞书 CLI 官方文档](https://github.com/larksuite/cli) 安装并配置 token。
 
@@ -502,7 +519,7 @@ relic.skill/
 - 🔒 **数据不外传** — 所有灵魂数据存储在你本地，不上传任何服务器
 - ✅ **授权先行** — 蒸馏他人前必须通过[六问授权协议](soul-shield/consent-protocol.md)
 - 🚫 **红线清晰** — 不得用于骚扰、跟踪、冒充他人。详见[伦理红线](soul-shield/ethics.md)
-- 💡 **标识明确** — Relic 在交互中会明确标识自己不是真人
+- 💡 **标识不缺席** — 身份由 `SKILL.md` / `manifest.json` / 产品 UI 元数据承载；对话正文不机械背诵免责声明，被问及身份时以角色口吻诚实回应（见[伦理红线](soul-shield/ethics.md)）
 - 🧠 **健康提醒** — 如果检测到过度依赖，会主动建议寻求真实社交
 
 > 蒸馏你奶奶之前，先确认她同意被蒸。

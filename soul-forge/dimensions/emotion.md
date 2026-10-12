@@ -1,122 +1,123 @@
-# 情感特征 (Emotion)
+# Emotion (情感特征)
 
 > “情绪不像天气预报，更像厨房的香气：看不见，但谁一进门都知道今天是什么味道。”
+> *Emotion isn't a weather forecast — it's more like the smell of a kitchen: invisible, but whoever walks in knows what today tastes like.*
 
-## 维度定义
+## Dimension Definition
 
-情感特征关注对象的情绪触发点、表达方式、修复方式，以及在关系中的依恋取向。这里的“依恋类型”用于描述关系中的靠近与安放方式，不替代医学或心理诊断。
+Emotion focuses on the subject's emotional triggers, expression styles, repair styles, and attachment orientation in relationships. "Attachment style" here describes ways of approaching and settling in relationships — it does not replace medical or psychological diagnosis.
 
-本维度重点提取三类信息：
+This dimension extracts three types of information:
 
-- **情绪触发点**：什么会让对象明显开心、担心、委屈、放松、愤怒或安心。
-- **表达方式**：对象如何展示情绪，是直接说、绕开说、用行动说，还是先藏起来。
-- **依恋类型**：对象在关系里如何靠近、确认安全感、面对分离与修复。
+- **Trigger points**: what visibly makes the subject happy, worried, wronged, relaxed, angry, or settled.
+- **Expression style**: how they show emotion — saying it directly, going around it, saying it through action, or hiding it first.
+- **Attachment style**: how they approach in relationships, confirm safety, and face separation and repair.
 
-## 提取方法
+## Extraction Methods
 
-1. **抓情绪波峰与波谷**
-   - 找明显有变化的时刻：声音变轻、字变短、回复变慢、突然密集确认、开始开玩笑或沉默。
-   - 情绪不是只看“我很难过”这类直说，也看表达外壳的变化。
+1. **Catch emotional peaks and troughs**
+   - Look for moments of clear change: voice softening, words shortening, replies slowing, sudden密集 confirmation, starting to joke, or going silent.
+   - Emotion isn't only in direct statements like "I'm sad" — it's in the changing shell of expression.
 
-2. **识别触发器**
-   - 观察哪些人、事、地点、时间最容易点亮或拉低对象的情绪。
-   - 把触发器写具体，例如“听见家人咳嗽”比“担心家人”更有用。
+2. **Identify triggers**
+   - Observe which people, events, places, and times most easily light up or drag down the subject's emotion.
+   - Write triggers concretely — "hearing a family member cough" is more useful than "worrying about family."
 
-3. **记录修复动作**
-   - 情绪起来以后，对象如何把自己和关系放回稳定状态。
-   - 修复动作能帮助判断依恋方式与安全感来源。
+3. **Record repair actions**
+   - After emotion rises, how the subject returns themselves and the relationship to stability.
+   - Repair actions help judge attachment style and sources of safety.
 
-4. **区分外显与内收**
-   - 有些人情绪大，但恢复快；有些人表面平静，实际通过失眠、反复确认、减少说话来表现。
-   - 不要只凭表面音量判断情绪浓度。
+4. **Distinguish outward vs. inward**
+   - Some people feel big and recover fast; some look calm but show it through insomnia, repeated confirmation, reduced speech.
+   - Don't judge emotional intensity by surface volume alone.
 
-5. **避免病理化描述**
-   - 使用关系性、观察性的语言，例如“更依赖日常确认”“习惯用照料来表达爱”，避免武断贴标签。
+5. **Avoid pathologizing descriptions**
+   - Use relational, observational language — "relies on daily confirmation," "habitually expresses love through caregiving" — avoid labeling.
 
-## 证据标注规则
+## Evidence Annotation Rules
 
-| 证据等级 | 在情感维度里的适用内容 | 标注方式 |
-| --- | --- | --- |
-| `verbatim` | 对象直接表达感受、担心、想念、失望、安慰 | 适合记录情绪原话与语气变化 |
-| `artifact` | 信件、语音、照片排列、礼物、长期保留物件 | 适合支撑情感投入与修复动作 |
-| `impression` | 长期相处者对情绪节奏和关系表现的观察 | 适合补充不易直说的情绪线索 |
+| Evidence Level | Applicable Content in Emotion | Annotation Style |
+|---|---|---|
+| `verbatim` | feelings, worries, longings, disappointments, comfort expressed directly | record emotional quotes and tone shifts |
+| `artifact` | letters, voice messages, photo arrangements, gifts, long-kept objects | supports emotional investment and repair actions |
+| `impression` | long-term companions' observations of emotional rhythm and relationship performance | supplements hard-to-say emotional clues |
 
-使用要求：
+Usage requirements:
 
-- “依恋类型”必须由多条关系证据支持，不能只凭一次争吵或一次告别推断。
-- 情绪触发点要尽量具体到情境、对象或动作。
-- 如果对象主要用行动表达情绪，就不要强求大量原话。
+- "Attachment style" must be supported by multiple relational evidence — never inferred from one fight or one farewell.
+- Emotional triggers should be as concrete as possible: situation, person, or action.
+- If the subject mainly expresses emotion through action, don't force a large volume of quotes.
 
-## 反例清单
+## Anti-Examples
 
-**过度心理学化:**
+**Over-psychologizing:**
 
-- ❌ "她有回避型依恋" → 病理化标签,不适合 Relic
-- ✅ "她难过的时候不会主动说,但会默默做一桌子菜" → 用行为描述情感
+- ❌ "She has avoidant attachment" → pathologizing label, unsuitable for a Relic
+- ✅ "她难过的时候不会主动说,但会默默做一桌子菜" / *"When she's sad she won't say so, but she'll quietly cook a table full of dishes"* → describe emotion through behavior
 
-**过度推断:**
+**Over-inference:**
 
-- ❌ "她内心深处很孤独" → 缺少证据
-- ✅ "她每次打电话都会问'你什么时候回来'(verbatim x5)" → 用原话支撑
+- ❌ "Deep down she's very lonely" → no evidence
+- ✅ "她每次打电话都会问'你什么时候回来'(verbatim x5)" / *"She asks 'when are you coming back' on every call (verbatim x5)"* → quote-supported
 
-## 引擎可消费字段
+## Engine-Consumable Fields
 
-在输出 personality.md 时,情感维度应额外包含:
+When outputting personality.md, the emotion dimension should additionally include:
 
-- **安抚有效方式**: 什么话/动作能让 ta 好受一点
-- **踩雷方式**: 什么话/动作会让 ta 不高兴
-- **冲突修复顺序**: ta 生气后通常怎么和好
-- **关心表达方式**: ta 表达关心的典型方式
+- **Effective soothing methods**: what words/actions make ta feel a bit better
+- **Landmine triggers**: what words/actions upset ta
+- **Conflict repair sequence**: how ta usually makes up after being angry
+- **Care expression style**: typical ways ta expresses care
 
-## 评分标准
+## Scoring
 
-| 等级 | 标准 |
-|------|------|
-| 优秀 | ≥3 个情感特征(如安抚方式、踩雷方式、修复顺序),每个有 ≥2 条证据,用行为描述而非标签 |
-| 合格 | ≥2 个情感特征,每个有 ≥1 条证据 |
-| 薄弱 | <2 个情感特征,或存在"ta 很孤独"这类过度推断(需追问) |
+| Level | Criteria |
+|---|---|
+| Excellent | ≥3 emotional traits (e.g. soothing style, landmines, repair sequence), each with ≥2 evidence items, described through behavior rather than labels |
+| Pass | ≥2 emotional traits, each with ≥1 evidence item |
+| Weak | <2 emotional traits, or over-inferences like "ta is very lonely" (probe the user) |
 
-## 输出格式模板
+## Output Template
 
 ```yaml
 dimension: emotion
-summary: 用 2-3 句概括对象容易被什么触动、如何表达情绪、如何在关系里寻找安全感
+summary: 用 2-3 句概括对象容易被什么触动、如何表达情绪、如何在关系里寻找安全感 / 2-3 sentences on what moves them, how they express emotion, how they seek safety in relationships
 facets:
   trigger_points:
-    pattern: 描述最常见的情绪触发器与触发后的变化
+    pattern: 描述最常见的情绪触发器与触发后的变化 / most common emotional triggers and post-trigger changes
     evidence:
       - level: verbatim
-        source: 原话或转写来源
-        excerpt: 能体现情绪触发的片段
+        source: 原话或转写来源 / quote or transcript source
+        excerpt: 能体现情绪触发的片段 / fragment showing emotional triggering
   expression_style:
-    pattern: 描述对象表达开心、担心、受伤与安慰的方式
+    pattern: 描述对象表达开心、担心、受伤与安慰的方式 / how they express happiness, worry, hurt, and comfort
     evidence:
       - level: artifact
-        source: 信件、礼物、长期保留物件或记录
-        excerpt: 能体现表达方式的证据
+        source: 信件、礼物、长期保留物件或记录 / letters, gifts, long-kept objects, records
+        excerpt: 能体现表达方式的证据 / evidence of expression style
   attachment_style:
-    pattern: 描述对象在亲密关系中的靠近、确认与修复方式
+    pattern: 描述对象在亲密关系中的靠近、确认与修复方式 / how they approach, confirm, and repair in intimate relationships
     evidence:
       - level: impression
-        source: 长期相处者观察
-        excerpt: 对关系节奏的归纳
+        source: 长期相处者观察 / long-term companion observation
+        excerpt: 对关系节奏的归纳 / synthesis of relational rhythm
   engine_hints:
     soothe_methods:
-      - "[有效的安抚方式1]"
-      - "[有效的安抚方式2]"
+      - "[有效的安抚方式1 / effective soothing method 1]"
+      - "[有效的安抚方式2 / effective soothing method 2]"
     trigger_avoid:
-      - "[会让 ta 不高兴的话/动作1]"
-      - "[会让 ta 不高兴的话/动作2]"
-    repair_sequence: "[冲突后的修复顺序：先冷静/先道歉/先转移话题]"
+      - "[会让 ta 不高兴的话/动作1 / upsetting word/action 1]"
+      - "[会让 ta 不高兴的话/动作2 / upsetting word/action 2]"
+    repair_sequence: "[冲突后的修复顺序：先冷静/先道歉/先转移话题 / post-conflict repair: cool down first/apologize first/change topic first]"
     care_signals:
-      - "[ta 表达关心的典型方式1]"
-      - "[ta 表达关心的典型方式2]"
+      - "[ta 表达关心的典型方式1 / typical care expression 1]"
+      - "[ta 表达关心的典型方式2 / typical care expression 2]"
 conflicts:
-  - 情绪表达与实际情感强度之间的反差说明
+  - 情绪表达与实际情感强度之间的反差说明 / gaps between emotional expression and actual intensity
 confidence: high | medium | low
 ```
 
-## 示例：奶奶
+## Example: Grandma
 
 ```yaml
 dimension: emotion
@@ -151,13 +152,13 @@ conflicts:
 confidence: high
 ```
 
-## 按模板类型调整
+## Adjustments by Template Type
 
-| 模板 | 情感维度重点 | 提问方向 |
-|------|------------|---------|
-| **人类** | 情绪触发点、表达方式、依恋类型、情感需求 | "什么事最容易让 ta 开心？""ta 难过的时候一般怎么表现？" |
-| **宠物** | 改为"情绪表达"：开心/害怕/生气/撒娇的具体表现 | "它高兴的时候什么样？害怕的时候呢？怎么撒娇？" |
-| **关系** | 提取情感互动：怎么表达在意、怎么处理冲突后的修复、什么话题是雷区 | "你们之间有什么不能碰的话题？吵完架怎么和好的？" |
-| **团队** | 提取集体情绪：什么时候士气最高、什么事最打击团队、怎么互相打气 | "团队最高光的时刻是什么？最低谷呢？" |
-| **地方** | 改为"情感联结"：那个地方让你想到什么感受、什么情绪、什么人 | "想到那个地方你第一个感受是什么？温暖？安全？自由？" |
-| **时刻** | 提取情感峰值：当时的情绪状态、事后的情感变化 | "那个瞬间你的感受是什么？事后回想起来感受变了吗？" |
+| Template | Emotion Focus | Probe Directions |
+|---|---|---|
+| **Human** | trigger points, expression style, attachment style, emotional needs | "What makes ta happiest?" "How does ta usually act when sad?" |
+| **Pet** | switch to "emotional expression": concrete signs of happy/afraid/angry/clingy | "What does it look like when happy? When afraid? How does it act cute?" |
+| **Relationship** | extract emotional interaction: how you show care, how you repair after conflict, what topics are landmines | "What topics can't you two touch? How do you make up after a fight?" |
+| **Team** | extract collective emotion: when morale peaks, what crushes the team, how you pump each other up | "The team's brightest moment? The lowest?" |
+| **Place** | switch to "emotional bond": what feeling that place evokes, what emotion, what people | "What's the first feeling when you think of that place? Warm? Safe? Free?" |
+| **Moment** | extract the emotional peak: the emotional state then, the emotional change after | "What did you feel in that instant? Did the feeling change looking back?" |

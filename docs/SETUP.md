@@ -1,60 +1,58 @@
-# 配置指南
+# Setup Guide
 
 > 从零开始,让 Relic 真的活起来。
+> *From zero to a Relic that's actually alive.*
 
-这不是技术文档。这是一份"怎么让奶奶住进飞书"的实操手册。
+这不是技术文档。这是一份"怎么让奶奶活过来"的实操手册。
+*This is not a technical doc — it's a hands-on manual for "how to bring grandma back to life."*
+
+**先选路径,再动手 / Pick your path first:**
+
+| 你的场景 / Your Scenario | 推荐路径 / Recommended Path | Jump To |
+|---|---|---|
+| 只想本地对话,不接任何 Bot / Local chat only, no bot | 纯 Claude Code / Cursor 内使用(零配置) / Use inside your agent (zero config) | Step 1 |
+| 家人在海外 / 国际网络环境 / Overseas or international network | Telegram 机器人 + ElevenLabs / OpenAI TTS | Step 3, Step 4 |
+| 国内网络环境 / 飞书重度用户 / CN network or Feishu-heavy | 飞书机器人 + MiniMax / 豆包 TTS(区域增强) / Feishu bot + MiniMax/Doubao TTS (regional enhancement) | Step 2, Step 4 |
+| 微信群聊记录导入 / WeChat log import | 微信解析(纯本地脚本,不依赖任何机器人) / WeChat parser (pure local script, no bot needed) | [PLATFORM-GUIDE](PLATFORM-GUIDE.md) |
 
 ---
 
-## 第一步:唤醒你的第一个 Relic
+## Step 1: Awaken Your First Relic
 
-在开始之前,你得先有个 Relic。就像盖房子得先有地基。
+Before anything, you need a Relic. Like building a house — foundation first.
 
-### 方式一:用脚本生成(推荐)
-
-如果你有聊天记录、照片、录音这些素材:
+### Option 1: Generate with the script (recommended)
 
 ```bash
-# 先解析数据(以微信为例)
+# First parse the data (WeChat example)
 python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
-# 然后唤醒 Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+# Then awaken the Relic
+python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
-这会在 `exes/grandma/` 下生成一个完整的 Relic 文件夹,包括:
+#### What the input JSON looks like
 
-- `SKILL.md` — 入口文件
-- `personality.md` — 四维人格画像
-- `interaction.md` — 对话示例
-- `memory.md` — 记忆片段
-- `manifest.json` — 配置文件
-- `proactive_config.json` — 主动行为配置
+This is the **easiest step to get stuck on** — what exactly goes into the JSON `--data` points at. Full explanation below.
 
-**为什么要这么做?** 因为手写这些文件太累了,而且容易漏东西。脚本会帮你把数据整理成 Relic 能理解的格式。
-
-#### 输入 JSON 长什么样
-
-这是整个流程里**最容易卡住的一步** —— `--data` 指向的那个 JSON 到底该写什么。下面是完整说明。
-
-**最小可用示例**(存成 `data.json`):
+**Minimal viable example** (save as `data.json`):
 
 ```json
 {
   "subject_name": "奶奶",
   "relationship": "奶奶",
-  "summary": "会提醒你吃饭的家人",
+  "summary": "会提醒你吃饭的家人 / the family member who reminds you to eat",
   "messages": [
     { "sender_name": "我",   "timestamp": 1700000000, "content": "奶奶,我今天加班到十一点" },
     { "sender_name": "奶奶", "timestamp": 1700000060, "content": "哎呀你这孩子,怎么又恁晚" },
     { "sender_name": "奶奶", "timestamp": 1700000120, "content": "吃饭了没有" }
   ],
-  "facts": ["爱发语音", "打字慢"],
+  "facts": ["爱发语音 / loves voice messages", "打字慢 / types slowly"],
   "memories": [
     {
-      "title": "包饺子",
-      "time": "每年春节",
-      "content": "她总会在厨房里一边包饺子一边念叨我别挑食。"
+      "title": "包饺子 / making dumplings",
+      "time": "每年春节 / every Spring Festival",
+      "content": "她总会在厨房里一边包饺子一边念叨我别挑食。 / She'd make dumplings in the kitchen while nagging me not to be picky."
     }
   ]
 }
@@ -64,295 +62,298 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma
 python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
-**顶层字段一览**(全部可选,除 `messages` 外都可以不给):
+**Top-level fields** (all optional except `messages`):
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `messages` | 数组 | **最有价值的输入**。聊天记录,决定了人格画像的质量 |
-| `memories` | 数组 | 手动整理的记忆片段 |
-| `facts` | 字符串数组 | 关于对象的事实,如 `["爱发语音", "打字慢"]` |
-| `photos` | 数组 | 照片元数据(拍摄时间、设备、GPS),用于推断生活轨迹 |
-| `interaction_modes` | 字符串数组 | 你希望它怎么跟你互动 |
-| `tags` | 字符串数组 | 标签 |
-| `dimensions` | 对象 | 手动指定四维内容,如 `{"cognition": ["..."]}` |
-| `events` / `timeline` / `notes` | 数组或字符串 | 会被并入 `memories` |
-| `source` | 字符串 | 数据来源说明,会记进 `manifest.json` |
+| Field | Type | Notes |
+|---|---|---|
+| `messages` | array | **The most valuable input.** Chat logs determine persona quality |
+| `memories` | array | Manually organized memory fragments |
+| `facts` | string array | Facts about the subject, e.g. `["loves voice messages", "types slowly"]` |
+| `photos` | array | Photo metadata (time, device, GPS) for inferring life轨迹 |
+| `interaction_modes` | string array | How you want it to interact with you |
+| `tags` | string array | Tags |
+| `dimensions` | object | Manually specify four-dimension content, e.g. `{"cognition": ["..."]}` |
+| `events` / `timeline` / `notes` | array or string | Merged into `memories` |
+| `source` | string | Data-source note, recorded in `manifest.json` |
 
-**`messages[]` 每个对象的字段**:
+**`messages[]` per-object fields**:
 
-| 字段 | 必填 | 别名 | 说明 |
-|------|------|------|------|
-| `content` | ✅ | `text` | 消息正文 |
-| `sender_name` | 建议填 | `sender_id` | 谁说的。**这一项决定成败,见下方说明** |
-| `timestamp` | 可选 | `datetime` / `date` | 时间。数字(Unix 秒)或日期字符串都行 |
-| `id` | 可选 | — | 消息 ID,缺省自动编号 |
-| `chat_name` | 可选 | `chat_id` | 会话名 |
-| `direction` | 可选 | — | 消息方向 |
-| `msg_type` | 可选 | — | 默认 `text` |
+| Field | Required | Alias | Notes |
+|---|---|---|---|
+| `content` | ✅ | `text` | Message body |
+| `sender_name` | recommended | `sender_id` | Who said it. **This one decides success — see below** |
+| `timestamp` | optional | `datetime` / `date` | Time. Unix seconds (number) or date string both work |
+| `id` | optional | — | Message ID; auto-numbered if absent |
+| `chat_name` | optional | `chat_id` | Conversation name |
+| `direction` | optional | — | Message direction |
+| `msg_type` | optional | — | Default `text` |
 
-**`memories[]` 每个对象的字段**:
+**`memories[]` per-object fields**:
 
-| 字段 | 必填 | 别名 | 说明 |
-|------|------|------|------|
-| `title` | 建议填 | `name` | 这条记忆叫什么 |
-| `content` | ✅ | `summary` / `description` | 记忆正文 |
-| `time` | 可选 | `date` / `datetime` | 什么时候的事,如 `"每年春节"` |
-| `source` | 可选 | — | 来源,如 `"家庭回忆"` |
+| Field | Required | Alias | Notes |
+|---|---|---|---|
+| `title` | recommended | `name` | What this memory is called |
+| `content` | ✅ | `summary` / `description` | Memory body |
+| `time` | optional | `date` / `datetime` | When, e.g. `"every Spring Festival"` |
+| `source` | optional | — | Source, e.g. `"family recollection"` |
 
-**`photos[]` 每个对象的字段**:
+**`photos[]` per-object fields**:
 
-| 字段 | 说明 |
-|------|------|
-| `path` | 照片路径 |
-| `filename` | 文件名(缺省从 `path` 取) |
-| `shot_timestamp` / `shot_time` / `datetime` | 拍摄时间 |
+| Field | Notes |
+|---|---|
+| `path` | Photo path |
+| `filename` | File name (defaults from `path`) |
+| `shot_timestamp` / `shot_time` / `datetime` | Capture time |
 | `device` | `{"make": "Apple", "model": "iPhone 13"}` |
 | `gps` | `{"lat": 39.9, "lng": 116.4}` |
 
-#### ⚠️ 一个必须理解的机制:谁是被蒸馏对象
+#### ⚠️ One mechanism you must understand: who is the subject
 
-脚本需要知道"这段聊天记录里,哪一方是要被做成 Relic 的人"。**判断错了,整理者自己的话就会被写进对方的人格画像** —— 这是最容易出的错。
+The script needs to know "which side of this chat log is the person being made into a Relic." **Get this wrong and the organizer's own words get written into the other person's persona** — the most common mistake.
 
-判定优先级:
+Resolution priority:
 
-1. `--name` 命令行参数(最高)
-2. JSON 里的 `subject_name` / `name` / `title` / `chat_name`
-3. 第一条消息的 `chat_name`
-4. 出现次数最多的**非整理者**发送者
+1. `--name` CLI argument (highest)
+2. `subject_name` / `name` / `title` / `chat_name` in the JSON
+3. `chat_name` of the first message
+4. The most frequent **non-organizer** sender
 
-整理者的自我标记会被自动排除:`我`、`me`、`self`、`本人`、`自己`、`user`、`用户`、`myself`、`owner`、`整理者`、`记录者`。
+Organizer self-markers are auto-excluded: `我`, `me`, `self`, `本人`, `自己`, `user`, `用户`, `myself`, `owner`, `整理者`, `记录者`.
 
-**所以:即使你说的话比奶奶多,脚本也不会把"我"当成奶奶。** 但为了万无一失,**强烈建议每次都显式传 `--name`**:
+**So: even if you said more than grandma, the script won't mistake "me" for grandma.** But to be safe, **always pass `--name` explicitly**:
 
 ```bash
 python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
-#### 一次给多个数据文件
+#### Multiple data files at once
 
-`--data` 支持多个文件,会自动合并(数组追加,`meta` 取第一个非空值):
+`--data` accepts multiple files; they merge automatically (arrays append, `meta` takes the first non-empty value):
 
 ```bash
 python scripts/relic_writer.py --data chat.json photos.json facts.json --template human --slug grandma
 ```
 
-#### 完整参数
+#### Full parameters
 
-| 参数 | 必填 | 说明 |
-|------|------|------|
-| `--data` | ✅ | 一个或多个输入 JSON 文件 |
-| `--template` | ✅ | 见下方可选值 |
-| `--slug` | ✅ | 输出目录名,如 `grandma` |
-| `--output-dir` | — | 输出根目录,默认 `exes` |
-| `--name` | — | 手动指定 Relic 名称(强烈建议) |
-| `--summary` | — | 手动指定一句话摘要 |
-| `--relationship` | — | 手动指定关系说明 |
-| `--force` | — | 允许覆盖已存在的非空目录 |
+| Parameter | Required | Notes |
+|---|---|---|
+| `--data` | ✅ | One or more input JSON files |
+| `--template` | ✅ | See values below |
+| `--slug` | ✅ | Output directory name, e.g. `grandma` |
+| `--output-dir` | — | Output root, defaults to `exes` |
+| `--name` | — | Manually specify the Relic name (strongly recommended) |
+| `--summary` | — | Manually specify a one-line summary |
+| `--relationship` | — | Manually specify the relationship note |
+| `--force` | — | Allow overwriting an existing non-empty directory |
 
-`--template` 可选值:`human`(人)、`pet`(宠物)、`relationship`(关系)、`team-culture`(团队文化)、`place`(地方)、`moment`(时刻)、`public-figure`(公众人物)、`expert`(业务专家)、`feishu-cli`(飞书协作记忆)。
+`--template` values: `human` (person), `pet`, `relationship`, `team-culture`, `place`, `moment`, `public-figure`, `expert`, `feishu-cli` (Feishu collaboration memory).
 
-### 方式二:手动创建
+### Option 2: Create manually
 
-如果你没有数据,或者想从零开始:
+If you have no data, or want to start from scratch:
 
 ```bash
 mkdir -p exes/grandma
 cd exes/grandma
 ```
 
-然后参考 `examples/grandma-demo/` 里的文件,手动创建上面列出的那些文件。
+Then reference the files in `examples/grandma-demo/` and hand-create the files listed above.
 
-**什么时候用这个?** 当你想蒸馏的对象没有数字痕迹(比如很久以前的人),或者你想完全自己控制每个细节。
+**When to use this?** When your subject left no digital traces (someone from long ago), or you want full control over every detail.
 
 ---
 
-## 第二步:让 Relic 住进飞书
+## Step 2: Move the Relic into Feishu (Regional Enhancement · Mainland China)
 
-奶奶不只在聊天记录里。现在让她住在飞书群里,@一下就来。
+> International users: skip to Step 3 (Telegram).
 
-### 2.1 在飞书开放平台创建应用
+Grandma doesn't just live in chat logs. Now she lives in your Feishu group — @ her and she's here.
 
-1. 打开 [飞书开放平台](https://open.feishu.cn/app)
-2. 点"创建企业自建应用"
-3. 填个名字,比如"奶奶·王秀兰"
-4. 创建完成后,记下这两个东西:
-   - **App ID** (长这样:`cli_a1b2c3d4e5f6g7h8`)
-   - **App Secret** (长这样:一串随机字符)
+### 2.1 Create an app on the Feishu Open Platform
 
-**为什么要创建应用?** 因为飞书机器人需要一个"身份证"才能发消息、接收消息。
+1. Open [Feishu Open Platform](https://open.feishu.cn/app)
+2. Click "Create Enterprise Custom App"
+3. Give it a name, e.g. "奶奶·王秀兰"
+4. After creation, note two things:
+   - **App ID** (looks like: `cli_a1b2c3d4e5f6g7h8`)
+   - **App Secret** (a random string)
 
-### 2.2 配置权限
+**Why create an app?** Because a Feishu bot needs an "ID card" to send and receive messages.
 
-在应用管理页面:
+### 2.2 Configure permissions
 
-1. 点"权限管理"
-2. 搜索并开通这些权限:
-   - `im:message` — 接收消息
-   - `im:message:send_as_bot` — 发送消息
-   - `im:chat` — 获取群信息
+In the app management page:
 
-3. 点"版本管理与发布" → "创建版本" → "申请发布"
+1. Click "Permission Management"
+2. Search and enable:
+   - `im:message` — receive messages
+   - `im:message:send_as_bot` — send messages
+   - `im:chat` — get group info
 
-**为什么要这些权限?** 因为机器人需要能看到你发的消息,也需要能回复你。
+3. Click "Version Management & Release" → "Create Version" → "Request Release"
 
-### 2.3 配置事件订阅
+**Why these permissions?** The bot needs to see your messages and reply to you.
 
-1. 在应用管理页面,点"事件订阅"
-2. 点"添加事件" → 搜索"接收消息" → 选择 `im.message.receive_v1`
-3. 配置请求地址:
-   - 如果你有公网服务器:`https://你的域名/webhook`
-   - 如果在本地开发:先用 [ngrok](https://ngrok.com/) 或 [localtunnel](https://localtunnel.github.io/www/) 暴露本地端口
+### 2.3 Configure event subscription
 
-**为什么要配置这个?** 因为飞书需要知道"用户发消息时,应该通知谁"。
+1. In app management, click "Event Subscription"
+2. Click "Add Event" → search "Receive Message" → select `im.message.receive_v1`
+3. Configure the request URL:
+   - If you have a public server: `https://your-domain/webhook`
+   - If developing locally: expose the local port first with [ngrok](https://ngrok.com/) or [localtunnel](https://localtunnel.github.io/www/)
 
-### 2.4 设置环境变量
+**Why configure this?** Feishu needs to know "when the user sends a message, who to notify."
 
-在项目根目录创建 `.env` 文件:
+### 2.4 Set environment variables
+
+Create a `.env` file in the project root:
 
 ```bash
-# 飞书应用凭证
+# Feishu app credentials
 FEISHU_APP_ID=cli_a1b2c3d4e5f6g7h8
-FEISHU_APP_SECRET=你的App Secret
-FEISHU_VERIFICATION_TOKEN=在"事件订阅"页面能看到
+FEISHU_APP_SECRET=your-app-secret
+FEISHU_VERIFICATION_TOKEN=visible on the "Event Subscription" page
 
-# AI 服务(用于驱动对话)
-AI_PROVIDER=claude  # 或 openai
-AI_API_KEY=sk-ant-xxx  # 你的 Claude 或 OpenAI API Key
+# AI service (drives conversation)
+AI_PROVIDER=claude  # or openai
+AI_API_KEY=sk-ant-xxx  # your Claude or OpenAI API key
 ```
 
-**为什么要用 .env?** 因为这些密钥不能提交到 Git,用 .env 文件可以让它们只存在你本地。
+**Why use .env?** Because these keys must not be committed to Git; a `.env` file keeps them local only.
 
-### 2.5 启动机器人
+### 2.5 Start the bot
 
 ```bash
 python scripts/feishu_bot.py --relic exes/grandma
 ```
 
-如果一切正常,你会看到:
+If all goes well, you'll see:
 
 ```text
 [INFO] Feishu bot started for Relic: grandma
 [INFO] Listening on http://0.0.0.0:8080/webhook
 ```
 
-### 2.6 测试
+### 2.6 Test
 
-1. 在飞书里找到你的机器人(在"工作台"里搜索应用名)
-2. 发条消息:`奶奶,我今天加班到十一点`
-3. 如果奶奶回复了,说明成功了
+1. Find your bot in Feishu (search the app name in "Workplace")
+2. Send a message: `奶奶,我今天加班到十一点`
+3. If grandma replies, it works
 
-**如果没反应怎么办?**
+**No response?**
 
-- 检查 `.env` 里的凭证是否正确
-- 检查飞书开放平台的"事件订阅"是否配置成功
-- 看看终端有没有报错
+- Check the credentials in `.env`
+- Check that "Event Subscription" is configured on the Feishu Open Platform
+- Look for errors in the terminal
 
 ---
 
-## 第三步:让 Relic 住进 Telegram
+## Step 3: Move the Relic into Telegram
 
-如果你的家人朋友在海外,Telegram 可能是更好的选择。
+If your family or friends are overseas, Telegram may be the better choice.
 
-### 3.1 用 @BotFather 创建机器人
+### 3.1 Create a bot with @BotFather
 
-1. 在 Telegram 里搜索 `@BotFather`
-2. 发送 `/newbot`
-3. 按提示输入机器人名字(比如"奶奶·王秀兰")
-4. 输入用户名(必须以 `bot` 结尾,比如 `grandma_wang_bot`)
-5. 创建成功后,BotFather 会给你一个 **Bot Token**(长这样:`123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
+1. Search `@BotFather` in Telegram
+2. Send `/newbot`
+3. Follow the prompts to name the bot (e.g. "奶奶·王秀兰")
+4. Enter a username (must end with `bot`, e.g. `grandma_wang_bot`)
+5. On success, BotFather gives you a **Bot Token** (looks like: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`)
 
-**为什么要用 BotFather?** 因为所有 Telegram 机器人都必须通过它创建,这是 Telegram 的规定。
+**Why BotFather?** All Telegram bots must be created through it — that's Telegram's rule.
 
-### 3.2 配置 Bot Token
+### 3.2 Configure the Bot Token
 
-在 `.env` 文件里加上:
+Add to the `.env` file:
 
 ```bash
 TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
 ```
 
-### 3.3 选择运行模式
+### 3.3 Choose a run mode
 
-Telegram 机器人有两种运行模式:
+The Telegram bot has two run modes:
 
-#### Webhook 模式(推荐,适合生产环境)
+#### Webhook mode (recommended, production)
 
-需要一个公网 HTTPS 地址。Telegram 会主动把消息推送给你。
+Requires a public HTTPS address. Telegram pushes messages to you.
 
 ```bash
 python scripts/telegram_bot.py --relic exes/grandma
 ```
 
-**什么时候用?** 当你有服务器,想让机器人 7×24 小时在线。
+**When to use?** When you have a server and want the bot online 7×24.
 
-#### Long Polling 模式(适合本地开发)
+#### Long Polling mode (local development)
 
-不需要公网地址。机器人会主动去 Telegram 拉取消息。
+No public address needed. The bot pulls messages from Telegram.
 
 ```bash
 python scripts/telegram_bot.py --relic exes/grandma --polling
 ```
 
-**什么时候用?** 当你在本地测试,或者没有公网服务器。
+**When to use?** When testing locally, or you have no public server.
 
-### 3.4 测试
+### 3.4 Test
 
-1. 在 Telegram 里搜索你的机器人用户名(比如 `@grandma_wang_bot`)
-2. 点"Start"
-3. 发条消息:`奶奶,我今天加班到十一点`
-4. 如果奶奶回复了,说明成功了
+1. Search your bot's username in Telegram (e.g. `@grandma_wang_bot`)
+2. Click "Start"
+3. Send a message: `奶奶,我今天加班到十一点`
+4. If grandma replies, it works
 
-**如果没反应怎么办?**
+**No response?**
 
-- 检查 Bot Token 是否正确
-- 如果用 Webhook 模式,检查公网地址是否能访问
-- 看看终端有没有报错
+- Check the Bot Token
+- In Webhook mode, check the public address is reachable
+- Look for errors in the terminal
 
 ---
 
-## 第四步:让 Relic 开口说话(TTS)
+## Step 4: Give the Relic a Voice (TTS)
 
 过年的时候,不只是文字消息。是奶奶真的声音,说"吃饺子了没"。
+*At New Year, it's not just text messages — it's grandma's real voice saying "have you eaten dumplings yet?"*
 
-### 4.1 选择 TTS 服务
+### 4.1 Choose a TTS service
 
-| 服务 | 优势 | 适合场景 |
-|------|------|---------|
-| **MiniMax** | 中文最自然,支持声音克隆,10 秒样本就能开始 | 中文 Relic(推荐) |
-| **ElevenLabs** | 英文最好,情绪表达细腻 | 英文 Relic |
-| **OpenAI TTS** | 便宜,质量还行 | 预算有限 |
+| Service | Strengths | Best For |
+|---|---|---|
+| **ElevenLabs** | Best English, nuanced emotion, direct international access | English Relics (recommended for international users) |
+| **MiniMax** | Most natural Chinese, voice cloning, 10-second samples | Chinese Relics (requires a CN-region account) |
+| **OpenAI TTS** | Cheap, decent quality | Budget-constrained |
 
-**为什么推荐 MiniMax?** 因为它对中文的情绪把握最好。奶奶说"哎呀你这孩子"的时候,真的能听出心疼。
+**Why MiniMax for Chinese Relics?** Its grasp of Chinese emotion is the best — when grandma says "哎呀你这孩子", you can really hear the heartache. For English Relics or international networks, prefer ElevenLabs.
 
-### 4.2 获取 API Key
-
-#### MiniMax
-
-1. 打开 [MiniMax 开放平台](https://www.minimaxi.com/)
-2. 注册并创建应用
-3. 在"API 密钥"页面复制 API Key
+### 4.2 Get an API key
 
 #### ElevenLabs
 
-1. 打开 [ElevenLabs](https://elevenlabs.io/)
-2. 注册并进入 Dashboard
-3. 点右上角头像 → "Profile" → 复制 API Key
+1. Open [ElevenLabs](https://elevenlabs.io/)
+2. Sign up and enter the Dashboard
+3. Click the avatar top-right → "Profile" → copy the API key
+
+#### MiniMax
+
+1. Open the [MiniMax open platform](https://www.minimaxi.com/)
+2. Sign up and create an app
+3. Copy the API key from the "API Keys" page
 
 #### OpenAI
 
-1. 打开 [OpenAI Platform](https://platform.openai.com/)
-2. 点"API keys" → "Create new secret key"
+1. Open [OpenAI Platform](https://platform.openai.com/)
+2. Click "API keys" → "Create new secret key"
 
-### 4.3 在 manifest.json 里配置
+### 4.3 Configure in manifest.json
 
-打开 `exes/grandma/manifest.json`,找到 `media.tts` 部分:
+Open `exes/grandma/manifest.json`, find the `media.tts` section:
 
 ```json
 "media": {
   "tts": {
     "enabled": true,
-    "provider": "minimax",
-    "voice_id": "female-tianmei",
+    "provider": "elevenlabs",
+    "voice_id": "your-voice-id",
     "emotion_mapping": {
       "care": "gentle",
       "worry": "concerned",
@@ -362,75 +363,76 @@ python scripts/telegram_bot.py --relic exes/grandma --polling
 }
 ```
 
-**参数说明:**
+**Parameters:**
 
-- `enabled`: 是否启用 TTS
-- `provider`: 服务商(`minimax` / `elevenlabs` / `openai`)
-- `voice_id`: 声音 ID(每个服务商的 ID 不一样)
-- `emotion_mapping`: 情绪到声音风格的映射
+- `enabled`: whether TTS is on
+- `provider`: service (`elevenlabs` / `minimax` / `openai`)
+- `voice_id`: voice ID (different per service)
+- `emotion_mapping`: emotion → voice-style mapping
 
-### 4.4 设置环境变量
+### 4.4 Set environment variables
 
-在 `.env` 文件里加上:
+Add to the `.env` file:
 
 ```bash
-# 根据你选的服务,加上对应的 API Key
-MINIMAX_API_KEY=你的API密钥
-# 或
-ELEVENLABS_API_KEY=你的API密钥
-# 或
-OPENAI_API_KEY=你的API密钥
+# Add the API key for the service you chose
+ELEVENLABS_API_KEY=your-api-key
+# or
+MINIMAX_API_KEY=your-api-key
+# or
+OPENAI_API_KEY=your-api-key
 ```
 
-### 4.5 测试声音效果
+### 4.5 Test the voice
 
 ```bash
 python scripts/tts_service.py --relic exes/grandma --text "哎呀你这孩子,怎么又恁晚" --mode care
 ```
 
-这会生成一个音频文件,听听效果如何。
+This generates an audio file — listen and judge.
 
-**如果声音不对劲怎么办?**
+**Voice not right?**
 
-- 试试换个 `voice_id`(每个服务商都有多个声音可选)
-- 调整 `emotion_mapping`
-- 如果是中文,确保用的是 MiniMax
+- Try a different `voice_id` (each service has several voices)
+- Adjust `emotion_mapping`
+- For Chinese, make sure you're using MiniMax
 
-### 4.6 声音克隆(可选)
+### 4.6 Voice cloning (optional)
 
-如果你有奶奶的录音,可以克隆她的声音。
+If you have grandma's recordings, you can clone her voice.
 
-#### 准备声音样本
+#### Prepare voice samples
 
-需要:
+Needed:
 
-- 10-30 秒的清晰录音
-- 没有背景噪音
-- 最好是说话的录音,不是唱歌
+- 10–30 seconds of clear recording
+- No background noise
+- Speech, not singing
 
-#### 克隆声音
+#### Clone the voice
 
 ```bash
 python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
 ```
 
-脚本会:
+The script will:
 
-1. 上传声音样本到 MiniMax
-2. 等待克隆完成(通常 1-2 分钟)
-3. 把新的 `voice_id` 写入 `manifest.json`
+1. Upload the samples to the provider
+2. Wait for cloning to finish (usually 1–2 minutes)
+3. Write the new `voice_id` into `manifest.json`
 
-**为什么要克隆声音?** 因为预设的声音再好,也不是奶奶的声音。克隆之后,真的能听出是她。
+**Why clone?** Preset voices are good, but they're not grandma's. After cloning, you can really hear it's her.
 
 ---
 
-## 第五步:让 Relic 主动找你说话
+## Step 5: Let the Relic Reach Out First
 
 奶奶不会只等你来找她。过年的时候,她会主动问"吃饺子了没"。
+*Grandma doesn't just wait for you. At New Year, she asks "have you eaten dumplings yet?" first.*
 
-### 5.1 配置 proactive_config.json
+### 5.1 Configure proactive_config.json
 
-打开 `exes/grandma/proactive_config.json`:
+Open `exes/grandma/proactive_config.json`:
 
 ```json
 {
@@ -459,172 +461,172 @@ python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir vo
 }
 ```
 
-**参数说明:**
+**Parameters:**
 
-- `holidays.list`: 哪些节日会触发主动消息
-  - 内置节日:`spring_festival`(春节)、`mid_autumn`(中秋)、`new_year`(元旦)
-  - 自定义生日:`birthday:1998-05-20`
+- `holidays.list`: which festivals trigger proactive messages
+  - Built-in: `spring_festival` (春节), `mid_autumn` (中秋), `new_year` (元旦)
+  - Custom birthday: `birthday:1998-05-20`
 
-- `anniversaries.dates`: 纪念日
-  - `date`: 日期(格式:`YYYY-MM-DD`)
-  - `label`: 这天是什么
-  - `type`: 情绪类型(`happy` / `bittersweet` / `sad`)
+- `anniversaries.dates`: anniversaries
+  - `date`: date (format: `YYYY-MM-DD`)
+  - `label`: what this day is
+  - `type`: emotion type (`happy` / `bittersweet` / `sad`)
 
-- `random_miss`: 随机想念
-  - `enabled`: 是否启用
-  - `min_interval_days`: 最少间隔多少天
+- `random_miss`: random missing-you
+  - `enabled`: on/off
+  - `min_interval_days`: minimum interval in days
 
-- `quiet_hours`: 免打扰时段
-  - 在这个时间段内,Relic 不会主动发消息
+- `quiet_hours`: do-not-disturb window
+  - The Relic sends no proactive messages during this window
 
-- `global_max_per_week`: 每周最多主动几次
-  - 防止 Relic 太烦人
+- `global_max_per_week`: max proactive sends per week
+  - Keeps the Relic from becoming annoying
 
-### 5.2 预览"它会不会主动来找你"
+### 5.2 Preview "will it reach out today?"
 
 ```bash
 python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 ```
 
-这会告诉你:
+This tells you:
 
-- 今天会不会触发主动消息
-- 如果会,是因为什么(节日?纪念日?随机想念?)
-- 会说什么
+- Whether today triggers a proactive message
+- If so, why (festival? anniversary? random miss?)
+- What it will say
 
-**为什么要 dry-run?** 因为你可能不想让奶奶真的在凌晨三点给你发消息。先预览一下,确认配置没问题。
+**Why dry-run?** Because you may not want grandma really messaging you at 3 a.m. Preview first, confirm the config.
 
-### 5.3 用 cron 定时运行
+### 5.3 Run on a schedule
 
-如果你想让 Relic 真的主动找你,需要定时运行这个脚本。
+If you want the Relic to actually reach out, run the script on a timer.
 
 #### Linux / macOS
 
 ```bash
-# 编辑 crontab
+# Edit crontab
 crontab -e
 
-# 加上这一行(每天早上 9 点检查一次)
+# Add this line (check once every day at 9 a.m.)
 0 9 * * * cd /path/to/relic.skill && python scripts/proactive_scheduler.py --relic exes/grandma
 ```
 
 #### Windows
 
-用"任务计划程序":
+Use Task Scheduler:
 
-1. 打开"任务计划程序"
-2. 点"创建基本任务"
-3. 触发器选"每天"
-4. 操作选"启动程序",填上:
-   - 程序:`python`
-   - 参数:`scripts/proactive_scheduler.py --relic exes/grandma`
-   - 起始于:`C:\path\to\relic.skill`
+1. Open "Task Scheduler"
+2. Click "Create Basic Task"
+3. Trigger: "Daily"
+4. Action: "Start a program", fill in:
+   - Program: `python`
+   - Arguments: `scripts/proactive_scheduler.py --relic exes/grandma`
+   - Start in: `C:\path\to\relic.skill`
 
-### 5.4 测试
+### 5.4 Test
 
 ```bash
-# 不加 --dry-run,真的发送
+# Without --dry-run: really sends
 python scripts/proactive_scheduler.py --relic exes/grandma
 ```
 
-如果今天有触发条件,Relic 会通过飞书或 Telegram 给你发消息。
+If today has trigger conditions, the Relic messages you via the configured channel.
 
 ---
 
-## 常见问题
+## FAQ
 
-### Q: 飞书机器人收不到消息怎么办?
+### Q: The Feishu bot isn't receiving messages. What do I do?
 
-**A:** 按顺序检查:
+**A:** Check in order:
 
-1. 飞书开放平台的"事件订阅"是否配置成功
-2. `.env` 里的 `FEISHU_APP_ID` 和 `FEISHU_APP_SECRET` 是否正确
-3. 机器人是否有 `im:message` 和 `im:message:send_as_bot` 权限
-4. 终端有没有报错
+1. Is "Event Subscription" configured on the Feishu Open Platform
+2. Are `FEISHU_APP_ID` and `FEISHU_APP_SECRET` in `.env` correct
+3. Does the bot have `im:message` and `im:message:send_as_bot` permissions
+4. Any errors in the terminal
 
-### Q: Telegram 机器人一直显示"typing"但不回复?
+### Q: The Telegram bot shows "typing" but never replies?
 
-**A:** 可能是 AI API 调用失败。检查:
+**A:** Probably an AI API call failure. Check:
 
-1. `.env` 里的 `AI_API_KEY` 是否正确
-2. 网络是否能访问 Claude / OpenAI API
-3. 终端有没有报错
+1. Is `AI_API_KEY` in `.env` correct
+2. Can the network reach the Claude / OpenAI API
+3. Any errors in the terminal
 
-### Q: TTS 生成的声音不像怎么办?
+### Q: The TTS voice doesn't sound right?
 
-**A:** 试试这些:
+**A:** Try:
 
-1. 换个 `voice_id`(每个服务商都有多个声音)
-2. 如果是中文,确保用的是 MiniMax
-3. 如果有录音,试试声音克隆
-4. 调整 `emotion_mapping`,让情绪表达更准确
+1. A different `voice_id` (each service has several voices)
+2. For Chinese, make sure you're using MiniMax
+3. If you have recordings, try voice cloning
+4. Adjust `emotion_mapping` for more accurate emotion
 
-### Q: Relic 主动消息太频繁怎么办?
+### Q: The Relic's proactive messages are too frequent?
 
-**A:** 调整 `proactive_config.json`:
+**A:** Adjust `proactive_config.json`:
 
-1. 把 `global_max_per_week` 改小(比如改成 1)
-2. 把 `random_miss.min_interval_days` 改大(比如改成 30)
-3. 关掉一些不需要的节日
+1. Lower `global_max_per_week` (e.g. to 1)
+2. Raise `random_miss.min_interval_days` (e.g. to 30)
+3. Turn off festivals you don't need
 
-### Q: 我没有聊天记录,能不能直接手写 Relic?
+### Q: I have no chat logs — can I hand-write a Relic?
 
-**A:** 可以。参考 `examples/grandma-demo/` 里的文件,手动创建:
+**A:** Yes. Reference the files in `examples/grandma-demo/` and hand-create:
 
-- `SKILL.md` — 写清楚"你是谁""怎么说话"
-- `personality.md` — 写四维人格(认知/表达/行为/情感)
-- `interaction.md` — 写几段示例对话
-- `memory.md` — 写一些记忆片段
-- `manifest.json` — 配置文件
+- `SKILL.md` — clearly write "who you are" and "how you talk"
+- `personality.md` — write the four dimensions (cognition / expression / behavior / emotion)
+- `interaction.md` — write a few example dialogues
+- `memory.md` — write some memory fragments
+- `manifest.json` — the config file
 
-### Q: 能不能让多个 Relic 住在同一个飞书群?
+### Q: Can multiple Relics live in one Feishu group?
 
-**A:** 可以。用多 Relic 模式:
+**A:** Yes. Use multi-Relic mode:
 
 ```bash
 python scripts/feishu_bot.py --relic-dir exes/ --multi-relic
 ```
 
-然后在群里 @机器人 时,加上 Relic 名字:
+Then when you @ the bot in the group, add the Relic name:
 
 ```text
-@机器人 奶奶,我今天加班到十一点
-@机器人 咪咪,我回来了
+@bot 奶奶,我今天加班到十一点
+@bot 咪咪,我回来了
 ```
 
-### Q: 我的 Relic 说话太正式,不像真人怎么办?
+### Q: My Relic talks too formally, not like a real person?
 
-**A:** 检查这些:
+**A:** Check:
 
-1. `SKILL.md` 里的"对话原则"是否写清楚了说话风格
-2. `interaction.md` 里的示例对话是否够生动
-3. `manifest.json` 里的 `speech_style.message_shape` 是否设置成 `split_short_messages`(拆成短消息)
+1. Are the "dialogue principles" in `SKILL.md` clear about speech style
+2. Are the example dialogues in `interaction.md` vivid enough
+3. Is `speech_style.message_shape` in `manifest.json` set to `split_short_messages`
 
-### Q: 能不能让 Relic 发图片?
+### Q: Can the Relic send images?
 
-**A:** 可以。在 `manifest.json` 里配置 `media.image`:
+**A:** Yes. Configure `media.image` in `manifest.json`:
 
 ```json
 "media": {
   "image": {
     "enabled": true,
-    "provider": "seedream",  // 或 openai / google
+    "provider": "openai",  // or google / seedream
     "style": "soft_illustration"
   }
 }
 ```
 
-然后在 `.env` 里加上对应的 API Key。
+Then add the corresponding API key to `.env`.
 
 ---
 
-## 下一步
+## Next Steps
 
-配置完成后,你可以:
+Once configured, you can:
 
-- 读读 [FAQ](FAQ.md),了解更多使用技巧
-- 看看 [PHILOSOPHY.md](PHILOSOPHY.md),理解 Relic 的设计理念
-- 加入 QQ 群(1098169092),和其他人聊聊你的 Relic
+- Read the [FAQ](FAQ.md) for more usage tips
+- Read [PHILOSOPHY.md](PHILOSOPHY.md) to understand Relic's design philosophy
+- Ask questions in [GitHub Issues](https://github.com/Ylsssq926/relic.skill/issues) — we'll help
 
 ---
 

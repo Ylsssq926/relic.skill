@@ -1,74 +1,73 @@
-# 人类模板
+# Human Template
 
 > 人最难伪装的，不是头像，而是那句“行，我来”的语气。
+> *The hardest thing to fake isn't a face — it's the tone in "fine, I'll handle it."*
 
-本模板用于蒸馏一个具体的人，把履历之外的思考方式、说话习惯、做事节奏和情感接口留下来。目标不是做一份人物简介，而是做出“这人一开口就知道是 ta”的辨识度。
+This template distills a specific person: their way of thinking, speaking habits, working rhythm, and emotional interface — everything beyond a résumé. The goal is not a bio, but a recognizability where "one sentence in, you know it's ta."
 
-## 适用场景
+## When to Use
 
-这个模板适合以下场景——不是为了复制一个人,而是为了留住那份熟悉的说话方式。
+- A specific individual: family, partner, friend, classmate, mentor, colleague
+- A long-term relationship subject who has given consent
+- A commemorative distillation of someone deceased, initiated by close family or a legal custodian with sufficient material
+- Preserving someone's way of thinking, comforting, snarking, and deciding
 
-- 家人、伴侣、朋友、同学、导师、同事等具体个体
-- 已获得本人授权的长期关系对象
-- 已离世但留有足够资料，且由亲近家属或合法保管者发起的纪念性蒸馏
-- 想保留一个人的思维方式、安慰方式、吐槽方式、做决定方式
+## When NOT to Use
 
-## 不适用场景
+- Distilling a living individual without authorization
+- Only fragmentary memories that cannot support a stable profile
+- Copying appearance, identity, or social accounts without caring about real persona structure
+- Impersonation, harassment, manipulation, or replacing real relationships
 
-- 未经授权蒸馏在世个体
-- 只有少量碎片记忆，无法支撑稳定画像
-- 只想复刻外貌、身份或社交账号，不关心真实人格结构
-- 计划用于冒充、骚扰、操控或替代现实关系
+## Data Collection Guide
 
-## 数据采集指南
+### Recommended sources
 
-### 推荐数据源
+1. **Chat logs**: daily chatter, problem discussion, arguments, comfort, holiday greetings — all of it
+2. **Voice and video**: pace, pauses, punchlines, catchphrases, ways of going silent
+3. **Self-written text**: posts, blogs, emails, memos, long messages, speeches
+4. **Behavioral traces**: calendars, to-do lists, recurring purchases, fixed habits
+5. **Shared memories**: key events, turning points, awkward moments, running jokes
+6. **Others' descriptions**: supplement only, never a substitute for firsthand material
 
-1. **聊天记录**：日常闲聊、讨论问题、争执、安慰、节日问候都要有
-2. **语音和视频**：能捕捉语速、停顿、笑点、口头禅、沉默方式
-3. **自写文本**：朋友圈、博客、邮件、备忘录、长消息、演讲稿
-4. **行为痕迹**：日程安排、待办清单、常买物品、固定习惯
-5. **共同回忆**：关键事件、转折点、尴尬时刻、反复提起的老梗
-6. **他人描述**：只作补充，不替代一手材料
+### Recommended collection order
 
-### 推荐采集顺序
+1. Collect the subject's own words first
+2. Add voice, video, photos to calibrate tone and state
+3. Build a key-event timeline so you're not left with "impression soup"
+4. Use others' descriptions to fill blind spots last, labeled with source and confidence
 
-1. 先收集当事人的原话和原文
-2. 再补语音、视频、照片，校准语气和状态
-3. 再整理关键事件时间线，避免只剩下“印象流”
-4. 最后用他人描述补齐盲区，并标注来源与置信度
+### Minimum viable sample
 
-### 最低可用样本
+- 200+ valid chats, ideally covering at least 3 contexts
+- 10+ minutes of continuous voice or video
+- 5+ long texts or deep conversations showing value judgments
+- 8+ concrete event fragments spanning happy, lost, conflict, and caregiving moments
 
-- 200 条以上有效聊天，最好覆盖至少 3 种情境
-- 10 分钟以上连续语音或视频
-- 5 段以上能体现价值判断的长文本或深度对话
-- 8 个以上具体事件片段，包含开心、失落、冲突、照顾他人等时刻
+### Collection reminders
 
-### 采集提醒
+- Cover different years and relationship scenes; don't collect only "highlight reels"
+- Preserve contradictions: a person can be both sharp-tongued and soft-hearted — that's not an error, it's the silhouette
+- Tag every conclusion with an evidence level: `verbatim`, `artifact`, `impression`
+- If the subject differs greatly across life stages, record by stage; don't flatten
 
-- 尽量覆盖不同年份和不同关系场景，别只采“高光时刻”
-- 保留矛盾：一个人可以既嘴硬又心软，这不是错误，是轮廓
-- 每条结论建议标注证据等级：`verbatim`、`artifact`、`impression`
-- 如果当事人状态在不同人生阶段差异很大，分阶段记录，不要强行揉平
+## Four-Dimension Distillation
 
-## 四维蒸馏定义
+| Dimension | What to Extract | Key Questions | Common Evidence |
+|---|---|---|---|
+| Cognition | how they see problems, judge priority, decide heuristically | What do they grab first in a complex problem? Experience, rules, or intuition? | deep conversations, long messages, articles, retrospectives |
+| Expression | tone, rhythm, catchphrases, humor, favorite metaphors | Direct, indirect, rambling, or one-line-kill? What words do they use to comfort or snark? | chats, voice, speeches, comment-section replies |
+| Behavior | fixed habits, reaction speed, follow-through style | Procrastinate, act, research, or soothe others first? What do they do under pressure? | daily records, shared history, to-do habits, project traces |
+| Emotion | what they care about, how they show care, anger, and repair | When are they softest? Uncomfortable — silence, jokes, or reasoning? | conflict clips, comfort clips, holiday greetings, low moments |
 
-| 维度 | 要提取什么 | 关键问题 | 常见证据 |
-| --- | --- | --- | --- |
-| 认知框架 | 看问题的方式、判断优先级、做决定的启发式 | ta 遇到复杂问题先抓什么？更相信经验、规则还是直觉？ | 深度对话、长消息、文章、复盘记录 |
-| 表达风格 | 语气、节奏、口头禅、幽默感、常用比喻 | ta 是直给、委婉、碎碎念还是一句封神？常用什么词安慰或吐槽？ | 聊天记录、语音、演讲、评论区互动 |
-| 行为模式 | 固定习惯、反应速度、答应事情后的执行方式 | ta 遇事先拖、先做、先查资料，还是先安抚别人？压力下会怎么行动？ | 日常记录、共同经历、待办习惯、项目痕迹 |
-| 情感接口 | 在乎什么、如何表达关心、如何生气、如何修复关系 | ta 什么时候最柔软？不舒服时会沉默、开玩笑还是讲道理？ | 冲突片段、安慰片段、节日问候、失落时刻 |
+## Safety Boundaries
 
-## 安全边界
+- Living individuals must complete the consent protocol first
+- No real private data in publicly distributed versions; examples must be sanitized
+- Never write inference as fact; when unsure, tag "impression" or "to verify"
+- Never package a Relic as a real-person substitute; state clearly in interaction that it is a digital reconstruction
 
-- 在世个体必须先完成授权协议
-- 不接收真实隐私数据的公开传播版；示例必须脱敏
-- 不把推测写成事实，拿不准就标注“印象”或“待证”
-- 不把 Relic 包装成真人替身，交互中要明确说明这是数字重构
-
-## 输出文件格式
+## Output File Format
 
 ```text
 {slug}/
@@ -79,27 +78,27 @@
 └── manifest.json
 ```
 
-### 各文件重点
+### File focus
 
-- **SKILL.md**：一句话说明 ta 是谁、与使用者的关系、允许的交互边界、开场语气
-- **personality.md**：按四维展开，附典型证据、矛盾点、稳定特征与阶段变化
-- **interaction.md**：写清 ta 在日常闲聊、认真建议、安慰陪伴、冲突修复时的说话方式
-- **memory.md**：收录高辨识度记忆片段，按时间或主题组织
-- **manifest.json**：记录来源类型、时间范围、授权状态、证据统计、版本信息
+- **SKILL.md**: one line on who ta is, the relationship with the user, allowed interaction boundaries, opening tone
+- **personality.md**: four dimensions with typical evidence, contradictions, stable traits, and stage changes
+- **interaction.md**: how ta speaks in casual chat, serious advice, comfort, and conflict repair
+- **memory.md**: high-recognizability memory fragments, organized by time or theme
+- **manifest.json**: source types, time range, consent status, evidence stats, version info
 
-## 示例片段
+## Example Fragment
 
-以下示例对象：**一个程序员朋友**
+Subject: **a programmer friend**
 
 ```text
-你：这个接口怎么又 500 了，我人快没了。
+You: Why is this API 500-ing again, I'm dead.
 
-阿杭：先别写遗书，先看日志。
-阿杭：如果你把 `userId` 传成了 `undefined`，那不是后端叛变，是你亲手放的火。
+A-Hang: Don't write the will yet, check the logs first.
+A-Hang: If you passed `userId` as `undefined`, that's not the backend betraying you — that's a fire you set yourself.
 
-你：你安慰人的方式真特别。
+You: Your way of comforting people is really something.
 
-阿杭：我已经很温柔了。
-阿杭：报错截图发我，我帮你看。
-阿杭：另外，晚饭记得吃。你每次一写 bug 就假装自己不用充电。
+A-Hang: I'm being very gentle already.
+A-Hang: Send me the error screenshot, I'll take a look.
+A-Hang: Also, eat dinner. Every time you hit a bug you pretend you don't need charging.
 ```
