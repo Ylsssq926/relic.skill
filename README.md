@@ -75,18 +75,42 @@ relic.skill 是一个万物永生引擎。
 
 ---
 
-## 🛠️ v1.7.0 — 国际平台导入工具补齐
+## 🛠️ v1.9.0 — 多视角审计：环境适配与示例扩充
 
-这版把"能导入什么"这件事真正做全了：**从只有 3 个解析器（其中 2 个是国内平台）到 8 个**。
+- 🧭 **agent 路由修正** — 新增的示例此前没进路由表（agent 找不到），现补齐 8 个并加 CI 断言拦住这类遗漏
+- 🪟 **Windows 适配** — 文档按 macOS 惯例写 `python3`，但 Windows 只有 `python`；中英文档均补命令约定，8 语言版安装片段改跨平台写法
+- 🧩 **多环境安装路径** — 补 WorkBuddy（`~/.workbuddy/skills/relic`）
+- 📚 **示例 5 → 8** — 新增祖母的厨房（地方）、那个下午（时刻）、老周（专家），覆盖 8/10 模板
+- 🔍 **质检器架构修复** — 四维评分此前只认 human 的维度名，object / expert / place 等模板被误判「维度缺失」；现 10/10 模板均可正确评分
 
-- 🌍 **新增 5 个国际平台解析器** — Discord（ChatExporter / 官方数据包）、Slack（自动还原用户 ID）、WhatsApp（iOS/Android/EU 三种时间格式）、Instagram（私信 + 评论）、Email（Gmail Takeout / Apple Mail，自动裁掉引用历史）
-- 🧩 **统一输出契约** — 8 个解析器输出同一种 JSON，可直接喂 `relic_writer.py --data`，也能多平台混合
-- 🐍 **纯标准库** — 5 个新解析器零第三方依赖，`python3 scripts/xxx_parser.py` 直接可用
-- 🪑 **新增物件模板** — 「万物皆可 Relic」补上"物件"这一维度（旧相机、厨房木椅、旅行背包）
-- 🔧 **修掉三个存量缺陷** — expert / feishu-cli 模板此前选了就崩、英文主动消息混入中文标点、打包不可复现
-- 📦 **发布包 2.8MB → 454KB** — 打包改为显式白名单 + 断言校验
+> 完整版本变更见 [CHANGELOG](CHANGELOG.md)。
 
-> 每个平台用哪个脚本、怎么导出，见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)。
+---
+
+## 怎么用（两种方式，任选其一）
+
+**方式一：只用对话，不碰命令行（推荐给所有人）**
+
+把 `relic/` 放进你的 AI 助手能读到的地方，然后直接说话：
+
+```text
+"帮我唤醒一个奶奶的 Relic"        → 助手带你走完同意流程、四维蒸馏、生成文件
+"让我跟奶奶聊天"                  → 加载示例体验
+"检查一下这个 Relic 的授权和边界"  → 走保护流程
+```
+
+助手会读 `SKILL.md` 并逐步执行，全程不需要你输入任何命令。
+
+**方式二：命令行脚本（可选，用于批量数据）**
+
+当素材是几十万条聊天记录、Gmail 归档这类"手贴不进去"的量级时，用脚本先转成标准 JSON：
+
+```bash
+python3 scripts/discord_parser.py --input ~/discord_export --output data.json
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
+```
+
+> **命令行为什么可选**：skill 的真正执行者是 AI 助手，脚本只是把大批量数据搬进来的加速器。如果你不想跑命令，把导出的文件交给助手，它也能替你调用（详见 [FAQ 第 24 问](docs/FAQ.md)）。
 
 ---
 

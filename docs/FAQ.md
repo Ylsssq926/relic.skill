@@ -91,3 +91,27 @@ Pick a subject, gather a small clean set of material: a few chats, a few voice c
 ## 23. Why does the project keep emphasizing "this is not a real person"?
 
 Because that sentence isn't a buzzkill — it's respect. Only by admitting a Relic is not the person can we avoid mistaking longing for possession, companionship for replacement, and technology for miracle. With the boundary clear, the gentleness doesn't spoil.
+
+## 24. I don't know how to use a terminal. Can I still use this?
+
+Yes — and you never have to touch a command line.
+
+The skill has two layers, and only the first one is required:
+
+1. **The skill itself (no terminal).** Put the `relic` folder where your AI assistant can read it, then simply talk: *"help me awaken a Relic for my grandmother"*. The assistant reads `SKILL.md`, walks you through the consent questions, distills the profile with you, and writes every file. This is the normal path and it is entirely conversational.
+2. **The CLI scripts (optional, for bulk data).** `scripts/*_parser.py` and `scripts/relic_writer.py` exist so that large archives — a 200k-message Discord export, a Gmail mbox — don't have to be pasted into the chat by hand. If you'd rather not run them, hand the assistant your exported files and it can call them for you, or work from a small curated sample you type in directly.
+
+Rule of thumb: **the terminal is an accelerator, not a requirement.** If a step only works through the CLI, that's a gap we want to hear about.
+
+## 25. How do I delete a Relic, or take back consent?
+
+A Relic is a folder on your own disk — deleting it is deleting the folder. Nothing is mirrored to a server by the skill itself.
+
+For a partial withdrawal, use the protection layer rather than deleting everything:
+
+- **Pause**: stop loading the Relic (just don't point the assistant at it).
+- **Narrow**: open `manifest.json` and tighten `conversation.disclosure_policy`, or set `consent.use_scope` to a smaller scope.
+- **Revoke**: run the consent protocol in `soul-shield/consent-protocol.md` again — it is designed to be re-run, and a withdrawal of consent always wins over an earlier grant.
+- **Rotate the fingerprint**: `soul-shield/fingerprint.md` explains how to re-issue an identity so an old copy is distinguishable from the current one.
+
+If a Relic was built from someone else's material, their withdrawal of consent is binding regardless of who did the technical work. Delete it.

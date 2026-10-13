@@ -73,18 +73,42 @@ Not a cold archive. A grandma who nags you about eating properly during Lunar Ne
 
 ---
 
-## 🛠️ v1.7.0 — International Import Tools Completed
+## 🛠️ v1.9.0 — Multi-Perspective Audit: Environment Fit & More Demos
 
-This release settles "what can I actually import": **from 3 parsers (2 of them China-only) to 8**.
+- 🧭 **Agent routing fixed** — newly added demos were missing from the routing tables (agents literally could not find them); now all 8 are routed, with a CI assertion to prevent the same gap
+- 🪟 **Windows fit** — docs use the macOS convention `python3`, but Windows only has `python`; both READMEs now state the convention, and the localized install snippets became cross-platform
+- 🧩 **More install paths** — WorkBuddy (`~/.workbuddy/skills/relic`) added to the supported hosts
+- 📚 **Demos 5 → 8** — grandma's kitchen (place), the proposal (moment), the tech lead (expert); now covering 8 of 10 templates
+- 🔍 **Quality checker architecture fix** — the four-dimension scoring only recognized human dimension names, so object / expert / place Relics were misjudged as "missing dimensions"; all 10 templates now score correctly
 
-- 🌍 **5 new international parsers** — Discord (ChatExporter / official data package), Slack (resolves user IDs to real names), WhatsApp (iOS / Android / EU time formats), Instagram (DMs + comments), Email (Gmail Takeout / Apple Mail, trims quoted history automatically)
-- 🧩 **One output contract** — all 8 parsers emit the same JSON, feeding `relic_writer.py --data` directly and mixing freely across platforms
-- 🐍 **Stdlib only** — the 5 new parsers need zero third-party packages; `python3 scripts/xxx_parser.py` just works
-- 🪑 **New Object template** — "everything can be a Relic" now covers objects too (old cameras, kitchen chairs, travel backpacks)
-- 🔧 **Three long-standing bugs fixed** — expert / feishu-cli templates used to crash on selection, English proactive messages mixed in Chinese punctuation, packaging was not reproducible
-- 📦 **Release zip 2.8MB → 454KB** — packaging now uses an explicit whitelist with assertions
+> Full release history in [CHANGELOG](CHANGELOG.md).
 
-> See the [Platform Data Export Guide](docs/PLATFORM-GUIDE.md) for which script to use per platform.
+---
+
+## How to Use It (Two Ways, Pick One)
+
+**Way 1: Conversation only — no terminal (recommended for everyone)**
+
+Put the `relic/` folder where your AI assistant can read it, then just talk:
+
+```text
+"help me awaken a Relic for my grandmother"  → the assistant walks you through consent, distillation, and file generation
+"talk to grandma"                            → load a demo Relic
+"review this Relic's consent and boundaries"  → run the protection flow
+```
+
+The assistant reads `SKILL.md` and executes step by step. You never type a command.
+
+**Way 2: Command-line scripts (optional, for bulk data)**
+
+When the material is 200k Discord messages or a Gmail archive — too much to paste — use a parser to turn it into normalized JSON first:
+
+```bash
+python3 scripts/discord_parser.py --input ~/discord_export --output data.json
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
+```
+
+> **Why the CLI is optional**: the real executor of this skill is your AI assistant; the scripts are just an accelerator for large archives. If you'd rather not run anything, hand the exported files to your assistant and it can call the scripts for you (see [FAQ #24](docs/FAQ.md)).
 
 ---
 
