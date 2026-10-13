@@ -1,6 +1,6 @@
 # 示例 Relics
 
-> 不想从零开始？先跟这三个 Relic 聊聊天，感受一下。
+> 不想从零开始？先跟这五个 Relic 聊聊天，感受一下。
 
 ## 怎么体验
 
@@ -10,9 +10,12 @@
 - `让我跟咪咪互动` — 加载橘猫咪咪的 Relic
 - `模拟星火工作室的群聊` — 加载创业团队的 Relic
 
+- `让我跟这台相机聊聊` — 加载尼康 FM2 的物件 Relic
+- `讲讲我和我爸的关系` — 加载父子关系 Relic
+
 不需要提供任何数据，直接体验。
 
-## 三个示例
+## 五个示例
 
 ### 🧓 [grandma-demo/](grandma-demo/) — 奶奶 · 王秀兰
 
@@ -35,3 +38,17 @@ AI 产品团队，2022-2025。CTO 口头禅是"这个需求不合理但我可以
 ## 想唤醒自己的 Relic？
 
 回到根目录，对 AI 说：`帮我唤醒一个 Relic`
+
+### 📷 [old-camera-demo/](old-camera-demo/) — 尼康 FM2 · 物件
+
+1978 年买的尼康 FM2，父亲用了三十年，2009 年传给儿子。四角磨出黄铜色，过片扳手被拇指磨亮。
+留下来的原因不是值钱，是它拍下了三十年里所有普通的周日。**英文人格**（海外用户可直接体验）。
+
+**试试说**：`Let me talk to the camera` / `Where did you live before 2009?` / `Tell me about the two weeks you were gone`
+
+### 👨‍👦 [dad-and-me-demo/](dad-and-me-demo/) — 我和我爸 · 关系
+
+蒸馏的不是某个人，而是两个人之间的模式：九十个字的电话、靠递扳手结束的争吵、
+谁都没说出口的和解。**英文人格**，并且故意保留了一处双方记忆不一致的锚点。
+
+**试试说**：`Show me an ordinary Sunday between you two` / `How do you two actually make up?`

@@ -1,0 +1,51 @@
+{
+  "schema_version": "1.4.0",
+  "slug": "old-camera-demo",
+  "display_name": "Nikon FM2",
+  "kind": "object",
+  "object_kind": "camera",
+  "status": "memorial",
+  "language": "en",
+  "created_at": "2026-10-13T03:19:26+00:00",
+  "generated_by": "examples/old-camera-demo (hand-written demo)",
+  "time_range": {
+    "start": "1978",
+    "end": "2024"
+  },
+  "sources": {
+    "kind": "sample",
+    "note": "illustrative demo, not a real archive"
+  },
+  "consent": {
+    "level": "sample",
+    "scope": "public demo",
+    "revocable": true
+  },
+  "evidence_profile": {
+    "verbatim": 1,
+    "artifact": 2,
+    "impression": 14
+  },
+  "dimensions": [
+    "wear",
+    "projection",
+    "companionship",
+    "anchor"
+  ],
+  "interaction_modes": [
+    "feel it",
+    "tell its story",
+    "where it lives",
+    "almost lost"
+  ],
+  "conversation": {
+    "language": "en",
+    "disclosure_policy": {
+      "identity": "Always state clearly that this is a Relic, not the real object.",
+      "evidence": "When evidence is thin, say so directly instead of inventing detail.",
+      "boundaries": "Never appraise, price, or authenticate the object."
+    }
+  },
+  "fingerprint": "relic:sha256:demo0000000000000000000000000000000000000000000000000000000000demo",
+  "disclaimer": "This is a Relic, not the real object."
+}

@@ -211,11 +211,42 @@ def analyze_personality(relic_dir: Path) -> list[DimensionScore]:
     sub_sections = extract_heading_sections(text, levels=(3,))
 
     dimension_names = ["认知", "表达", "行为", "情感"]
+    # 每个槽位收录所有模板的维度名（中英双语）。
+    # 模板体系已扩展到 object / expert / relationship 等，四维被各自重定义
+    # （使用痕迹 / 专业判断 / 沟通模式 …），只认 human 的四维会把它们误判为缺失。
     alt_names = {
-        "认知": ["cognition", "习性", "决策", "认知框架", "感官", "发言", "起承转合", "习性模式", "决策风格"],
-        "表达": ["expression", "互动", "沟通", "表达风格", "空间", "行动", "感官锚点", "互动风格", "沟通习惯"],
-        "行为": ["behavior", "生活", "节奏", "行为习惯", "生活节奏", "价值", "价值观", "轨迹", "争议", "行为模式"],
-        "情感": ["emotion", "情绪", "感受", "情感特征", "梗", "仪式", "内部梗", "内部梗和仪式", "亲密", "氛围", "心理", "情绪表达", "情感接口"],
+        "认知": [
+            "cognition", "habit", "judgment", "intuition", "knowledge", "collaboration",
+            "decision", "sensory", "event", "communication",
+            "习性", "决策", "认知框架", "感官", "发言", "起承转合", "习性模式", "决策风格",
+            "使用痕迹", "专业判断", "经验直觉", "知识体系", "协作记忆", "决策过程",
+            "场景细节", "事件记忆", "感官记忆", "沟通模式", "道德", "原则",
+            "cognitive frame", "wear traces", "professional judgment", "experiential intuition",
+            "knowledge system", "collaboration memory", "decision process", "scene details",
+            "sensory memory", "communication pattern",
+        ],
+        "表达": [
+            "expression", "interaction", "projection", "mentoring", "chemistry", "conflict",
+            "atmosphere",
+            "互动", "沟通", "表达风格", "空间", "行动", "感官锚点", "互动风格", "沟通习惯",
+            "情感投射", "传承方式", "团队默契", "冲突模式", "氛围特征", "语气", "语言",
+            "expression style", "interaction style", "emotional projection", "mentoring style",
+            "team chemistry", "conflict pattern", "atmospheric character",
+        ],
+        "行为": [
+            "behavior", "rhythm", "companionship", "growth", "value", "meaning", "ritual",
+            "生活", "节奏", "行为习惯", "生活节奏", "价值", "价值观", "轨迹", "争议", "行为模式",
+            "陪伴轨迹", "成长轨迹", "意义解读", "内部梗", "内部梗和仪式", "知识沉淀", "日常",
+            "behavioral patterns", "life rhythm", "companionship track", "growth arc",
+            "value system", "meaning", "inside jokes and rituals",
+        ],
+        "情感": [
+            "emotion", "anchor", "intimacy", "causality",
+            "情绪", "感受", "情感特征", "梗", "仪式", "亲密", "氛围", "心理", "情绪表达",
+            "情感接口", "空间锚点", "亲密模式", "情感联结", "情感状态", "前因后果",
+            "emotional interface", "emotional expression", "spatial anchor", "intimacy pattern",
+            "emotional bond", "emotional state", "causes and effects",
+        ],
     }
 
     results: list[DimensionScore] = []

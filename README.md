@@ -538,7 +538,7 @@ relic.skill/
 │   └── ethics.md               # 伦理红线
 │
 ├── templates/                  # 📋 万物永生模板 x10（附选择指南）
-├── examples/                   # 🎯 示例 Relics x3（附体验指南）
+├── examples/                   # 🎯 示例 Relics x5（附体验指南）
 ├── scripts/                    # 🔧 Python 工具脚本 x17（含飞书全链路唤醒）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）

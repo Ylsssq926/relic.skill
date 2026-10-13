@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1] - 2026-10-13
+
+### 示例覆盖 3 → 5 + 质检器多模板误判修复
+
+**新增两个示例（英文人格，海外买家可直接体验）**
+
+- 📷 `examples/old-camera-demo/` — 物件模板：一台 1978 年的尼康 FM2，父亲用了三十年、2009 年传给儿子；四角磨出黄铜色，留下来不是因为值钱，而是它拍下了三十年里所有普通的周日
+- 👨‍👦 `examples/dad-and-me-demo/` — 关系模板：蒸馏的不是人，而是两人之间的模式（九十个字的电话、靠递扳手结束的争吵）；刻意保留一处双方记忆不一致的锚点，演示「矛盾并存」原则
+
+两个示例都是英文骨架，同时验证了 v1.8.0 的语言自适应路径。
+
+**修复：质检器对非人类模板的误判**
+
+`quality_checker.py` 的四维映射表只收录了 human/pet/team 的维度名，导致 object / expert / relationship 等模板的四维（使用痕迹 / 专业判断 / 沟通模式 …）被当成缺失——object 示例原本只得 48.6 分（四维覆盖 19）。现已收录全部模板的中英双语维度名：
+
+| 对象 | 修复前 | 修复后 |
+|---|---|---|
+| object 示例 | 48.6（四维 19） | 63.8（四维 57） |
+| 英文骨架 | 低分误判 | 74.2（四维 83） |
+| grandma 示例 | 80.0 | 80.0（无回归） |
+
+**索引同步**：`examples/README.md`（3 → 5 个示例 + 体验口令）、README 中英示例计数。
+
 ## [1.8.0] - 2026-10-13
 
 ### 骨架语言自适应 + iMessage 解析器 + 完整性检查纳入 CI
