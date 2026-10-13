@@ -13,8 +13,8 @@
 
 | User Intent | Triggers | Target Files |
 |---|---|---|
-| **0. Try demo Relics** | "让我跟奶奶聊天" / "talk to grandma" / "召唤咪咪" | `examples/` + `soul-engine/` |
-| **1. Awaken a new Relic** | "帮我唤醒" / "distill a relic" / "做个数字分身" | `soul-shield/` → `templates/` → `soul-forge/` |
+| **0. Try demo Relics** | "让我跟奶奶聊天" / "talk to grandma" / "让我跟这台相机聊聊" / "讲讲我和我爸的关系" / "召唤咪咪" | `examples/` + `soul-engine/` |
+| **1. Awaken a new Relic** | "帮我唤醒" / "distill a relic" / "做个数字分身" / "把这台相机留下来" | `soul-shield/` → `templates/` → `soul-forge/` |
 | **2. Chat with an existing Relic** | "跟XX聊天" / "chat with [Name]" / "召唤XX" | `{relic}/` + `soul-engine/` |
 | **3. Protect & ethics review** | "检查授权" / "verify consent" / "生成指纹" | `soul-shield/` |
 
@@ -25,12 +25,21 @@
 ### 0. User wants to try a demo Relic (the most common first-use scenario)
 
 ```text
-The user may say "让我跟奶奶聊天" / "talk to grandma" / "让我跟咪咪互动" / "模拟星火工作室群聊".
+The user may say "让我跟奶奶聊天" / "talk to grandma" / "让我跟咪咪互动" / "模拟星火工作室群聊" /
+"让我跟这台相机聊聊" / "讲讲我和我爸的关系".
 
 Pick the example directory by intent:
-- Grandma / Wang Xiulan → examples/grandma-demo/
-- Cat / Mimi → examples/cat-mimi-demo/
-- Team / Spark → examples/team-startup-demo/
+- Grandma / Wang Xiulan (human) → examples/grandma-demo/
+- Cat / Mimi (pet) → examples/cat-mimi-demo/
+- Team / Spark (team culture) → examples/team-startup-demo/
+- Nikon FM2 (object) → examples/old-camera-demo/
+- Dad & Me (relationship) → examples/dad-and-me-demo/
+- Grandma's kitchen (place) → examples/kitchen-demo/
+- The proposal (moment) → examples/proposal-demo/
+- The tech lead (expert) → examples/tech-lead-demo/
+
+For public-figure / Feishu-CLI there is no demo yet: say so, then offer to run the
+awakening flow with the matching template from templates/.
 
 Read that directory's SKILL.md, personality.md, interaction.md, memory.md; then read soul-engine/SKILL.md, soul-engine/interaction.md, soul-engine/memory-system.md to start interaction.
 If the directory or files don't exist, tell the user the demo isn't created yet, and ask whether to try another available demo or awaken a new Relic.
@@ -91,10 +100,16 @@ Build & quality:
 Media & delivery (optional):
 - python3 scripts/tts_service.py --help
 - python3 scripts/image_service.py --help
+- python3 scripts/media_service.py --help       # shared media pipeline for the two above
+- python3 scripts/photo_analyzer.py --help      # EXIF / device / location extraction
 - python3 scripts/relic_engine.py --help
 - python3 scripts/telegram_bot.py --help
 - python3 scripts/feishu_bot.py --help        # Feishu (Mainland China)
 - python3 scripts/lark_expert_forge.py --help  # Feishu CLI expert forge (Mainland China)
+
+Internal (not for end users):
+- python3 scripts/manifest_schema.py --help     # normalize/validate manifest.json
+- python3 scripts/test_integration.py           # integration smoke test
 ```
 
 > All parsers share one output contract (`schema_version` / `source.platform` / `messages[]`), so their outputs feed `relic_writer.py --data` interchangeably. The core flow needs only Python 3.9+; run `pip3 install -r requirements.txt` for the parsers that touch images or mailboxes.

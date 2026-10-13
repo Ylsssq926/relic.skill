@@ -202,9 +202,12 @@ Each piece of information is tagged with an evidence level:
 If you purchased or downloaded `relic.zip` from Agensi, extract the archive and place the `relic` folder into your agent's skill directory:
 
 - **Claude Code**: Extract into `.claude/skills/relic` (project-level) or `~/.claude/skills/relic` (global)
+- **WorkBuddy**: Extract into `~/.workbuddy/skills/relic` (user-level, available in every project) or `.workbuddy/skills/relic`
 - **Cursor**: Extract into `.cursor/skills/relic`
 - **Windsurf / Cline / Copilot**: Extract into `.windsurf/skills/relic`, `.cline/skills/relic`, or `.github/skills/relic`
 - **Universal**: Place the extracted `relic` directory directly into your workspace. Any agent pointing to `relic/SKILL.md` will activate immediately.
+
+> **Windows users**: commands in this document follow the macOS / Linux convention `python3`. On Windows use `python` (or `py`) instead — e.g. `python scripts\relic_writer.py --help` — and replace `~` with `%USERPROFILE%`.
 
 ### Option 1: Install into the current project with Git
 
@@ -364,6 +367,8 @@ send_message(
 
 **Every platform has a parser.** Export your data, run the script, and you get normalized JSON that `relic_writer.py` consumes directly:
 
+> Commands are written as `python3` (macOS / Linux convention). **On Windows use `python`** (e.g. `python scripts\discord_parser.py --help`), and replace `~` with `%USERPROFILE%`.
+
 | Type | Platform | Export Method | Parser |
 |------|------|---------|---------|
 | 💬 Messaging | Telegram | Official export | `scripts/telegram_parser.py` |
@@ -447,7 +452,7 @@ relic.skill/
 │   └── ethics.md               # Ethical red lines
 │
 ├── templates/                  # 📋 Templates for everything x10 (with a selection guide)
-├── examples/                   # 🎯 Example Relics x3 (with a quick walkthrough)
+├── examples/                   # 🎯 Example Relics x8 (8 of 10 templates, with walkthroughs)
 ├── scripts/                    # 🔧 Python utility scripts x17 (including Feishu full-chain forging)
 ├── assets/                     # 🎨 Visual assets
 ├── docs/                       # 📚 In-depth docs (including the tools guide)

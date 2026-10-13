@@ -5,6 +5,51 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.0] - 2026-10-13
+
+### 多视角审计：环境适配 + 示例 5→8 + 质检器架构修复
+
+代入 agent / Windows 用户 / WorkBuddy 用户 / 非人类模板用户四种视角做了一轮系统审查，发现的问题分四类修复。
+
+**一、agent 路由缺失（最严重）**
+
+新增的示例目录没进 agent 的路由表，agent 永远找不到它们：
+
+- `SKILL.md` 与 `FOR_AI.md` 的 demo 路由此前只列 3 个示例（实际 5 个），新增的 old-camera / dad-and-me 无人可达 —— 现补齐 8 个，并注明 public-figure / feishu-cli 走唤醒流程
+- 触发词表补入物件与关系场景（"让我跟这台相机聊聊" / "讲讲我和我爸的关系"）
+- **新增 `DemoRoutingTest`（3 项断言）**：示例目录必须同时出现在 SKILL.md、FOR_AI.md、examples/README.md 中，且文件齐全、manifest 通过 schema —— 这类"加了文件忘了接路由"的问题从此由 CI 拦住
+
+**二、Windows / 多环境适配**
+
+- 全部文档按 macOS/Linux 惯例写 `python3`，但 **Windows 上只有 `python` / `py`** —— README（中英）平台表与安装章节均补充命令约定说明；PLATFORM-GUIDE 同步
+- 8 个语言版 README 的安装片段含 `mkdir -p .claude/skills`（Windows 不认，且单一环境假设）—— 改为跨平台写法并补 WorkBuddy 路径
+- 安装路径补 **WorkBuddy**（`~/.workbuddy/skills/relic`）；此前只覆盖 Claude Code / Cursor / Windsurf / Cline
+
+**三、示例覆盖 5 → 8（8/10 模板）**
+
+新增三个英文示例，覆盖此前空白的三类对象：
+
+| 示例 | 模板 | 看点 |
+|---|---|---|
+| `kitchen-demo` | place | 祖母的厨房：感官先于事件；演示"绝不可输出可用于定位的地址"这条最严边界 |
+| `proposal-demo` | moment | 那个下午：先慢放现场再谈意义；**故意保留一处双方记忆不一致的锚点** |
+| `tech-lead-demo` | expert | 退休技术主管：B 端知识传承；"我是 Relic，不是在职顾问"写进身份而非附加条款 |
+
+**四、质检器架构修复（影响全部非 human 模板）**
+
+`quality_checker.py` 的四槽（认知/表达/行为/情感）是为 human 设计的，其他模板的四维被各自重定义（place = 感官/事件/联结/氛围，expert = 判断/直觉/知识/传承），关键词表不可能穷尽 —— 导致这些模板被误判"维度缺失"（object 示例曾只得 48.6，expert 的行为槽恒为 0）。
+
+- **按顺序兜底**：关键词匹配不到的槽，按 personality.md 的章节顺序补位（顺序即维度顺序，正是 writer 生成骨架的排列方式）。修复后 10/10 模板均能正确评分（73-78）
+- **英文证据判定**：记忆锚点的"有证据"判定只认中文 `来源：`，英文 Relic 的 `Source:` 恒判为无证据 —— 现同时接受 `Source:` / `Evidence:`
+
+**五、示例质量对齐**
+
+- 5 个新示例的 manifest 用 `manifest_schema` 基线 + 自定义字段合并补全（此前缺 identity / relationship / safety / compliance 等 18 个字段，schema 校验不通过）
+- 记忆锚点补证据等级标注（新示例 0 → 100% 覆盖；存量 cat-mimi-demo 8 段全部补齐）
+- 全部 8 个示例质检分落到 65-84 区间，记忆质量均有证据支撑
+
+**测试**：65 → 68 项全过。
+
 ## [1.8.1] - 2026-10-13
 
 ### 示例覆盖 3 → 5 + 质检器多模板误判修复

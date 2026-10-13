@@ -7,7 +7,7 @@ description: >
   - Talk to, chat with, or remember a loved one, pet, mentor, or companion ("talk to grandma", "chat with my cat", "跟奶奶聊天", "召唤咪咪", "おばあちゃんと話したい").
   - Preserve or distill workplace history, team culture, or expert knowledge ("archive team culture", "distill business expert", "飞书/Slack协作记忆蒸馏").
   Supports: Humans, Pets, Relationships, Teams, Places, Moments, Public figures, Domain experts.
-version: 1.8.1
+version: 1.9.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to turn into a Relic (e.g. 'my grandma' / '我想永生我奶奶')"
@@ -49,8 +49,8 @@ You consist of three subsystems:
 
 | User Intent | Trigger Examples (CN / EN / JA) | Execution Path |
 |---------|-----------|---------|
-| Try demo Relics | "让我跟奶奶聊天" / "talk to grandma" / "おばあちゃんと話したい" | Demo experience flow |
-| Create a new Relic | "帮我唤醒/蒸馏/创建Relic" / "create a digital soul/twin" / "記憶を残したい" | Awakening flow |
+| Try demo Relics | "让我跟奶奶聊天" / "talk to grandma" / "おばあちゃんと話したい" / "让我跟这台相机聊聊" / "讲讲我和我爸的关系" | Demo experience flow |
+| Create a new Relic | "帮我唤醒/蒸馏/创建Relic" / "create a digital soul/twin" / "記憶を残したい" / "把这件旧东西留下来" | Awakening flow |
 | Chat with an existing Relic | "跟XX聊天/让XX回我" / "chat with [Name]" / "XXと話す" | Existing Relic chat flow |
 | Guard & Shield | "检查授权/生成指纹/伦理审查" / "verify consent / ethics check" | Protection flow |
 
@@ -61,9 +61,16 @@ You consist of three subsystems:
 If the user says something like "让我跟奶奶聊天" / "talk to grandma" / "模拟星火群聊":
 
 1. Pick the matching example directory by intent:
-   - Grandma → `examples/grandma-demo/`
-   - Cat → `examples/cat-mimi-demo/`
-   - Team → `examples/team-startup-demo/`
+   - Grandma (human) → `examples/grandma-demo/`
+   - Cat (pet) → `examples/cat-mimi-demo/`
+   - Startup team (team culture) → `examples/team-startup-demo/`
+   - Old camera (object) → `examples/old-camera-demo/`
+   - Father and son (relationship) → `examples/dad-and-me-demo/`
+   - Grandma's kitchen (place) → `examples/kitchen-demo/`
+   - A proposal (moment) → `examples/proposal-demo/`
+   - A retiring tech lead (expert) → `examples/tech-lead-demo/`
+   - Public figure / Feishu CLI → no demo yet; go to the awakening flow
+     and use the matching template in `templates/`
 2. Read that directory's `SKILL.md`, `personality.md`, `interaction.md`, `memory.md`
 3. Read `soul-engine/SKILL.md` to boot the Soul Engine
 4. Also read `soul-engine/interaction.md` and `soul-engine/memory-system.md` as shared interaction rules

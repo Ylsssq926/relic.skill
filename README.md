@@ -203,9 +203,12 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 如果你从 Agensi 或发布包下载了 `relic.zip`，直接解压并将解压出的 `relic` 目录放入目标路径即可：
 
 - **Claude Code**: 解压至当前项目 `.claude/skills/relic` 或用户主目录 `~/.claude/skills/relic`
+- **WorkBuddy**: 解压至 `~/.workbuddy/skills/relic`（用户级，所有项目可用）或项目 `.workbuddy/skills/relic`
 - **Cursor**: 解压至当前项目 `.cursor/skills/relic`
 - **Windsurf / Cline / Copilot**: 解压至项目对应的 `.windsurf/skills/relic`、`.cline/skills/relic` 或 `.github/skills/relic`
 - **通用方式**: 直接把 `relic/` 文件夹放到项目根目录下，AI 助手读取 `relic/SKILL.md` 即可立即可用。
+
+> **Windows 用户必读**：本文档的命令按 macOS / Linux 惯例写成 `python3`，Windows 上请改用 `python`（或 `py`），例如 `python scripts\relic_writer.py --help`。路径中的 `~` 在 Windows 上是 `%USERPROFILE%`。
 
 ### 方式一：通过 Git 安装到当前项目
 
@@ -450,7 +453,9 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 
 ## 支持的数据平台
 
-**9 个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON：
+**9 个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON。
+
+> 命令按 macOS / Linux 惯例写成 `python3`；**Windows 用户请用 `python`**（例如 `python scripts\discord_parser.py --help`），路径中的 `~` 换成 `%USERPROFILE%`。
 
 | 类型 | 平台 | 获取方式 | 导入脚本 |
 |------|------|---------|---------|
@@ -538,7 +543,7 @@ relic.skill/
 │   └── ethics.md               # 伦理红线
 │
 ├── templates/                  # 📋 万物永生模板 x10（附选择指南）
-├── examples/                   # 🎯 示例 Relics x5（附体验指南）
+├── examples/                   # 🎯 示例 Relics x8（覆盖 8/10 模板，附体验指南）
 ├── scripts/                    # 🔧 Python 工具脚本 x17（含飞书全链路唤醒）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）

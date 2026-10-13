@@ -174,8 +174,12 @@ CTO ❯ 行吧，这个需求不合理但我可以做
 ### 方式一：安裝到目前專案
 
 ```bash
+# macOS / Linux (Claude Code)
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
+
+# WorkBuddy users: clone into ~/.workbuddy/skills/relic instead
+# Windows: New-Item -ItemType Directory -Force .claude\skills
 ```
 
 ### 方式二：npx 一鍵安裝

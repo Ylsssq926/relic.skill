@@ -177,8 +177,12 @@ Cada pedaço de informação recebe um nível de evidência:
 ### Opção 1: instalar no projeto atual
 
 ```bash
+# macOS / Linux (Claude Code)
 mkdir -p .claude/skills
 git clone https://github.com/Ylsssq926/relic.skill .claude/skills/relic
+
+# WorkBuddy users: clone into ~/.workbuddy/skills/relic instead
+# Windows: New-Item -ItemType Directory -Force .claude\skills
 ```
 
 ### Opção 2: instalar em um comando com npx

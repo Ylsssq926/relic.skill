@@ -13,6 +13,7 @@
 """
 
 import re
+import sys
 import unittest
 from pathlib import Path
 
@@ -104,6 +105,51 @@ class WorkflowNavigabilityTest(unittest.TestCase):
     def test_platform_parsers_ship(self):
         missing = [p for p in REQUIRED_PARSERS if not (ROOT / p).exists()]
         self.assertEqual(missing, [], f"parsers missing: {missing}")
+
+
+class DemoRoutingTest(unittest.TestCase):
+    """每个示例目录都必须出现在 agent 的两条路由里。
+
+    新增示例时最容易漏的就是这一步——仓库里有了示例，但 SKILL.md / FOR_AI.md
+    的路由表没更新，agent 就永远找不到它（v1.8.1 真实出现过）。
+    """
+
+    def _demo_dirs(self):
+        return sorted(p.name for p in (ROOT / "examples").iterdir()
+                      if p.is_dir() and p.name.endswith("-demo"))
+
+    def test_every_demo_is_routed_in_skill_and_for_ai(self):
+        skills = {"SKILL.md": (ROOT / "SKILL.md").read_text(encoding="utf-8"),
+                  "FOR_AI.md": (ROOT / "FOR_AI.md").read_text(encoding="utf-8"),
+                  "examples/README.md": (ROOT / "examples" / "README.md").read_text(encoding="utf-8")}
+        missing = []
+        for demo in self._demo_dirs():
+            for name, body in skills.items():
+                if demo not in body:
+                    missing.append(f"{demo} not referenced in {name}")
+        self.assertEqual(missing, [], f"unrouted demos: {missing}")
+
+    def test_every_demo_has_the_required_files(self):
+        required = ["SKILL.md", "personality.md", "interaction.md", "memory.md",
+                    "manifest.json", "README.md"]
+        broken = []
+        for demo in self._demo_dirs():
+            for fname in required:
+                if not (ROOT / "examples" / demo / fname).exists():
+                    broken.append(f"{demo}/{fname}")
+        self.assertEqual(broken, [], f"incomplete demos: {broken}")
+
+    def test_demo_manifests_pass_schema(self):
+        import subprocess
+        schema = ROOT / "scripts" / "manifest_schema.py"
+        broken = []
+        for demo in self._demo_dirs():
+            manifest = ROOT / "examples" / demo / "manifest.json"
+            proc = subprocess.run([sys.executable, str(schema), str(manifest)],
+                                  capture_output=True, text=True, encoding="utf-8")
+            if "Validation passed" not in proc.stdout:
+                broken.append(demo)
+        self.assertEqual(broken, [], f"manifest schema failures: {broken}")
 
 
 class TemplateReferenceTest(unittest.TestCase):

@@ -250,6 +250,7 @@ def analyze_personality(relic_dir: Path) -> list[DimensionScore]:
     }
 
     results: list[DimensionScore] = []
+    used_sub_indexes: set[int] = set()
 
     for dim_name in dimension_names:
         ds = DimensionScore(name=dim_name)
@@ -265,9 +266,12 @@ def analyze_personality(relic_dir: Path) -> list[DimensionScore]:
 
         # 再匹配 writer 产物里的 ### 子标题
         if not matched_section:
-            for title, body in sub_sections:
+            for idx, (title, body) in enumerate(sub_sections):
+                if idx in used_sub_indexes:
+                    continue
                 if any(term.lower() in title.lower() for term in search_terms):
                     matched_section = body
+                    used_sub_indexes.add(idx)
                     break
 
         if matched_section:
@@ -278,10 +282,29 @@ def analyze_personality(relic_dir: Path) -> list[DimensionScore]:
             ds.evidence_impression = i
             ds.has_specific_examples = has_specifics(matched_section)
             ds.issues = check_vague(matched_section)
-        else:
-            ds.issues.append(f"未找到 {dim_name} 维度的内容")
 
         results.append(ds)
+
+    # 兜底：模板体系的四维是被各自重定义的（place 是感官/事件/联结/氛围，
+    # expert 是判断/直觉/知识/传承），关键词表不可能穷尽，硬匹配会把新模板
+    # 判成「维度缺失」。这里按 personality.md 的章节顺序，把还没被占用的
+    # 章节依次补给空槽——顺序即维度顺序，这正是 writer 生成骨架时的排列方式。
+    spare = [i for i in range(len(sub_sections)) if i not in used_sub_indexes]
+    empty = [d for d in results if d.word_count == 0]
+    for ds, idx in zip(empty, spare):
+        _, body = sub_sections[idx]
+        used_sub_indexes.add(idx)
+        ds.word_count = count_chinese_words(body)
+        v, a, i = count_evidence(body)
+        ds.evidence_verbatim = v
+        ds.evidence_artifact = a
+        ds.evidence_impression = i
+        ds.has_specific_examples = has_specifics(body)
+        ds.issues = check_vague(body)
+
+    for ds in results:
+        if ds.word_count == 0:
+            ds.issues.append(f"未找到 {ds.name} 维度的内容")
 
     return results
 
@@ -305,7 +328,13 @@ def analyze_memory(relic_dir: Path) -> tuple[int, int]:
     memory_count = len(memory_sections)
     with_evidence = 0
     for _, body in memory_sections:
-        if re.search(r"(verbatim|artifact|impression|^\-\s*来源：)", body, re.IGNORECASE | re.MULTILINE):
+        # 中文用「来源：/证据等级」，英文 Relic 用 Source: / Evidence:；
+        # 只认中文会让英文 Relic 的记忆证据恒为 0。
+        if re.search(
+            r"(verbatim|artifact|impression"
+            r"|^\-\s*来源[：:]|^\-\s*证据|^\-\s*source[：:]|^\-\s*evidence[：:])",
+            body, re.IGNORECASE | re.MULTILINE,
+        ):
             with_evidence += 1
 
     return memory_count, with_evidence
