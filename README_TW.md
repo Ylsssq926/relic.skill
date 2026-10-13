@@ -318,6 +318,8 @@ send_message(
 | 📄 通用 | 任意文字 | 手動匯入 | TXT / JSON / CSV / MD |
 
 > 詳細匯出教學請見 [平台資料取得指南](docs/PLATFORM-GUIDE.md)
+>
+> 每個平台都有對應的解析腳本 — `scripts/*_parser.py`（共 8 個，純標準庫；已補上 Discord / Slack / WhatsApp / Instagram / 郵件）。
 
 ---
 

@@ -29,6 +29,27 @@
 | Instagram | Accounts Center download | 1) Go to Instagram → Accounts Center.<br>2) Go to `Your information and permissions → Download your information`.<br>3) Select the Instagram account; check the categories you need — posts, DMs, comments, saved, stories.<br>4) Set the time range, format, notification email, and media quality.<br>5) Create the file and download the ZIP within the link's validity window. | ZIP / JSON / HTML | If it's for a Relic, prioritize DMs, post copy, comments, and story captions — don't check everything. |
 | Gmail | Google Takeout | 1) Log into your Google account → Google Takeout.<br>2) First "Deselect all," then check only `Mail`.<br>3) Choose label ranges as needed — common: Inbox / Sent / Starred / a contact label.<br>4) Next, choose "Export once," ZIP, and download method.<br>5) Create the export and download the archive. | MBOX / ZIP | Email is best split by contact, thread, and time period before extraction. |
 
+## Which Parser to Use
+
+Export first (per the table above), then run the matching parser — it converts the export into the normalized JSON that `relic_writer.py` consumes:
+
+| Platform | Export you should have | Command |
+|---|---|---|
+| Telegram | `result.json` or a folder of chat JSON | `python3 scripts/telegram_parser.py --input ~/telegram_export --output data.json` |
+| Discord | DiscordChatExporter `.json` / official data package | `python3 scripts/discord_parser.py --input ~/discord_export --output data.json` |
+| WhatsApp | folder of per-chat `.txt` | `python3 scripts/whatsapp_parser.py --input ~/whatsapp_export --output data.json` |
+| Slack | workspace export folder (with `users.json`) | `python3 scripts/slack_parser.py --input ~/slack_export --output data.json` |
+| Instagram | extracted "Download Your Information" folder | `python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json` |
+| Gmail / Apple Mail | `.mbox` / `.eml` | `python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.json` |
+| WeChat | SQLite / CSV export | `python3 scripts/wechat_parser.py --input ~/wechat_export --output data.json` |
+| QQ | `.txt` / `.mht` export | `python3 scripts/qq_parser.py --input chat.txt --output data.json` |
+| Feishu | via Feishu CLI | `python3 scripts/lark_expert_forge.py --help` |
+| DingTalk / iMessage / X | any of the above formats after conversion | export JSON/CSV/MBOX, then feed `scripts/relic_writer.py --data` directly |
+
+**Add `--self-name` (your own display name) to every parser** — that's how the Relic learns which side of the conversation is "you" versus the subject.
+
+All parsers are pure Python standard library (no extra installs) and fully local — they only read the files you exported.
+
 ## Organizing Exports into Relic Input
 
 The recommendation is to normalize all platforms into one directory structure, instead of dropping things on the desktop one minute and Downloads the next:

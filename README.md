@@ -75,15 +75,18 @@ relic.skill 是一个万物永生引擎。
 
 ---
 
-## 🛠️ v1.5.1 结项维护版
+## 🛠️ v1.7.0 — 国际平台导入工具补齐
 
-这版不堆新玩具,只把门面擦亮、地基踩实,给第一阶段收个漂亮尾。
+这版把"能导入什么"这件事真正做全了：**从只有 3 个解析器（其中 2 个是国内平台）到 8 个**。
 
-- 🏆 **飞书 CLI 创作者大赛 · 人气赛道第一名** — 团队记忆蒸馏这条路,被认真看见了
-- 🌐 **演示站回到稳定域名** — 在线体验统一指向 `https://relic.luelan.online`
-- ✅ **CI 更靠谱** — Markdown、Python、demo-site 类型检查 / lint / build 都有人守门
-- 🧹 **仓库更清爽** — 清掉截图、生成计划、AI 工具临时产物,把 Star History 曲线也撤下来了
-- 🔒 **依赖更稳** — demo-site 补上 Next.js 安全补丁,结项前少一点悬念
+- 🌍 **新增 5 个国际平台解析器** — Discord（ChatExporter / 官方数据包）、Slack（自动还原用户 ID）、WhatsApp（iOS/Android/EU 三种时间格式）、Instagram（私信 + 评论）、Email（Gmail Takeout / Apple Mail，自动裁掉引用历史）
+- 🧩 **统一输出契约** — 8 个解析器输出同一种 JSON，可直接喂 `relic_writer.py --data`，也能多平台混合
+- 🐍 **纯标准库** — 5 个新解析器零第三方依赖，`python3 scripts/xxx_parser.py` 直接可用
+- 🪑 **新增物件模板** — 「万物皆可 Relic」补上"物件"这一维度（旧相机、厨房木椅、旅行背包）
+- 🔧 **修掉三个存量缺陷** — expert / feishu-cli 模板此前选了就崩、英文主动消息混入中文标点、打包不可复现
+- 📦 **发布包 2.8MB → 454KB** — 打包改为显式白名单 + 断言校验
+
+> 每个平台用哪个脚本、怎么导出，见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)。
 
 ---
 

@@ -320,6 +320,8 @@ send_message(
 | 📄 汎用 | 任意のテキスト | 手動インポート | TXT / JSON / CSV / MD |
 
 > 詳しいエクスポート手順は [プラットフォームデータ取得ガイド](docs/PLATFORM-GUIDE.md) を参照してください
+>
+> 各プラットフォームには専用の解析スクリプトがあります — `scripts/*_parser.py`（8 個、標準ライブラリのみ。Discord / Slack / WhatsApp / Instagram / メールにも対応）。
 
 ---
 

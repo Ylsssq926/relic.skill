@@ -320,6 +320,8 @@ send_message(
 | 📄 범용 | 모든 텍스트 | 수동 가져오기 | TXT / JSON / CSV / MD |
 
 > 자세한 내보내기 튜토리얼은 [플랫폼 데이터 수집 가이드](docs/PLATFORM-GUIDE.md)에서 확인하세요
+>
+> 각 플랫폼에는 전용 파서 스크립트가 있습니다 — `scripts/*_parser.py` (총 8 개, 표준 라이브러리만 사용; Discord / Slack / WhatsApp / Instagram / 이메일 지원 추가).
 
 ---
 

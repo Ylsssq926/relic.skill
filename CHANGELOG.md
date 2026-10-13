@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.1] - 2026-10-13
+
+### 验收修复：测试纳入 CI + 文档同步
+
+独立验收复检时发现三处遗漏，均为"改了代码但相关配套没跟上"：
+
+- 🧪 **新解析器接入 CI** — v1.7.0 的 5 个解析器此前只有本地临时验证脚本（在 gitignore 目录里），CI 完全覆盖不到。现新增 `tests/test_platform_parsers.py`（8 个测试用例、跨 5 个解析器），覆盖各平台导出格式识别、三种时间戳精度换算、附件与多行消息保留、`--self-name` 方向判定、以及"解析器输出能直接喂 writer"的端到端契约。测试总数 39 → 47
+- 📖 **PLATFORM-GUIDE 补齐脚本对照** — 该文档是"平台数据获取指南"，但 v1.7.0 加了 5 个解析器后它完全没提，用户读完导出步骤仍不知道该跑哪个脚本。现新增「Which Parser to Use」对照表（10 行，含可直接复制的命令）
+- 📅 **门面与时序修正** — README 首屏版本章节停留在 v1.5.1（买家常看的第一屏）；README_EN 缺少 What's New 章节；ROADMAP 的版本进度表停在 v1.5.1 且 v1.6.0/v1.7.0 号段与实际发布内容错位（原计划的「社区模板扩展」顺延为 v1.8.0）
+- 🌐 **8 个语言版 README** 补上国际解析器说明
+
+验证：47 项测试全绿、模拟 agent 引用完整性全过、国际解析器样本验证全过、打包断言全过。
+
 ## [1.7.0] - 2026-10-13
 
 ### 补齐国际平台导入工具（海外用户的实际入口）

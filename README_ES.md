@@ -307,6 +307,8 @@ python3 scripts/proactive_feishu.py \
 | 📄 Genérico | Cualquier texto | Importación manual | TXT / JSON / CSV / MD |
 
 > Para ver instrucciones detalladas de exportación, consulta la [Guía de obtención de datos de plataformas](docs/PLATFORM-GUIDE.md)
+>
+> Cada plataforma tiene su propio script analizador — `scripts/*_parser.py` (8 analizadores, solo biblioteca estándar; ahora también Discord / Slack / WhatsApp / Instagram / correo).
 
 ---
 

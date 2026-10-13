@@ -73,6 +73,21 @@ Not a cold archive. A grandma who nags you about eating properly during Lunar Ne
 
 ---
 
+## 🛠️ v1.7.0 — International Import Tools Completed
+
+This release settles "what can I actually import": **from 3 parsers (2 of them China-only) to 8**.
+
+- 🌍 **5 new international parsers** — Discord (ChatExporter / official data package), Slack (resolves user IDs to real names), WhatsApp (iOS / Android / EU time formats), Instagram (DMs + comments), Email (Gmail Takeout / Apple Mail, trims quoted history automatically)
+- 🧩 **One output contract** — all 8 parsers emit the same JSON, feeding `relic_writer.py --data` directly and mixing freely across platforms
+- 🐍 **Stdlib only** — the 5 new parsers need zero third-party packages; `python3 scripts/xxx_parser.py` just works
+- 🪑 **New Object template** — "everything can be a Relic" now covers objects too (old cameras, kitchen chairs, travel backpacks)
+- 🔧 **Three long-standing bugs fixed** — expert / feishu-cli templates used to crash on selection, English proactive messages mixed in Chinese punctuation, packaging was not reproducible
+- 📦 **Release zip 2.8MB → 454KB** — packaging now uses an explicit whitelist with assertions
+
+> See the [Platform Data Export Guide](docs/PLATFORM-GUIDE.md) for which script to use per platform.
+
+---
+
 ## Templates for Everything
 
 Not just people. Everything deserves a Relic.

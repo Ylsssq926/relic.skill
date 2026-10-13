@@ -312,6 +312,8 @@ python3 scripts/feishu_forge.py \
 | 📄 Genérico | Qualquer texto | Importação manual | TXT / JSON / CSV / MD |
 
 > Para o passo a passo de exportação, veja o [Guia de Exportação de Dados por Plataforma](docs/PLATFORM-GUIDE.md)
+>
+> Cada plataforma tem seu próprio script de análise — `scripts/*_parser.py` (8 analisadores, apenas biblioteca padrão; Discord / Slack / WhatsApp / Instagram / e-mail agora incluídos).
 
 ---
 

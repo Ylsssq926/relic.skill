@@ -307,6 +307,8 @@ python3 scripts/proactive_feishu.py \
 | 📄 Allgemein | Beliebiger Text | Manueller Import | TXT / JSON / CSV / MD |
 
 > Ausführliche Exportanleitungen findest du im [Leitfaden zur Plattform-Datenbeschaffung](docs/PLATFORM-GUIDE.md)
+>
+> Jede Plattform hat ein eigenes Parser-Skript — `scripts/*_parser.py` (8 Parser, reine Standardbibliothek; Discord / Slack / WhatsApp / Instagram / E-Mail werden jetzt ebenfalls unterstützt).
 
 ---
 
