@@ -106,3 +106,7 @@ relic.zip
 # ===== 部署配置（含服务器地址，禁止提交）=====
 .env.deploy
 .workbuddy/
+
+# 商业增值包：只在付费版分发，不进公开仓库
+COMMERCIAL-PACK/
+relic-commercial.zip

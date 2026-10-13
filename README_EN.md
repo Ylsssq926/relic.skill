@@ -550,6 +550,21 @@ relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
 
 > Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
 
+### Two Editions
+
+| | This repository (public framework) | Commercial edition (Agensi) |
+|---|---|---|
+| Four-dimension distillation / evidence grading / protection layer | ✅ | ✅ |
+| 10 platform parsers / 10 templates / 8 demos | ✅ | ✅ |
+| Commercial license | ❌ (personal use free; commercial requires a license) | ✅ |
+| **Scenario playbooks** (enterprise knowledge transfer / family legacy / creator persona) | ❌ | ✅ |
+| **Deployment & data-governance guide** | ❌ | ✅ |
+| Withdrawal & support commitment | community | priority channel |
+
+The public edition gives you the complete toolchain. The commercial edition adds three **battle-tested playbooks**, a pre-delivery sanitization and governance checklist, and a license that covers commercial work.
+
+> Relics produced by either edition share the **exact same file format** and can be moved freely between them — the difference is licensing and companion content, not data.
+
 ---
 
 <p align="center">

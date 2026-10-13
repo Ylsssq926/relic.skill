@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.1] - 2026-10-13
+
+### 两版分发：公开框架版 vs 商业版
+
+把「公开仓库」与「付费版」的差异做成机制，而不是靠自觉。
+
+**背景**：此前 GitHub 仓库与 Agensi 分发的 zip 内容完全相同——买家付 $29 拿到的东西和免费 clone 的一样。授权条款区分了商用/非商用，但**产品内容**没有区分。
+
+**现在的分发结构**：
+
+| | 公开框架版 `relic.zip` | 商业版 `relic-commercial.zip` |
+|---|---|---|
+| 框架（四维 / 证据分级 / 保护层 / 10 解析器 / 10 模板 / 8 示例） | ✅ | ✅ |
+| `COMMERCIAL-PACK/`（3 份场景配方 + 部署治理指南 + 支持承诺） | ❌ | ✅ |
+| 商用授权 | ❌ | ✅ |
+| 体积 | 606 KB / 144 文件 | 622 KB / 150 文件 |
+
+**商业增值包内容**（`COMMERCIAL-PACK/`，已加入 `.gitignore`，不进公开仓库）：
+
+- `recipes/enterprise-knowledge-transfer.md` — 企业知识传承：素材门槛（300 条留痕 / 20 处判断痕迹 / 3 个复盘）、四维填写要点、验收阈值、4 类常见失败模式
+- `recipes/family-legacy.md` — 家族记忆工程：同意地图（多对象 × 多提供者）、素材三层分级、代际语气差异处理、跨档案一致性验收
+- `recipes/creator-persona.md` — 创作者人格资产：三种用途选型、公开内容蒸馏纪律、三条商业红线、读者验收法
+- `deploy/production-notes.md` — 交付前脱敏清单（含扫描脚本）、访问控制四档、部署三形态、常见生产事故、撤回机制
+- `support.md` — 更新通道、四步排查顺序、环境问题速查、支持边界、撤回处理承诺
+
+**打包脚本升级**：`tools/package_release.py` 新增 `--edition public|commercial`；两版输出不同文件名，且**互相断言**——商业版必须有 `COMMERCIAL-PACK/`，公开版必须没有，防止两者静默趋同。
+
+**文档**：README 中英新增「两个版本」对照表，明确公开版给工具、商业版给打法与许可，并说明两版产出的 Relic 文件格式完全一致、可自由迁移。
+
 ## [1.10.0] - 2026-10-13
 
 ### CI/CD 重构 + 第 10 个平台 + 跨平台兼容性修复

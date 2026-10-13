@@ -26,6 +26,18 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_ZIP = ROOT / "relic.zip"
+OUT_ZIP_COMMERCIAL = ROOT / "relic-commercial.zip"
+
+# 商业增值包：只在 commercial 版里出现（.gitignore 已排除，公开仓库不含）。
+COMMERCIAL_DIR = "COMMERCIAL-PACK"
+COMMERCIAL_FILES = [
+    f"{COMMERCIAL_DIR}/README.md",
+    f"{COMMERCIAL_DIR}/support.md",
+    f"{COMMERCIAL_DIR}/recipes/enterprise-knowledge-transfer.md",
+    f"{COMMERCIAL_DIR}/recipes/family-legacy.md",
+    f"{COMMERCIAL_DIR}/recipes/creator-persona.md",
+    f"{COMMERCIAL_DIR}/deploy/production-notes.md",
+]
 STAGE = Path(os.environ.get("TEMP", "/tmp")) / "relic-package-stage"
 
 # ---------------------------------------------------------------- whitelist
@@ -137,8 +149,11 @@ def excluded(rel_posix: str, is_dir: bool) -> bool:
                for g in EXCLUDE_GLOBS)
 
 
-def collect() -> list[tuple[Path, str]]:
-    """Return [(source_path, path_inside_zip)] honoring the whitelist."""
+def collect(edition: str = "public") -> list[tuple[Path, str]]:
+    """Return [(source_path, path_inside_zip)] honoring the whitelist.
+
+    edition="commercial" additionally ships COMMERCIAL-PACK/ (paid extras).
+    """
     items: list[tuple[Path, str]] = []
     for name in FILES:
         p = ROOT / name
@@ -157,28 +172,36 @@ def collect() -> list[tuple[Path, str]]:
                 rel = (rel_dir / fn).as_posix()
                 if not excluded(rel, False):
                     items.append((Path(dirpath) / fn, f"relic/{rel}"))
+    if edition == "commercial":
+        for rel in COMMERCIAL_FILES:
+            src = ROOT / rel
+            if not src.exists():
+                sys.exit(f"[FAIL] commercial edition requires missing file: {rel}")
+            items.append((src, f"relic/{rel}"))
+
     return items
 
 
-def build() -> Path:
+def build(edition: str = "public") -> Path:
     if STAGE.exists():
         shutil.rmtree(STAGE)
     STAGE.mkdir(parents=True)
-    items = collect()
+    items = collect(edition)
     for src, arc in items:
         dst = STAGE / arc
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
-    if OUT_ZIP.exists():
-        OUT_ZIP.unlink()
-    with zipfile.ZipFile(OUT_ZIP, "w", zipfile.ZIP_DEFLATED) as z:
+    out_zip = OUT_ZIP_COMMERCIAL if edition == "commercial" else OUT_ZIP
+    if out_zip.exists():
+        out_zip.unlink()
+    with zipfile.ZipFile(out_zip, "w", zipfile.ZIP_DEFLATED) as z:
         for _, arc in sorted(items, key=lambda x: x[1]):
             z.write(STAGE / arc, arc)
     shutil.rmtree(STAGE)
-    return OUT_ZIP
+    return out_zip
 
 
-def verify(zip_path: Path) -> int:
+def verify(zip_path: Path, edition: str = "public") -> int:
     failures = []
     with zipfile.ZipFile(zip_path) as z:
         names = z.namelist()
@@ -195,6 +218,13 @@ def verify(zip_path: Path) -> int:
                 failures.append(
                     f"{prefix} expected {expected} entries matching {marker!r}, "
                     f"found {len(found)}")
+
+        # 版本一致性：商业包必须在 commercial 版里、在 public 版里绝迹
+        has_pack = any(COMMERCIAL_DIR + "/" in n for n in names)
+        if edition == "commercial" and not has_pack:
+            failures.append(f"commercial edition is missing {COMMERCIAL_DIR}/")
+        if edition == "public" and has_pack:
+            failures.append(f"public edition must not ship {COMMERCIAL_DIR}/")
 
         # 条目名禁入
         for n in names:
@@ -238,18 +268,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Build/verify the relic.skill release zip")
     ap.add_argument("--verify-only", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--edition", choices=["public", "commercial"], default="public",
+                    help="public = GitHub 分发（框架）；commercial = Agensi 分发（框架 + 商业包）")
     a = ap.parse_args()
     if a.list:
-        for src, arc in collect():
+        for src, arc in collect(a.edition):
             print(arc)
         return 0
     if a.verify_only:
-        if not OUT_ZIP.exists():
-            sys.exit("[FAIL] relic.zip not found")
-        return verify(OUT_ZIP)
-    z = build()
-    print(f"[build] wrote {z}")
-    return verify(z)
+        target = OUT_ZIP_COMMERCIAL if a.edition == "commercial" else OUT_ZIP
+        if not target.exists():
+            sys.exit(f"[FAIL] {target.name} not found")
+        return verify(target, a.edition)
+    z = build(a.edition)
+    print(f"[build] wrote {z} (edition={a.edition})")
+    return verify(z, a.edition)
 
 
 if __name__ == "__main__":

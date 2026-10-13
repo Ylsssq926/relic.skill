@@ -3,7 +3,7 @@ name: relic-talk
 description: >
   Soul Engine — Bring an awakened Relic alive for conversation.
   Trigger on /relic-talk, or when user wants to talk to, chat with, or invoke a Relic ("talk to grandma", "chat with Mimi", "跟XX聊天", "召唤XX", "让XX回我").
-version: 1.10.0
+version: 1.10.1
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who you want to talk to (e.g. 'talk to grandma' / '让我跟奶奶聊天')"
