@@ -237,8 +237,17 @@ def apply_dry_run(media: MediaService, dry_run: bool) -> None:
         media.image.dry_run = dry_run
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """CLI 入口。"""
+    _ensure_utf8_output()
     configure_utf8_stdout()
     configure_logging()
     parser = create_argument_parser()

@@ -274,10 +274,10 @@ relic.skill は [Feishu CLI](https://github.com/larksuite/cli) をデータ収�
 
 ```bash
 # 飛書 IM 履歴を収集
-python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
 
 # 飛書ドキュメントを収集
-python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/lark_expert_forge.py --expert "<name>" --email "<email>" --dry-run
 ```
 
 **能動的行動の例：**

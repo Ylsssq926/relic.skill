@@ -88,6 +88,7 @@ Import parsers (data → normalized JSON → relic_writer):
 - python3 scripts/email_parser.py --help       # Gmail Takeout / Apple Mail .mbox
 - python3 scripts/instagram_parser.py --help    # Instagram data download
 - python3 scripts/imessage_parser.py --help   # iMessage chat.db (macOS)
+- python3 scripts/lark_parser.py --help       # Feishu / Lark export
 - python3 scripts/wechat_parser.py --help      # WeChat (Mainland China)
 - python3 scripts/qq_parser.py --help          # QQ (Mainland China)
 
@@ -122,8 +123,8 @@ relic.skill/
 ├── soul-forge/           ← Soul Forge (distillation engine)
 ├── soul-engine/          ← Soul Engine (interaction system)
 ├── soul-shield/          ← Soul Shield (protection & ethics)
-├── templates/            ← universal templates x9
-├── examples/             ← demo Relics x3
+├── templates/            ← universal templates x10
+├── examples/             ← demo Relics x8
 ├── scripts/              ← Python tool scripts
 └── docs/                 ← deep-dive documentation
 ```

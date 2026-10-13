@@ -87,7 +87,7 @@ Not a cold archive. A grandma who nags you about eating properly during Lunar Ne
 
 ## How to Use It (Two Ways, Pick One)
 
-**Way 1: Conversation only — no terminal (recommended for everyone)**
+### Way 1: Conversation only — no terminal (recommended for everyone)
 
 Put the `relic/` folder where your AI assistant can read it, then just talk:
 
@@ -99,7 +99,7 @@ Put the `relic/` folder where your AI assistant can read it, then just talk:
 
 The assistant reads `SKILL.md` and executes step by step. You never type a command.
 
-**Way 2: Command-line scripts (optional, for bulk data)**
+### Way 2: Command-line scripts (optional, for bulk data)
 
 When the material is 200k Discord messages or a Gmail archive — too much to paste — use a parser to turn it into normalized JSON first:
 
@@ -356,10 +356,10 @@ lark-cli --help
 
 ```bash
 # Collect Feishu IM history
-python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
 
 # Collect Feishu Docs
-python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/lark_expert_forge.py --expert "<name>" --email "<email>" --dry-run
 ```
 
 **Proactive Behavior Example:**
@@ -403,7 +403,8 @@ send_message(
 | 🌐 Social | Instagram | Download Your Information | `scripts/instagram_parser.py` |
 | 💬 Messaging | WeChat | WeChatMsg / 留痕 / PyWxDump | `scripts/wechat_parser.py` |
 | 💬 Messaging | QQ | Official export | `scripts/qq_parser.py` |
-| 💬 Work | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
+| 💬 Work | Feishu | admin-console export / [Feishu CLI](https://github.com/larksuite/cli) | `scripts/lark_parser.py` |
+| 💬 Work | Feishu (expert full-chain) | Feishu CLI across IM/Docs/Base | `scripts/lark_expert_forge.py` |
 | 💬 Work | DingTalk | API | export JSON, then generic import |
 | 📱 Mobile | iMessage | `~/Library/Messages/chat.db` | `scripts/imessage_parser.py` |
 | 🌐 Social | Twitter/X | Official archive | export JSON, then generic import |
@@ -430,6 +431,9 @@ python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
 
 # iMessage (macOS database; your terminal may need Full Disk Access)
 python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
+
+# Feishu (admin-console CSV / lark-cli JSON / plain text export)
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
 
 # Then generate the Relic
 python3 scripts/relic_writer.py --data data.json --template human --slug grandma
@@ -477,7 +481,7 @@ relic.skill/
 │
 ├── templates/                  # 📋 Templates for everything x10 (with a selection guide)
 ├── examples/                   # 🎯 Example Relics x8 (8 of 10 templates, with walkthroughs)
-├── scripts/                    # 🔧 Python utility scripts x17 (including Feishu full-chain forging)
+├── scripts/                    # 🔧 Python utility scripts x24 (10 platform parsers incl. Feishu full-chain)
 ├── assets/                     # 🎨 Visual assets
 ├── docs/                       # 📚 In-depth docs (including the tools guide)
 └── ROADMAP.md                  # 🗺️ Product roadmap

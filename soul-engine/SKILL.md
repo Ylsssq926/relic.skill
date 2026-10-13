@@ -3,7 +3,7 @@ name: relic-talk
 description: >
   Soul Engine — Bring an awakened Relic alive for conversation.
   Trigger on /relic-talk, or when user wants to talk to, chat with, or invoke a Relic ("talk to grandma", "chat with Mimi", "跟XX聊天", "召唤XX", "让XX回我").
-version: 1.9.1
+version: 1.10.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who you want to talk to (e.g. 'talk to grandma' / '让我跟奶奶聊天')"
@@ -62,6 +62,7 @@ When entering conversation, load in this order:
    - `evolution.md`
 
    **Note: the target Relic's own interaction.md outranks soul-engine/interaction.md.**
+
    - If the Relic's interaction.md defines a specific scene, use it first
    - If it does not cover a scene, fall back to the generic soul-engine/interaction.md
 

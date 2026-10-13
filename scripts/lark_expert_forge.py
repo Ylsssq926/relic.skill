@@ -49,7 +49,8 @@ def run_lark_cli(args: List[str], dry_run: bool = False) -> Optional[Union[Dict,
         log("info", f"[DRY-RUN] {Colors.BOLD}{' '.join(cmd)}{Colors.ENDC}")
         return None
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+        result = subprocess.run(cmd, capture_output=True, text=True,
+                                encoding="utf-8", errors="replace", timeout=120)
         if result.returncode != 0:
             log("error", f"CLI 执行失败: {result.stderr.strip()}")
             return None
@@ -612,13 +613,15 @@ class ExpertForge:
         # 调用 relic_writer.py 生成完整 Relic 文件夹
         if not self.dry_run:
             relic_writer_cmd = [
-                sys.executable, "scripts/relic_writer.py",
+                # 绝对路径：从任意工作目录调用本脚本都能找到 writer
+                sys.executable, str(Path(__file__).resolve().parent / "relic_writer.py"),
                 "--data", str(self.output_dir / "relic_config.json"),
                 "--template", "expert",
                 "--slug", self.expert_name.lower().replace(" ", "-"),
             ]
             log("info", f"正在生成 Relic 文件夹...")
-            result = subprocess.run(relic_writer_cmd, capture_output=True, text=True, timeout=60)
+            result = subprocess.run(relic_writer_cmd, capture_output=True, text=True,
+                                          encoding="utf-8", errors="replace", timeout=60)
             if result.returncode == 0:
                 log("ok", f"Relic 文件夹已生成")
             else:
@@ -666,7 +669,16 @@ class ExpertForge:
         print(f"    3. 运行 python scripts/proactive_scheduler.py --relic {self.output_dir} --dry-run")
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main() -> None:
+    _ensure_utf8_output()
     parser = argparse.ArgumentParser(
         description="飞书 CLI 全链路专家数字身份锻造脚本",
         formatter_class=argparse.RawDescriptionHelpFormatter,

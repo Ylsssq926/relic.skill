@@ -979,8 +979,17 @@ def validate_args(args: argparse.Namespace) -> None:
     raise ImageConfigError("未提供 --prompt；或者请使用 --relic 并搭配 --type avatar/cover")
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """CLI 入口。"""
+    _ensure_utf8_output()
     configure_utf8_stdout()
     configure_logging()
     parser = create_argument_parser()

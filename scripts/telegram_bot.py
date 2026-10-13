@@ -1241,8 +1241,17 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     return parser.parse_args(argv)
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     """CLI 入口。"""
+    _ensure_utf8_output()
     configure_utf8_stdio()
     args = parse_args(argv)
     configure_logging(debug=args.debug)

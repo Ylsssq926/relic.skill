@@ -71,6 +71,9 @@ python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
 # iMessage (macOS)
 python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
 
+# Feishu / Lark
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
+
 # WeChat (Mainland China)
 python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
@@ -680,5 +683,5 @@ Once configured, you can:
 ---
 
 <p align="center">
-  <em>配置过程中遇到问题?在 <a href="https://github.com/Ylsssq926/relic.skill/issues">GitHub Issues</a> 里提问,我们会帮你。</em>
+  <em>配置过程中遇到问题?在 <a href="https://github.com/Ylsssq926/relic.skill/issues"GitHub Issues</a> 里提问,我们会帮你。</em>
 </p>

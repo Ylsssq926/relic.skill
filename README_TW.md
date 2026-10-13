@@ -272,10 +272,10 @@ relic.skill 支援 [Feishu CLI](https://github.com/larksuite/cli) 作為資料�
 
 ```bash
 # 收集飛書 IM 歷史
-python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
 
 # 收集飛書文件
-python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/lark_expert_forge.py --expert "<name>" --email "<email>" --dry-run
 ```
 
 **主動行為範例：**

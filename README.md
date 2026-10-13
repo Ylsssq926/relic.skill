@@ -89,7 +89,7 @@ relic.skill 是一个万物永生引擎。
 
 ## 怎么用（两种方式，任选其一）
 
-**方式一：只用对话，不碰命令行（推荐给所有人）**
+### 方式一：只用对话，不碰命令行（推荐给所有人）
 
 把 `relic/` 放进你的 AI 助手能读到的地方，然后直接说话：
 
@@ -101,7 +101,7 @@ relic.skill 是一个万物永生引擎。
 
 助手会读 `SKILL.md` 并逐步执行，全程不需要你输入任何命令。
 
-**方式二：命令行脚本（可选，用于批量数据）**
+### 方式二：命令行脚本（可选，用于批量数据）
 
 当素材是几十万条聊天记录、Gmail 归档这类"手贴不进去"的量级时，用脚本先转成标准 JSON：
 
@@ -477,7 +477,7 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 
 ## 支持的数据平台
 
-**9 个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON。
+**10 个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON。
 
 > 命令按 macOS / Linux 惯例写成 `python3`；**Windows 用户请用 `python`**（例如 `python scripts\discord_parser.py --help`），路径中的 `~` 换成 `%USERPROFILE%`。
 
@@ -491,7 +491,8 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 | 🌐 社交 | Instagram | Download Your Information | `scripts/instagram_parser.py` |
 | 💬 即时通讯 | 微信 | WeChatMsg / 留痕 / PyWxDump | `scripts/wechat_parser.py` |
 | 💬 即时通讯 | QQ | 官方导出 | `scripts/qq_parser.py` |
-| 💬 办公 | 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
+| 💬 办公 | 飞书 | 管理后台导出 / [飞书 CLI](https://github.com/larksuite/cli) | `scripts/lark_parser.py` |
+| 💬 办公 | 飞书（专家全链路） | 飞书 CLI 深度联动 IM/Docs/Base | `scripts/lark_expert_forge.py` |
 | 💬 办公 | 钉钉 | API | 导出 JSON 后走通用导入 |
 | 📱 手机 | iMessage | `~/Library/Messages/chat.db` | `scripts/imessage_parser.py` |
 | 🌐 社交 | Twitter/X | 官方归档 | 导出 JSON 后走通用导入 |
@@ -519,12 +520,12 @@ python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
 # iMessage（macOS 现成数据库，可能需要给终端「完全磁盘访问权限」）
 python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
 
+# 飞书（管理后台导出 CSV / lark-cli JSON / 文本导出）
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
+
 # 然后生成 Relic
 python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 ```
-
-> 详细的导出教程见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)
-| 📄 通用 | 任意文本 | 手动导入 | TXT / JSON / CSV / MD |
 
 > 详细的导出教程见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)
 
@@ -568,7 +569,7 @@ relic.skill/
 │
 ├── templates/                  # 📋 万物永生模板 x10（附选择指南）
 ├── examples/                   # 🎯 示例 Relics x8（覆盖 8/10 模板，附体验指南）
-├── scripts/                    # 🔧 Python 工具脚本 x17（含飞书全链路唤醒）
+├── scripts/                    # 🔧 Python 工具脚本 x24（含 10 个平台解析器与飞书全链路唤醒）
 ├── assets/                     # 🎨 视觉资源
 ├── docs/                       # 📚 深度文档（含推荐工具清单）
 └── ROADMAP.md                  # 🗺️ 产品路线图

@@ -80,11 +80,6 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
-def require_dateutil() -> None:
-    if date_parser is None:
-        raise RuntimeError("缺少依赖 python-dateutil，请先执行 pip install -r requirements.txt")
-
-
 def read_text_with_fallback(path: Path) -> str:
     for encoding in ("utf-8-sig", "utf-8", "utf-16", "utf-16le", "gb18030", "latin-1"):
         try:
@@ -101,6 +96,54 @@ def write_json(path: Path, payload: Dict[str, Any], pretty: bool) -> None:
         handle.write("\n")
 
 
+_STDLIB_DATETIME_FORMATS = (
+    "%Y-%m-%d %H:%M:%S",
+    "%Y-%m-%d %H:%M",
+    "%Y-%m-%d",
+    "%Y-%m-%dT%H:%M:%S",
+    "%Y-%m-%dT%H:%M",
+    "%d-%m-%Y %H:%M:%S",
+    "%m-%d-%Y %H:%M:%S",
+)
+
+
+def parse_datetime_flexible(text: str) -> Optional[datetime]:
+    """把日期字符串解析成 datetime，优先用 dateutil，缺依赖时退回标准库。
+
+    标准库路径覆盖导出文件里实际出现过的写法：ISO（含时区）、
+    "YYYY-MM-DD HH:MM[:SS]"、以及中文的"YYYY年M月D日"。
+    naive 结果保持 naive —— 与 dateutil 的行为一致，时间戳按本地时区换算。
+    """
+    candidate = str(text).strip()
+    if not candidate:
+        return None
+
+    if date_parser is not None:
+        try:
+            return date_parser.parse(candidate)
+        except (ValueError, OverflowError, TypeError):
+            return None
+
+    # --- 标准库路径 ---
+    iso_candidate = candidate.replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(iso_candidate)
+    except ValueError:
+        pass
+
+    normalized = (candidate
+                  .replace("年", "-").replace("月", "-").replace("日", " ")
+                  .replace("/", "-").replace(".", "-"))
+    normalized = re.sub(r"\s+", " ", normalized).strip().rstrip("-")
+    for fmt in _STDLIB_DATETIME_FORMATS:
+        try:
+            return datetime.strptime(normalized, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+
 def normalize_time_text(text: str) -> str:
     return text.replace("年", "-").replace("月", "-").replace("日", "")
 
@@ -109,10 +152,8 @@ def normalize_timestamp(value: Any) -> Tuple[Optional[int], Optional[str]]:
     text = str(value).strip()
     if not text:
         return None, None
-    require_dateutil()
-    try:
-        parsed = date_parser.parse(normalize_time_text(text))
-    except (ValueError, OverflowError):
+    parsed = parse_datetime_flexible(normalize_time_text(text))
+    if parsed is None:
         return None, text
     return int(parsed.timestamp()), parsed.isoformat()
 
@@ -350,7 +391,16 @@ def create_argument_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    _ensure_utf8_output()
     parser = create_argument_parser()
     args = parser.parse_args(argv)
 

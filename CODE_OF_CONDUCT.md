@@ -1,14 +1,14 @@
 # Contributor Covenant Code of Conduct
 
-本公约参考 Contributor Covenant 2.1，并结合 relic.skill 的使用场景补充了专属红线。  
+本公约参考 Contributor Covenant 2.1，并结合 relic.skill 的使用场景补充了专属红线。
 This code of conduct is adapted from Contributor Covenant 2.1, with additional rules for relic.skill.
 
 ## 我们的承诺 / Our Pledge
 
-我们承诺为每一位参与者提供开放、友善、尊重的社区环境，不因年龄、体型、可见或不可见的残障、族群、性别特征、性别认同与表达、经验水平、教育程度、社会经济地位、国籍、外貌、种族、宗教或性取向而区别对待。  
+我们承诺为每一位参与者提供开放、友善、尊重的社区环境，不因年龄、体型、可见或不可见的残障、族群、性别特征、性别认同与表达、经验水平、教育程度、社会经济地位、国籍、外貌、种族、宗教或性取向而区别对待。
 We pledge to make participation in our community a respectful and harassment-free experience for everyone, regardless of age, body size, visible or invisible disability, ethnicity, sex characteristics, gender identity and expression, level of experience, education, socio-economic status, nationality, personal appearance, race, religion, or sexual identity and orientation.
 
-我们也承诺：在 relic.skill 社区内，讨论和创作与 Relic 相关的内容时，始终尊重被蒸馏对象的隐私、尊严与边界。  
+我们也承诺：在 relic.skill 社区内，讨论和创作与 Relic 相关的内容时，始终尊重被蒸馏对象的隐私、尊严与边界。
 We also pledge to respect the privacy, dignity, and boundaries of the people or subjects being distilled into Relics.
 
 ## 鼓励的行为 / Positive Behavior
@@ -55,17 +55,17 @@ The following behaviors are unacceptable in the relic.skill community:
 
 ## 执行责任 / Enforcement Responsibilities
 
-项目维护者有责任解释并执行本行为准则。对于违反规则的 issue、PR、评论、示例、数据片段或其他贡献，维护者可以删除、编辑、拒绝或要求修改。  
+项目维护者有责任解释并执行本行为准则。对于违反规则的 issue、PR、评论、示例、数据片段或其他贡献，维护者可以删除、编辑、拒绝或要求修改。
 Community maintainers are responsible for clarifying and enforcing this code of conduct. They may remove, edit, reject, or request changes to issues, pull requests, comments, examples, data snippets, or other contributions that violate these rules.
 
 ## 适用范围 / Scope
 
-本准则适用于所有项目空间，包括但不限于：GitHub issue、pull request、discussion、commit message、文档、示例数据、QQ群以及代表 relic.skill 社区发言的公开场合。  
+本准则适用于所有项目空间，包括但不限于：GitHub issue、pull request、discussion、commit message、文档、示例数据、QQ群以及代表 relic.skill 社区发言的公开场合。
 This code of conduct applies within all project spaces, including GitHub issues, pull requests, discussions, commit messages, documentation, example data, the QQ group, and public spaces when someone is representing the relic.skill community.
 
 ## 处理方式 / Reporting and Enforcement
 
-如果你遇到骚扰、隐私侵犯、未经授权蒸馏、冒充使用或其他违规行为，请私下联系项目维护者。你可以通过 GitHub 私信仓库维护者，或在 QQ 群 **1098169092** 联系管理员。请不要在公开场合继续扩散受害者的私密数据。  
+如果你遇到骚扰、隐私侵犯、未经授权蒸馏、冒充使用或其他违规行为，请私下联系项目维护者。你可以通过 GitHub 私信仓库维护者，或在 QQ 群 **1098169092** 联系管理员。请不要在公开场合继续扩散受害者的私密数据。
 If you experience harassment, privacy violations, unauthorized distillation, impersonation, or other misconduct, contact the maintainers privately. You may reach the repository maintainers through GitHub private contact or by messaging the admins in QQ group **1098169092**. Please do not amplify the victim's private data in public while reporting the issue.
 
 维护者会尽快审查报告，并根据情节采取措施，包括但不限于：
@@ -100,5 +100,5 @@ To keep the project aligned with its purpose, the following rules take priority:
 
 ## 参考与署名 / Attribution
 
-本文件基于 Contributor Covenant 2.1 改写：  
+本文件基于 Contributor Covenant 2.1 改写：
 <https://www.contributor-covenant.org/version/2/1/code_of_conduct/>

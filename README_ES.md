@@ -272,13 +272,10 @@ Integración nativa con [Feishu CLI](https://github.com/larksuite/cli) para dest
 ```bash
 # Recolectar mensajes de grupo Feishu (últimos 30 días)
 feishu-cli im list-messages --chat-id oc_xxx --start-time 2024-01-01 | \
-  python3 scripts/feishu_forge.py --type im --output data/feishu_im.json
+  python3 scripts/lark_parser.py --input ~/feishu_export --output data/feishu_im.json
 
 # Comportamiento proactivo: enviar recordatorio de reunión
-python3 scripts/proactive_feishu.py \
-  --relic exes/team-culture \
-  --trigger calendar_event \
-  --chat-id oc_xxx
+python3 scripts/proactive_scheduler.py --relic exes/team-culture --dry-run
 ```
 
 | Capacidad | Comando Feishu CLI | Caso de uso |

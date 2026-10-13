@@ -180,7 +180,9 @@ def deduplicate(messages: Sequence[Dict[str, Any]]) -> List[Dict[str, Any]]:
             continue
         seen.add(key)
         out.append(msg)
-    out.sort(key=lambda m: (m.get("timestamp") or 0, m.get("sender_name") or ""))
+        # 只按时间戳排序；无时间戳的消息落在 0，稳定排序会保持原始顺序。
+    # （把 sender_name 也放进 key 会让无时间戳的导出按人名重排，对话顺序乱掉。）
+    out.sort(key=lambda m: m.get("timestamp") or 0)
     return out
 
 

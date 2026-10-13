@@ -337,7 +337,16 @@ def cmd_diff(args: argparse.Namespace) -> int:
     return 0
 
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
+    _ensure_utf8_output()
     parser = create_argument_parser()
     args = parser.parse_args(argv)
     ensure_command_selected(parser, args)

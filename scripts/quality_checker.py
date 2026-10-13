@@ -468,8 +468,17 @@ def print_report(report: RelicReport, verbose: bool = False) -> None:
 # CLI
 # ---------------------------------------------------------------------------
 
+def _ensure_utf8_output() -> None:
+    """Windows 控制台默认 cp936，直接 print 中文会 UnicodeEncodeError 崩掉脚本。"""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
 def main() -> None:
     # 确保 Windows 终端下 stdout / stderr 都使用 UTF-8
+    _ensure_utf8_output()
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
     sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="utf-8", errors="replace")

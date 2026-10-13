@@ -308,6 +308,76 @@ class IMessageParserTest(ParserTestCase):
         self.assertEqual(outgoing[0]["sender_name"], "me@icloud.com")
 
 
+class LarkParserTest(ParserTestCase):
+    """飞书是第 10 个摄入渠道。真实导出有三种形态：lark-cli JSON、
+    管理后台 CSV、以及文本导出。三种都要能吃下来。"""
+
+    def test_lark_cli_json_with_nested_body(self):
+        """lark-cli im messages-list 的返回：create_time 是毫秒字符串，
+        body.content 是再包一层的 JSON 字符串。"""
+        path = self.tmpdir() / "messages.json"
+        path.write_text(json.dumps({
+            "code": 0,
+            "data": {"items": [
+                {"message_id": "om_1", "msg_type": "text",
+                 "create_time": "1677664800000",
+                 "sender": {"id": "ou_alice", "sender_type": "user"},
+                 "body": {"content": json.dumps({"text": "deploy is done"})}},
+                {"message_id": "om_2", "msg_type": "image",
+                 "create_time": "1677664860000",
+                 "sender": {"id": "ou_bob"},
+                 "body": {"content": json.dumps({"image_key": "img_1"})},
+                 "file_name": "topology.png"},
+            ]},
+        }, ensure_ascii=False), encoding="utf-8")
+        (self.tmpdir() / "users.json").write_text(json.dumps({
+            "data": {"items": [{"open_id": "ou_alice", "name": "Alice"}]},
+        }, ensure_ascii=False), encoding="utf-8")
+
+        proc, payload = self.run_parser("lark_parser.py", self.tmpdir(),
+                                        ["--self-name", "Alice"])
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(payload["source"]["platform"], "feishu")
+        contents = [m["content"] for m in payload["messages"]]
+        # 双层 JSON 必须被剥开
+        self.assertIn("deploy is done", contents)
+        # 非文本消息不能被静默丢弃
+        self.assertTrue(any("topology.png" in c for c in contents),
+                        f"image placeholder missing: {contents}")
+        # open_id → 真名
+        self.assertEqual(payload["messages"][0]["sender_name"], "Alice")
+        self.assertEqual(payload["messages"][0]["direction"], "outgoing")
+        # 毫秒字符串 → Unix 秒
+        self.assertEqual(payload["messages"][0]["timestamp"], 1677664800)
+
+    def test_admin_console_csv(self):
+        path = self.tmpdir() / "group.csv"
+        path.write_text(
+            "时间,发送者,内容\n"
+            "2023-03-01 10:00:00,张三,这个方案我看了\n"
+            "2023-03-01 10:01:00,李四,先按你说的改\n",
+            encoding="utf-8",
+        )
+        proc, payload = self.run_parser("lark_parser.py", path, ["--self-name", "张三"])
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(len(payload["messages"]), 2)
+        self.assertEqual(payload["messages"][0]["sender_name"], "张三")
+        self.assertEqual(payload["messages"][0]["direction"], "outgoing")
+
+    def test_plain_txt_dump(self):
+        path = self.tmpdir() / "chat.txt"
+        path.write_text(
+            "Alice: 早\n"
+            "Bob: 早，昨天的单子处理完了\n"
+            "Alice: 好\n",
+            encoding="utf-8",
+        )
+        proc, payload = self.run_parser("lark_parser.py", path)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(len(payload["messages"]), 3)
+        self.assertEqual(payload["messages"][1]["sender_name"], "Bob")
+
+
 class ParserToWriterContractTest(ParserTestCase):
     """The whole point of the unified contract: parser output feeds the writer."""
 

@@ -12,6 +12,18 @@ from scripts.feishu_bot import BotConfig, FeishuAPIError, RelicBot, RequestValid
 from scripts.relic_engine import OutgoingMessage, ResponsePlan
 
 
+def _flask_available() -> bool:
+    """create_app() 需要 Flask —— 那是可选的 bot 功能，不是核心流程。
+    缺依赖时跳过而不是报错：买家按文档只装核心依赖时，测试套件仍应全绿。"""
+    try:
+        import flask  # noqa: F401
+    except ImportError:
+        return False
+    return True
+
+
+HAS_FLASK = _flask_available()
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
 GRANDMA_RELIC = REPO_ROOT / "examples" / "grandma-demo"
 
@@ -383,6 +395,7 @@ class FeishuBotAdapterTest(unittest.TestCase):
         self.assertIn(b"Content-Type: audio/mpeg", body)
         self.assertIn(b"audio-bytes", body)
 
+    @unittest.skipUnless(HAS_FLASK, "requires flask (optional bot feature)")
     def test_create_app_healthz_returns_bot_status(self) -> None:
         bot = self.make_bot()
         app = create_app(bot)
@@ -394,6 +407,7 @@ class FeishuBotAdapterTest(unittest.TestCase):
         self.assertTrue(data["ok"])
         self.assertEqual(data["default_relic"], bot.default_relic_slug)
 
+    @unittest.skipUnless(HAS_FLASK, "requires flask (optional bot feature)")
     def test_create_app_webhook_rejects_invalid_json(self) -> None:
         bot = self.make_bot()
         app = create_app(bot)
@@ -403,6 +417,7 @@ class FeishuBotAdapterTest(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.get_json()["msg"], "invalid json")
 
+    @unittest.skipUnless(HAS_FLASK, "requires flask (optional bot feature)")
     def test_create_app_webhook_returns_bot_response(self) -> None:
         bot = self.make_bot()
         app = create_app(bot)

@@ -79,7 +79,7 @@ REQUIRED_PARSERS = [
     "scripts/telegram_parser.py", "scripts/discord_parser.py",
     "scripts/whatsapp_parser.py", "scripts/slack_parser.py",
     "scripts/instagram_parser.py", "scripts/email_parser.py",
-    "scripts/imessage_parser.py",
+    "scripts/imessage_parser.py", "scripts/lark_parser.py",
     "scripts/wechat_parser.py", "scripts/qq_parser.py",
 ]
 

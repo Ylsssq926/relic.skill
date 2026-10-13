@@ -277,7 +277,7 @@ lark-im export --chat-id "oc_xxx" --output feishu_chat.json
 lark-docs export --doc-id "doxcnxxx" --output feishu_docs.json
 
 # Forjar um Relic a partir dos dados do Feishu
-python3 scripts/feishu_forge.py \
+python3 scripts/lark_expert_forge.py \
   --chat feishu_chat.json \
   --docs feishu_docs.json \
   --template team-culture \

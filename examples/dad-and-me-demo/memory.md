@@ -3,6 +3,7 @@
 ## Memory Anchors
 
 ### 1. The shed week
+
 - When: 2019, late summer
 - Source: both accounts
 - Evidence: artifact
@@ -10,6 +11,7 @@
   that preceded it. On day three they started handing each other tools again.
 
 ### 2. The ninety-second call
+
 - When: every Sunday, 2011 – 2026
 - Source: call log
 - Evidence: artifact
@@ -17,6 +19,7 @@
   fifteen years.
 
 ### 3. The first drive
+
 - When: 2005
 - Source: family account
 - Evidence: artifact
@@ -24,6 +27,7 @@
   and none asked for. The son found a spare tyre he hadn't packed.
 
 ### 4. Door-slamming year
+
 - When: 2008
 - Source: both accounts, disagreeing
 - Evidence: artifact

@@ -5,13 +5,69 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.10.0] - 2026-10-13
+
+### CI/CD 重构 + 第 10 个平台 + 跨平台兼容性修复
+
+三个子代理并行审计（CI 配置 / 打包封装 / 跨平台兼容），发现的问题按主题修复。
+
+#### 一、新增飞书原生解析器（`scripts/lark_parser.py`）
+
+上架物料宣称"10 个平台原生摄入"并列了 Feishu/Lark，但实际只有 9 个解析器 —— 飞书走的是 `lark_expert_forge.py` 的全链路（不产出标准 JSON）。现补齐真正的解析器，支持三种真实导出形态：
+
+- lark-cli JSON：`create_time` 是毫秒字符串，`body.content` 是**再包一层的 JSON 字符串**（双层解析）
+- 管理后台 CSV：中文列名（时间/发送者/内容）
+- 文本导出：`说话人: 内容` 与 `说话人 日期 时间` 两种写法
+
+富媒体消息（图片/文件/语音/贴纸/卡片）转为可读占位而非丢弃；可选读取 `users.json` 把 open_id 还原成真名。**10 个平台全部纯标准库。**
+
+#### 二、跨平台兼容性（Windows 用户此前会直接报错）
+
+- **编码**：11 个脚本缺 stdout 守护，在 cp936 控制台打印中文会 `UnicodeEncodeError` 直接崩（rc=1）——现统一注入 `_ensure_utf8_output()`，并修正 `feishu_bot.py` 缺失的 `import sys`
+- **依赖**：qq / telegram / wechat 三个解析器硬依赖 `python-dateutil`，缺依赖时直接抛错 —— 与"解析器零依赖"的承诺矛盾。现改为**可选加速**：有 dateutil 走原路径（零回归），没有则退回标准库解析（覆盖 ISO / 多种日期格式 / 中文年月日）
+- **子进程**：`lark_expert_forge.py` 的两处 `subprocess.run(text=True)` 补 `encoding="utf-8"`；`relic_writer.py` 调用改用脚本自身目录的绝对路径（原为 cwd 相对路径）
+- **参数一致性**：`wechat_parser.py` 补 `--self-name`（此前只有它没有，文档却宣称所有解析器都支持）
+
+#### 三、CI/CD 重构
+
+- **markdownlint 一直在扫 node_modules**：忽略写法 `!node_modules` 不递归，实测带入 14000+ 误报（依赖包的 CHANGELOG）——修正为 `!**/node_modules/**` 并补齐其余忽略项
+- **core-tests（新）**：3 个操作系统 × 2 个 Python 版本矩阵，**不安装任何依赖** —— 把"零依赖可用"这条对买家的承诺变成 CI 门禁
+- **full-tests**：装可选依赖跑全套（含 bot 测试）
+- **package-gate（新）**：打包断言进 CI（买家拿到的就是这一个 zip，必须由 CI 把关）
+- **py-compile 降到 3.9**：故意用声明支持的最低版本，让 3.10+ 语法在此直接暴露
+- **integration-smoke（新）**：让 `scripts/test_integration.py` 真正跑起来（此前不在 discovery 路径内，等于死代码）
+- **demo-site 降级**：营销站与交付物无关，改为只在 PR 时跑
+
+#### 四、打包封装加固
+
+- **补 8 个语言版 README 进包**：README 顶部的语言切换器链接了它们，不进包就是 8 条死链
+- **内容级禁入扫描（新）**：此前只检查条目名，现扫描文件内容中的本机路径（`C://Users//...`）、密钥形态（`sk-` / `ghp_`）、内网地址、内部目录引用
+- **目录计数断言（新）**：模板=10 / 示例=8 / 解析器=10，数量对不上直接失败（防止"加了文件忘更新断言"）
+- **REQUIRED 补齐**：docs 从 5 → 7，示例从 3 → 8，解析器从 9 → 10
+
+#### 五、markdownlint 归零（135 → 0）
+
+根因不是文档手误，而是**生成器产出违规格式**：`relic_writer.py` 的四个 builder 在"标题 + 列表"之间不留空行，每个买家生成的 Relic 都会继承 → 治本（改生成器），再治标（批量修现有文档）。
+
+- 修 `relic_writer.py` 的 9 处拼接格式
+- 批量修 71 个文档文件的结构性问题（列表空行、连续空行、结尾换行、裸 URL、列表标记统一）
+- 删除 README 中早先编辑留下的表格残骸（孤立表格行 + 重复引用行）
+- 修复过程中发现并修正了一个自伤：自动修复脚本把 HTML 属性的 `src="<url>"` 写坏（63 处 badge），以及给列表续行注入空行打断有序列表（121 处）——均已还原
+
+#### 六、文档与实际对齐
+
+- 9 个 README（EN + 8 语言）引用了 3 个**不存在的脚本**（`feishu_collector.py` / `feishu_forge.py` / `proactive_feishu.py`），命令参数也是虚构的 —— 全部改为真实脚本与真实参数
+- 文件计数同步：FOR_AI 的 `templates x9 / examples x3`、README 的 `scripts x17` → 实际值
+
+**验证**：71 项单元测试全过（新增飞书 3 项）· 24/24 脚本零依赖可加载 · markdownlint 101 文件 0 错误 · 打包断言全过（144 entries）· 8 个示例质检分数未受影响。
+
 ## [1.9.1] - 2026-10-13
 
 ### 用户视角补完：零技术用户路径 + 撤回同意说明
 
 继续多视角审计，补上两个此前没有正面回答的用户问题。
 
-**「我不会用命令行，还能用吗？」**
+#### 「我不会用命令行，还能用吗？」
 
 FAQ 有 23 个问题，但没有一个回答这个 —— 而它恰恰是最大客群的第一个疑问。现新增 FAQ #24，明确两层结构：
 
@@ -20,7 +76,7 @@ FAQ 有 23 个问题，但没有一个回答这个 —— 而它恰恰是最大�
 
 README（中英）同步新增「怎么用（两种方式，任选其一）」章节，把这条路径放在版本说明之前 —— 买家不必先读脚本列表才知道自己可以不碰命令行。
 
-**「怎么删除 Relic / 撤回同意？」**
+#### 「怎么删除 Relic / 撤回同意？」
 
 新增 FAQ #25，给出四档处置而非单一"删掉"：暂停（不再加载）／收窄（改 `manifest.json` 的披露策略与授权范围）／撤回（重跑六问同意协议，撤回永远优于先前的授权）／换指纹（让旧副本可与当前版本区分）。并明确：若素材来自他人，对方的撤回具有约束力，无论技术工作是谁做的。
 
@@ -32,7 +88,7 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 
 代入 agent / Windows 用户 / WorkBuddy 用户 / 非人类模板用户四种视角做了一轮系统审查，发现的问题分四类修复。
 
-**一、agent 路由缺失（最严重）**
+#### 一、agent 路由缺失（最严重）
 
 新增的示例目录没进 agent 的路由表，agent 永远找不到它们：
 
@@ -40,13 +96,13 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 - 触发词表补入物件与关系场景（"让我跟这台相机聊聊" / "讲讲我和我爸的关系"）
 - **新增 `DemoRoutingTest`（3 项断言）**：示例目录必须同时出现在 SKILL.md、FOR_AI.md、examples/README.md 中，且文件齐全、manifest 通过 schema —— 这类"加了文件忘了接路由"的问题从此由 CI 拦住
 
-**二、Windows / 多环境适配**
+#### 二、Windows / 多环境适配
 
 - 全部文档按 macOS/Linux 惯例写 `python3`，但 **Windows 上只有 `python` / `py`** —— README（中英）平台表与安装章节均补充命令约定说明；PLATFORM-GUIDE 同步
 - 8 个语言版 README 的安装片段含 `mkdir -p .claude/skills`（Windows 不认，且单一环境假设）—— 改为跨平台写法并补 WorkBuddy 路径
 - 安装路径补 **WorkBuddy**（`~/.workbuddy/skills/relic`）；此前只覆盖 Claude Code / Cursor / Windsurf / Cline
 
-**三、示例覆盖 5 → 8（8/10 模板）**
+#### 三、示例覆盖 5 → 8（8/10 模板）
 
 新增三个英文示例，覆盖此前空白的三类对象：
 
@@ -56,14 +112,14 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 | `proposal-demo` | moment | 那个下午：先慢放现场再谈意义；**故意保留一处双方记忆不一致的锚点** |
 | `tech-lead-demo` | expert | 退休技术主管：B 端知识传承；"我是 Relic，不是在职顾问"写进身份而非附加条款 |
 
-**四、质检器架构修复（影响全部非 human 模板）**
+#### 四、质检器架构修复（影响全部非 human 模板）
 
 `quality_checker.py` 的四槽（认知/表达/行为/情感）是为 human 设计的，其他模板的四维被各自重定义（place = 感官/事件/联结/氛围，expert = 判断/直觉/知识/传承），关键词表不可能穷尽 —— 导致这些模板被误判"维度缺失"（object 示例曾只得 48.6，expert 的行为槽恒为 0）。
 
 - **按顺序兜底**：关键词匹配不到的槽，按 personality.md 的章节顺序补位（顺序即维度顺序，正是 writer 生成骨架的排列方式）。修复后 10/10 模板均能正确评分（73-78）
 - **英文证据判定**：记忆锚点的"有证据"判定只认中文 `来源：`，英文 Relic 的 `Source:` 恒判为无证据 —— 现同时接受 `Source:` / `Evidence:`
 
-**五、示例质量对齐**
+#### 五、示例质量对齐
 
 - 5 个新示例的 manifest 用 `manifest_schema` 基线 + 自定义字段合并补全（此前缺 identity / relationship / safety / compliance 等 18 个字段，schema 校验不通过）
 - 记忆锚点补证据等级标注（新示例 0 → 100% 覆盖；存量 cat-mimi-demo 8 段全部补齐）
@@ -75,14 +131,14 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 
 ### 示例覆盖 3 → 5 + 质检器多模板误判修复
 
-**新增两个示例（英文人格，海外买家可直接体验）**
+#### 新增两个示例（英文人格，海外买家可直接体验）
 
 - 📷 `examples/old-camera-demo/` — 物件模板：一台 1978 年的尼康 FM2，父亲用了三十年、2009 年传给儿子；四角磨出黄铜色，留下来不是因为值钱，而是它拍下了三十年里所有普通的周日
 - 👨‍👦 `examples/dad-and-me-demo/` — 关系模板：蒸馏的不是人，而是两人之间的模式（九十个字的电话、靠递扳手结束的争吵）；刻意保留一处双方记忆不一致的锚点，演示「矛盾并存」原则
 
 两个示例都是英文骨架，同时验证了 v1.8.0 的语言自适应路径。
 
-**修复：质检器对非人类模板的误判**
+#### 修复：质检器对非人类模板的误判
 
 `quality_checker.py` 的四维映射表只收录了 human/pet/team 的维度名，导致 object / expert / relationship 等模板的四维（使用痕迹 / 专业判断 / 沟通模式 …）被当成缺失——object 示例原本只得 48.6 分（四维覆盖 19）。现已收录全部模板的中英双语维度名：
 
@@ -100,7 +156,7 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 
 验收报告里列出的三项短板，本轮全部落地。
 
-**生成内容语言自适应（最大缺口）**
+#### 生成内容语言自适应（最大缺口）
 
 英文买家跑 `relic_writer.py` 时，此前会拿到「中文结构标签 + 英文素材」的混合骨架——约 80 个标签串（基本画像 / 四维画像 / 认知框架 …）+ 30 个维度引导句模板。直接使用（不走 agent 精修）的人看到的就是半成品。
 
@@ -110,11 +166,11 @@ README（中英）同步新增「怎么用（两种方式，任选其一）」�
 - 英文骨架零中文残留（含标点规范化：顿号 → 逗号、全角引号 → 半角）
 - 中文路径逐条回归，无行为变化
 
-**iMessage 解析器（第 9 个平台）**
+#### iMessage 解析器（第 9 个平台）
 
 macOS 的 `chat.db` 是现成的数据库，不需要导出对话框。`scripts/imessage_parser.py` 处理 Apple epoch（纳秒/秒两种精度）、`attributedBody` 二进制兜底（现代 macOS 常把 `text` 置空）、tapback 表情过滤、附件占位符还原。
 
-**引用完整性检查纳入 CI**
+#### 引用完整性检查纳入 CI
 
 此前 59 项引用断言只是本地临时脚本（位于 gitignore 目录），CI 覆盖不到。现移植为 `tests/test_repo_integrity.py`（7 个测试）：四条工作流文件存在性、模板引用、frontmatter 可解析、文档相对路径引用零死链、买家关键路径语言覆盖、9 个解析器随包发布。
 
@@ -172,22 +228,22 @@ macOS 的 `chat.db` 是现成的数据库，不需要导出对话框。`scripts/
 
 上架适配的第三轮：从"文档英文化"下沉到**工具链实际可用性**，并用回归测试挖出三个此前从未被发现的缺陷。
 
-**工具链适配（面向非中文环境的 agent 调用）**
+#### 工具链适配（面向非中文环境的 agent 调用）
 
 - 🐍 **命令一致性** — 全部文档与 17 个脚本的调用示例改用 `python3`（macOS/Linux 惯例），SETUP 新增「Environment Setup」节与依赖分层表（core / bot / TTS 三档，核心流程零依赖）
 - 🌐 **区域增强降级** — `lark_expert_forge.py` 在 `lark-cli` 缺失时输出中英双语错误 + 通用路径指引（不再只指引 npm 安装）；子脚本调用改用 `sys.executable`，不再硬编码 `python`
 
-**存量缺陷修复（回归测试发现）**
+#### 存量缺陷修复（回归测试发现）
 
 - 🚨 **expert / feishu-cli 模板从未可用** — 两个模板的 6 个维度 builder（judgment/intuition/knowledge/mentoring/collaboration/chemistry）从未注册进 `build_dimension_lines`，选择这两个模板会直接 `KeyError` 崩溃。现已补齐并通过端到端验证
 - 🚨 **英文 Relic 的主动消息带中文标点** — `proactive_scheduler.py` 的 `profile.language == "en" is False` 是 Python 链式比较陷阱，条件恒为 False，导致英文人格前缀永远用全角逗号。改为 `!= "en"`，已加行为断言
 - 📦 **打包不可复现** — 新增 `tools/package_release.py`：显式白名单 + 卫生清理 + 必备/禁入断言 + 体积报告；assets 改为逐文件白名单（只发文档真正引用的 4 个 SVG），zip 从 2.8MB 降到 431KB（-85%）
 
-**万物立意补全**
+#### 万物立意补全
 
 - 🪑 **新增 object 模板（物件）** — soul-forge 一直承诺"物件"可蒸馏，但 `templates/` 无对应模板，agent 按对象表选型会落空。现已贯通三层：`templates/object.md` + `relic_writer.py` TEMPLATE_CONFIG + `manifest_schema.py` VALID_KINDS，四维重定义为「使用痕迹 / 情感投射 / 陪伴轨迹 / 空间锚点」
 
-**验证**
+#### 验证
 
 - 10/10 模板生成回归通过；39/39 单测通过；59 项模拟 agent 调用断言通过；零依赖环境（bare venv）下 17/17 脚本 `--help` 与 object 模板端到端生成通过
 

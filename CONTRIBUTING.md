@@ -1,9 +1,9 @@
 # Contributing to relic.skill
 
-> 来都来了，顺手给记忆拧一颗螺丝。  
+> 来都来了，顺手给记忆拧一颗螺丝。
 > If you brought a bug report, a clean PR, or a new template, you are in the right place.
 
-感谢你愿意为 relic.skill 贡献内容、代码和想法。  
+感谢你愿意为 relic.skill 贡献内容、代码和想法。
 Thank you for helping relic.skill remember a little more of the world.
 
 ## 如何贡献 / Ways to Contribute
@@ -73,7 +73,7 @@ git clone https://github.com/Ylsssq926/relic.skill
 cd relic.skill
 ```
 
-可选：如果你需要运行 Python 脚本，可以创建虚拟环境：  
+可选：如果你需要运行 Python 脚本，可以创建虚拟环境：
 Optional: create a virtual environment if you plan to run Python scripts:
 
 ```bash
@@ -88,7 +88,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-建议先阅读这些文件：  
+建议先阅读这些文件：
 Recommended reading before you start:
 
 - `FOR_AI.md`
@@ -99,7 +99,7 @@ Recommended reading before you start:
 
 ## 提交规范 / Commit Convention
 
-本项目使用 Conventional Commits：  
+本项目使用 Conventional Commits：
 This project uses Conventional Commits:
 
 | 类型 Type | 说明 Description | 示例 Example |
@@ -140,41 +140,41 @@ If behavior changes, explain why in the body.
 
 ## 如何提交新的万物永生模板 / How to Submit a New Relic Template
 
-这是最重要的一类贡献。  
+这是最重要的一类贡献。
 This is one of the most valuable kinds of contribution.
 
-提交模板时，请重点检查：  
+提交模板时，请重点检查：
 When you submit a template, please make sure it does all of the following:
 
-1. **对象边界清楚 / Clear target boundary**  
-   说明这个模板蒸馏的到底是什么：一个人、一只宠物、一段关系、一个团队、一个地方，还是一个时刻。  
+1. **对象边界清楚 / Clear target boundary**
+   说明这个模板蒸馏的到底是什么：一个人、一只宠物、一段关系、一个团队、一个地方，还是一个时刻。
    Define exactly what the template distills: a person, pet, relationship, team, place, or moment.
 
-2. **四维定义具体 / Specific four-dimensional model**  
-   认知、表达、行为、情感四个维度都要说明“提取什么”，不要只写抽象名词。  
+2. **四维定义具体 / Specific four-dimensional model**
+   认知、表达、行为、情感四个维度都要说明“提取什么”，不要只写抽象名词。
    For cognition, expression, behavior, and emotion, specify what should be extracted instead of vague labels.
 
-3. **数据来源可信 / Credible data sources**  
-   标明适合的数据来源，例如聊天记录、照片、语音、文档、共同经历或公开资料。  
+3. **数据来源可信 / Credible data sources**
+   标明适合的数据来源，例如聊天记录、照片、语音、文档、共同经历或公开资料。
    List suitable sources such as chats, photos, voice notes, documents, shared experiences, or public materials.
 
-4. **安全边界明确 / Clear safety boundaries**  
-   写明哪些情况不适用，例如未获授权、资料过少、涉及隐私伤害、用于骚扰或冒充。  
+4. **安全边界明确 / Clear safety boundaries**
+   写明哪些情况不适用，例如未获授权、资料过少、涉及隐私伤害、用于骚扰或冒充。
    State when the template must not be used, such as missing consent, insufficient evidence, privacy harm, harassment, or impersonation.
 
-5. **示例片段有辨识度 / Useful example snippets**  
-   给出能体现风格的短片段，让维护者快速判断模板是否成立。  
+5. **示例片段有辨识度 / Useful example snippets**
+   给出能体现风格的短片段，让维护者快速判断模板是否成立。
    Include short but distinctive sample fragments so reviewers can quickly judge whether the template works.
 
-6. **不碰红线 / Stay inside the red lines**  
-   不蒸馏政治人物，不提交真实私密数据，不上传未经授权的可识别内容。  
+6. **不碰红线 / Stay inside the red lines**
+   不蒸馏政治人物，不提交真实私密数据，不上传未经授权的可识别内容。
    Do not distill political figures, upload real private data, or submit identifiable content without permission.
 
-如果你不确定一个模板是否合适，先开 `New Relic Template` issue 讨论，通常比直接开 PR 更快。  
+如果你不确定一个模板是否合适，先开 `New Relic Template` issue 讨论，通常比直接开 PR 更快。
 If you are unsure whether a template fits the project, open a `New Relic Template` issue first. That is usually faster than opening a PR directly.
 
 ---
 
-**掠蓝 | relic.skill**  
-GitHub: <https://github.com/Ylsssq926/relic.skill>  
+**掠蓝 | relic.skill**
+GitHub: <https://github.com/Ylsssq926/relic.skill>
 QQ 群 / QQ Group: **1098169092**

@@ -250,6 +250,7 @@ The point of continuous evolution is not training the Relic into a character tha
      dimension: expression  # or cognition/behavior/emotion
      confidence: high  # explicit user correction = high
    ```
+
 3. **Adopt the user's phrasing in the next reply**
 4. **If the same feature is corrected 3+ times**, update it in the corresponding dimension of `personality.md`
 
@@ -265,6 +266,7 @@ The point of continuous evolution is not training the Relic into a character tha
      dimension: [corresponding dimension]
      evidence_level: verbatim  # user-provided directly = verbatim
    ```
+
 3. **Naturally weave this new information into subsequent conversation**
 
 ### Drift detection (simplified version, executable by the AI in conversation)

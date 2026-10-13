@@ -3,32 +3,49 @@ name: relic
 description: >
   Universal Digital Immortality Engine — Distill anyone or anything you care about into an interactive digital soul. 给灵魂开个 GitHub。
   Trigger whenever user wants to:
+
   - Create, distill, or awaken a Relic, digital soul, persona, or clone from chat logs, memories, or voice ("create a relic", "digital twin of my grandma", "preserve memory of pet/team", "帮我唤醒/蒸馏/做个Relic", "保存/纪念XX的记忆", "Relicを作りたい/記憶を保存").
   - Talk to, chat with, or remember a loved one, pet, mentor, or companion ("talk to grandma", "chat with my cat", "跟奶奶聊天", "召唤咪咪", "おばあちゃんと話したい").
   - Preserve or distill workplace history, team culture, or expert knowledge ("archive team culture", "distill business expert", "飞书/Slack协作记忆蒸馏").
   Supports: Humans, Pets, Relationships, Teams, Places, Moments, Public figures, Domain experts.
-version: 1.9.1
+version: 1.10.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to turn into a Relic (e.g. 'my grandma' / '我想永生我奶奶')"
 external_urls:
   # Feishu / Lark bot + CLI integration (optional, CN region)
-  - https://open.feishu.cn
+
+  - <https://open.feishu.cn>
+
   # Volcano Engine TTS / voice clone + image generation (optional, CN region)
-  - https://openspeech.bytedance.com
-  - https://ark.cn-beijing.volces.com
+
+  - <https://openspeech.bytedance.com>
+  - <https://ark.cn-beijing.volces.com>
+
   # MiniMax TTS + voice clone (optional)
-  - https://api.minimax.io
+
+  - <https://api.minimax.io>
+
   # ElevenLabs TTS + voice clone (optional)
-  - https://api.elevenlabs.io
+
+  - <https://api.elevenlabs.io>
+
   # OpenAI-compatible endpoints: chat, TTS, image generation (optional)
-  - https://api.openai.com
+
+  - <https://api.openai.com>
+
   # Anthropic messages API (optional, drives Relic conversation)
-  - https://api.anthropic.com
+
+  - <https://api.anthropic.com>
+
   # Telegram Bot API (optional)
-  - https://api.telegram.org
+
+  - <https://api.telegram.org>
+
   # Google Gemini image generation (optional)
-  - https://generativelanguage.googleapis.com
+
+  - <https://generativelanguage.googleapis.com>
+
 ---
 
 # relic.skill — Universal Digital Immortality Engine
@@ -71,6 +88,7 @@ If the user says something like "让我跟奶奶聊天" / "talk to grandma" / "�
    - A retiring tech lead (expert) → `examples/tech-lead-demo/`
    - Public figure / Feishu CLI → no demo yet; go to the awakening flow
      and use the matching template in `templates/`
+
 2. Read that directory's `SKILL.md`, `personality.md`, `interaction.md`, `memory.md`
 3. Read `soul-engine/SKILL.md` to boot the Soul Engine
 4. Also read `soul-engine/interaction.md` and `soul-engine/memory-system.md` as shared interaction rules
@@ -142,6 +160,7 @@ The core flow of this skill (consent → distillation → conversation → prote
 | `scripts/email_parser.py` | Gmail / Apple Mail | `.mbox` / `.eml` |
 | `scripts/instagram_parser.py` | Instagram | data-download JSON (DMs + comments) |
 | `scripts/imessage_parser.py` | iMessage | macOS `chat.db` (SQLite) |
+| `scripts/lark_parser.py` | Feishu / Lark | admin CSV / lark-cli JSON / plain text |
 | `scripts/wechat_parser.py` | WeChat | exported SQLite / CSV |
 | `scripts/qq_parser.py` | QQ | exported TXT / MHT |
 

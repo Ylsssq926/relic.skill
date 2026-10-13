@@ -1886,23 +1886,23 @@ def build_skill_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
         f"> {ctx['summary']}\n\n"
         + L["not_real"].format(name=ctx["subject_name"], identity=ctx["identity"]) + "\n"
         + L["read_first"] + "\n\n"
-        f"## {L['role']}\n"
+        f"## {L['role']}\n\n"
         f"- {L['template']}: {ctx['template_label']}\n"
         f"- Slug: {ctx['slug']}\n"
         f"- {L['relationship']}: {ctx['relationship']}\n"
         f"- {L['time_range']}: {ctx['time_range_text']}\n"
         f"- {L['evidence']}: {source_summary}\n"
         f"- {L['frequent']}: {keywords_text}\n\n"
-        f"## {L['how_it_works']}\n"
+        f"## {L['how_it_works']}\n\n"
         f"1. {L['rule_prefer_source']}\n"
         f"2. {L['rule_no_fabricate']}\n"
         f"3. {L['rule_disclaim']}\n"
         f"4. {L['rule_tone'].format(tone=ctx['tone'])}\n\n"
-        f"## {L['opening_tone']}\n"
+        f"## {L['opening_tone']}\n\n"
         f"- {L['main_tone']}: {ctx['tone']}\n"
         f"- {L['typical_phrases']}: {phrase_text}\n"
         f"- {L['active_window']}: {ctx['active_bucket']}\n\n"
-        f"## {L['boundaries']}\n{boundaries}\n"
+        f"## {L['boundaries']}\n\n{boundaries}\n"
     )
     return _localize_punctuation(text, lang)
 
@@ -1917,6 +1917,7 @@ def build_personality_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
         f"# {ctx['subject_name']} · personality",
         "",
         f"## {L['basic_profile']}",
+        "",
         f"- {L['template_type']}: {ctx['template_label']}",
         f"- {L['core_purpose']}: {ctx['summary_goal']}",
         f"- {L['time_range']}: {ctx['time_range_text']}",
@@ -1929,6 +1930,7 @@ def build_personality_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
     for index, (title, kind) in enumerate(ctx["dimensions"], start=1):
         sections.append("")
         sections.append(f"### {index}. {title}")
+        sections.append("")
         explicit_lines = explicit_dimension_lines(ctx, title)
         if explicit_lines:
             sections.append(f"- {L['provided_conclusions']}:")
@@ -1945,6 +1947,7 @@ def build_interaction_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
         f"# {ctx['subject_name']} · interaction",
         "",
         f"## {L['general_principles']}",
+        "",
         f"- {L['keep_tone'].format(tone=ctx['tone'])}",
         f"- {L['cite_memory']}",
         f"- {L['no_impersonation']}",
@@ -1960,6 +1963,7 @@ def build_interaction_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
             [
                 "",
                 f"### {index}. {title}",
+                "",
                 f"- {L['scene']}: {description}",
                 f"- {L['response_principle']}: {L['principle_hint'].format(items=cue_items)}",
                 f"- {L['tone_anchor']}: {L['anchor_hint'].format(items=anchor_items)}",
@@ -1985,6 +1989,7 @@ def build_memory_md(ctx: Dict[str, Any], lang: str = "zh") -> str:
             [
                 "",
                 f"### {index}. {entry['title']}",
+                "",
                 f"- {L['when']}: {entry['when']}",
                 f"- {L['source']}: {entry['source']}",
                 f"- {L['content']}: {entry['body']}",

@@ -8,6 +8,7 @@ Two things make moment Relics different, and both are demonstrated here:
 
 1. **Scene before meaning.** Slow motion first — what was visible, audible,
    physical — and only then what it came to mean.
+
 2. **Disagreement preserved.** The two accounts disagree about whether anyone
    cried. The Relic keeps both and labels it unresolved rather than picking one.
 

@@ -11,6 +11,7 @@ one shows two things at once:
 1. **Objects work as Relics too** — "everything deserves to be remembered" is not
    only about people. Wear traces, projection, companionship, and spatial anchors
    are enough material for something worth talking to.
+
 2. **English skeletons are first-class** — `relic_writer.py` auto-detects the
    material language, so an English archive produces an English Relic.
 

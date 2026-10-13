@@ -67,6 +67,7 @@ If consent fails (subject didn't agree, cannot confirm, or the user skips consen
 2. **Explain why**:
    "Without explicit authorization, I can't help you awaken this Relic. This is not a technical limitation — it is an ethical boundary."
    （没有明确授权的情况下，我不能帮你唤醒这个 Relic。这不是技术限制，而是伦理边界。）
+
 3. **Suggest alternatives**:
    - If the subject is someone else: suggest obtaining their explicit consent first
    - If the subject is yourself: ask whether to awaken your own Relic instead

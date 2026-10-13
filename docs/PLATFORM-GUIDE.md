@@ -44,7 +44,8 @@ Export first (per the table above), then run the matching parser — it converts
 | iMessage | `chat.db` (macOS SQLite) | `python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json` |
 | WeChat | SQLite / CSV export | `python3 scripts/wechat_parser.py --input ~/wechat_export --output data.json` |
 | QQ | `.txt` / `.mht` export | `python3 scripts/qq_parser.py --input chat.txt --output data.json` |
-| Feishu | via Feishu CLI | `python3 scripts/lark_expert_forge.py --help` |
+| Feishu | admin-console CSV / lark-cli JSON / TXT | `python3 scripts/lark_parser.py --input ~/feishu_export --output data.json` |
+| Feishu (expert full-chain) | via Feishu CLI | `python3 scripts/lark_expert_forge.py --help` |
 | DingTalk / X | any of the above formats after conversion | export JSON/CSV/MBOX, then feed `scripts/relic_writer.py --data` directly |
 
 **Add `--self-name` (your own display name) to every parser** — that's how the Relic learns which side of the conversation is "you" versus the subject.

@@ -274,10 +274,10 @@ relic.skill은 [Feishu CLI](https://github.com/larksuite/cli)를 데이터 수�
 
 ```bash
 # 페이슈 IM 기록 수집
-python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/lark_parser.py --input ~/feishu_export --output data.json
 
 # 페이슈 문서 수집
-python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/lark_expert_forge.py --expert "<name>" --email "<email>" --dry-run
 ```
 
 **능동적 행동 예시:**
