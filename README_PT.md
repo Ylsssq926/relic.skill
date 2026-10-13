@@ -78,6 +78,7 @@ Não é só para pessoas. Tudo merece um Relic.
 | 🏠 [Lugar](templates/place.md) | A memória de um lugar | Um dormitório da faculdade, o quintal de casa, o café de sempre |
 | ⏳ [Momento](templates/moment.md) | Um instante importante | Formatura, pedido de casamento, a primeira vez que você viu seu filho |
 | 🌟 [Figura pública](templates/public-figure.md) | Um framework cognitivo destilado de materiais públicos | Transforme a forma de pensar de alguém que você admira em um conselheiro privado |
+| 🪑 [Objeto](templates/object.md) | Um objeto que você não consegue jogar fora | Uma câmera velha, uma cadeira de cozinha, uma mochila — o carinho mora no desgaste |
 | 💼 [Especialista](templates/expert.md) | Julgamento profissional de especialistas | O conhecimento não deveria ir embora com as pessoas |
 | 🐦 [Feishu CLI](templates/feishu-cli.md) | Memória de colaboração Feishu | Destile memórias de equipe com Feishu CLI — aquelas noites juntos continuam brilhando |
 
@@ -242,20 +243,20 @@ No Claude Code / Kiro, basta dizer:
 
 ```bash
 # Parse do histórico de chat do WeChat
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # Parse do histórico de chat do QQ
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # Gera um Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # Ver se ele puxaria assunto primeiro
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # Version management
-python scripts/version_manager.py snapshot --slug grandma --note "Primeira versão"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "Primeira versão"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > Desde a v1.1.2, os novos Relics gerados por `relic_writer.py` já vêm com `proactive_config.json`, então dá para fazer um dry-run sem escrever nada na mão e ver se ele bateria na sua porta hoje.
@@ -272,7 +273,7 @@ lark-im export --chat-id "oc_xxx" --output feishu_chat.json
 lark-docs export --doc-id "doxcnxxx" --output feishu_docs.json
 
 # Forjar um Relic a partir dos dados do Feishu
-python scripts/feishu_forge.py \
+python3 scripts/feishu_forge.py \
   --chat feishu_chat.json \
   --docs feishu_docs.json \
   --template team-culture \

@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""Release packager for relic.skill — builds the Agensi/GitHub zip from an
+explicit whitelist, strips runtime state, and asserts the result.
+
+Design goals:
+  1. Explicit inclusion — nothing enters the zip unless it is listed.
+  2. Hygiene — runtime state, caches, and dev-only assets are stripped.
+  3. Verification — required files must exist; forbidden patterns must not.
+  4. Reproducible — same repo state always yields the same file set.
+
+Usage:
+  python3 tools/package_release.py              # build + verify
+  python3 tools/package_release.py --verify-only # verify existing relic.zip
+  python3 tools/package_release.py --list        # print manifest, don't build
+"""
+from __future__ import annotations
+
+import argparse
+import fnmatch
+import os
+import shutil
+import sys
+import zipfile
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+OUT_ZIP = ROOT / "relic.zip"
+STAGE = Path(os.environ.get("TEMP", "/tmp")) / "relic-package-stage"
+
+# ---------------------------------------------------------------- whitelist
+FILES = [
+    "SKILL.md", "FOR_AI.md", "README.md", "README_EN.md",
+    "CHANGELOG.md", "LICENSE", "COMMERCIAL-LICENSE.md",
+    "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "requirements.txt",
+    # assets are whitelisted individually: only the SVGs are referenced by
+    # shipped docs (README.md / README_EN.md use assets/banner.svg).
+    # The repo also carries demo-site social cards (*.png) and Agensi listing
+    # covers (relic-cover*.jpg, relic-banner.jpg) — those stay in git, they do
+    # not ship inside the skill.
+    "assets/banner.svg", "assets/logo.svg",
+    "assets/architecture.svg", "assets/soul-dimensions.svg",
+]
+DIRS = ["soul-forge", "soul-engine", "soul-shield", "templates",
+        "examples", "docs", "scripts", "tests"]
+
+# ------------------------------------------------------------- exclusion
+EXCLUDE_DIRS = {"__pycache__", "node_modules", ".git", ".venv", "venv",
+                "exes", ".versions", "relic-data", "voice_samples",
+                ".pytest_cache", ".claude", ".agent", ".reference"}
+EXCLUDE_FILES = {
+    ".proactive_state.json", ".DS_Store", "Thumbs.db", "desktop.ini",
+    ".env", ".env.deploy", "relic.zip", "package.json", "package-lock.json",
+}
+# demo-site marketing assets: only light ones ship in the zip
+EXCLUDE_GLOBS = [
+    "**/*.pyc", "**/*.bak", "**/*.log",
+]
+
+# ------------------------------------------------------------ verification
+REQUIRED = [
+    "relic/SKILL.md", "relic/requirements.txt", "relic/LICENSE",
+    "relic/README.md", "relic/README_EN.md", "relic/COMMERCIAL-LICENSE.md",
+    "relic/FOR_AI.md", "relic/CHANGELOG.md",
+    "relic/soul-forge/SKILL.md", "relic/soul-engine/SKILL.md",
+    "relic/soul-shield/SKILL.md",
+    "relic/templates/human.md", "relic/templates/pet.md",
+    "relic/templates/object.md", "relic/templates/relationship.md",
+    "relic/templates/team-culture.md", "relic/templates/place.md",
+    "relic/templates/moment.md", "relic/templates/public-figure.md",
+    "relic/templates/expert.md", "relic/templates/feishu-cli.md",
+    "relic/scripts/relic_writer.py", "relic/scripts/wechat_parser.py",
+    "relic/scripts/telegram_parser.py", "relic/scripts/qq_parser.py",
+    "relic/scripts/quality_checker.py", "relic/scripts/version_manager.py",
+    "relic/scripts/proactive_scheduler.py", "relic/scripts/tts_service.py",
+    "relic/scripts/image_service.py", "relic/scripts/media_service.py",
+    "relic/scripts/relic_engine.py", "relic/scripts/photo_analyzer.py",
+    "relic/scripts/telegram_bot.py", "relic/scripts/feishu_bot.py",
+    "relic/scripts/lark_expert_forge.py", "relic/scripts/manifest_schema.py",
+    "relic/docs/SETUP.md", "relic/docs/PLATFORM-GUIDE.md",
+    "relic/docs/FAQ.md", "relic/docs/PHILOSOPHY.md",
+    "relic/docs/ARCHITECTURE.md",
+    "relic/examples/grandma-demo/SKILL.md",
+    "relic/examples/cat-mimi-demo/SKILL.md",
+    "relic/examples/team-startup-demo/SKILL.md",
+]
+FORBIDDEN_SUBSTRINGS = [
+    "proactive_state", "__pycache__", "demo-site", "demo-api",
+    ".claude/", ".agent/", ".reference/", "node_modules",
+    ".env", "relic-1024", "relic.zip", "deploy-demo",
+]
+
+
+def excluded(rel_posix: str, is_dir: bool) -> bool:
+    if is_dir:
+        return Path(rel_posix).name in EXCLUDE_DIRS
+    if Path(rel_posix).name in EXCLUDE_FILES:
+        return True
+    return any(fnmatch.fnmatch(rel_posix, g) or fnmatch.fnmatch(rel_posix, "*/" + g)
+               for g in EXCLUDE_GLOBS)
+
+
+def collect() -> list[tuple[Path, str]]:
+    """Return [(source_path, path_inside_zip)] honoring the whitelist."""
+    items: list[tuple[Path, str]] = []
+    for name in FILES:
+        p = ROOT / name
+        if not p.exists():
+            sys.exit(f"[FAIL] required top-level file missing from repo: {name}")
+        items.append((p, f"relic/{name}"))
+    for d in DIRS:
+        base = ROOT / d
+        if not base.is_dir():
+            sys.exit(f"[FAIL] required directory missing from repo: {d}/")
+        for dirpath, dirnames, filenames in os.walk(base):
+            rel_dir = Path(dirpath).relative_to(ROOT)
+            dirnames[:] = [x for x in dirnames
+                           if not excluded((rel_dir / x).as_posix(), True)]
+            for fn in sorted(filenames):
+                rel = (rel_dir / fn).as_posix()
+                if not excluded(rel, False):
+                    items.append((Path(dirpath) / fn, f"relic/{rel}"))
+    return items
+
+
+def build() -> Path:
+    if STAGE.exists():
+        shutil.rmtree(STAGE)
+    STAGE.mkdir(parents=True)
+    items = collect()
+    for src, arc in items:
+        dst = STAGE / arc
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    if OUT_ZIP.exists():
+        OUT_ZIP.unlink()
+    with zipfile.ZipFile(OUT_ZIP, "w", zipfile.ZIP_DEFLATED) as z:
+        for _, arc in sorted(items, key=lambda x: x[1]):
+            z.write(STAGE / arc, arc)
+    shutil.rmtree(STAGE)
+    return OUT_ZIP
+
+
+def verify(zip_path: Path) -> int:
+    failures = []
+    with zipfile.ZipFile(zip_path) as z:
+        names = z.namelist()
+        nameset = set(names)
+        for req in REQUIRED:
+            if req not in nameset:
+                failures.append(f"missing required entry: {req}")
+        for n in names:
+            for bad in FORBIDDEN_SUBSTRINGS:
+                if bad in n:
+                    failures.append(f"forbidden content in zip: {n} ({bad})")
+        sizes = sorted(((i.file_size, i.filename) for i in z.infolist()),
+                       reverse=True)
+        print(f"[verify] entries={len(names)}  "
+              f"uncompressed={sum(s for s, _ in sizes)/1024:.0f}KB  "
+              f"zip={zip_path.stat().st_size/1024:.0f}KB")
+        print("[verify] 5 largest entries:")
+        for s, n in sizes[:5]:
+            print(f"         {s/1024:8.0f} KB  {n}")
+    if failures:
+        for f in failures:
+            print(f"[FAIL] {f}")
+        return 1
+    print("[verify] OK — all required entries present, no forbidden content")
+    return 0
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="Build/verify the relic.skill release zip")
+    ap.add_argument("--verify-only", action="store_true")
+    ap.add_argument("--list", action="store_true")
+    a = ap.parse_args()
+    if a.list:
+        for src, arc in collect():
+            print(arc)
+        return 0
+    if a.verify_only:
+        if not OUT_ZIP.exists():
+            sys.exit("[FAIL] relic.zip not found")
+        return verify(OUT_ZIP)
+    z = build()
+    print(f"[build] wrote {z}")
+    return verify(z)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

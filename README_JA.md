@@ -78,6 +78,7 @@ relic.skill は、あらゆるものを永生化するエンジンです。
 | 🏠 [場所](templates/place.md) | ある場所の記憶 | 大学の寮、実家の庭、通い慣れたカフェ |
 | ⏳ [瞬間](templates/moment.md) | 大切な一瞬 | 卒業式、プロポーズ、初めて子どもに会った日 |
 | 🌟 [公的人物](templates/public-figure.md) | 公開資料に表れた認知フレーム | 尊敬する人の思考法を、あなただけの参謀に変える |
+| 🪑 [物](templates/object.md) | 捨てられないもの | 古いカメラ、台所の木の椅子、旅鞄——擦れ傷の中に愛着が残っている |
 | 💼 [ビジネスエキスパート](templates/expert.md) | 専門家の判断力 | 知識は人と共に去るべきではない——経験を対話可能なデジタルアイデンティティに |
 | 🐦 [飛書 CLI](templates/feishu-cli.md) | 飛書コラボレーション記憶 | 飛書 CLI でチームの記憶を蒸留——あの夜を一緒に乗り越えた記憶が輝き続ける |
 
@@ -241,20 +242,20 @@ Claude Code / Kiro でそのままこう言ってください：
 
 ```bash
 # WeChat のチャット履歴を解析
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # QQ のチャット履歴を解析
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # Relic を生成
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # 今日は向こうから来るか、dry-run で見る
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # バージョン管理
-python scripts/version_manager.py snapshot --slug grandma --note "初版"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "初版"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > v1.1.2 からは、新しく生成した Relic に `proactive_config.json` が最初から入るので、設定を手で書かなくても、そのまま dry-run で「今日は向こうから来るかな」を見られます。
@@ -269,10 +270,10 @@ relic.skill は [Feishu CLI](https://github.com/larksuite/cli) をデータ収�
 
 ```bash
 # 飛書 IM 履歴を収集
-python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
 
 # 飛書ドキュメントを収集
-python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
 ```
 
 **能動的行動の例：**

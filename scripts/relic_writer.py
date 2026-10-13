@@ -89,6 +89,29 @@ TEMPLATE_CONFIG: Dict[str, Dict[str, Any]] = {
             "涉及真实住址、监控细节或医疗隐私时保持克制。",
         ],
     },
+    "object": {
+        "label": "物件",
+        "identity": "基于使用痕迹重构的物件记忆体",
+        "tone": "像摸着一件旧东西讲它的来历，语气克制而亲近",
+        "summary_goal": "保留一件物品的使用痕迹、情感投射、陪伴轨迹和空间锚点",
+        "dimensions": [
+            ("使用痕迹", "wear"),
+            ("情感投射", "projection"),
+            ("陪伴轨迹", "companionship"),
+            ("空间锚点", "anchor"),
+        ],
+        "interactions": [
+            ("摸摸它", "适合描述此刻的触感、温度、磨损与手感。"),
+            ("讲讲来历", "适合重述购买、赠送、修理、差点丢失的故事。"),
+            ("它在哪", "适合回忆它在空间里的位置、移动路线和与周边的关系。"),
+            ("差点失去", "适合温柔回望它缺席又回归的时刻。"),
+        ],
+        "boundaries": [
+            "不把物件模板用于贵重财产鉴定或估价。",
+            "材料不足时如实写磨损少、记忆模糊，不硬编包浆与故事。",
+            "涉及他人隐私（信件、日记、礼物内容）时保持克制与脱敏。",
+        ],
+    },
     "relationship": {
         "label": "关系",
         "identity": "不是某个人，而是这段关系本身的声音和惯性",
@@ -927,6 +950,86 @@ def build_rhythm_lines(ctx: Dict[str, Any]) -> List[str]:
     ]
 
 
+def build_wear_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"关于这件物件的已知线索包括：{join_items(ctx['facts'], fallback='暂无可用事实线索')}，可据此判断高频接触区与使用习惯。",
+        f"材料覆盖时间范围为 {ctx['time_range_text']}，跨越时间越长的痕迹越能说明“长期怎么被对待”，而非“最近一次怎么被对待”。",
+        "书写使用痕迹时优先落在可观察细节：磨损方向、修补处、褪色、变亮的边角，而不是笼统写“有故事”。",
+    ]
+
+
+def build_projection_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"记忆锚点中出现：{join_items([m.get('title', '') for m in ctx['memory_entries']], fallback='暂无可用记忆标题')}，这些标题往往就是情感投射的直接入口。",
+        "优先回答“为什么是它而不是别的同类”——舍不得换的理由，就是它在这段关系里的位置。",
+        "避免把情感投射写成客观参数（如品牌、价格、成色），那些属于档案信息，不属于投射。",
+    ]
+
+
+def build_companionship_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"材料规模为 {ctx['photo_count']} 张照片 / {ctx['memory_count']} 条记忆，时间范围 {ctx['time_range_text']}，据此可切分陪伴阶段。",
+        "把“缺席”也写进轨迹：丢失过、借出过、收起来过，缺口本身就是故事的一部分。",
+        "涉及赠送者、修理者、共同使用者的片段要单独标出，物件的陪伴往往是他人的在场证明。",
+    ]
+
+
+def build_anchor_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"材料中出现的地点线索包括：{join_items(ctx['locations'], fallback='暂无地点线索')}，可用于还原它在空间里的常驻位置。",
+        "优先写“它在哪儿”“动线怎么走”“和什么摆在一起”，空间关系比物件参数更能唤起记忆。",
+        "如果家具或房间本身与物件绑定（如旧书桌、老厨房），空间锚点可以延伸到场所 Relic 的交叉引用。",
+    ]
+
+
+def build_judgment_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"判断类信号词累计出现 {ctx['signal_counts'].get('decision', 0)} 次，样本共 {ctx['message_count']} 条消息，说明结论出现的频率与场景。",
+        f"高频表达（{join_items(ctx['keywords'], fallback='暂无高频词')}）往往就是 ta 做判断时的入口词，可以优先复盘这些句子。",
+        "书写专业判断时优先落在“面对什么条件给出什么结论、为什么这个结论优先”，而不是复述结论本身。",
+    ]
+
+
+def build_intuition_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        "经验直觉体现在“多年以后依然这样选”的稳定性上——优先收录被时间反复验证过的判断，而非一次性的聪明结论。",
+        f"记忆锚点（{ctx['memory_count']} 条）里那些带因果解释的片段，通常就是直觉的来源，值得单独标注。",
+        "写直觉时区分“经验沉淀”与“个人偏好”，前者可传授，后者只适用于 ta 自己。",
+    ]
+
+
+def build_knowledge_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"知识体系建议按“领域 → 核心观点 → 证据来源 → 置信度”结构化，避免退化成零散金句合集。",
+        f"资料时间范围 {ctx['time_range_text']}：超过一年的经验可能已经过时，标注时间戳比标注权威更诚实。",
+        "如果某条知识来自公开文档或标准，写清出处；如果来自 ta 的个人经验，写清适用边界。",
+    ]
+
+
+def build_mentoring_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        "传承方式优先写“ta 带新人时会先问什么、先纠正什么、先让新人踩哪个坑”，这些比知识清单更可复制。",
+        f"互动偏好线索：{join_items(ctx['interaction_modes_input'], fallback='暂无显式互动偏好记录')}，可作为指导语气的参考。",
+        "指导语气要保留 ta 特有的直接程度：过度委婉会让赛博导师失去“前辈感”。",
+    ]
+
+
+def build_collaboration_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        f"协作记忆从 {ctx['message_count']} 条消息与 {ctx['memory_count']} 条锚点中提取，优先保留推进上线、翻车、救火这三类场景。",
+        f"高频出现的信号词（{join_items(ctx['keywords'], fallback='暂无高频词')}）往往就是团队当时的行话。",
+        "协作记忆强调“过程”，同一件事的结论不如当时的来回拉扯有价值。",
+    ]
+
+
+def build_chemistry_lines(ctx: Dict[str, Any]) -> List[str]:
+    return [
+        "团队默契体现在“不用解释就懂”的短句里，短于平均长度的消息（平均约 " f"{ctx['average_message_length']} 字）往往就是默契样本。",
+        f"参与者（{join_items(ctx['participants'], fallback='暂无参与者记录')}）的互动组合能反映默认分工与角色位置。",
+        "默契不要写成口号，写成具体行为：谁先看数据、谁负责收尾、谁在沉默时先开口。",
+    ]
+
+
 def build_sensory_lines(ctx: Dict[str, Any]) -> List[str]:
     device_text = join_items(ctx['devices'], fallback='暂无明显设备线索')
     location_text = join_items(ctx['locations'], fallback='没有 GPS 线索也可以从照片/记忆描述入手')
@@ -1062,6 +1165,16 @@ def build_dimension_lines(kind: str, ctx: Dict[str, Any], index: int = 0) -> Lis
         "habit": build_habit_lines,
         "interaction": build_interaction_lines,
         "rhythm": build_rhythm_lines,
+        "wear": build_wear_lines,
+        "projection": build_projection_lines,
+        "companionship": build_companionship_lines,
+        "anchor": build_anchor_lines,
+        "judgment": build_judgment_lines,
+        "intuition": build_intuition_lines,
+        "knowledge": build_knowledge_lines,
+        "mentoring": build_mentoring_lines,
+        "collaboration": build_collaboration_lines,
+        "chemistry": build_chemistry_lines,
         "sensory": build_sensory_lines,
         "event": build_event_lines,
         "atmosphere": build_atmosphere_lines,

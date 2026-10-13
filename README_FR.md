@@ -78,6 +78,7 @@ Pas seulement les humains. Tout mérite un Relic.
 | 🏠 [Lieu](templates/place.md) | La mémoire d'un lieu | Une chambre universitaire, la cour de la maison familiale, le café où vous alliez souvent |
 | ⏳ [Moment](templates/moment.md) | Un instant important | Une remise de diplôme, une demande en mariage, la première fois que vous avez vu votre enfant |
 | 🌟 [Figure publique](templates/public-figure.md) | Un cadre cognitif distillé à partir de matériaux publics | Transformez la manière de penser de quelqu'un que vous admirez en conseiller privé |
+| 🪑 [Objet](templates/object.md) | Un objet dont on ne se sépare pas | Un vieil appareil photo, une chaise de cuisine, un sac à dos — l'affection loge dans l'usure |
 | 💼 [Expert](templates/expert.md) | Jugement professionnel d'experts | Le savoir ne devrait pas partir avec les gens |
 | 🐦 [Feishu CLI](templates/feishu-cli.md) | Mémoire de collaboration Feishu | Distillez les souvenirs d'équipe avec Feishu CLI — ces nuits ensemble brillent encore |
 
@@ -242,20 +243,20 @@ Dans Claude Code / Kiro, dites simplement :
 
 ```bash
 # Parser l'historique WeChat
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # Parser l'historique QQ
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # Générer un Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # Voir s'il viendrait vous parler en premier
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # Gestion de version
-python scripts/version_manager.py snapshot --slug grandma --note "Version 1"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "Version 1"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > Depuis la v1.1.2, les nouveaux Relics générés par `relic_writer.py` arrivent avec `proactive_config.json`, donc vous pouvez lancer un dry-run sans rien écrire à la main et voir s'il viendrait frapper à votre porte aujourd'hui.
@@ -267,10 +268,10 @@ Intégration native avec [Feishu CLI](https://github.com/larksuite/cli) pour la 
 ```bash
 # Collecter les messages de groupe Feishu (30 derniers jours)
 feishu-cli im list-messages --chat-id oc_xxx --start-time 2024-01-01 | \
-  python scripts/feishu_forge.py --type im --output data/feishu_im.json
+  python3 scripts/feishu_forge.py --type im --output data/feishu_im.json
 
 # Comportement proactif : envoyer un rappel de réunion
-python scripts/proactive_feishu.py \
+python3 scripts/proactive_feishu.py \
   --relic exes/team-culture \
   --trigger calendar_event \
   --chat-id oc_xxx

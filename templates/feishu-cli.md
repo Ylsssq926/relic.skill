@@ -125,7 +125,7 @@ See [Domain Expert Template](expert.md) and the one-shot awakening script `scrip
 
 ```bash
 # Full pipeline: consent → collection → structuring → proactive care → generate Relic
-python scripts/lark_expert_forge.py --expert "Zhang" --email "zhang@company.com" --chat-id "oc_xxx" --dry-run
+python3 scripts/lark_expert_forge.py --expert "Zhang" --email "zhang@company.com" --chat-id "oc_xxx" --dry-run
 ```
 
 Key capabilities:

@@ -78,6 +78,7 @@ relic.skill — это движок бессмертия для всего.
 | 🏠 [Место](templates/place.md) | Память о месте | Комната в общежитии, двор родного дома, любимая кофейня |
 | ⏳ [Момент](templates/moment.md) | Важное мгновение | Выпускной, предложение руки и сердца, первая встреча с ребёнком |
 | 🌟 [Публичная фигура](templates/public-figure.md) | Cognitive framework, дистиллированный из публичных материалов | Превратите способ мышления человека, которым вы восхищаетесь, в личного советника |
+| 🪑 [Предмет](templates/object.md) | Предмет, который невозможно выбросить | Старый фотоаппарат, кухонный стул, рюкзак — привязанность живёт в потёртостях |
 | 💼 [Эксперт](templates/expert.md) | Профессиональное суждение экспертов | Знания не должны уходить с людьми |
 | 🐦 [Feishu CLI](templates/feishu-cli.md) | Память о совместной работе в Feishu | Дистиллируйте командные воспоминания через Feishu CLI — те ночи вместе продолжают светить |
 
@@ -242,20 +243,20 @@ relic.skill основан на открытом стандарте SKILL.md и 
 
 ```bash
 # Парсинг истории чатов WeChat
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # Парсинг истории чатов QQ
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # Генерация Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # Проверить, заговорит ли он первым
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # Version management
-python scripts/version_manager.py snapshot --slug grandma --note "Первая версия"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "Первая версия"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > Начиная с v1.1.2 новые Relics, созданные через `relic_writer.py`, уже идут с `proactive_config.json`, так что можно сразу сделать dry-run без ручной настройки и посмотреть, постучался бы он к вам сегодня.
@@ -272,7 +273,7 @@ lark-im export --chat-id "oc_xxx" --output feishu_chat.json
 lark-docs export --doc-id "doxcnxxx" --output feishu_docs.json
 
 # Выковать Relic из данных Feishu
-python scripts/feishu_forge.py \
+python3 scripts/feishu_forge.py \
   --chat feishu_chat.json \
   --docs feishu_docs.json \
   --template team-culture \

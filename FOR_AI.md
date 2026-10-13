@@ -72,15 +72,15 @@ List all template files in templates/ and briefly introduce each one's purpose.
 
 ```text
 Data parsing scripts live in scripts/:
-- python scripts/wechat_parser.py --help
-- python scripts/qq_parser.py --help
-- python scripts/telegram_parser.py --help
-- python scripts/photo_analyzer.py --help
-- python scripts/relic_writer.py --help
-- python scripts/version_manager.py --help
-- python scripts/quality_checker.py --help
-- python scripts/proactive_scheduler.py --help
-- python scripts/lark_expert_forge.py --help
+- python3 scripts/wechat_parser.py --help
+- python3 scripts/qq_parser.py --help
+- python3 scripts/telegram_parser.py --help
+- python3 scripts/photo_analyzer.py --help
+- python3 scripts/relic_writer.py --help
+- python3 scripts/version_manager.py --help
+- python3 scripts/quality_checker.py --help
+- python3 scripts/proactive_scheduler.py --help
+- python3 scripts/lark_expert_forge.py --help
 ```
 
 ## Project Structure at a Glance

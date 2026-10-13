@@ -1320,7 +1320,7 @@ def stable_choice(options: Sequence[str], seed: str) -> str:
 def elder_style_prefix(profile: PersonalityProfile) -> str:
     """老一辈 / 父母型开场语。"""
     if profile.voice_prefix:
-        return f"{profile.voice_prefix}，" if profile.language == "en" is False else f"{profile.voice_prefix}, "
+        return f"{profile.voice_prefix}，" if profile.language != "en" else f"{profile.voice_prefix}, "
     if profile.relation_kind in {"elder", "parent"}:
         return "哎，" if profile.language != "en" else "Oh, "
     return ""

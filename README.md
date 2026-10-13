@@ -101,7 +101,8 @@ relic.skill 是一个万物永生引擎。
 | 🏠 [地方](templates/place.md) | 一个地方的记忆 | 大学宿舍、老家的院子、常去的咖啡馆 |
 | ⏳ [时刻](templates/moment.md) | 一个重要瞬间 | 毕业典礼、求婚、第一次见到孩子 |
 | 🌟 [公众人物](templates/public-figure.md) | 公开资料中的认知框架 | 把你佩服的人的思维方式变成私人参谋 |
-| 🐦 [飞书 CLI](templates/feishu-cli.md) | 飞书协作记忆 | 用飞书 CLI 蒸馏协作记忆，让那些一起扛过的夜继续发光 |
+| 🪑 [物件](templates/object.md) | 一件舍不得丢的东西 | 旧相机、厨房木椅、旅行背包——磨损里藏着陪伴 |
+| 🐦 [飞书 CLI](templates/feishu-cli.md) | 飞书协作记忆 | 用飞书 CLI 蒸馏协作记忆，让那些一起扛过的夜继续发光（区域增强） |
 
 ---
 
@@ -272,7 +273,7 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 
 第一次用？三步走：
 
-1. **唤醒 Relic** — `python scripts/relic_writer.py --help`
+1. **唤醒 Relic** — `python3 scripts/relic_writer.py --help`
 2. **选择平台** — 飞书机器人或 Telegram 机器人
 3. **配置媒体** — 可选，让 Relic 能说话、能发图
 
@@ -300,20 +301,20 @@ relic.skill 基于开放的 SKILL.md 标准，兼容所有支持该标准的 AI 
 
 ```bash
 # 解析微信聊天记录
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # 解析 QQ 聊天记录
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # 生成 Relic（会自动附带 proactive_config.json）
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # 预览“它会不会主动来找你”
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # 版本管理
-python scripts/version_manager.py snapshot --slug grandma --note "第一版"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "第一版"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > 从 v1.1.2 开始，新生成的 Relic 会默认带上 `proactive_config.json`。也就是说，你现在不用先研究配置长什么样，先 dry-run 一下，就能看看它今天会不会突然来敲你一下。
@@ -326,13 +327,13 @@ python scripts/version_manager.py rollback --slug grandma --version 1
 
 ```bash
 # 启动飞书机器人（需要配置飞书应用凭证）
-python scripts/feishu_bot.py --relic exes/grandma
+python3 scripts/feishu_bot.py --relic exes/grandma
 
 # 测试模式（不实际发送）
-python scripts/feishu_bot.py --relic exes/grandma --dry-run --test-message "奶奶，我今天加班到十一点"
+python3 scripts/feishu_bot.py --relic exes/grandma --dry-run --test-message "奶奶，我今天加班到十一点"
 
 # 多 Relic 模式（根据用户命令切换）
-python scripts/feishu_bot.py --relic-dir exes/ --multi-relic
+python3 scripts/feishu_bot.py --relic-dir exes/ --multi-relic
 ```
 
 配置飞书应用凭证（`.env` 文件）：
@@ -353,13 +354,13 @@ Relic 也能住在 Telegram 里：
 
 ```bash
 # Webhook 模式（需要公网 HTTPS）
-python scripts/telegram_bot.py --relic exes/grandma
+python3 scripts/telegram_bot.py --relic exes/grandma
 
 # Long Polling 模式（本地开发，无需公网）
-python scripts/telegram_bot.py --relic exes/grandma --polling
+python3 scripts/telegram_bot.py --relic exes/grandma --polling
 
 # 测试模式
-python scripts/telegram_bot.py --relic exes/grandma --dry-run --test-message "奶奶，我今天加班到十一点"
+python3 scripts/telegram_bot.py --relic exes/grandma --dry-run --test-message "奶奶，我今天加班到十一点"
 ```
 
 配置（`.env` 文件）：
@@ -380,10 +381,10 @@ MiniMax TTS 支持中文声音克隆，10 秒样本就能开始——奶奶说"�
 
 ```bash
 # 合成语音（豆包语音）
-python scripts/tts_service.py --relic exes/grandma --text "过年了，吃饺子了没" --mode holiday
+python3 scripts/tts_service.py --relic exes/grandma --text "过年了，吃饺子了没" --mode holiday
 
 # 声音克隆（需要声音样本）
-python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
+python3 scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
 ```
 
 ### 🐦 飞书 CLI 深度集成（区域增强 · 中国大陆）

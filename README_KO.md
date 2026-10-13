@@ -78,6 +78,7 @@ relic.skill은 모든 것을 영생시키는 엔진입니다.
 | 🏠 [장소](templates/place.md) | 어떤 장소의 기억 | 대학 기숙사, 고향집 마당, 자주 가던 카페 |
 | ⏳ [순간](templates/moment.md) | 중요한 한순간 | 졸업식, 프러포즈, 처음 아이를 만난 순간 |
 | 🌟 [공적 인물](templates/public-figure.md) | 공개 자료 속 인지 프레임 | 존경하는 사람의 사고방식을 나만의 참모로 만든다 |
+| 🪑 [물건](templates/object.md) | 버리기 아까운 것 | 낡은 카메라, 부엌 의자, 여행 가방 — 닳음에 애정이 남습니다 |
 | 💼 [비즈니스 전문가](templates/expert.md) | 전문가의 판단력 | 지식은 사람과 함께 떠나서는 안 됩니다 — 경험을 대화 가능한 디지털 정체성으로 |
 | 🐦 [페이슈 CLI](templates/feishu-cli.md) | 페이슈 협업 기억 | 페이슈 CLI로 팀 기억을 증류 — 함께 버텨낸 밤들이 계속 빛나도록 |
 
@@ -241,20 +242,20 @@ Claude Code / Kiro에서 바로 이렇게 말하세요:
 
 ```bash
 # WeChat 대화 기록 파싱
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # QQ 대화 기록 파싱
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # Relic 생성
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # 오늘 먼저 찾아올지 dry-run으로 보기
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # 버전 관리
-python scripts/version_manager.py snapshot --slug grandma --note "초판"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "초판"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > v1.1.2부터는 새로 만든 Relic에 `proactive_config.json`이 기본으로 들어가서, 설정을 먼저 손으로 쓰지 않아도 "오늘 먼저 찾아올까?"를 바로 dry-run으로 볼 수 있습니다.
@@ -269,10 +270,10 @@ relic.skill은 [Feishu CLI](https://github.com/larksuite/cli)를 데이터 수�
 
 ```bash
 # 페이슈 IM 기록 수집
-python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
 
 # 페이슈 문서 수집
-python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
 ```
 
 **능동적 행동 예시:**

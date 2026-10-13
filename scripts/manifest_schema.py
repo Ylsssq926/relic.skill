@@ -29,6 +29,7 @@ VALID_KINDS = {
     "moment",
     "expert",
     "feishu-cli",
+    "object",
     "public-figure",  # legacy-compatible special case
 }
 VALID_STATUSES = {"living", "memorial", "fictional", "team", "place"}
@@ -384,6 +385,7 @@ def _normalize_kind(value: Any) -> str:
         "relationship": "relationship",
         "place": "place",
         "moment": "moment",
+        "object": "object",
         "expert": "expert",
         "feishu-cli": "feishu-cli",
         "feishu_cli": "feishu-cli",

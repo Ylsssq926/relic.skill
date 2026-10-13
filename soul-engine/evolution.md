@@ -287,4 +287,4 @@ When these occur, suggest the user run snapshot:
 - The user explicitly says "the current version is great"
 - The conversation exceeds 50 turns
 
-Suggested phrasing: "你觉得现在的 ta 像不像？如果满意的话，可以运行 `python scripts/version_manager.py snapshot --slug [slug] --note '用户确认版本'` 保存当前状态。" / *"Does ta feel right now? If you're happy with it, run `python scripts/version_manager.py snapshot --slug [slug] --note 'user-confirmed version'` to save the current state."*
+Suggested phrasing: "你觉得现在的 ta 像不像？如果满意的话，可以运行 `python3 scripts/version_manager.py snapshot --slug [slug] --note '用户确认版本'` 保存当前状态。" / *"Does ta feel right now? If you're happy with it, run `python3 scripts/version_manager.py snapshot --slug [slug] --note 'user-confirmed version'` to save the current state."*

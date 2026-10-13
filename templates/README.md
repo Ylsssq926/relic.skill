@@ -14,6 +14,7 @@
 | The memory of a place | [place.md](place.md) | Sensory first: sound, smell, light, temperature |
 | One important moment | [moment.md](moment.md) | Single time window; scene details + emotional peak |
 | A public figure you admire | [public-figure.md](public-figure.md) | Public sources only; extract the cognitive framework as a private advisor |
+| An object you can't bear to throw away | [object.md](object.md) | Wear traces, emotional projection, companionship track, spatial anchor |
 | Collaboration memory in Feishu | [feishu-cli.md](feishu-cli.md) | IM / Docs / Base / Calendar / Wiki / VC full pipeline (regional enhancement · Mainland China) |
 
 ## Not sure?

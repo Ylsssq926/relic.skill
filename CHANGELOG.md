@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.1] - 2026-10-13
+
+### 工具链适配与存量缺陷修复
+
+上架适配的第三轮：从"文档英文化"下沉到**工具链实际可用性**，并用回归测试挖出三个此前从未被发现的缺陷。
+
+**工具链适配（面向非中文环境的 agent 调用）**
+
+- 🐍 **命令一致性** — 全部文档与 17 个脚本的调用示例改用 `python3`（macOS/Linux 惯例），SETUP 新增「Environment Setup」节与依赖分层表（core / bot / TTS 三档，核心流程零依赖）
+- 🌐 **区域增强降级** — `lark_expert_forge.py` 在 `lark-cli` 缺失时输出中英双语错误 + 通用路径指引（不再只指引 npm 安装）；子脚本调用改用 `sys.executable`，不再硬编码 `python`
+
+**存量缺陷修复（回归测试发现）**
+
+- 🚨 **expert / feishu-cli 模板从未可用** — 两个模板的 6 个维度 builder（judgment/intuition/knowledge/mentoring/collaboration/chemistry）从未注册进 `build_dimension_lines`，选择这两个模板会直接 `KeyError` 崩溃。现已补齐并通过端到端验证
+- 🚨 **英文 Relic 的主动消息带中文标点** — `proactive_scheduler.py` 的 `profile.language == "en" is False` 是 Python 链式比较陷阱，条件恒为 False，导致英文人格前缀永远用全角逗号。改为 `!= "en"`，已加行为断言
+- 📦 **打包不可复现** — 新增 `tools/package_release.py`：显式白名单 + 卫生清理 + 必备/禁入断言 + 体积报告；assets 改为逐文件白名单（只发文档真正引用的 4 个 SVG），zip 从 2.8MB 降到 431KB（-85%）
+
+**万物立意补全**
+
+- 🪑 **新增 object 模板（物件）** — soul-forge 一直承诺"物件"可蒸馏，但 `templates/` 无对应模板，agent 按对象表选型会落空。现已贯通三层：`templates/object.md` + `relic_writer.py` TEMPLATE_CONFIG + `manifest_schema.py` VALID_KINDS，四维重定义为「使用痕迹 / 情感投射 / 陪伴轨迹 / 空间锚点」
+
+**验证**
+
+- 10/10 模板生成回归通过；39/39 单测通过；59 项模拟 agent 调用断言通过；零依赖环境（bare venv）下 17/17 脚本 `--help` 与 object 模板端到端生成通过
+
 ## [1.6.0] - 2026-10-12
 
 ### Agensi 上架适配

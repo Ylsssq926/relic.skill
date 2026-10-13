@@ -17,6 +17,32 @@
 
 ---
 
+## Environment Setup (do this first)
+
+The core flow (awaken → chat → protect) needs **nothing but Python 3.9+** — no GPU, no Docker, no cloud account. Optional enhancements (bots, TTS, image generation) add their own requirements, declared per feature below.
+
+```bash
+# 1. Verify Python (macOS/Linux: python3; Windows: python or py)
+python3 --version
+
+# 2. Install the only hard dependencies (used by parsing/writing scripts)
+pip3 install -r requirements.txt
+```
+
+**Command conventions in all docs**: commands are written as `python3` (macOS/Linux). On Windows use `python` (or `py`) instead — e.g. `python scripts\relic_writer.py --help`.
+
+**Dependency tiers**:
+
+| Tier | Packages | Needed For |
+|---|---|---|
+| Core (recommended) | `pillow`, `python-dateutil` | `relic_writer.py`, `wechat_parser.py`, `telegram_parser.py`, `qq_parser.py`, `photo_analyzer.py` |
+| Bot features (optional) | `flask`, `requests` | `feishu_bot.py`, `telegram_bot.py` |
+| TTS / image (optional) | `requests` | `tts_service.py`, `image_service.py` |
+
+Scripts detect missing dependencies and tell you exactly what to install — you never need the full set up front.
+
+---
+
 ## Step 1: Awaken Your First Relic
 
 Before anything, you need a Relic. Like building a house — foundation first.
@@ -25,10 +51,10 @@ Before anything, you need a Relic. Like building a house — foundation first.
 
 ```bash
 # First parse the data (WeChat example)
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # Then awaken the Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
 #### What the input JSON looks like
@@ -59,7 +85,7 @@ This is the **easiest step to get stuck on** — what exactly goes into the JSON
 ```
 
 ```bash
-python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
 **Top-level fields** (all optional except `messages`):
@@ -123,7 +149,7 @@ Organizer self-markers are auto-excluded: `我`, `me`, `self`, `本人`, `自己
 **So: even if you said more than grandma, the script won't mistake "me" for grandma.** But to be safe, **always pass `--name` explicitly**:
 
 ```bash
-python scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
 ```
 
 #### Multiple data files at once
@@ -131,7 +157,7 @@ python scripts/relic_writer.py --data data.json --template human --slug grandma 
 `--data` accepts multiple files; they merge automatically (arrays append, `meta` takes the first non-empty value):
 
 ```bash
-python scripts/relic_writer.py --data chat.json photos.json facts.json --template human --slug grandma
+python3 scripts/relic_writer.py --data chat.json photos.json facts.json --template human --slug grandma
 ```
 
 #### Full parameters
@@ -225,7 +251,7 @@ AI_API_KEY=sk-ant-xxx  # your Claude or OpenAI API key
 ### 2.5 Start the bot
 
 ```bash
-python scripts/feishu_bot.py --relic exes/grandma
+python3 scripts/feishu_bot.py --relic exes/grandma
 ```
 
 If all goes well, you'll see:
@@ -280,7 +306,7 @@ The Telegram bot has two run modes:
 Requires a public HTTPS address. Telegram pushes messages to you.
 
 ```bash
-python scripts/telegram_bot.py --relic exes/grandma
+python3 scripts/telegram_bot.py --relic exes/grandma
 ```
 
 **When to use?** When you have a server and want the bot online 7×24.
@@ -290,7 +316,7 @@ python scripts/telegram_bot.py --relic exes/grandma
 No public address needed. The bot pulls messages from Telegram.
 
 ```bash
-python scripts/telegram_bot.py --relic exes/grandma --polling
+python3 scripts/telegram_bot.py --relic exes/grandma --polling
 ```
 
 **When to use?** When testing locally, or you have no public server.
@@ -386,7 +412,7 @@ OPENAI_API_KEY=your-api-key
 ### 4.5 Test the voice
 
 ```bash
-python scripts/tts_service.py --relic exes/grandma --text "哎呀你这孩子,怎么又恁晚" --mode care
+python3 scripts/tts_service.py --relic exes/grandma --text "哎呀你这孩子,怎么又恁晚" --mode care
 ```
 
 This generates an audio file — listen and judge.
@@ -412,7 +438,7 @@ Needed:
 #### Clone the voice
 
 ```bash
-python scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
+python3 scripts/tts_service.py --relic exes/grandma --clone-voice --sample-dir voice_samples/
 ```
 
 The script will:
@@ -485,7 +511,7 @@ Open `exes/grandma/proactive_config.json`:
 ### 5.2 Preview "will it reach out today?"
 
 ```bash
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 ```
 
 This tells you:
@@ -507,7 +533,7 @@ If you want the Relic to actually reach out, run the script on a timer.
 crontab -e
 
 # Add this line (check once every day at 9 a.m.)
-0 9 * * * cd /path/to/relic.skill && python scripts/proactive_scheduler.py --relic exes/grandma
+0 9 * * * cd /path/to/relic.skill && python3 scripts/proactive_scheduler.py --relic exes/grandma
 ```
 
 #### Windows
@@ -526,7 +552,7 @@ Use Task Scheduler:
 
 ```bash
 # Without --dry-run: really sends
-python scripts/proactive_scheduler.py --relic exes/grandma
+python3 scripts/proactive_scheduler.py --relic exes/grandma
 ```
 
 If today has trigger conditions, the Relic messages you via the configured channel.
@@ -584,7 +610,7 @@ If today has trigger conditions, the Relic messages you via the configured chann
 **A:** Yes. Use multi-Relic mode:
 
 ```bash
-python scripts/feishu_bot.py --relic-dir exes/ --multi-relic
+python3 scripts/feishu_bot.py --relic-dir exes/ --multi-relic
 ```
 
 Then when you @ the bot in the group, add the Relic name:

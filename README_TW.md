@@ -76,6 +76,7 @@ relic.skill 是一個萬物永生引擎。
 | 🏠 [地方](templates/place.md) | 一個地方的記憶 | 大學宿舍、老家的院子、常去的咖啡館 |
 | ⏳ [時刻](templates/moment.md) | 一個重要瞬間 | 畢業典禮、求婚、第一次見到孩子 |
 | 🌟 [公眾人物](templates/public-figure.md) | 公開資料中的認知框架 | 把你敬佩的人的思考方式變成私人參謀 |
+| 🪑 [物件](templates/object.md) | 一件捨不得丟的東西 | 舊相機、廚房木椅、旅行背包——磨損裡藏著陪伴 |
 | 💼 [業務專家](templates/expert.md) | 資深專家的專業判斷 | 知識不該隨人走，把經驗鍛造成可對話的數位身份 |
 | 🐦 [飛書 CLI](templates/feishu-cli.md) | 飛書協作記憶 | 用飛書 CLI 蒸餾協作記憶，讓那些一起扛過的夜繼續發光 |
 
@@ -239,20 +240,20 @@ relic.skill 基於開放的 SKILL.md 標準，相容所有支援該標準的 AI 
 
 ```bash
 # 解析微信聊天紀錄
-python scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
+python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # 解析 QQ 聊天紀錄
-python scripts/qq_parser.py --input chat.txt --output data.json
+python3 scripts/qq_parser.py --input chat.txt --output data.json
 
 # 生成 Relic
-python scripts/relic_writer.py --data data.json --template human --slug grandma
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
 
 # 預覽「它今天會不會主動來敲門」
-python scripts/proactive_scheduler.py --relic exes/grandma --dry-run
+python3 scripts/proactive_scheduler.py --relic exes/grandma --dry-run
 
 # 版本管理
-python scripts/version_manager.py snapshot --slug grandma --note "第一版"
-python scripts/version_manager.py rollback --slug grandma --version 1
+python3 scripts/version_manager.py snapshot --slug grandma --note "第一版"
+python3 scripts/version_manager.py rollback --slug grandma --version 1
 ```
 
 > 從 v1.1.2 開始，新生成的 Relic 會預設附上 `proactive_config.json`，所以不用先手寫設定，也能直接 dry-run 看看「它今天會不會主動來敲門」。
@@ -267,10 +268,10 @@ relic.skill 支援 [Feishu CLI](https://github.com/larksuite/cli) 作為資料�
 
 ```bash
 # 收集飛書 IM 歷史
-python scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
+python3 scripts/feishu_collector.py --type im --chat-id oc_xxx --output data.json
 
 # 收集飛書文件
-python scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
+python3 scripts/feishu_collector.py --type docs --doc-id doxcn_xxx --output data.json
 ```
 
 **主動行為範例：**

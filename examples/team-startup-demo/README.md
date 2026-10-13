@@ -21,7 +21,7 @@ AI 会自动加载这个 Relic，然后你就能和团队对话了。
 ### 直接运行
 
 ```bash
-python scripts/relic_engine.py --relic examples/team-startup-demo --message "今天线上出bug了"
+python3 scripts/relic_engine.py --relic examples/team-startup-demo --message "今天线上出bug了"
 ```
 
 你会看到团队的回应：

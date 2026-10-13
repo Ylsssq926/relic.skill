@@ -21,7 +21,7 @@ AI 会自动加载这个 Relic，然后你就能和奶奶对话了。
 ### 直接运行
 
 ```bash
-python scripts/relic_engine.py --relic examples/grandma-demo --message "奶奶，我今天加班到十一点"
+python3 scripts/relic_engine.py --relic examples/grandma-demo --message "奶奶，我今天加班到十一点"
 ```
 
 你会看到奶奶的回复：

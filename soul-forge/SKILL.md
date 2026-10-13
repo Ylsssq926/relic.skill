@@ -3,7 +3,7 @@ name: relic-forge
 description: >
   Soul Forge — Distill memories, chat logs, voice, and photos into a 4-dimensional digital soul / persona.
   Trigger on /relic-forge, or when user wants to distill, awaken, or build a Relic ("distill a relic", "create digital persona", "帮我唤醒/蒸馏Relic", "制作数字分身").
-version: 1.6.0
+version: 1.6.1
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to distill (e.g. 'my grandma' / '我想蒸馏我奶奶')"
@@ -159,6 +159,8 @@ Then output the complete Relic folder as-is.
 | Team | startup, band, class, project group | decision mechanism, collaborative tone, collective emotion | meeting notes, group chats, documents |
 | Moment | wedding, graduation, moving night, farewell | emotional peak, key expressions, on-scene behavior | photos, videos, same-day chats |
 | Object | old camera, kitchen table, travel backpack | wear traces, emotional projection, companionship track | photos, purchase records, narration |
+
+> **Template mapping**: every subject type has a same-named template in `templates/` — `human`, `pet`, `relationship`, `team-culture`, `place`, `moment`, `public-figure`, `expert`, `object`. Objects use `object.md` (four dimensions redefined for wear traces / emotional projection / companionship track / spatial anchor).
 
 ## Directory References
 

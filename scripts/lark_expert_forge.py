@@ -59,8 +59,12 @@ def run_lark_cli(args: List[str], dry_run: bool = False) -> Optional[Union[Dict,
         except json.JSONDecodeError:
             return output
     except FileNotFoundError:
-        log("error", "lark-cli 未安装。请先运行: npm install -g @larksuite/cli")
-        sys.exit(1)
+        log("error", "lark-cli not found on PATH. / lark-cli 未安装。")
+        log("error", "Feishu users / 飞书用户: npm install -g @larksuite/cli")
+        log("error", "International users / 海外用户: this script is a Mainland-China regional enhancement.")
+        log("error", "Use the generic path instead / 请改走通用路径: docs/PLATFORM-GUIDE.md")
+        log("error", "(export your chat/docs files, then scripts/relic_writer.py --template expert)")
+        sys.exit(2)
     except subprocess.TimeoutExpired:
         log("error", "CLI 执行超时 (120s)")
         return None
@@ -608,7 +612,7 @@ class ExpertForge:
         # 调用 relic_writer.py 生成完整 Relic 文件夹
         if not self.dry_run:
             relic_writer_cmd = [
-                "python", "scripts/relic_writer.py",
+                sys.executable, "scripts/relic_writer.py",
                 "--data", str(self.output_dir / "relic_config.json"),
                 "--template", "expert",
                 "--slug", self.expert_name.lower().replace(" ", "-"),
