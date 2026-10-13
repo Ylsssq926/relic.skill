@@ -550,20 +550,16 @@ relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
 
 > Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
 
-### Two Editions
+### What the Paid Edition Adds
 
-| | This repository (public framework) | Commercial edition (Agensi) |
-|---|---|---|
-| Four-dimension distillation / evidence grading / protection layer | ✅ | ✅ |
-| 10 platform parsers / 10 templates / 8 demos | ✅ | ✅ |
-| Commercial license | ❌ (personal use free; commercial requires a license) | ✅ |
-| **Scenario playbooks** (enterprise knowledge transfer / family legacy / creator persona) | ❌ | ✅ |
-| **Deployment & data-governance guide** | ❌ | ✅ |
-| Withdrawal & support commitment | community | priority channel |
+This repository is a **working skeleton**, free for personal use. The paid edition closes the last mile from toolchain to delivery:
 
-The public edition gives you the complete toolchain. The commercial edition adds three **battle-tested playbooks**, a pre-delivery sanitization and governance checklist, and a license that covers commercial work.
+- ✅ **Commercial license** — internal company use, client delivery, embedding in commercial products
+- ✅ **Three scenario playbooks** — enterprise knowledge transfer / family legacy / creator persona. Each one specifies material thresholds, parameters, acceptance criteria and common failure modes — not fill-in-the-blank templates
+- ✅ **Pre-delivery governance guide** — sanitization checklist with a runnable scanner, access-control tiers, deployment shapes, withdrawal procedure
+- ✅ **Priority support channel**, with a withdrawal commitment that outranks every other clause
 
-> Relics produced by either edition share the **exact same file format** and can be moved freely between them — the difference is licensing and companion content, not data.
+Relics produced by either edition share the **exact same file format** and move freely between them — the difference is licensing and companion content, not data.
 
 ---
 

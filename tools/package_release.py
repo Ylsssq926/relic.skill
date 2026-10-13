@@ -25,8 +25,11 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+# 默认产物就是**要上传到平台的包**（含商业增值），文件名保持 relic.zip ——
+# 买家在平台下载时看到的就是这个名字，最不容易拿错。
 OUT_ZIP = ROOT / "relic.zip"
-OUT_ZIP_COMMERCIAL = ROOT / "relic-commercial.zip"
+# 公开框架版（不含 COMMERCIAL-PACK）：只在需要发布 GitHub Release 时生成。
+OUT_ZIP_PUBLIC = ROOT / "relic-public.zip"
 
 # 商业增值包：只在 commercial 版里出现（.gitignore 已排除，公开仓库不含）。
 COMMERCIAL_DIR = "COMMERCIAL-PACK"
@@ -191,7 +194,7 @@ def build(edition: str = "public") -> Path:
         dst = STAGE / arc
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
-    out_zip = OUT_ZIP_COMMERCIAL if edition == "commercial" else OUT_ZIP
+    out_zip = OUT_ZIP if edition == "commercial" else OUT_ZIP_PUBLIC
     if out_zip.exists():
         out_zip.unlink()
     with zipfile.ZipFile(out_zip, "w", zipfile.ZIP_DEFLATED) as z:
@@ -268,15 +271,16 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Build/verify the relic.skill release zip")
     ap.add_argument("--verify-only", action="store_true")
     ap.add_argument("--list", action="store_true")
-    ap.add_argument("--edition", choices=["public", "commercial"], default="public",
-                    help="public = GitHub 分发（框架）；commercial = Agensi 分发（框架 + 商业包）")
+    ap.add_argument("--edition", choices=["commercial", "public"], default="commercial",
+                    help="commercial（默认）= 上架用，含商业包，输出 relic.zip；"
+                         "public = GitHub 开源分发用，不含商业包，输出 relic-public.zip")
     a = ap.parse_args()
     if a.list:
         for src, arc in collect(a.edition):
             print(arc)
         return 0
     if a.verify_only:
-        target = OUT_ZIP_COMMERCIAL if a.edition == "commercial" else OUT_ZIP
+        target = OUT_ZIP if a.edition == "commercial" else OUT_ZIP_PUBLIC
         if not target.exists():
             sys.exit(f"[FAIL] {target.name} not found")
         return verify(target, a.edition)

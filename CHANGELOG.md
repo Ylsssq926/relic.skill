@@ -30,7 +30,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `deploy/production-notes.md` — 交付前脱敏清单（含扫描脚本）、访问控制四档、部署三形态、常见生产事故、撤回机制
 - `support.md` — 更新通道、四步排查顺序、环境问题速查、支持边界、撤回处理承诺
 
-**打包脚本升级**：`tools/package_release.py` 新增 `--edition public|commercial`；两版输出不同文件名，且**互相断言**——商业版必须有 `COMMERCIAL-PACK/`，公开版必须没有，防止两者静默趋同。
+**打包脚本升级**：`tools/package_release.py` 新增 `--edition`，默认 `commercial`：
+
+| 命令 | 输出 | 用途 |
+|---|---|---|
+| `python tools/package_release.py`（默认） | `relic.zip` | **上架用**，含 `COMMERCIAL-PACK/` |
+| `python tools/package_release.py --edition public` | `relic-public.zip` | 需要发 GitHub Release 时才用，不含商业包 |
+
+两版**互相断言**（商业版必须有 `COMMERCIAL-PACK/`，公开版必须没有），防止静默趋同。默认产物就是唯一要上传的文件，避免拿错。
+
+> 早期草案曾把两个包并列输出（`relic.zip` = 公开版、`relic-commercial.zip` = 商业版），默认还指向了不用于上架的那个——已修正为上面这张表。
 
 **文档**：README 中英新增「两个版本」对照表，明确公开版给工具、商业版给打法与许可，并说明两版产出的 Relic 文件格式完全一致、可自由迁移。
 
