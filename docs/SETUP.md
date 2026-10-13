@@ -68,6 +68,9 @@ python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.jso
 # Instagram (extracted data download)
 python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
 
+# iMessage (macOS)
+python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
+
 # WeChat (Mainland China)
 python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 

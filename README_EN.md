@@ -376,7 +376,7 @@ send_message(
 | 💬 Messaging | QQ | Official export | `scripts/qq_parser.py` |
 | 💬 Work | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
 | 💬 Work | DingTalk | API | export JSON, then generic import |
-| 📱 Mobile | iMessage | `chat.db` backup | export CSV, then generic import |
+| 📱 Mobile | iMessage | `~/Library/Messages/chat.db` | `scripts/imessage_parser.py` |
 | 🌐 Social | Twitter/X | Official archive | export JSON, then generic import |
 | 📄 Generic | Any TXT / JSON / CSV / Markdown | Manual | feed `scripts/relic_writer.py` directly |
 
@@ -398,6 +398,9 @@ python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.jso
 
 # Instagram (extracted "Download Your Information" folder)
 python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
+
+# iMessage (macOS database; your terminal may need Full Disk Access)
+python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
 
 # Then generate the Relic
 python3 scripts/relic_writer.py --data data.json --template human --slug grandma

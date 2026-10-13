@@ -221,6 +221,93 @@ class EmailParserTest(ParserTestCase):
         self.assertIn("Dinner plan", payload["messages"][0]["chat_name"])
 
 
+class IMessageParserTest(ParserTestCase):
+    """chat.db 是 macOS 上现成的数据库，不需要导出对话框——但要处理
+    Apple epoch（纳秒/秒两种精度）、attributedBody 兜底、tapback 过滤。"""
+
+    def _build_db(self):
+        import sqlite3
+        db = self.tmpdir() / "chat.db"
+        conn = sqlite3.connect(str(db))
+        conn.executescript(
+            """
+            CREATE TABLE handle (ROWID INTEGER PRIMARY KEY, id TEXT);
+            CREATE TABLE chat (ROWID INTEGER PRIMARY KEY, chat_identifier TEXT, display_name TEXT);
+            CREATE TABLE message (
+                ROWID INTEGER PRIMARY KEY, text TEXT, attributedBody BLOB,
+                handle_id INTEGER, date INTEGER, is_from_me INTEGER,
+                associated_message_type INTEGER
+            );
+            CREATE TABLE chat_message_join (chat_id INTEGER, message_id INTEGER);
+            CREATE TABLE attachment (ROWID INTEGER PRIMARY KEY, filename TEXT);
+            CREATE TABLE message_attachment_join (message_id INTEGER, attachment_id INTEGER);
+            """
+        )
+        conn.execute("INSERT INTO handle (ROWID, id) VALUES (1, '+15551234567')")
+        conn.execute("INSERT INTO chat (ROWID, chat_identifier, display_name) "
+                     "VALUES (1, '+15551234567', 'Mom')")
+        # Apple epoch: 2023-03-01T10:00:00Z = 699_357_600 s after 2001-01-01
+        base_ns = 699357600 * 1_000_000_000
+        conn.execute("INSERT INTO message (ROWID, text, handle_id, date, is_from_me, "
+                     "associated_message_type) VALUES (1, 'did you eat', 1, ?, 0, 0)",
+                     (base_ns,))
+        # outgoing, no handle, second precision (older macOS)
+        conn.execute("INSERT INTO message (ROWID, text, handle_id, date, is_from_me, "
+                     "associated_message_type) VALUES (2, 'yes mom', NULL, ?, 1, 0)",
+                     (699357660,))
+        # attributedBody only (modern macOS sometimes NULLs text)
+        conn.execute("INSERT INTO message (ROWID, text, attributedBody, handle_id, date, "
+                     "is_from_me, associated_message_type) VALUES (3, NULL, ?, 1, ?, 0, 0)",
+                     (b"\x04\x0bstreamtyped\x81\xe8\x03NSString\x01raw content here\x86", base_ns + 120_000_000_000))
+        # tapback reaction — must be filtered out
+        conn.execute("INSERT INTO message (ROWID, text, handle_id, date, is_from_me, "
+                     "associated_message_type) VALUES (4, 'Loved \"did you eat\"', 1, ?, 0, 2000)",
+                     (base_ns + 180_000_000_000,))
+        # attachment-only message
+        conn.execute("INSERT INTO message (ROWID, text, handle_id, date, is_from_me, "
+                     "associated_message_type) VALUES (5, ?, 1, ?, 0, 0)",
+                     ("\ufffc", base_ns + 240_000_000_000))
+        conn.execute("INSERT INTO attachment (ROWID, filename) "
+                     "VALUES (1, '/Users/x/Library/Messages/Attachments/photo.jpg')")
+        conn.execute("INSERT INTO message_attachment_join (message_id, attachment_id) VALUES (5, 1)")
+        for mid in (1, 2, 3, 4, 5):
+            conn.execute("INSERT INTO chat_message_join (chat_id, message_id) VALUES (1, ?)", (mid,))
+        conn.commit()
+        conn.close()
+        return db
+
+    def test_parses_chat_db(self):
+        db = self._build_db()
+        proc, payload = self.run_parser(
+            "imessage_parser.py", db, ["--self-name", "me@icloud.com"])
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(payload["source"]["platform"], "imessage")
+        contents = [m["content"] for m in payload["messages"]]
+        self.assertIn("did you eat", contents)
+        self.assertIn("yes mom", contents)
+        # attributedBody fallback recovered the body
+        self.assertTrue(any("raw content here" in c for c in contents),
+                        f"attributedBody not recovered: {contents}")
+        # tapback filtered
+        self.assertFalse(any(c.startswith("Loved") for c in contents))
+        # attachment placeholder survived (\ufffc -> attachment)
+        self.assertTrue(any("photo.jpg" in c for c in contents))
+
+    def test_apple_epoch_and_direction(self):
+        db = self._build_db()
+        proc, payload = self.run_parser(
+            "imessage_parser.py", db, ["--self-name", "me@icloud.com"])
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        first = payload["messages"][0]
+        # 2023-03-01T10:00:00Z
+        self.assertEqual(first["timestamp"], 1677664800)
+        self.assertEqual(first["direction"], "incoming")
+        self.assertEqual(first["chat_name"], "Mom")
+        outgoing = [m for m in payload["messages"] if m["content"] == "yes mom"]
+        self.assertEqual(outgoing[0]["direction"], "outgoing")
+        self.assertEqual(outgoing[0]["sender_name"], "me@icloud.com")
+
+
 class ParserToWriterContractTest(ParserTestCase):
     """The whole point of the unified contract: parser output feeds the writer."""
 

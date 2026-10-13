@@ -450,7 +450,7 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 
 ## 支持的数据平台
 
-**每个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON：
+**9 个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON：
 
 | 类型 | 平台 | 获取方式 | 导入脚本 |
 |------|------|---------|---------|
@@ -464,7 +464,7 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 | 💬 即时通讯 | QQ | 官方导出 | `scripts/qq_parser.py` |
 | 💬 办公 | 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
 | 💬 办公 | 钉钉 | API | 导出 JSON 后走通用导入 |
-| 📱 手机 | iMessage | `chat.db` 备份 | 导出 CSV 后走通用导入 |
+| 📱 手机 | iMessage | `~/Library/Messages/chat.db` | `scripts/imessage_parser.py` |
 | 🌐 社交 | Twitter/X | 官方归档 | 导出 JSON 后走通用导入 |
 | 📄 通用 | 任意 TXT / JSON / CSV / Markdown | 手动整理 | 直接喂给 `scripts/relic_writer.py` |
 
@@ -486,6 +486,9 @@ python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.jso
 
 # Instagram（Download Your Information 解压后的目录）
 python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
+
+# iMessage（macOS 现成数据库，可能需要给终端「完全磁盘访问权限」）
+python3 scripts/imessage_parser.py --input ~/Library/Messages/chat.db --output data.json
 
 # 然后生成 Relic
 python3 scripts/relic_writer.py --data data.json --template human --slug grandma

@@ -78,6 +78,7 @@ Import parsers (data → normalized JSON → relic_writer):
 - python3 scripts/slack_parser.py --help       # Slack workspace export
 - python3 scripts/email_parser.py --help       # Gmail Takeout / Apple Mail .mbox
 - python3 scripts/instagram_parser.py --help    # Instagram data download
+- python3 scripts/imessage_parser.py --help   # iMessage chat.db (macOS)
 - python3 scripts/wechat_parser.py --help      # WeChat (Mainland China)
 - python3 scripts/qq_parser.py --help          # QQ (Mainland China)
 

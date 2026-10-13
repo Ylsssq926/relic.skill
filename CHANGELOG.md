@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-10-13
+
+### 骨架语言自适应 + iMessage 解析器 + 完整性检查纳入 CI
+
+验收报告里列出的三项短板，本轮全部落地。
+
+**生成内容语言自适应（最大缺口）**
+
+英文买家跑 `relic_writer.py` 时，此前会拿到「中文结构标签 + 英文素材」的混合骨架——约 80 个标签串（基本画像 / 四维画像 / 认知框架 …）+ 30 个维度引导句模板。直接使用（不走 agent 精修）的人看到的就是半成品。
+
+- 新增 `detect_output_language()`：按素材语言推断骨架语言（拉丁字符占中文两倍以上判为 en）
+- 全部 30 个维度 builder、4 个生成函数（SKILL/personality/interaction/memory）、10 个模板元数据（label / identity / tone / summary_goal / dimensions / interactions / boundaries）、记忆条目与 manifest 策略文本完成双语化
+- 新增 `--lang auto|zh|en`（默认 auto 跟随素材），可显式覆盖
+- 英文骨架零中文残留（含标点规范化：顿号 → 逗号、全角引号 → 半角）
+- 中文路径逐条回归，无行为变化
+
+**iMessage 解析器（第 9 个平台）**
+
+macOS 的 `chat.db` 是现成的数据库，不需要导出对话框。`scripts/imessage_parser.py` 处理 Apple epoch（纳秒/秒两种精度）、`attributedBody` 二进制兜底（现代 macOS 常把 `text` 置空）、tapback 表情过滤、附件占位符还原。
+
+**引用完整性检查纳入 CI**
+
+此前 59 项引用断言只是本地临时脚本（位于 gitignore 目录），CI 覆盖不到。现移植为 `tests/test_repo_integrity.py`（7 个测试）：四条工作流文件存在性、模板引用、frontmatter 可解析、文档相对路径引用零死链、买家关键路径语言覆盖、9 个解析器随包发布。
+
+**测试**：47 → 65 项（新增仓库完整性 7、语言自适应 9、iMessage 2），全部通过。
+
 ## [1.7.1] - 2026-10-13
 
 ### 验收修复：测试纳入 CI + 文档同步
