@@ -7,7 +7,7 @@ description: >
   - Talk to, chat with, or remember a loved one, pet, mentor, or companion ("talk to grandma", "chat with my cat", "跟奶奶聊天", "召唤咪咪", "おばあちゃんと話したい").
   - Preserve or distill workplace history, team culture, or expert knowledge ("archive team culture", "distill business expert", "飞书/Slack协作记忆蒸馏").
   Supports: Humans, Pets, Relationships, Teams, Places, Moments, Public figures, Domain experts.
-version: 1.6.1
+version: 1.6.2
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to turn into a Relic (e.g. 'my grandma' / '我想永生我奶奶')"

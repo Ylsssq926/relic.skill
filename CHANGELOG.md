@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.6.2] - 2026-10-13
+
+### 英文沉浸度修复（主动行为系统）
+
+英文 Relic 的主动消息此前是「中文主体 + 英文收尾」的混合，且润色函数从未接线。回归验证发现并修复：
+
+- 🌐 **节日/纪念日主体无英文路径** — `festival_body` / `anniversary_body` 只有中文实现，英文人格收到的是「Oh, 中秋到了…」这类混合消息。现补 `_holiday_message_en` / `_anniversary_message_en` / `EN_RANDOM_BY_KIND`，按 human/pet/team/place 四种关系分别给出英文语料
+- 🔧 **`en_polish()` 是 dead code** — 定义了但从未被调用，英文消息的小写开头与句首大写从未生效。现接入 `build_message` 出口
+- 🔠 **拼接缺分隔** — `compact_message` 用无分隔拼接，英文出现 `warm.just`。现按文本脚本分流：拉丁文用空格连接，CJK 保持无空格
+- 🅰️ **代词与专有名词** — 独立 `i`/`i'm` 大写为 `I`/`I'm`；呼语前缀后的普通词小写（`Oh, no big news`）但专有名词保持（`Oh, Mid-Autumn Festival`）
+
+中文消息路径逐条回归验证，无任何行为变化。
+
 ## [1.6.1] - 2026-10-13
 
 ### 工具链适配与存量缺陷修复

@@ -1330,11 +1330,17 @@ def en_polish(text: str) -> str:
     """英文消息句首大写整理（拼接后的模板片段以小写开头）。"""
     if not text:
         return text
-    return re.sub(
+    text = re.sub(
         r"(^|[.!?]\s+)([a-z])",
         lambda match: match.group(1) + match.group(2).upper(),
         text,
     )
+    # standalone first-person pronoun must be capitalized (including i'm)
+    text = re.sub(r"(?<![A-Za-z])i(?![A-Za-z])", "I", text)
+    # after a vocative prefix like "Oh, " the next word stays lowercase,
+    # but only when it is a plain word — leave names like "Mid-Autumn" alone
+    return re.sub(r"^([A-Z][a-z]+,\s+)([A-Z])([a-z]+)(?![\w-])",
+                  lambda m: m.group(1) + m.group(2).lower() + m.group(3), text)
 
 
 def holiday_label_en(holiday_id: str) -> str:
@@ -1549,13 +1555,23 @@ def render_holiday_message(profile: PersonalityProfile, check: TriggerCheckResul
     tail = care_tail(profile, f"{seed}|tail", reflective=reflective)
 
     if profile.relation_kind == "pet":
-        body = stable_choice(
-            [
-                f"今天{check.label}，我先来蹭你一下。{body}",
-                f"{check.label}到了，我来在你身边打个滚。{body}",
-            ],
-            seed,
-        )
+        if profile.language == "en":
+            label_en = holiday_label_en(holiday_id)
+            body = stable_choice(
+                [
+                    f"It's {label_en} today — let me come rub against you first. {body}",
+                    f"{label_en} is here. I'm coming to keep you company. {body}",
+                ],
+                seed,
+            )
+        else:
+            body = stable_choice(
+                [
+                    f"今天{check.label}，我先来蹭你一下。{body}",
+                    f"{check.label}到了，我来在你身边打个滚。{body}",
+                ],
+                seed,
+            )
         return compact_message(body, tail)
 
     if profile.relation_kind == "team":
@@ -1635,9 +1651,42 @@ def render_anniversary_message(profile: PersonalityProfile, check: TriggerCheckR
     return compact_message(prefix + body, tail)
 
 
+EN_RANDOM_BY_KIND: Dict[str, List[str]] = {
+    "pet": [
+        "No big news — just wanted to rub against you for a second. Rest if you're tired.",
+        "I thought about you out of nowhere. If today was rough, consider me sitting beside you.",
+    ],
+    "team": [
+        "Nothing urgent — just checking in. Finish the single most important thing first today.",
+        "Quick nudge: don't turn yourself into a to-do list.",
+    ],
+    "place": [
+        "The light today reminded me of that place. You don't have to look back — I'm leaving that familiar breeze here for you.",
+        "Nothing happened. I just remembered the smell and the quiet of that place, like a door pushed open softly.",
+    ],
+    "default": [
+        "No big news — I just thought of you.",
+        "Just popping in to see how your day is going.",
+    ],
+}
+
+
+def _random_message_en(profile: PersonalityProfile, today: date, seed: str) -> str:
+    """English random-missing-you message (follows the Relic's language)."""
+    prefix = elder_style_prefix(profile)
+    pool = EN_RANDOM_BY_KIND.get(profile.relation_kind, EN_RANDOM_BY_KIND["default"])
+    base = stable_choice(pool, seed)
+    if prefix:
+        base = f"{prefix}{base}"
+    tail = care_tail(profile, f"{seed}|tail", reflective=False)
+    return compact_message(base, tail)
+
+
 def render_random_message(profile: PersonalityProfile, today: date) -> str:
     """生成随机想念消息。"""
     seed = f"{profile.seed}|random|{today.isoformat()}"
+    if profile.language == "en":
+        return _random_message_en(profile, today, seed)
     prefix = elder_style_prefix(profile)
 
     if profile.relation_kind == "pet":
@@ -1708,21 +1757,110 @@ def render_random_message(profile: PersonalityProfile, today: date) -> str:
 
 def compact_message(*parts: str) -> str:
     """拼接消息并清理多余空白。"""
-    text = "".join(part.strip() for part in parts if part and part.strip())
+    cleaned = [part.strip() for part in parts if part and part.strip()]
+    # Latin-script messages need a space between parts; CJK does not.
+    if cleaned and not any(re.search(r"[\u4e00-\u9fff]", part) for part in cleaned):
+        text = " ".join(cleaned)
+    else:
+        text = "".join(cleaned)
     text = re.sub(r"\s+", " ", text).strip()
     text = text.replace(" ，", "，").replace(" 。", "。").replace(" ？", "？").replace(" ！", "！")
     return text
 
 
+def _holiday_message_en(profile: PersonalityProfile, check: TriggerCheckResult, today: date) -> str:
+    """English festival message (follows the Relic's language)."""
+    holiday_id = str(check.metadata.get("holiday_id") or "")
+    seed = f"{profile.seed}|holiday|{holiday_id}|{today.isoformat()}"
+    label = holiday_label_en(holiday_id)
+    reflective = holiday_id == "qingming" or (profile.memorial and holiday_id in {"mid_autumn", "spring_festival"})
+
+    if profile.relation_kind == "pet":
+        body = stable_choice(
+            [
+                f"It's {label} today — let me come rub against you first. Eat something warm.",
+                f"{label} is here. I'm coming to sit beside you for a bit.",
+            ],
+            seed,
+        )
+    elif profile.relation_kind == "team":
+        body = stable_choice(
+            [
+                f"{label} today. Before the sprint starts, remember the one thing that matters most.",
+                f"Happy {label}. Whatever ships today, don't forget to eat first.",
+            ],
+            seed,
+        )
+    else:
+        body = stable_choice(
+            [
+                f"{label} today. Busy or not, make sure you eat something warm.",
+                f"It's {label}. I'm taking first swing at reminding you to look after yourself.",
+            ],
+            seed,
+        )
+    tail = care_tail(profile, f"{seed}|tail", reflective=reflective)
+    return compact_message(elder_style_prefix(profile) + body, tail)
+
+
+def _anniversary_message_en(profile: PersonalityProfile, check: TriggerCheckResult, today: date) -> str:
+    """English anniversary message (follows the Relic's language)."""
+    label = str(check.metadata.get("label") or check.label or "this date")
+    ann_type = str(check.metadata.get("anniversary_type") or "neutral")
+    years_since = int(check.metadata.get("years_since") or 0)
+    seed = f"{profile.seed}|anniversary|{label}|{today.isoformat()}"
+    reflective = ann_type == "bittersweet" or profile.memorial
+
+    if profile.relation_kind == "pet":
+        body = stable_choice(
+            [
+                f"Today is {label}. Thinking of it makes me want to rub against you.",
+                f"{label} is here. Still want to keep you company today.",
+            ],
+            seed,
+        )
+    elif profile.relation_kind == "team":
+        body = stable_choice(
+            [
+                f"This date brings back {label}. Popping in to mark it with you.",
+                f"So it's {label} — worth a small mark, even if no one says it out loud.",
+            ],
+            seed,
+        )
+        reflective = False
+    elif years_since > 0:
+        body = stable_choice(
+            [
+                f"{years_since} years since {label}. You don't have to celebrate it — just noticing is enough.",
+                f"It's {label} again, {years_since} years on. Some dates don't need a speech.",
+            ],
+            seed,
+        )
+    else:
+        body = stable_choice(
+            [
+                f"Today is {label}. Thinking of you.",
+                f"{label} — just a quiet knock on the door.",
+            ],
+            seed,
+        )
+    tail = care_tail(profile, f"{seed}|tail", reflective=reflective)
+    return compact_message(elder_style_prefix(profile) + body, tail)
+
+
 def build_message(profile: PersonalityProfile, check: TriggerCheckResult, today: date) -> str:
     """根据触发类型渲染最终消息。"""
     if check.trigger_type == HOLIDAY_TYPE:
-        return render_holiday_message(profile, check, today)
-    if check.trigger_type == ANNIVERSARY_TYPE:
-        return render_anniversary_message(profile, check, today)
-    if check.trigger_type == RANDOM_TYPE:
-        return render_random_message(profile, today)
-    raise ValueError(f"不支持为触发类型 {check.trigger_type} 生成消息")
+        text = (_holiday_message_en(profile, check, today)
+                if profile.language == "en" else render_holiday_message(profile, check, today))
+    elif check.trigger_type == ANNIVERSARY_TYPE:
+        text = (_anniversary_message_en(profile, check, today)
+                if profile.language == "en" else render_anniversary_message(profile, check, today))
+    elif check.trigger_type == RANDOM_TYPE:
+        text = render_random_message(profile, today)
+    else:
+        raise ValueError(f"不支持为触发类型 {check.trigger_type} 生成消息")
+    return en_polish(text) if profile.language == "en" else text
 
 
 def append_state_message(state: Dict[str, Any], decision: Decision) -> Dict[str, Any]:
