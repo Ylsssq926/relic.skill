@@ -447,20 +447,48 @@ lark-cli calendar +create --summary "赛博导师提醒：客户拜访前准备"
 
 ## 支持的数据平台
 
-| 类型 | 平台 | 获取方式 | 格式 |
-|------|------|---------|------|
-| 💬 即时通讯 | 微信 | WeChatMsg / 留痕 / PyWxDump | SQLite / CSV |
-| 💬 即时通讯 | QQ | 官方导出 | TXT / MHT |
-| 💬 即时通讯 | Telegram | 官方导出 | JSON |
-| 💬 即时通讯 | Discord | DiscordChatExporter | JSON |
-| 💬 即时通讯 | Slack | 官方导出 | JSON |
-| 💬 办公 | 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API | JSON |
-| 💬 办公 | 钉钉 | API | JSON |
-| 📱 手机 | iMessage | 本地数据库 | SQLite |
-| 📱 手机 | WhatsApp | 官方归档 | TXT |
-| 🌐 社交 | Twitter/X | 官方归档 | JSON |
-| 🌐 社交 | Instagram | 官方归档 | JSON |
-| 📧 邮件 | Gmail | Google Takeout | MBOX |
+**每个平台都有对应的导入脚本**——导出后运行脚本，即可转成 relic_writer 可直接吃的标准化 JSON：
+
+| 类型 | 平台 | 获取方式 | 导入脚本 |
+|------|------|---------|---------|
+| 💬 即时通讯 | Telegram | 官方导出 | `scripts/telegram_parser.py` |
+| 💬 即时通讯 | Discord | DiscordChatExporter 或官方数据包 | `scripts/discord_parser.py` |
+| 💬 即时通讯 | WhatsApp | 手机端 Export Chat（每会话一个 .txt） | `scripts/whatsapp_parser.py` |
+| 💬 即时通讯 | Slack | 管理员工作区导出 | `scripts/slack_parser.py` |
+| 📧 邮件 | Gmail / Apple Mail | Google Takeout / MailData | `scripts/email_parser.py` |
+| 🌐 社交 | Instagram | Download Your Information | `scripts/instagram_parser.py` |
+| 💬 即时通讯 | 微信 | WeChatMsg / 留痕 / PyWxDump | `scripts/wechat_parser.py` |
+| 💬 即时通讯 | QQ | 官方导出 | `scripts/qq_parser.py` |
+| 💬 办公 | 飞书 | [飞书 CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
+| 💬 办公 | 钉钉 | API | 导出 JSON 后走通用导入 |
+| 📱 手机 | iMessage | `chat.db` 备份 | 导出 CSV 后走通用导入 |
+| 🌐 社交 | Twitter/X | 官方归档 | 导出 JSON 后走通用导入 |
+| 📄 通用 | 任意 TXT / JSON / CSV / Markdown | 手动整理 | 直接喂给 `scripts/relic_writer.py` |
+
+```bash
+# Telegram（官方导出 result.json）
+python3 scripts/telegram_parser.py --input ~/Downloads/Telegram\ Desktop --output data.json
+
+# Discord（DiscordChatExporter 的 general.json）
+python3 scripts/discord_parser.py --input ~/discord_export --output data.json
+
+# WhatsApp（Export Chat 导出的 .txt 文件夹）
+python3 scripts/whatsapp_parser.py --input ~/WhatsApp\ Chat --output data.json
+
+# Slack（工作区导出目录，自动读 users.json 还原人名）
+python3 scripts/slack_parser.py --input ~/slack_export --output data.json
+
+# Gmail（Takeout 的 .mbox）
+python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.json
+
+# Instagram（Download Your Information 解压后的目录）
+python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
+
+# 然后生成 Relic
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
+```
+
+> 详细的导出教程见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)
 | 📄 通用 | 任意文本 | 手动导入 | TXT / JSON / CSV / MD |
 
 > 详细的导出教程见 [平台数据获取指南](docs/PLATFORM-GUIDE.md)

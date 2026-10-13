@@ -7,7 +7,7 @@ description: >
   - Talk to, chat with, or remember a loved one, pet, mentor, or companion ("talk to grandma", "chat with my cat", "跟奶奶聊天", "召唤咪咪", "おばあちゃんと話したい").
   - Preserve or distill workplace history, team culture, or expert knowledge ("archive team culture", "distill business expert", "飞书/Slack协作记忆蒸馏").
   Supports: Humans, Pets, Relationships, Teams, Places, Moments, Public figures, Domain experts.
-version: 1.6.2
+version: 1.7.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to turn into a Relic (e.g. 'my grandma' / '我想永生我奶奶')"
@@ -122,7 +122,24 @@ A Relic = a folder = a directly loadable Skill:
 
 ## Network Access & Environment Variables (Transparent Declaration)
 
-The core flow of this skill (consent → distillation → conversation → protection) **runs 100% locally with zero network requests**. The following are **optional enhancements** that only reach external services when the user explicitly configures and enables the corresponding script:
+The core flow of this skill (consent → distillation → conversation → protection) **runs 100% locally with zero network requests**.
+
+**Import parsers are also fully local** — they only read files the user already exported:
+
+| Parser | Platform | Reads |
+|---|---|---|
+| `scripts/telegram_parser.py` | Telegram | official export JSON |
+| `scripts/discord_parser.py` | Discord | DiscordChatExporter / official data package JSON |
+| `scripts/whatsapp_parser.py` | WhatsApp | exported `.txt` per conversation |
+| `scripts/slack_parser.py` | Slack | workspace export JSON (+ `users.json` for names) |
+| `scripts/email_parser.py` | Gmail / Apple Mail | `.mbox` / `.eml` |
+| `scripts/instagram_parser.py` | Instagram | data-download JSON (DMs + comments) |
+| `scripts/wechat_parser.py` | WeChat | exported SQLite / CSV |
+| `scripts/qq_parser.py` | QQ | exported TXT / MHT |
+
+All parsers emit the same contract (`schema_version` / `source.platform` / `messages[]`), so their output feeds `scripts/relic_writer.py --data` interchangeably.
+
+The following are **optional enhancements** that only reach external services when the user explicitly configures and enables the corresponding script:
 
 | Optional Feature | Script | Services Accessed | Required Env Vars |
 |---|---|---|---|

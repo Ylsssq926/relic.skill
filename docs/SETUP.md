@@ -50,12 +50,32 @@ Before anything, you need a Relic. Like building a house — foundation first.
 ### Option 1: Generate with the script (recommended)
 
 ```bash
-# First parse the data (WeChat example)
+# Telegram (official export folder)
+python3 scripts/telegram_parser.py --input ~/Downloads/Telegram\ Desktop --output data.json
+
+# Discord (DiscordChatExporter output)
+python3 scripts/discord_parser.py --input ~/discord_export --output data.json
+
+# WhatsApp (folder of exported .txt files)
+python3 scripts/whatsapp_parser.py --input ~/WhatsApp\ Chat --output data.json
+
+# Slack (workspace export folder)
+python3 scripts/slack_parser.py --input ~/slack_export --output data.json
+
+# Gmail / Apple Mail (.mbox)
+python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.json
+
+# Instagram (extracted data download)
+python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
+
+# WeChat (Mainland China)
 python3 scripts/wechat_parser.py --input ~/wechat_export/ --output data.json
 
 # Then awaken the Relic
-python3 scripts/relic_writer.py --data data.json --template human --slug grandma --name 奶奶
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma --name Grandma
 ```
+
+Every parser produces the same normalized JSON contract, so you can mix sources: `--data chat.json photos.json facts.json` merges several files.
 
 #### What the input JSON looks like
 

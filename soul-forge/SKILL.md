@@ -3,7 +3,7 @@ name: relic-forge
 description: >
   Soul Forge — Distill memories, chat logs, voice, and photos into a 4-dimensional digital soul / persona.
   Trigger on /relic-forge, or when user wants to distill, awaken, or build a Relic ("distill a relic", "create digital persona", "帮我唤醒/蒸馏Relic", "制作数字分身").
-version: 1.6.2
+version: 1.7.0
 license: PolyForm-Noncommercial-1.0.0
 user-invocable: true
 argument-hint: "Describe who or what you want to distill (e.g. 'my grandma' / '我想蒸馏我奶奶')"

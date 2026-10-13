@@ -71,17 +71,32 @@ List all template files in templates/ and briefly introduce each one's purpose.
 ### 5. User wants to use CLI tools
 
 ```text
-Data parsing scripts live in scripts/:
-- python3 scripts/wechat_parser.py --help
-- python3 scripts/qq_parser.py --help
-- python3 scripts/telegram_parser.py --help
-- python3 scripts/photo_analyzer.py --help
-- python3 scripts/relic_writer.py --help
-- python3 scripts/version_manager.py --help
-- python3 scripts/quality_checker.py --help
-- python3 scripts/proactive_scheduler.py --help
-- python3 scripts/lark_expert_forge.py --help
+Import parsers (data → normalized JSON → relic_writer):
+- python3 scripts/telegram_parser.py --help     # Telegram official export
+- python3 scripts/discord_parser.py --help      # DiscordChatExporter / official package
+- python3 scripts/whatsapp_parser.py --help    # WhatsApp exported .txt
+- python3 scripts/slack_parser.py --help       # Slack workspace export
+- python3 scripts/email_parser.py --help       # Gmail Takeout / Apple Mail .mbox
+- python3 scripts/instagram_parser.py --help    # Instagram data download
+- python3 scripts/wechat_parser.py --help      # WeChat (Mainland China)
+- python3 scripts/qq_parser.py --help          # QQ (Mainland China)
+
+Build & quality:
+- python3 scripts/relic_writer.py --help       # generate a Relic from normalized JSON
+- python3 scripts/quality_checker.py --help     # score a Relic's four dimensions
+- python3 scripts/version_manager.py --help    # snapshot / list / rollback / diff
+- python3 scripts/proactive_scheduler.py --help # proactive message preview (--dry-run)
+
+Media & delivery (optional):
+- python3 scripts/tts_service.py --help
+- python3 scripts/image_service.py --help
+- python3 scripts/relic_engine.py --help
+- python3 scripts/telegram_bot.py --help
+- python3 scripts/feishu_bot.py --help        # Feishu (Mainland China)
+- python3 scripts/lark_expert_forge.py --help  # Feishu CLI expert forge (Mainland China)
 ```
+
+> All parsers share one output contract (`schema_version` / `source.platform` / `messages[]`), so their outputs feed `relic_writer.py --data` interchangeably. The core flow needs only Python 3.9+; run `pip3 install -r requirements.txt` for the parsers that touch images or mailboxes.
 
 ## Project Structure at a Glance
 

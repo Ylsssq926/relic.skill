@@ -347,21 +347,46 @@ send_message(
 
 ## Supported Data Platforms
 
-| Type | Platform | Export Method | Format |
-|------|------|---------|------|
-| 💬 Messaging | WeChat | WeChatMsg / 留痕 / PyWxDump | SQLite / CSV |
-| 💬 Messaging | QQ | Official export | TXT / MHT |
-| 💬 Messaging | Telegram | Official export | JSON |
-| 💬 Messaging | Discord | DiscordChatExporter | JSON |
-| 💬 Messaging | Slack | Official export | JSON |
-| 💬 Work | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | JSON |
-| 💬 Work | DingTalk | API | JSON |
-| 📱 Mobile | iMessage | Local database | SQLite |
-| 📱 Mobile | WhatsApp | Official archive | TXT |
-| 🌐 Social | Twitter/X | Official archive | JSON |
-| 🌐 Social | Instagram | Official archive | JSON |
-| 📧 Email | Gmail | Google Takeout | MBOX |
-| 📄 Generic | Any text | Manual import | TXT / JSON / CSV / MD |
+**Every platform has a parser.** Export your data, run the script, and you get normalized JSON that `relic_writer.py` consumes directly:
+
+| Type | Platform | Export Method | Parser |
+|------|------|---------|---------|
+| 💬 Messaging | Telegram | Official export | `scripts/telegram_parser.py` |
+| 💬 Messaging | Discord | DiscordChatExporter or official data package | `scripts/discord_parser.py` |
+| 💬 Messaging | WhatsApp | Phone "Export Chat" (one .txt per conversation) | `scripts/whatsapp_parser.py` |
+| 💬 Messaging | Slack | Admin workspace export | `scripts/slack_parser.py` |
+| 📧 Email | Gmail / Apple Mail | Google Takeout / MailData | `scripts/email_parser.py` |
+| 🌐 Social | Instagram | Download Your Information | `scripts/instagram_parser.py` |
+| 💬 Messaging | WeChat | WeChatMsg / 留痕 / PyWxDump | `scripts/wechat_parser.py` |
+| 💬 Messaging | QQ | Official export | `scripts/qq_parser.py` |
+| 💬 Work | Feishu | [Feishu CLI](https://github.com/larksuite/cli) / API | `scripts/lark_expert_forge.py` |
+| 💬 Work | DingTalk | API | export JSON, then generic import |
+| 📱 Mobile | iMessage | `chat.db` backup | export CSV, then generic import |
+| 🌐 Social | Twitter/X | Official archive | export JSON, then generic import |
+| 📄 Generic | Any TXT / JSON / CSV / Markdown | Manual | feed `scripts/relic_writer.py` directly |
+
+```bash
+# Telegram (official export folder)
+python3 scripts/telegram_parser.py --input ~/Downloads/Telegram\ Desktop --output data.json
+
+# Discord (DiscordChatExporter output)
+python3 scripts/discord_parser.py --input ~/discord_export --output data.json
+
+# WhatsApp (folder of exported .txt files)
+python3 scripts/whatsapp_parser.py --input ~/WhatsApp\ Chat --output data.json
+
+# Slack (workspace export; users.json is picked up automatically)
+python3 scripts/slack_parser.py --input ~/slack_export --output data.json
+
+# Gmail (Takeout .mbox)
+python3 scripts/email_parser.py --input ~/Takeout/Archive.mbox --output data.json
+
+# Instagram (extracted "Download Your Information" folder)
+python3 scripts/instagram_parser.py --input ~/instagram-data --output data.json
+
+# Then generate the Relic
+python3 scripts/relic_writer.py --data data.json --template human --slug grandma
+```
 
 > For step-by-step export instructions, see the [Platform Data Export Guide](docs/PLATFORM-GUIDE.md)
 

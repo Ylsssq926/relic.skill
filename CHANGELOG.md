@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-10-13
+
+### 补齐国际平台导入工具（海外用户的实际入口）
+
+此前文档承诺 12 个平台，但可用的导入脚本只有微信 / QQ / Telegram 三个 —— 其中两个是国内平台，海外用户真正能用的只有 Telegram。本版补齐主力缺口。
+
+**新增解析器（统一输出契约：`schema_version` / `source.platform` / `messages[]`，可直接喂 `relic_writer.py --data`）**
+
+| 脚本 | 平台 | 支持的导出形态 |
+|---|---|---|
+| `scripts/discord_parser.py` | Discord | DiscordChatExporter JSON、官方数据包 `messages/` 与 `DM_Chats/`（附件、embed、贴纸、表情反应均保留） |
+| `scripts/slack_parser.py` | Slack | 工作区导出目录；自动读取 `users.json` 把 Uxxxx ID 还原成真人名；线程回复、文件、表情独立标注 |
+| `scripts/whatsapp_parser.py` | WhatsApp | 手机端 Export Chat 的每会话 `.txt`（iOS 方括号 / Android 短横格式 / EU 区域格式，含 AM-PM）；多行消息正确折叠 |
+| `scripts/instagram_parser.py` | Instagram | Download Your Information 解压目录；私信（新旧两种结构）+ 公开评论（评论同样是人格素材） |
+| `scripts/email_parser.py` | Gmail / Apple Mail | `.mbox` / `.eml`；自动裁掉引用的历史回复只保留本次新写的内容，附件单独标注 |
+
+**验证**：新增 `verify_international_parsers.py`，用各平台真实导出格式的样本覆盖 5 个脚本共 32 项断言（字段映射、ISO/毫秒/秒级时间戳换算、附件与表情保留、多行折叠、users.json 人名还原、引号裁剪、方向判定、去重）—— 全部通过。过程中修正了 WhatsApp 秒级时间戳被丢弃的实现缺陷。
+
+**文档同步**：README（中英）平台表新增「导入脚本」列与可直接复制的命令块；FOR_AI.md 工具索引按「导入 / 生成 / 媒体投递」三类重组；SKILL.md 新增本地解析器声明（纯本地、不产生任何网络请求）；SETUP.md Step 1 给出七平台解析示例；打包断言把 5 个新脚本列入必备项。
+
 ## [1.6.2] - 2026-10-13
 
 ### 英文沉浸度修复（主动行为系统）
