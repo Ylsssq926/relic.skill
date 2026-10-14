@@ -95,7 +95,7 @@ NO: melancholic depression aesthetic
 
 ## 当前线上事实
 
-- 演示站：`https://relic.luelan.online`（README、demo-site metadata、部署脚本统一指向这里）
+- 演示站：`https://relic.luelanai.com`（README、demo-site metadata、部署脚本统一指向这里）
 - GitHub: `Ylsssq926/relic.skill`
 - GitHub 描述：**"万物皆可 Relic — 给灵魂开个 GitHub | Universal Digital Immortality Engine 🧬"**
 - 项目分类：`opensource`

@@ -5,7 +5,7 @@ import DynamicBackground from "@/components/animations/DynamicBackground";
 import { I18nProvider } from "@/components/providers/I18nProvider";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://relic.luelan.online"),
+  metadataBase: new URL("https://relic.luelanai.com"),
   title: "relic.skill - 万物皆可 Relic",
   description:
     "把重要的人、宠物、关系、团队、地方、时刻,从散落的数据碎片中唤醒成可交互的数字灵魂。",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "relic.skill - 万物皆可 Relic",
     description: "把你在乎的东西唤醒成可交互的数字灵魂。",
-    url: "https://relic.luelan.online",
+    url: "https://relic.luelanai.com",
     siteName: "relic.skill",
     locale: "zh_CN",
     type: "website",
