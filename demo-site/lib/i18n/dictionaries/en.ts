@@ -16,7 +16,7 @@ const en: Dictionary = {
     closeMenu: "Close menu",
   },
   hero: {
-    badge: "relic.skill · Digital Immortality Engine",
+    badge: "relic.skill · Local-First Digital Memory Engine",
     award: {
       label: "🏆 Feishu CLI Creator Contest · #1 in the Popularity track",
       ariaLabel: "Read more about winning the Popularity track at the Feishu CLI Creator Contest",
@@ -312,9 +312,20 @@ const en: Dictionary = {
     roadmapTitle: "Product Roadmap",
     roadmapDesc: "Everything deserves a Relic — but one step at a time.",
   },
+  edition: {
+    label: "Choose your path",
+    title: "Open framework or commercial-ready toolkit",
+    subtitle: "The same Relic format, with a clear difference in licensing and delivery support.",
+    openTitle: "GitHub Open Edition",
+    openDesc: "Free for personal, research, hobby, and noncommercial use. Read the code, build your own Relics, and contribute back.",
+    commercialTitle: "Commercial Edition",
+    commercialDesc: "Includes commercial licensing, three proven scenario playbooks, deployment and governance notes, and priority support.",
+    openCta: "Explore GitHub",
+    commercialCta: "Ask about the paid edition",
+  },
   homeData: {
-    templateCount: "9 Templates",
-    templateDesc: "Put what matters into the right containers.",
+    templateCount: "10 Relic Types",
+    templateDesc: "People, pets, relationships, teams, places, moments, objects, and expertise — each with its own evidence-aware shape.",
     shieldPoints: [
       "Six-question consent protocol: agree first, then begin",
       "Soul fingerprint: every Relic has traceable origins",
@@ -326,8 +337,8 @@ const en: Dictionary = {
       "Real features and future iterations live on the GitHub repo",
     ],
     openSource: { title: "Open & Auditable", desc: "Implementation details, docs, and discussions are all in the repo — anyone can see how it works." },
-    localFirst: { title: "Local First", desc: "Keep your materials in your own hands first, then decide how to organize, export, and save." },
-      multiPlatform: { title: "Multi-Platform", desc: "Starting on the web, extending to Feishu bots, WeChat, Telegram, and beyond." },
+    localFirst: { title: "Local First", desc: "Your source material stays on your device unless you explicitly connect an external model or media service." },
+    multiPlatform: { title: "Multi-Platform", desc: "Import from 10+ data sources and bring the same Relic to Claude Code, Feishu, Telegram, and other agent runtimes." },
   },
 };
 

@@ -2,6 +2,17 @@ import type { Dictionary } from "./zh";
 
 const ko: Dictionary = {
   site: { title: "relic.skill", tagline: "모든 것에 Relic을", description: "소중한 사람과 기억을, 더 따뜻한 방식으로 남기다." },
+  edition: {
+    label: "경로를 선택하세요",
+    title: "오픈 프레임워크 또는 상용 툴킷",
+    subtitle: "같은 Relic 형식으로, 라이선스와 지원 범위가 명확하게 나뉩니다.",
+    openTitle: "GitHub 오픈 에디션",
+    openDesc: "개인, 연구, 취미 및 비상업적 프로젝트에 무료로 사용할 수 있습니다.",
+    commercialTitle: "상용 에디션",
+    commercialDesc: "상용 라이선스, 시나리오 플레이북, 배포 가이드와 우선 지원을 제공합니다.",
+    openCta: "GitHub 둘러보기",
+    commercialCta: "상용 에디션 보기",
+  },
   nav: { home: "홈", demo: "체험", gallery: "갤러리", roadmap: "로드맵", tryNow: "지금 시도", openMenu: "메뉴 열기", closeMenu: "메뉴 닫기" },
   hero: {
     badge: "relic.skill · 디지털 영생 엔진",

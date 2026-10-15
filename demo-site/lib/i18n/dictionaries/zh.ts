@@ -310,8 +310,19 @@ const zh = {
     roadmapTitle: "产品路线图",
     roadmapDesc: "万物皆可 Relic — 但得一步一步来。",
   },
+  edition: {
+    label: "选择你的路径",
+    title: "开源框架，或商业交付工具包",
+    subtitle: "Relic 文件格式完全一致，差别在授权范围、场景配方与交付支持。",
+    openTitle: "GitHub 开源版",
+    openDesc: "个人、研究、兴趣和非商业用途免费。代码、文档和讨论公开可审计。",
+    commercialTitle: "商业增强版",
+    commercialDesc: "包含商业使用授权、三份场景配方、部署与治理说明，以及优先支持。",
+    openCta: "查看 GitHub",
+    commercialCta: "了解商业版",
+  },
   homeData: {
-    templateCount: "9 种模板",
+    templateCount: "10 种模板",
     templateDesc: "把重要存在放进对应的容器里。",
     shieldPoints: [
       "六问授权协议：先同意，再开始",

@@ -61,10 +61,11 @@ function HeaderBase({ className, ...props }: HeaderProps) {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2.5"
+            className="flex items-center gap-2.5 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
             onClick={() => setOpen(false)}
+            aria-label="relic.skill home"
           >
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-sm font-black text-white">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-brand text-sm font-black text-white shadow-brand">
               R
             </span>
             <div className="hidden sm:block">
@@ -81,7 +82,7 @@ function HeaderBase({ className, ...props }: HeaderProps) {
           <nav className="hidden items-center gap-1 lg:flex">
             {navItems.map((item) => {
               const content = (
-                <span className="inline-flex h-9 items-center rounded-lg px-3 text-sm font-medium text-foreground-muted transition-colors hover:bg-background-soft hover:text-foreground">
+                <span className="inline-flex h-9 items-center rounded-lg px-3 text-sm font-medium text-foreground-muted transition-colors hover:bg-background-soft hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40">
                   {item.label}
                 </span>
               );
@@ -103,7 +104,7 @@ function HeaderBase({ className, ...props }: HeaderProps) {
             <LocaleSwitcher />
             <Link
               href="/demo"
-              className="inline-flex h-9 items-center rounded-full bg-brand px-4 text-sm font-semibold text-white shadow-brand transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex h-10 items-center rounded-full bg-brand px-5 text-sm font-semibold text-white shadow-brand transition-all duration-300 hover:-translate-y-0.5 hover:shadow-elevated focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2"
             >
               {dict.nav.tryNow}
             </Link>

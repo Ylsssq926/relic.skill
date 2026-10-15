@@ -1,6 +1,7 @@
 import HomeCoreFeaturesSection from "@/components/site/home/HomeCoreFeaturesSection";
 import HomeCTASection from "@/components/site/home/HomeCTASection";
 import HomeExamplesSection from "@/components/site/home/HomeExamplesSection";
+import HomeEditionSection from "@/components/site/home/HomeEditionSection";
 import HomeHeroSection from "@/components/site/home/HomeHeroSection";
 import HomeHighlightsSection from "@/components/site/home/HomeHighlightsSection";
 import HomeSummaryStrip from "@/components/site/home/HomeSummaryStrip";
@@ -16,6 +17,7 @@ export default function Page() {
       <HomeTemplatesSection />
       <HomeExamplesSection />
       <HomeHighlightsSection />
+      <HomeEditionSection />
       <HomeCTASection />
     </PageShell>
   );

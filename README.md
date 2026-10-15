@@ -3,6 +3,10 @@
 </p>
 
 <p align="center">
+  <strong>发行版说明：GitHub 是开源框架版；商业增强版（含商业授权、场景配方、部署说明与优先支持）通过商业渠道单独提供。</strong>
+</p>
+
+<p align="center">
   <strong>简体中文</strong> | <a href="README_EN.md">English</a> | <a href="README_JA.md">日本語</a> | <a href="README_KO.md">한국어</a> | <a href="README_ES.md">Español</a> | <a href="README_FR.md">Français</a> | <a href="README_DE.md">Deutsch</a> | <a href="README_PT.md">Português</a> | <a href="README_RU.md">Русский</a> | <a href="README_TW.md">繁體中文</a>
 </p>
 
@@ -629,6 +633,19 @@ relic.skill 站在巨人的肩膀上。感谢这些项目的启发：
 <p align="center">
   <em>真正的死亡不是心跳停止，而是最后一个记得你的人也忘了你。</em>
 </p>
+
+## 发行版：开源框架版 vs 商业增强版
+
+| | GitHub 开源框架版 | 商业增强版 |
+|---|---|---|
+| 核心 Relic 框架、模板、解析器和示例 | ✅ | ✅ |
+| 个人、研究、兴趣和非商业用途 | ✅ | ✅ |
+| 商业使用授权 | ❌ | ✅，以购买的授权范围为准 |
+| 商业场景配方 | ❌ | ✅ 企业知识传承 / 家族记忆 / 创作者人格 |
+| 部署与治理说明 | ❌ | ✅ |
+| 优先支持 | ❌ | ✅ |
+
+GitHub 仓库提供的是可审计的开源框架；商业版是单独打包的交付工具包。购买副本不自动代表拥有无限制的再次分发、SaaS 集成或企业转授权权利，具体以 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 为准。
 
 ## 授权
 

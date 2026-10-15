@@ -3,6 +3,10 @@
 </p>
 
 <p align="center">
+  <strong>Edition note: GitHub ships the open framework. The commercial edition adds commercial licensing, scenario playbooks, deployment notes, and priority support.</strong>
+</p>
+
+<p align="center">
   <a href="README.md">简体中文</a> | <strong>English</strong> | <a href="README_JA.md">日本語</a> | <a href="README_KO.md">한국어</a> | <a href="README_ES.md">Español</a> | <a href="README_FR.md">Français</a> | <a href="README_DE.md">Deutsch</a> | <a href="README_PT.md">Português</a> | <a href="README_RU.md">Русский</a> | <a href="README_TW.md">繁體中文</a>
 </p>
 
@@ -549,6 +553,19 @@ relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
 - 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
 
 > Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+
+### Open Edition vs Commercial Edition
+
+| | GitHub Open Edition | Commercial Edition |
+|---|---|---|
+| Core Relic framework, templates, parsers and examples | ✅ | ✅ |
+| Personal, research and hobby use | ✅ | ✅ |
+| Commercial use license | ❌ | ✅, within the purchased scope |
+| Scenario playbooks | ❌ | ✅ Enterprise knowledge transfer / family legacy / creator persona |
+| Deployment and governance notes | ❌ | ✅ |
+| Priority support | ❌ | ✅ |
+
+The commercial package is sold separately. Buying a copy does not automatically grant unlimited redistribution, SaaS embedding, or enterprise sublicensing rights; see [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md).
 
 ### What the Paid Edition Adds
 

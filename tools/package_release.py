@@ -102,7 +102,7 @@ REQUIRED = [
     "relic/docs/SETUP.md", "relic/docs/PLATFORM-GUIDE.md",
     "relic/docs/FAQ.md", "relic/docs/PHILOSOPHY.md",
     "relic/docs/ARCHITECTURE.md", "relic/docs/RESEARCH.md",
-    "relic/docs/TOOLS.md",
+    "relic/docs/TOOLS.md", "relic/docs/SALES-CHANNELS.md",
     "relic/examples/README.md",
     "relic/examples/grandma-demo/SKILL.md",
     "relic/examples/cat-mimi-demo/SKILL.md",

@@ -6,6 +6,17 @@ const ja: Dictionary = {
     tagline: "すべてに Relic を",
     description: "大切な人と思い出を、もっと優しい形で残す。",
   },
+  edition: {
+    label: "選べる2つの進み方",
+    title: "オープンなフレームワーク、または商用ツールキット",
+    subtitle: "Relic の形式は同じ。ライセンスと導入サポートが異なります。",
+    openTitle: "GitHub オープン版",
+    openDesc: "個人利用、研究、趣味、非商用プロジェクトは無料です。",
+    commercialTitle: "Commercial Edition",
+    commercialDesc: "商用ライセンス、シナリオ集、デプロイ手順、優先サポートを含みます。",
+    openCta: "GitHubを見る",
+    commercialCta: "商用版を見る",
+  },
   nav: {
     home: "ホーム",
     demo: "体験",

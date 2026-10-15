@@ -26,6 +26,7 @@ export const LOCALE_LABELS: Record<Locale, string> = {
   tw: "繁體中文",
 };
 
-export const DEFAULT_LOCALE: Locale = "zh";
+// The public site serves an international audience by default; visitors can switch and the choice is remembered.
+export const DEFAULT_LOCALE: Locale = "en";
 
 export const FALLBACK_LOCALE: Locale = "en";

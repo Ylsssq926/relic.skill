@@ -37,6 +37,7 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
   return (
     <Card className="overflow-hidden">
       <div className="relative aspect-[16/10] overflow-hidden bg-background-soft sm:aspect-[16/9]">
+        {/* TODO(image): replace demo covers with final editorial artwork when available. */}
         {relics.map((relic, index) => (
           <Image
             key={relic.id}
@@ -68,7 +69,7 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
                     (current - 1 + relics.length) % relics.length,
                 )
               }
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/28"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -78,7 +79,7 @@ export default function HomeHeroCarousel({ relics }: HomeHeroCarouselProps) {
               onClick={() =>
                 setActiveIndex((current) => (current + 1) % relics.length)
               }
-              className="flex h-8 w-8 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/28"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition hover:bg-white/28 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

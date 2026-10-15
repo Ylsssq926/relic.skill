@@ -6,9 +6,9 @@ import { I18nProvider } from "@/components/providers/I18nProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://relic.luelanai.com"),
-  title: "relic.skill - 万物皆可 Relic",
+  title: "relic.skill — GitHub for Souls",
   description:
-    "把重要的人、宠物、关系、团队、地方、时刻,从散落的数据碎片中唤醒成可交互的数字灵魂。",
+    "A local-first, consent-aware engine for turning memories, people, pets, teams, and expertise into auditable digital Relics.",
   keywords: [
     "数字陪伴",
     "记忆整理",
@@ -19,18 +19,18 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "掠蓝" }],
   openGraph: {
-    title: "relic.skill - 万物皆可 Relic",
-    description: "把你在乎的东西唤醒成可交互的数字灵魂。",
+    title: "relic.skill — GitHub for Souls",
+    description: "Turn what matters into an auditable digital Relic — local-first, consent-aware, and built for real conversations.",
     url: "https://relic.luelanai.com",
     siteName: "relic.skill",
-    locale: "zh_CN",
+    locale: "en_US",
     type: "website",
     images: [{ url: "/images/relic-og.jpg", width: 1200, height: 630, alt: "relic.skill" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "relic.skill - 万物皆可 Relic",
-    description: "把你在乎的东西唤醒成可交互的数字灵魂。",
+    title: "relic.skill — GitHub for Souls",
+    description: "Turn what matters into an auditable digital Relic — local-first, consent-aware, and built for real conversations.",
     images: ["/images/relic-og.jpg"],
   },
 };
@@ -46,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="en">
       {/* TODO: 当实现路由级 i18n 时，lang 应该动态化 */}
       <body className="min-h-screen bg-background text-foreground antialiased relative z-0">
         <I18nProvider>

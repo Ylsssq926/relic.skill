@@ -6,6 +6,17 @@ const tw: Dictionary = {
     tagline: "萬物皆可 Relic",
     description: "把重要的人與記憶，以更溫柔的方式留下來。",
   },
+  edition: {
+    label: "選擇你的路徑",
+    title: "開源框架，或商業工具包",
+    subtitle: "Relic 檔案格式一致，差別在授權範圍與交付支援。",
+    openTitle: "GitHub 開源版",
+    openDesc: "個人、研究、興趣與非商業用途免費使用。",
+    commercialTitle: "商業增強版",
+    commercialDesc: "包含商業授權、場景配方、部署說明與優先支援。",
+    openCta: "查看 GitHub",
+    commercialCta: "查看商業版",
+  },
   nav: {
     home: "首頁",
     demo: "體驗中心",

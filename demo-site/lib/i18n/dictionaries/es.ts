@@ -6,6 +6,17 @@ const es: Dictionary = {
     tagline: "Todo merece un Relic",
     description: "Preserva a las personas y recuerdos que te importan, de una manera más gentil.",
   },
+  edition: {
+    label: "Elige tu camino",
+    title: "Framework abierto o toolkit comercial",
+    subtitle: "El mismo formato Relic, con diferencias claras de licencia y soporte.",
+    openTitle: "Edición abierta de GitHub",
+    openDesc: "Gratis para uso personal, investigación, hobby y proyectos no comerciales.",
+    commercialTitle: "Edición comercial",
+    commercialDesc: "Licencia comercial, playbooks, notas de despliegue y soporte prioritario.",
+    openCta: "Explorar GitHub",
+    commercialCta: "Ver edición comercial",
+  },
   nav: {
     home: "Inicio",
     demo: "Experiencia",
