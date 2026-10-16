@@ -1,0 +1,1 @@
+{"id":"DEC-001","title":"Keep migration reversible","decision":"Ship behind a feature flag.","status":"accepted","owners":["platform-owner"],"evidence":[{"source_id":"S-003","level":"artifact"}],"review":{"reviewer":"project-owner","reviewed_at":"2026-05-12"}}

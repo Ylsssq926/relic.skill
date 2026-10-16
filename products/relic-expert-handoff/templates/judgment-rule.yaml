@@ -1,0 +1,14 @@
+id: JR-001
+title: ""
+rule: ""
+conditions:
+  applies_when: ""
+  changes_when: ""
+evidence:
+  - source_id: S-001
+    level: verbatim
+    excerpt: ""
+confidence: low
+counterexample: ""
+validation_question: ""
+status: needs-verification

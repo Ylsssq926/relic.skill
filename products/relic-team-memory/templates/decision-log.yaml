@@ -1,0 +1,15 @@
+id: DEC-001
+title: ""
+decision: ""
+status: unknown
+context: ""
+alternatives: []
+owners: []
+due_date: ""
+evidence:
+  - source_id: S-001
+    level: needs-verification
+    link_or_excerpt: ""
+review:
+  reviewer: ""
+  reviewed_at: ""

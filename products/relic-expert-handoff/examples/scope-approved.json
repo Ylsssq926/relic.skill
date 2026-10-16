@@ -1,0 +1,6 @@
+{
+  "project": {"name": "Northstar handoff", "expert_role": "platform lead", "purpose": "prepare successor review", "audience": "platform team"},
+  "consent": {"expert_approved": true, "data_owner_approved": true, "consent_date": "2026-05-12", "withdrawal_route": "contact project owner"},
+  "scope": {"included_sources": ["redacted architecture review"], "date_range": "2026-Q1", "excluded_sources": ["private chat"], "excluded_topics": ["personal matters"]},
+  "retention": {"review_owner": "project-owner", "review_date": "2026-06-30", "deletion_trigger": "withdrawal or expiry"}
+}
