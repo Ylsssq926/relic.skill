@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>Edition note: GitHub ships the open framework. The commercial edition adds commercial licensing, scenario playbooks, deployment notes, and priority support.</strong>
+  <strong>Edition note: GitHub ships the open framework under MIT. The commercial edition adds scenario playbooks, deployment notes, and priority support on top of it.</strong>
 </p>
 
 <p align="center">
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -546,40 +546,39 @@ relic.skill stands on the shoulders of giants. Thanks to these projects for the 
 
 ## License
 
-relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+relic.skill is released under the **MIT License**.
 
-- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
-- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
-- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+- ✅ **Free for personal and commercial use** — study, research, internal company use, or embedding in a commercial product
+- 🧩 **Commercial add-on pack is sold separately** — scenario recipes, deployment notes, and support are paid extras, independent of the code license
+- 📄 See [LICENSE](LICENSE) and [Commercial Add-on](COMMERCIAL-LICENSE.md)
 
-> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+> Versions v1.6.0 through v1.10.1 used PolyForm Noncommercial 1.0.0; from v1.11.0 it is MIT again.
 
 ### Open Edition vs Commercial Edition
 
 | | GitHub Open Edition | Commercial Edition |
 |---|---|---|
 | Core Relic framework, templates, parsers and examples | ✅ | ✅ |
-| Personal, research and hobby use | ✅ | ✅ |
-| Commercial use license | ❌ | ✅, within the purchased scope |
+| Personal and commercial use (MIT, redistribution allowed) | ✅ | ✅ |
 | Scenario playbooks | ❌ | ✅ Enterprise knowledge transfer / family legacy / creator persona |
 | Deployment and governance notes | ❌ | ✅ |
 | Priority support | ❌ | ✅ |
 
-The commercial package is sold separately. Buying a copy does not automatically grant unlimited redistribution, SaaS embedding, or enterprise sublicensing rights; see [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md).
+The GitHub repository is an auditable open framework, free for commercial use and redistribution under MIT. The commercial package is a separately sold delivery kit — the difference is playbooks, deployment governance, and support, not licensing.
 
 ### What the Paid Edition Adds
 
-This repository is a **working skeleton**, free for personal use. The paid edition closes the last mile from toolchain to delivery:
+This repository is a **working skeleton**, released under MIT. The paid edition closes the last mile from toolchain to delivery:
 
-- ✅ **Commercial license** — internal company use, client delivery, embedding in commercial products
+- ✅ **Delivery support** — deployment questions, scenario selection, acceptance review
 - ✅ **Three scenario playbooks** — enterprise knowledge transfer / family legacy / creator persona. Each one specifies material thresholds, parameters, acceptance criteria and common failure modes — not fill-in-the-blank templates
 - ✅ **Pre-delivery governance guide** — sanitization checklist with a runnable scanner, access-control tiers, deployment shapes, withdrawal procedure
 - ✅ **Priority support channel**, with a withdrawal commitment that outranks every other clause
 
-Relics produced by either edition share the **exact same file format** and move freely between them — the difference is licensing and companion content, not data.
+Relics produced by either edition share the **exact same file format** and move freely between them — the difference is companion content and support, not licensing, and not data.
 
 ---
 
 <p align="center">
-  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
+  MIT License · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
 </p>

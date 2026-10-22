@@ -7,7 +7,7 @@ description: >
 relic-fingerprint: relic:sha256:demo0000000000000000000000000000000000000000000000000000000000demo
 relic-authenticity: sample
 version: 1.8.0
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 relic-type: object
 object-kind: camera

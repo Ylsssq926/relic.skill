@@ -8,7 +8,7 @@ description: >
 relic-fingerprint: relic:sha256:demo2222222222222222222222222222222222222222222222222222222222demo
 relic-authenticity: sample
 version: 1.8.1
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 relic-type: place
 active-years: "1972-2016"

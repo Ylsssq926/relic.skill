@@ -7,7 +7,7 @@ description: >
   Trigger on requests such as "audit my skill before launch", "prepare this agent
   skill for sale", "check the release zip", or "审查这个 Skill 能不能发布售卖".
 version: 0.1.0
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 argument-hint: "Point to the Skill directory, test command, and intended sales edition"
 ---

@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -424,16 +424,16 @@ relic.skill 站在巨人的肩膀上。感謝這些專案帶來的啟發：
 
 ## 授权
 
-relic.skill 采用 **PolyForm Noncommercial License 1.0.0**。
+relic.skill 採用 **MIT License**。
 
-- ✅ **个人使用免费** — 学习、研究、自己给自己做 Relic、业余项目，都不需要付费
-- 💼 **商业使用需授权** — 公司内部使用、为客户交付、集成进商业产品，需购买商用授权
-- 📄 详见 [LICENSE](LICENSE) 与 [商用授权说明](COMMERCIAL-LICENSE.md)
+- ✅ **個人與商業用途均可免費使用** — 學習、研究、公司內部使用、整合進商業產品，都不需要額外授權
+- 🧩 **商業增強包單獨提供** — 場景配方、部署治理說明與支援服務為付費內容，與程式碼授權無關
+- 📄 詳見 [LICENSE](LICENSE) 與 [商業增強包說明](COMMERCIAL-LICENSE.md)
 
-> v1.5.2 及之前为 MIT 许可；已发布的 MIT 副本不受本次变更影响。
+> v1.6.0 至 v1.10.1 曾使用 PolyForm Noncommercial 1.0.0；自 v1.11.0 起回到 MIT。
 
 ---
 
 <p align="center">
-  PolyForm Noncommercial 1.0.0 · 商用需授权 · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
+  MIT License · Made with ❤️ by <strong>掠蓝（Luelan）</strong>
 </p>

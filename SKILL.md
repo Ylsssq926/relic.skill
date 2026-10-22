@@ -9,7 +9,7 @@ description: >
   - Preserve or distill workplace history, team culture, or expert knowledge ("archive team culture", "distill business expert", "飞书/Slack协作记忆蒸馏").
   Supports: Humans, Pets, Relationships, Teams, Places, Moments, Public figures, Domain experts.
 version: 1.10.1
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 argument-hint: "Describe who or what you want to turn into a Relic (e.g. 'my grandma' / '我想永生我奶奶')"
 external_urls:

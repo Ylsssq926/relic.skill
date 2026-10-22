@@ -9,7 +9,7 @@ description: >
   handoff", "make an onboarding mentor", "extract the decision rules", or
   "把专家经验交接下来".
 version: 0.1.0
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 argument-hint: "Describe the expert, role, scope, and available source material"
 ---

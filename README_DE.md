@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -410,16 +410,16 @@ relic.skill steht auf den Schultern von Giganten. Danke an diese Projekte für d
 
 ## License
 
-relic.skill is licensed under the **PolyForm Noncommercial License 1.0.0**.
+relic.skill is released under the **MIT License**.
 
-- ✅ **Free for personal use** — study, research, your own Relics, hobby projects
-- 💼 **Commercial use requires a license** — internal company use, client delivery, or embedding in a commercial product
-- 📄 See [LICENSE](LICENSE) and [Commercial License](COMMERCIAL-LICENSE.md)
+- ✅ **Free for personal and commercial use** — study, research, internal company use, or embedding in a commercial product
+- 🧩 **Commercial add-on pack is sold separately** — scenario recipes, deployment notes, and support are paid extras, independent of the code license
+- 📄 See [LICENSE](LICENSE) and [Commercial Add-on](COMMERCIAL-LICENSE.md)
 
-> Versions up to v1.5.2 were MIT-licensed; existing MIT copies are unaffected.
+> Versions v1.6.0 through v1.10.1 used PolyForm Noncommercial 1.0.0; from v1.11.0 it is MIT again.
 
 ---
 
 <p align="center">
-  PolyForm Noncommercial 1.0.0 · Commercial license required · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
+  MIT License · Made with ❤️ by <strong>掠蓝 (Luelan)</strong>
 </p>

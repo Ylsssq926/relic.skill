@@ -4,7 +4,7 @@ description: >
   Soul Shield — Guard Relic integrity, consent protocol, and ethics boundaries.
   Trigger on /relic-shield, or when user wants to verify consent, generate fingerprint, or check ethical compliance ("check consent", "ethics review", "灵魂指纹", "授权检查").
 version: 1.10.1
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 argument-hint: "Describe the Relic to protect or verify (e.g. 'verify grandma relic consent' / '检查授权和指纹')"
 ---

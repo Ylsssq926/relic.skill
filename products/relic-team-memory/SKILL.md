@@ -7,7 +7,7 @@ description: >
   Use when a team says decisions are lost in chat, onboarding is slow, or a project
   needs a searchable memory layer.
 version: 0.1.0
-license: PolyForm-Noncommercial-1.0.0
+license: MIT
 user-invocable: true
 argument-hint: "Describe the team, project, approved sources, and desired memory output"
 ---

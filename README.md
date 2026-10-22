@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <strong>发行版说明：GitHub 是开源框架版；商业增强版（含商业授权、场景配方、部署说明与优先支持）通过商业渠道单独提供。</strong>
+  <strong>发行版说明：GitHub 是开源框架版（MIT）；商业增强版在框架之上附场景配方、部署说明与优先支持，通过商业渠道单独提供。</strong>
 </p>
 
 <p align="center">
@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Noncommercial-orange.svg" alt="License"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/stargazers"><img src="https://img.shields.io/github/stars/Ylsssq926/relic.skill?style=social" alt="Stars"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/network/members"><img src="https://img.shields.io/github/forks/Ylsssq926/relic.skill?style=social" alt="Forks"></a>
   <a href="https://github.com/Ylsssq926/relic.skill/issues"><img src="https://img.shields.io/github/issues/Ylsssq926/relic.skill" alt="Issues"></a>
@@ -639,37 +639,36 @@ relic.skill 站在巨人的肩膀上。感谢这些项目的启发：
 | | GitHub 开源框架版 | 商业增强版 |
 |---|---|---|
 | 核心 Relic 框架、模板、解析器和示例 | ✅ | ✅ |
-| 个人、研究、兴趣和非商业用途 | ✅ | ✅ |
-| 商业使用授权 | ❌ | ✅，以购买的授权范围为准 |
+| 个人与商业用途（MIT 授权，可再分发） | ✅ | ✅ |
 | 商业场景配方 | ❌ | ✅ 企业知识传承 / 家族记忆 / 创作者人格 |
 | 部署与治理说明 | ❌ | ✅ |
 | 优先支持 | ❌ | ✅ |
 
-GitHub 仓库提供的是可审计的开源框架；商业版是单独打包的交付工具包。购买副本不自动代表拥有无限制的再次分发、SaaS 集成或企业转授权权利，具体以 [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) 为准。
+GitHub 仓库提供的是可审计的开源框架，MIT 授权下可自由商用与再分发；商业版是单独打包的交付工具包，差别在场景配方、部署治理与支持，不在授权。
 
 ## 授权
 
-relic.skill 采用 **PolyForm Noncommercial License 1.0.0**。
+relic.skill 采用 **MIT License**。
 
-- ✅ **个人使用免费** — 学习、研究、自己给自己做 Relic、业余项目，都不需要付费
-- 💼 **商业使用需授权** — 公司内部使用、为客户交付、集成进商业产品，需购买商用授权
-- 📄 详见 [LICENSE](LICENSE) 与 [商用授权说明](COMMERCIAL-LICENSE.md)
+- ✅ **个人与商业用途均可免费使用** — 学习、研究、公司内部使用、集成进商业产品，都不需要额外授权
+- 🧩 **商业增强包单独提供** — 场景配方、部署治理说明与支持服务为付费内容，与代码授权无关
+- 📄 详见 [LICENSE](LICENSE) 与 [商业增强包说明](COMMERCIAL-LICENSE.md)
 
-> v1.5.2 及之前为 MIT 许可；已发布的 MIT 副本不受本次变更影响。
+> v1.6.0 至 v1.10.1 曾使用 PolyForm Noncommercial 1.0.0；自 v1.11.0 起回到 MIT。
 
 ### 本仓库与付费版的区别
 
-本仓库（GitHub）是**可用的骨架**，个人使用免费。付费版解决的是「从工具到交付」的最后一公里：
+本仓库（GitHub）是**可用的骨架**，MIT 授权，自由使用。付费版解决的是「从工具到交付」的最后一公里：
 
-- ✅ **商用授权** — 公司内部使用、为客户交付、集成进商业产品
+- ✅ **交付支持** — 部署答疑、场景选型与验收建议
 - ✅ **三份场景配方** — 企业知识传承 / 家族记忆工程 / 创作者人格资产。每份写到素材门槛、参数、验收阈值与常见失败模式，不是模板填空
 - ✅ **交付前治理指南** — 脱敏清单（含可运行的扫描脚本）、访问控制分级、部署形态、撤回流程
 - ✅ **优先支持通道**，含一条高于其他所有条款的撤回承诺
 
-两版产出的 Relic **文件格式完全一致**，可自由迁移——差别在授权与配套内容，不在数据。
+两版产出的 Relic **文件格式完全一致**，可自由迁移——差别在配套内容与支持，不在授权，也不在数据。
 
 ---
 
 <p align="center">
-  PolyForm Noncommercial 1.0.0 · 商用需授权 · Made with ❤️ by <strong>掠蓝</strong>
+  MIT License · Made with ❤️ by <strong>掠蓝</strong>
 </p>

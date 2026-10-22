@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.11.0] - 2026-10-22
+
+### 授权回到 MIT
+
+代码授权从 PolyForm Noncommercial 1.0.0 改回 **MIT License**，商业化不再靠许可限制，改靠付费内容包。
+
+**为什么改**：v1.6.0 引入非商业许可，本意是给商业化留出空间，实际效果是挡住了公司内部使用、
+客户交付和二次集成这类正常用途，而真正的滥用者本来也不会遵守许可。v1.11.0 起代码完全放开，
+商业价值放在 `COMMERCIAL-PACK/` 的内容与支持上。
+
+**改动范围**：
+
+- `LICENSE` 换为 MIT 全文，版权声明保留 `掠蓝 (Luelan)`
+- `package.json` 的 `license` 字段改为 `MIT`，版本升至 1.11.0
+- 10 个 `SKILL.md` 的 frontmatter `license` 改为 `MIT`（含 `soul-*` 与 `examples/*`）
+- 10 个 README 的许可证徽章、授权段落、页脚同步为 MIT（中/英/日/韩/德/西/法/葡/俄/繁）
+- `COMMERCIAL-LICENSE.md` 重写为「商业增强包说明」：区分代码授权与付费内容
+- 付费版对比列表移除「商用授权」条目，改为「交付支持」
+
+**兼容性**：已发布的旧版本副本不受影响；按 PolyForm 或原商用授权取得的权利继续有效，
+MIT 只是在其上放宽了限制。
+
 ## [1.10.1] - 2026-10-13
 
 ### 两版分发：公开框架版 vs 商业版
