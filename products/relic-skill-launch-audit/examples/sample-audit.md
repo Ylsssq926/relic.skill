@@ -4,7 +4,7 @@
 
 ## Decision
 
-**REVISE**
+### REVISE
 
 ## Findings
 
